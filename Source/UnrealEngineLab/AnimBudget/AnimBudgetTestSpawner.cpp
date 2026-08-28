@@ -166,15 +166,31 @@ void AAnimBudgetTestSpawner::Tick(float DeltaSeconds)
 
 	// PoseTickedThisFrame()은 GFrameCounter == LastPoseTickFrame 이므로, allocator가 의도한 값이
 	// 아니라 이번 프레임에 실제로 포즈가 평가된 컴포넌트 수를 센다.
+	// 엔진의 NumInterpolated / AverageTickRate CSV 스탯도 WITH_TICK_DEBUG 전용이라,
+	// 같은 값을 컴포넌트의 public 접근자로 직접 센다.
 	int32 NumPoseTicked = 0;
+	int32 NumInterpolating = 0;
+	int32 TickRateSum = 0;
 	for (int32 Index = 0; Index < SpawnedComponents.Num(); ++Index)
 	{
 		const USkeletalMeshComponentBudgeted* Component = SpawnedComponents[Index];
-		if (Component != nullptr && Component->PoseTickedThisFrame())
+		if (Component == nullptr)
+		{
+			continue;
+		}
+
+		if (Component->PoseTickedThisFrame())
 		{
 			++NumPoseTicked;
 			++PerComponentPoseTicks[Index];
 		}
+
+		if (Component->IsUsingExternalInterpolation())
+		{
+			++NumInterpolating;
+		}
+
+		TickRateSum += FMath::Max<int32>(1, Component->GetExternalTickRate());
 	}
 
 	const int32 NumComponents = SpawnedComponents.Num();
@@ -184,8 +200,12 @@ void AAnimBudgetTestSpawner::Tick(float DeltaSeconds)
 	CSV_CUSTOM_STAT(AnimBudgetTest, NumPoseTicked, NumPoseTicked, ECsvCustomStatOp::Set);
 	CSV_CUSTOM_STAT(AnimBudgetTest, NumReducedWork, NumReducedWorkComponents, ECsvCustomStatOp::Set);
 	CSV_CUSTOM_STAT(AnimBudgetTest, AnimQuality, AnimQuality, ECsvCustomStatOp::Set);
+	CSV_CUSTOM_STAT(AnimBudgetTest, NumInterpolating, NumInterpolating, ECsvCustomStatOp::Set);
+	CSV_CUSTOM_STAT(AnimBudgetTest, AvgTickRate, NumComponents > 0 ? (float)TickRateSum / (float)NumComponents : 0.0f, ECsvCustomStatOp::Set);
 
 	PoseTickAccumulator += NumPoseTicked;
+	InterpolatingAccumulator += NumInterpolating;
+	TickRateAccumulator += TickRateSum;
 	++FramesSinceReport;
 
 	if (ReportIntervalSeconds <= 0.0f)
@@ -339,11 +359,18 @@ void AAnimBudgetTestSpawner::LogReport()
 			NumConsideredRendered, SpawnedComponents.Num(), LocalWorld->TimeSeconds, RenderCutoff, MaxLastRenderTime);
 	}
 
+	const float AvgInterpolating = FramesSinceReport > 0 ? (float)InterpolatingAccumulator / (float)FramesSinceReport : 0.0f;
+	const float AvgTickRate = (FramesSinceReport > 0 && NumComponents > 0)
+		? (float)TickRateAccumulator / ((float)FramesSinceReport * (float)NumComponents)
+		: 0.0f;
+
 	UE_LOG(LogAnimBudgetTest, Display,
-		TEXT("components=%d avgPoseTicked=%.1f animQuality=%.3f reducedWork=%d frames=%d a.Budget.Enabled=%d worldEnabled=%d -> budgeting %s"),
+		TEXT("components=%d avgPoseTicked=%.1f animQuality=%.3f avgInterpolating=%.1f avgTickRate=%.2f reducedWork=%d frames=%d a.Budget.Enabled=%d worldEnabled=%d -> budgeting %s"),
 		NumComponents,
 		AvgPoseTicked,
 		AvgQuality,
+		AvgInterpolating,
+		AvgTickRate,
 		NumReducedWorkComponents,
 		FramesSinceReport,
 		bCVarEnabled ? 1 : 0,
@@ -400,6 +427,8 @@ void AAnimBudgetTestSpawner::LogReport()
 	}
 
 	PoseTickAccumulator = 0;
+	InterpolatingAccumulator = 0;
+	TickRateAccumulator = 0;
 	FramesSinceReport = 0;
 	for (int32& Count : PerComponentPoseTicks)
 	{

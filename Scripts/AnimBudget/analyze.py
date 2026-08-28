@@ -22,6 +22,8 @@ COLS = [
     ("AnimBudgetTest/NumPoseTicked", "poseticked"),
     ("AnimBudgetTest/AnimQuality", "quality"),
     ("AnimBudgetTest/NumReducedWork", "reduced"),
+    ("AnimBudgetTest/NumInterpolating", "interp"),
+    ("AnimBudgetTest/AvgTickRate", "tickrate"),
 ]
 WINDOW = 400  # steady-state frames taken from the end of the capture
 
@@ -49,15 +51,16 @@ def main():
     files = sorted(glob.glob(os.path.join(CSVDIR, "*.csv")), key=os.path.getmtime)
     if labels and len(labels) != len(files):
         print(f"warning: {len(labels)} labels for {len(files)} csv files")
-    hdr = f"{'case':<18}{'frames':>7}{'fps':>8}{'frame_ms':>10}{'gt_ms':>9}{'anim_ms':>9}{'alloc_ms':>9}{'workunit':>10}{'ticked':>8}{'quality':>9}{'reduced':>9}"
+    hdr = (f"{'case':<18}{'frames':>7}{'gt_ms':>9}{'anim_ms':>9}{'alloc_ms':>9}"
+           f"{'ticked':>8}{'quality':>9}{'interp':>8}{'tickrate':>10}{'reduced':>9}{'fps':>7}")
     print(hdr)
     print("-" * len(hdr))
     for i, f in enumerate(files):
         s = summarize(f)
         label = labels[i] if i < len(labels) else os.path.basename(f)[:17]
-        print(f"{label:<18}{s['frames']:>7}{s['fps']:>8.1f}{s['frame_ms']:>10.2f}{s['gt_ms']:>9.2f}"
-              f"{s['anim_ms']:>9.2f}{s['alloc_ms']:>9.3f}{s['workunit_ms']:>10.4f}"
-              f"{s['poseticked']:>8.0f}{s['quality']:>9.3f}{s['reduced']:>9.0f}")
+        print(f"{label:<18}{s['frames']:>7}{s['gt_ms']:>9.2f}{s['anim_ms']:>9.2f}{s['alloc_ms']:>9.3f}"
+              f"{s['poseticked']:>8.0f}{s['quality']:>9.3f}{s['interp']:>8.0f}{s['tickrate']:>10.2f}"
+              f"{s['reduced']:>9.0f}{s['fps']:>7.1f}")
 
 
 if __name__ == "__main__":

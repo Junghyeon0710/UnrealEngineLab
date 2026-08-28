@@ -219,7 +219,7 @@ a.Budget.Debug.Enabled 1
 | `a.Budget.InterpolationFalloffAggression` | 0.4 | [0.1, 0.9] | 클수록 보간 그룹을 빨리 줄임 |
 | `a.Budget.InterpolationMaxRate` | 6 | > 1 | 보간 중 최대 틱 간격 |
 | `a.Budget.MaxInterpolatedComponents` | 16 | >= 0 | 스로틀 전 최대 보간 컴포넌트 수 |
-| `a.Budget.InterpolationTickMultiplier` | 0.75 | [0.1, 0.9] | 보간 틱의 상대 비용 추정. 실측은 약 0.46이었다 (결과 문서 8.3절) |
+| `a.Budget.InterpolationTickMultiplier` | 0.75 | [0.1, 0.9] | 보간 틱의 상대 비용 추정. 실측 약 0.46. 낮추면 예산이 throttle 그룹으로 흘러가 품질이 오른다 (결과 문서 9절). **보간이 일어나지 않는 구간에서는 무의미** |
 
 ### 6.4 Reduced work
 
@@ -334,6 +334,21 @@ LogSkeletalMesh: Warning: SetComponentSignificance called on [...] before regist
 
 한편 순수 스로틀링의 비용은 틱 레이트에 **거의 정확히 반비례**한다
 (Rate 2/4/8 -> 6.82 / 3.29 / 1.50 ms, baseline 13.12 ms). 숨은 프레임당 고정비용은 없다.
+
+---
+
+## 6.12 보간은 "중간 부하" 단계다 — 압력이 높으면 아예 안 쓰인다
+
+400개 실측에서 `BudgetMs 1.0`(압력 2.5 초과, emergency reduced work 구간)일 때
+**보간 중인 컴포넌트가 0개**였다. `a.Budget.MaxInterpolatedComponents`를 16에서 200으로 올려도
+0이었다. 보간 밴드가 열리기 전에 전부 throttle로 떨어지기 때문이다.
+
+`BudgetMs 5.0`으로 압력을 낮추자 65~74개가 보간에 들어갔다.
+
+따라서 `InterpolationTickMultiplier`, `MaxInterpolatedComponents`,
+`InterpolationFalloffAggression` 같은 보간 파라미터는 **중간 부하 구간에서만 의미가 있다.**
+튜닝하기 전에 먼저 보간이 실제로 일어나고 있는지 확인할 것
+(엔진 CSV로는 볼 수 없다 — 5.2절 참고. `IsUsingExternalInterpolation()`으로 직접 세야 한다).
 
 ---
 

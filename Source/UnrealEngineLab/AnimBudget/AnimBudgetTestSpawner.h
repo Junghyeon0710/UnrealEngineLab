@@ -122,6 +122,12 @@ private:
 	/** 지난 리포트 이후 매 프레임의 포즈 평가 컴포넌트 수를 누적한 값. */
 	int64 PoseTickAccumulator = 0;
 
+	/** 지난 리포트 이후 매 프레임의 '보간 중' 컴포넌트 수를 누적한 값. */
+	int64 InterpolatingAccumulator = 0;
+
+	/** 지난 리포트 이후 매 프레임의 외부 틱 레이트 합. 평균을 내면 allocator가 정한 평균 틱 간격이 된다. */
+	int64 TickRateAccumulator = 0;
+
 	/** PoseTickAccumulator에 반영된 프레임 수. */
 	int32 FramesSinceReport = 0;
 
