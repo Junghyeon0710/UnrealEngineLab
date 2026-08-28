@@ -240,7 +240,16 @@ a.Budget.Debug.Force.Rate 4      # 전부 4프레임에 1번 틱
 a.Budget.Debug.Force.Interp 1
 ```
 
-**기대 결과**: Game(ms)이 baseline의 대략 1/4 수준. 이 값이 시나리오 A의 **이론적 하한**이다.
+```
+a.Budget.Debug.Force.Reduced 0   # reduced work 는 따로 켜야 한다
+```
+
+**기대 결과**: `avgPoseTicked`가 정확히 `400 / Rate`, `anim_ms`가 baseline의 `1 / Rate`.
+실측은 오차 없이 맞았다 (Rate 2/4/8 -> 200/100/50틱, 6.82/3.29/1.50 ms).
+이 곡선이 시나리오 A의 **이론적 하한**이다.
+
+`Force.Interp 1`은 평가 횟수를 바꾸지 않지만 **비용을 2.4배로 올린다** — 보간 프레임에도
+컴포넌트가 매 프레임 틱하기 때문이다. 결과 문서 8.3절 참고.
 
 ---
 

@@ -219,7 +219,7 @@ a.Budget.Debug.Enabled 1
 | `a.Budget.InterpolationFalloffAggression` | 0.4 | [0.1, 0.9] | 클수록 보간 그룹을 빨리 줄임 |
 | `a.Budget.InterpolationMaxRate` | 6 | > 1 | 보간 중 최대 틱 간격 |
 | `a.Budget.MaxInterpolatedComponents` | 16 | >= 0 | 스로틀 전 최대 보간 컴포넌트 수 |
-| `a.Budget.InterpolationTickMultiplier` | 0.75 | [0.1, 0.9] | 보간 틱의 상대 비용 추정 |
+| `a.Budget.InterpolationTickMultiplier` | 0.75 | [0.1, 0.9] | 보간 틱의 상대 비용 추정. 실측은 약 0.46이었다 (결과 문서 8.3절) |
 
 ### 6.4 Reduced work
 
@@ -316,6 +316,24 @@ LogSkeletalMesh: Warning: SetComponentSignificance called on [...] before regist
 
 **첫 `Tick` 이후에 호출해야 한다.** 3.2절의 `SetAutoCalculateSignificance`가
 `RegisterComponent()` **전에** 호출되어야 하는 것과 순서가 정반대이니 주의.
+
+---
+
+## 6.11 보간은 공짜가 아니다
+
+같은 평가 횟수(400개 중 100개)에서 보간을 켜면 애니메이션 게임스레드 시간이
+**3.29 ms -> 7.86 ms 로 2.4배** 늘었다.
+
+`EnableExternalInterpolation`이 켜진 컴포넌트는 틱 함수가 **매 프레임 살아있고**,
+평가하지 않는 프레임에는 포즈를 보간한다. 스로틀링(틱 자체를 끔)과 달리
+프레임당 비용이 계속 발생한다.
+
+부드러움이 필요 없는 원거리 메시라면 `a.Budget.MaxInterpolatedComponents`를 낮추거나
+`a.Budget.InterpolationFalloffAggression`을 올려 보간 대상을 줄이는 쪽이
+같은 품질에서 비용을 크게 줄인다.
+
+한편 순수 스로틀링의 비용은 틱 레이트에 **거의 정확히 반비례**한다
+(Rate 2/4/8 -> 6.82 / 3.29 / 1.50 ms, baseline 13.12 ms). 숨은 프레임당 고정비용은 없다.
 
 ---
 
