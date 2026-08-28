@@ -1,0 +1,42 @@
+# Unreal Engine generated files
+Binaries/
+DerivedDataCache/
+Intermediate/
+Saved/
+
+# Local Codex settings
+.codex/
+
+# IDE and local user files
+.vs/
+.idea/
+*.suo
+*.user
+*.userprefs
+*.VC.db
+*.VC.opendb
+*.sln
+*.slnx
+
+# Build output
+Build/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# KoreanOldTown generated intermediates
+*.blend1
+ExternalAssets/Models/KoreanOldTown/KoreanOldTown_CombinedSource.blend
+Content/KoreanOldTown/Level/KOT_SaveProbe.umap
+Content/KoreanOldTown/Level/KoreanOldTown_BlenderGenerated.umap
+
+# Codex Industrial Harbor generated binary outputs
+Content/IndustrialHarbor_Codex/
+Content/IndustrialHarbor_Codex_R02/
+ExternalAssets/Models/IndustrialHarbor_Codex/
+ExternalAssets/Textures/IndustrialHarbor_Codex/
+Scripts/IndustrialHarbor_Codex/__pycache__/
+Scripts/IndustrialHarbor_Codex/*.blend
+*.pyc
+cat_render.png
