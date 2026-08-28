@@ -218,7 +218,7 @@ a.Budget.Debug.Enabled 1
 | `a.Budget.AlwaysTickFalloffAggression` | 0.8 | [0.1, 0.9] | 클수록 always-tick 그룹을 빨리 줄임 |
 | `a.Budget.InterpolationFalloffAggression` | 0.4 | [0.1, 0.9] | 클수록 보간 그룹을 빨리 줄임 |
 | `a.Budget.InterpolationMaxRate` | 6 | > 1 | 보간 중 최대 틱 간격 |
-| `a.Budget.MaxInterpolatedComponents` | 16 | >= 0 | 이름과 달리 **상한이 아니라 최소 보장선**이다. 예산이 여유로우면 이 값을 넘겨 보간한다 (결과 문서 9.5절) |
+| `a.Budget.MaxInterpolatedComponents` | 16 | >= 0 | 이름과 달리 **상한이 아니라 최소 보장선**이다. 예산이 여유로우면 이 값을 넘겨 보간하고, 반대로 크게 올려도 보간이 그만큼 늘지는 않는다 (200으로 올려도 74->81에 그침, 결과 문서 9.5~9.6절) |
 | `a.Budget.InterpolationTickMultiplier` | 0.75 | [0.1, 0.9] | 보간 틱의 상대 비용 추정. 실측 약 0.46. 낮추면 예산이 throttle 그룹으로 흘러가 품질이 오른다 (결과 문서 9절). **보간이 일어나지 않는 구간에서는 무의미** |
 
 ### 6.4 Reduced work
