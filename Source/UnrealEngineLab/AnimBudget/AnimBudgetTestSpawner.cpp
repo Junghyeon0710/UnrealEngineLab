@@ -9,9 +9,14 @@
 #include "EngineUtils.h"
 #include "HAL/IConsoleManager.h"
 #include "IAnimationBudgetAllocator.h"
+#include "ProfilingDebugging/CsvProfiler.h"
 #include "SkeletalMeshComponentBudgeted.h"
 
 DEFINE_LOG_CATEGORY_STATIC(LogAnimBudgetTest, Log, All);
+
+// The allocator's own NumTicked/AnimQuality CSV stats are compiled out unless WITH_TICK_DEBUG
+// is set, so this test measures the same thing from PoseTickedThisFrame() instead.
+CSV_DEFINE_CATEGORY(AnimBudgetTest, true);
 
 namespace AnimBudgetTest
 {
@@ -96,6 +101,8 @@ AAnimBudgetTestSpawner::AAnimBudgetTestSpawner()
 {
 	PrimaryActorTick.bCanEverTick = true;
 	PrimaryActorTick.bStartWithTickEnabled = true;
+	// Sample after the budgeted components have had their chance to tick this frame.
+	PrimaryActorTick.TickGroup = TG_PostUpdateWork;
 
 	RootComponent = CreateDefaultSubobject<USceneComponent>(TEXT("Root"));
 }
@@ -127,6 +134,28 @@ void AAnimBudgetTestSpawner::EndPlay(const EEndPlayReason::Type EndPlayReason)
 void AAnimBudgetTestSpawner::Tick(float DeltaSeconds)
 {
 	Super::Tick(DeltaSeconds);
+
+	// PoseTickedThisFrame() is GFrameCounter == LastPoseTickFrame, so this counts the components
+	// whose pose really evaluated this frame rather than what the allocator intended.
+	int32 NumPoseTicked = 0;
+	for (const USkeletalMeshComponentBudgeted* Component : SpawnedComponents)
+	{
+		if (Component != nullptr && Component->PoseTickedThisFrame())
+		{
+			++NumPoseTicked;
+		}
+	}
+
+	const int32 NumComponents = SpawnedComponents.Num();
+	const float AnimQuality = NumComponents > 0 ? (float)NumPoseTicked / (float)NumComponents : 0.0f;
+
+	CSV_CUSTOM_STAT(AnimBudgetTest, NumComponents, NumComponents, ECsvCustomStatOp::Set);
+	CSV_CUSTOM_STAT(AnimBudgetTest, NumPoseTicked, NumPoseTicked, ECsvCustomStatOp::Set);
+	CSV_CUSTOM_STAT(AnimBudgetTest, NumReducedWork, NumReducedWorkComponents, ECsvCustomStatOp::Set);
+	CSV_CUSTOM_STAT(AnimBudgetTest, AnimQuality, AnimQuality, ECsvCustomStatOp::Set);
+
+	PoseTickAccumulator += NumPoseTicked;
+	++FramesSinceReport;
 
 	if (ReportIntervalSeconds <= 0.0f)
 	{
@@ -210,9 +239,11 @@ void AAnimBudgetTestSpawner::ClearGrid()
 
 	SpawnedComponents.Reset();
 	NumReducedWorkComponents = 0;
+	PoseTickAccumulator = 0;
+	FramesSinceReport = 0;
 }
 
-void AAnimBudgetTestSpawner::LogReport() const
+void AAnimBudgetTestSpawner::LogReport()
 {
 	UWorld* LocalWorld = GetWorld();
 	const IAnimationBudgetAllocator* Allocator = LocalWorld != nullptr ? IAnimationBudgetAllocator::Get(LocalWorld) : nullptr;
@@ -221,13 +252,23 @@ void AAnimBudgetTestSpawner::LogReport() const
 	static const IConsoleVariable* EnabledCVar = IConsoleManager::Get().FindConsoleVariable(TEXT("a.Budget.Enabled"));
 	const bool bCVarEnabled = EnabledCVar != nullptr && EnabledCVar->GetInt() != 0;
 
+	const int32 NumComponents = SpawnedComponents.Num();
+	const float AvgPoseTicked = FramesSinceReport > 0 ? (float)PoseTickAccumulator / (float)FramesSinceReport : 0.0f;
+	const float AvgQuality = NumComponents > 0 ? AvgPoseTicked / (float)NumComponents : 0.0f;
+
 	UE_LOG(LogAnimBudgetTest, Display,
-		TEXT("components=%d reducedWork=%d a.Budget.Enabled=%d worldEnabled=%d -> budgeting %s"),
-		SpawnedComponents.Num(),
+		TEXT("components=%d avgPoseTicked=%.1f animQuality=%.3f reducedWork=%d frames=%d a.Budget.Enabled=%d worldEnabled=%d -> budgeting %s"),
+		NumComponents,
+		AvgPoseTicked,
+		AvgQuality,
 		NumReducedWorkComponents,
+		FramesSinceReport,
 		bCVarEnabled ? 1 : 0,
 		bWorldEnabled ? 1 : 0,
 		(bCVarEnabled && bWorldEnabled) ? TEXT("ACTIVE") : TEXT("INACTIVE"));
+
+	PoseTickAccumulator = 0;
+	FramesSinceReport = 0;
 }
 
 void AAnimBudgetTestSpawner::HandleReduceWork(USkeletalMeshComponentBudgeted* InComponent, bool bReduce)

@@ -43,8 +43,8 @@ public:
 	/** Destroy every component spawned by this actor. */
 	void ClearGrid();
 
-	/** Log the current component / reduced-work counts. */
-	void LogReport() const;
+	/** Log the counts gathered since the last report, then reset the window. */
+	void LogReport();
 
 	/** Skeletal mesh used for every grid slot. */
 	UPROPERTY(EditAnywhere, Category = "Anim Budget Test")
@@ -91,6 +91,12 @@ private:
 
 	/** How many components the allocator currently has in reduced work. */
 	int32 NumReducedWorkComponents = 0;
+
+	/** Components whose pose actually evaluated, summed over every frame since the last report. */
+	int64 PoseTickAccumulator = 0;
+
+	/** Frames counted into PoseTickAccumulator. */
+	int32 FramesSinceReport = 0;
 
 	/** Countdown to the next periodic report. */
 	float TimeUntilNextReport = 0.0f;

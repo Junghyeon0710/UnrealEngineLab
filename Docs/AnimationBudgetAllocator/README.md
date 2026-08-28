@@ -161,11 +161,22 @@ csvprofile start
 csvprofile stop
 ```
 
-수집되는 커스텀 스탯: `AverageWorkUnitTimeMs`, `NumAlwaysTicked`, `NumInterpolated`,
-`NumThrottled`, `NumTicked`, `AnimQuality`(= NumTicked / 전체), `AverageTickRate`,
-그리고 타이밍 스탯 `BudgetedAnimation`, `AnimationBudgetAllocator`.
+**주의 — 품질 스탯은 기본 빌드에 없다.** 소스에 보이는 `NumTicked`, `AnimQuality`,
+`AverageTickRate`, `NumThrottled`, `NumInterpolated`, `NumAlwaysTicked`는 전부
+`BUDGET_CSV_STAT` 매크로로 감싸여 있는데, 이 매크로는 `WITH_EXTRA_BUDGET_CSV_STATS`
+(= `WITH_TICK_DEBUG`)가 켜져야만 코드로 확장된다. 기본 빌드에서는 컴파일 아웃된다.
 
-`AnimQuality`가 이 시스템의 핵심 품질 지표다.
+기본 빌드에서 실제로 CSV에 나오는 것:
+
+| 컬럼 | 의미 |
+|---|---|
+| `AnimationBudget/GameThread/BudgetedAnimation` | 예산 대상 애니메이션의 게임스레드 시간 |
+| `AnimationBudget/AverageWorkUnitTimeMs` | 컴포넌트 1개 평균 비용 |
+| `Exclusive/GameThread/AnimationBudgetAllocator` | allocator 자체 오버헤드 |
+
+품질을 재려면 `USkeletalMeshComponent::PoseTickedThisFrame()`
+(`GFrameCounter == LastPoseTickFrame`)으로 직접 세는 편이 확실하다. 이 리포의
+테스트 액터가 그렇게 하고 `AnimBudgetTest/*` CSV 스탯으로 내보낸다.
 
 ### 5.3 온스크린 디버그
 
@@ -257,6 +268,21 @@ a.Budget.Debug.Enabled 1
 
 ---
 
+## 6.8 실측으로 확인된 함정 — `MaxTickRate`가 `BudgetMs`를 무력화한다
+
+기본값 `a.Budget.MaxTickRate = 10`, `a.Budget.InterpolationMaxRate = 6`은 컴포넌트를
+그보다 드물게 틱시킬 수 없게 만드는 **하한선**이다. 예산이 그보다 적은 작업을 요구해도
+더 내려갈 수단이 없으므로, 어느 지점부터는 `BudgetMs`를 낮춰도 아무 변화가 없다.
+
+400개 메시 실측(`results/2026-08-28-i9-10900F.md`)에서 `BudgetMs`를 0.25 / 0.5 / 1.0 / 2.0으로
+바꿔도 결과가 완전히 동일했고(품질 0.210, 2.9 ms), `MaxTickRate`를 60으로 올리자마자
+`BudgetMs 0.25`가 1.01 ms / 품질 0.062로 내려갔다.
+
+낮은 예산을 실제로 달성하려면 `a.Budget.MaxTickRate`를 먼저 올려야 한다.
+반대로 이 상한은 품질 하한을 보장하는 안전장치이기도 하므로, 올릴 때는 시각적 끊김을 함께 확인할 것.
+
+---
+
 ## 7. 요약 체크리스트
 
 테스트가 "동작하지 않을" 때 순서대로 확인:
@@ -268,3 +294,4 @@ a.Budget.Debug.Enabled 1
 5. `stat AnimationBudgetAllocator`의 Num Registered Components > 0 인가
 6. reduced work가 안 보인다면 -> `OnReduceWork()`를 바인드했는가
 7. 컴포넌트 수가 적어서 예산 안에 다 들어가는 건 아닌가 (`a.Budget.BudgetMs`를 0.2 정도로 낮춰 확인)
+8. `BudgetMs`를 낮춰도 변화가 없다면 -> `a.Budget.MaxTickRate` 상한에 걸린 것 (6.8절)
