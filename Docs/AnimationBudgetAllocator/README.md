@@ -218,7 +218,7 @@ a.Budget.Debug.Enabled 1
 | `a.Budget.AlwaysTickFalloffAggression` | 0.8 | [0.1, 0.9] | 클수록 always-tick 그룹을 빨리 줄임 |
 | `a.Budget.InterpolationFalloffAggression` | 0.4 | [0.1, 0.9] | 클수록 보간 그룹을 빨리 줄임 |
 | `a.Budget.InterpolationMaxRate` | 6 | > 1 | 보간 중 최대 틱 간격 |
-| `a.Budget.MaxInterpolatedComponents` | 16 | >= 0 | 스로틀 전 최대 보간 컴포넌트 수 |
+| `a.Budget.MaxInterpolatedComponents` | 16 | >= 0 | 이름과 달리 **상한이 아니라 최소 보장선**이다. 예산이 여유로우면 이 값을 넘겨 보간한다 (결과 문서 9.5절) |
 | `a.Budget.InterpolationTickMultiplier` | 0.75 | [0.1, 0.9] | 보간 틱의 상대 비용 추정. 실측 약 0.46. 낮추면 예산이 throttle 그룹으로 흘러가 품질이 오른다 (결과 문서 9절). **보간이 일어나지 않는 구간에서는 무의미** |
 
 ### 6.4 Reduced work
@@ -343,7 +343,8 @@ LogSkeletalMesh: Warning: SetComponentSignificance called on [...] before regist
 **보간 중인 컴포넌트가 0개**였다. `a.Budget.MaxInterpolatedComponents`를 16에서 200으로 올려도
 0이었다. 보간 밴드가 열리기 전에 전부 throttle로 떨어지기 때문이다.
 
-`BudgetMs 5.0`으로 압력을 낮추자 65~74개가 보간에 들어갔다.
+`BudgetMs`를 올리며 스윕한 결과 경계가 3.0과 4.0 사이에 있었다:
+1.0과 3.0에서 보간 0개, 4.0에서 17개, 5.0에서 65~74개.
 
 따라서 `InterpolationTickMultiplier`, `MaxInterpolatedComponents`,
 `InterpolationFalloffAggression` 같은 보간 파라미터는 **중간 부하 구간에서만 의미가 있다.**
