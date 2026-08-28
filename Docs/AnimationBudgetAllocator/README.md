@@ -109,6 +109,7 @@ significance를 계산한다 (가장 가까운 시점 기준, 1.0 -> 0.0 선형)
 **주의 — 이 플래그는 등록 시점에 캡처된다.**
 `FAnimationBudgetAllocator::RegisterComponent`가 `ComponentData.bAutoCalculateSignificance`로
 값을 복사해 가므로, `SetAutoCalculateSignificance()`는 **`RegisterComponent()` 호출 전에** 해야 한다.
+반대로 `SetComponentSignificance()`는 등록이 끝난 **뒤에** 불러야 한다 (6.10절).
 
 **주의 — 거리 기본값 문서 오류.**
 `AutoCalculatedSignificanceMaxDistance`의 실제 기본값은 구조체 정의상 `30000.0f`(= 300 m)인데,
@@ -283,6 +284,41 @@ a.Budget.Debug.Enabled 1
 
 ---
 
+## 6.9 오프스크린 감축은 `bTickEvenIfNotRendered` 없이는 일어나지 않는다
+
+`a.Budget.MaxTickedOffsreen`은 컴포넌트가 `NonRenderedComponentData` 목록에 들어가야 적용되는데,
+그 목록에 들어가려면 `SetComponentSignificance(..., bTickEvenIfNotRendered=true, ...)`가 되어 있어야 한다.
+꺼져 있으면 `ShouldComponentTick`의 다른 조건(`ShouldTickPose()` 등)으로 살아남아
+**화면 밖이어도 온스크린과 똑같이 처리된다.**
+
+400개 실측: 플래그 off면 카메라를 등져도 품질 0.208 그대로,
+플래그 on이면 `MaxTickedOffsreen`이 정확히 상한으로 동작했다 (4 -> 4.0틱, 32 -> 31.8틱).
+
+이름이 "렌더 안 돼도 틱해라"로 읽히지만, 실제로는 **오프스크린 예산 관리 대상에 편입시키는 스위치**다.
+
+### 여기에 Lumen이 한 겹 더 얹힌다
+
+UE5 기본값인 Lumen이 켜져 있으면 시야 밖 프리미티브의 `LastRenderTime`도 계속 갱신되어,
+allocator 입장에서는 **오프스크린 컴포넌트가 아예 존재하지 않는다**
+(400개 전부 `LastRenderTime > World->TimeSeconds - 1`).
+`r.DynamicGlobalIlluminationMethod 0`으로 꺼야 오프스크린으로 분류되기 시작한다.
+그림자(`r.ShadowQuality 0`)는 무관했다.
+
+## 6.10 `SetComponentSignificance`는 등록 직후에 부르면 조용히 무시된다
+
+월드 BeginPlay 도중에 컴포넌트를 스폰하면 `USkeletalMeshComponentBudgeted::BeginPlay`가
+`RegisterComponentDeferred`를 타서 아직 allocator를 물지 않은 상태가 된다.
+이때 `SetComponentSignificance`를 부르면 다음 경고만 남기고 값이 버려진다:
+
+```
+LogSkeletalMesh: Warning: SetComponentSignificance called on [...] before registering with budget allocator
+```
+
+**첫 `Tick` 이후에 호출해야 한다.** 3.2절의 `SetAutoCalculateSignificance`가
+`RegisterComponent()` **전에** 호출되어야 하는 것과 순서가 정반대이니 주의.
+
+---
+
 ## 7. 요약 체크리스트
 
 테스트가 "동작하지 않을" 때 순서대로 확인:
@@ -295,3 +331,4 @@ a.Budget.Debug.Enabled 1
 6. reduced work가 안 보인다면 -> `OnReduceWork()`를 바인드했는가
 7. 컴포넌트 수가 적어서 예산 안에 다 들어가는 건 아닌가 (`a.Budget.BudgetMs`를 0.2 정도로 낮춰 확인)
 8. `BudgetMs`를 낮춰도 변화가 없다면 -> `a.Budget.MaxTickRate` 상한에 걸린 것 (6.8절)
+9. 오프스크린인데 비용이 안 줄면 -> `bTickEvenIfNotRendered`가 꺼져 있거나 Lumen 때문에 계속 렌더 판정 (6.9절)

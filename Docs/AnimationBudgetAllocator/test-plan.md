@@ -157,16 +157,24 @@ a.Budget.BudgetMs 5.0
 
 ### 시나리오 C — Significance 우선순위
 
-카메라를 그리드 한쪽 끝으로 옮기고 `a.Budget.Debug.Enabled 1`로 확인.
+`AnimBudgetTest.Report`가 컴포넌트를 플레이어 시점까지의 거리로 정렬해 4구간으로 나누고
+구간별 포즈 평가 비율을 찍는다 (`tickRatioByDistance`). 눈으로 볼 필요 없이 수치로 확인된다.
+
+PlayerStart를 그리드 모서리 `(-2000, -2000, 300)` yaw 45로 옮겨 거리 분포를 넓힌 뒤 측정한다.
+
+**기대 결과**: 가까운 구간의 비율이 먼 구간보다 뚜렷하게 높다 (실측 3.2배).
+
+`a.Budget.AutoCalculatedSignificanceMaxDistance`를 바꿔봐도 **분포는 바뀌지 않는다** —
+allocator는 significance 절대값이 아니라 정렬 순위로 배분하고, 이 값은 거리 순서를 바꾸지 않기 때문이다.
+결과 문서 5.1절 참고.
+
+시각적으로도 보고 싶으면:
 
 ```
 a.Budget.Debug.Enabled 1
 a.Budget.Debug.VerboseActive 1
 a.Budget.Debug.Verbose.ShowOnCanvas 1
 ```
-
-**기대 결과**: 카메라에 가까운 메시가 always-tick, 먼 메시가 throttled/interpolated로 분류된다.
-`a.Budget.AutoCalculatedSignificanceMaxDistance`를 3000(cm)으로 낮추면 훨씬 좁은 범위만 살아남아야 한다.
 
 ### 시나리오 D — Reduced work 경로
 
@@ -191,14 +199,23 @@ AnimBudgetTest.Report                        # reducedWork 가 거의 전체 수
 
 ### 시나리오 E — 화면 밖 처리
 
-카메라를 돌려 그리드를 화면 밖으로 보낸다.
+**이 시나리오는 사전 조건 두 개를 맞추지 않으면 아무 변화도 관측되지 않는다** (README 6.9절).
+
+1. PlayerStart를 yaw 180으로 돌려 그리드를 화면 밖으로 보낸다.
+2. 스포너의 `bTickEvenIfNotRendered = true` — 이게 꺼져 있으면 오프스크린 감축이 전혀 없다.
+3. Lumen을 끈다 — 켜져 있으면 시야 밖 메시도 계속 "렌더링 중"으로 분류된다.
 
 ```
+r.DynamicGlobalIlluminationMethod 0
+r.ReflectionMethod 0
 a.Budget.MaxTickedOffsreen 4     # 오타 주의: Offsreen
 ```
 
-**기대 결과**: Num Ticked가 `MaxTickedOffsreen` 근처까지 떨어진다.
-값을 32로 올리면 그만큼 늘어나야 한다.
+`AnimBudgetTest.Report`의 `renderState: consideredRendered=0/400` 으로 오프스크린 판정이
+실제로 걸렸는지 먼저 확인할 것. 여기가 `400/400`이면 아직 Lumen 등이 렌더 상태를 유지하고 있는 것이다.
+
+**기대 결과**: `avgPoseTicked`가 `MaxTickedOffsreen`과 같아진다.
+실측 4 -> 4.0, 32 -> 31.8.
 
 ### 시나리오 E2 — 틱 레이트 상한 (반드시 같이 볼 것)
 
@@ -287,6 +304,22 @@ python Scripts/AnimBudget/analyze.py A1_baseline A2_budget
 - 해상도를 낮추고 `r.ScreenPercentage`를 줄여 GPU 병목을 피한다. `-nullrhi`는 쓰면 안 된다 —
   렌더링이 없으면 모든 컴포넌트가 오프스크린으로 취급되어 `MaxTickedOffsreen` 경로로 빠진다.
 - 캡처의 **마지막 400프레임 중앙값**만 사용한다. 초반은 로딩 + 수렴 구간이다.
+
+## 3.2 에디터 PIE로 돌릴 때
+
+동작 검증(C / E)은 PIE로 충분하다. 오프스크린 결과는 스탠드얼론과 정확히 일치했다.
+다만 **시간 측정에는 쓸 수 없다** — 400개 기준 PIE는 약 3 fps, 스탠드얼론은 40 fps였고
+RTX 3070 8 GB VRAM을 초과한다 (결과 문서 7절).
+
+MCP로 자동화할 때 쓰는 조작:
+
+- 스포너의 `StartupConsoleCommands` 배열에 CVar를 넣으면 BeginPlay에서 실행된다.
+  PIE 콘솔을 직접 칠 필요가 없다.
+- **CVar는 PIE 세션을 넘어 에디터 프로세스에 남는다.** 시나리오를 연속으로 돌릴 때는
+  이전 시나리오에서 바꾼 값을 매번 명시적으로 되돌려야 한다.
+- `StartPIE`의 `startTransform` 회전은 control rotation에 반영되지 않는다.
+  카메라를 돌리려면 **PlayerStart 액터 자체**를 회전시킬 것.
+- 에디터를 종료한 직후 스탠드얼론을 띄우면 GPU 크래시가 난다. 45초 정도 여유를 둘 것.
 
 ## 4. 주의사항
 
