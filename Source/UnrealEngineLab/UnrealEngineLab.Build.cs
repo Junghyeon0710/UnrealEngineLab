@@ -10,6 +10,9 @@ public class UnrealEngineLab : ModuleRules
 	
 		PublicDependencyModuleNames.AddRange(new string[] { "Core", "CoreUObject", "Engine", "InputCore", "EnhancedInput" });
 
+		// Animation Budget Allocator test harness (see Docs/AnimationBudgetAllocator)
+		PrivateDependencyModuleNames.Add("AnimationBudgetAllocator");
+
 		PrivateDependencyModuleNames.AddRange(new string[] {  });
 
 		// Uncomment if you are using Slate UI
