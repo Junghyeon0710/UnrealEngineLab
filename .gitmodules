@@ -1,0 +1,3 @@
+[submodule "Plugins/AIWidgetInspector"]
+	path = Plugins/AIWidgetInspector
+	url = https://github.com/Junghyeon0710/AIWidgetInspector.git
