@@ -687,4 +687,4 @@ SOLID는 코드에 무조건 적용해야 하는 규칙이라기보다, 프로�
 
 작은 기능에 Interface, Factory, Strategy, Service를 전부 적용하면 오히려 구조를 이해하기 어려워질 수 있기 때문에 실제 변경 가능성과 유지보수 비용을 보고 필요한 곳에 적용하는 것이 중요하다.
 
-[CS 목차로 돌아가기](README.md)
+[메인 README의 CS 목차로 돌아가기](../../README.md#cs)
