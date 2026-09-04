@@ -11,7 +11,7 @@ Unreal Engine 최적화, 성능 분석, 공식 문서 정리, 신기능 및 궁�
 ### Design
 
 - [SOLID 원칙](Docs/CS/SOLID.md)
-- [Clean Code 정리](Docs/CS/CleanCode.md)
+- [Clean Code](Docs/CS/CleanCode.md)
 
 
 ## 프로젝트 구성

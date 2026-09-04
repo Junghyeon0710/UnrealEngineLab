@@ -1,4 +1,4 @@
-# Clean Code 정리
+# Clean Code
 
 <a id="contents"></a>
 
