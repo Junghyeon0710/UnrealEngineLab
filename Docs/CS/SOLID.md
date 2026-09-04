@@ -661,7 +661,7 @@ GameplayMessage는 Sender와 Receiver가 서로를 몰라도 되도록 만드는
 | --- | --- | --- |
 | 클래스가 너무 커지고 여러 기능이 섞임 | SRP | 책임 단위로 Component, Manager, Service 분리 |
 | 타입 하나 추가할 때 여러 코드 수정 | OCP | Interface, Strategy, Factory, Data Driven 검토 |
-| 특정 자식에서 부모 함수를 사용할 수 없음 | LSP | 상속 구조 재검토, Interface/Composition 사용 |
+| 특정 자식이 부모 함수가 보장하던 동작을 정상적으로 제공할 수 없음 | LSP | 상속 구조 재검토, Interface/Composition 사용 |
 | 인터페이스에 사용하지 않는 함수가 많음 | ISP | 역할 단위로 인터페이스 분리 |
 | 게임 로직이 HTTP, UI, File 구현을 직접 알고 있음 | DIP | 추상화 계층 추가, DI 검토 |
 
