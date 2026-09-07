@@ -216,6 +216,8 @@ void UInteractionComponent::TryInteract(AActor* Target)
 
 Interface가 없다면 호출하는 쪽에서 구체 타입을 계속 확인하게 되기 쉽다.
 
+호출하는 쪽에서 대상의 구체 타입을 계속 확인하며 분기하는 구조는 지양한다.
+
 ```cpp
 if (ADoor* Door = Cast<ADoor>(Target))
 {
