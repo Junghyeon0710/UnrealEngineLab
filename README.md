@@ -13,6 +13,7 @@ Unreal Engine 최적화, 성능 분석, 공식 문서 정리, 신기능 및 궁�
 - [SOLID 원칙](Docs/CS/SOLID.md)
 - [Clean Code](Docs/CS/CleanCode.md)
 - [객체지향 프로그래밍](Docs/CS/OOP.md)
+- [아키텍처와 의존성](Docs/CS/ArchitectureDependencies.md)
 
 
 ## 프로젝트 구성

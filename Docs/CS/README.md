@@ -9,6 +9,7 @@
 - [SOLID 원칙](SOLID.md)
 - [Clean Code](CleanCode.md)
 - [객체지향 프로그래밍](OOP.md)
+- [아키텍처와 의존성](ArchitectureDependencies.md)
 - Design Smell (정리 예정)
 - Design Pattern (정리 예정)
 
