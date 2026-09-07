@@ -216,8 +216,6 @@ void UInteractionComponent::TryInteract(AActor* Target)
 
 Interface가 없다면 호출하는 쪽에서 구체 타입을 계속 확인하게 되기 쉽다.
 
-호출하는 쪽에서 대상의 구체 타입을 계속 확인하며 분기하는 구조는 지양한다.
-
 ```cpp
 if (ADoor* Door = Cast<ADoor>(Target))
 {
@@ -233,7 +231,14 @@ else if (APickupItem* Item = Cast<APickupItem>(Target))
 }
 ```
 
-대상 종류가 늘어날 때마다 이 분기까지 수정해야 한다면 공통 역할을 Interface로 묶을 수 있는지 살펴볼 만하다.
+호출하는 쪽에서 대상의 구체 타입을 계속 확인하며 분기하는 구조는 지양한다.
+
+서로 다른 객체가 동일한 의미의 기능을 제공한다면 공통 Interface를 사용해 호출하는 쪽이 구체 타입을 알지 않도록 한다.
+
+if (IInteractable* Interactable = Cast<IInteractable>(Target))
+{
+    Interactable->Interact(GetOwner());
+}
 
 ---
 
