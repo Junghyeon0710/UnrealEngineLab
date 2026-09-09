@@ -15,7 +15,8 @@ public class UnrealEngineLab : ModuleRules
 
 		PublicDependencyModuleNames.AddRange(new string[] { "Core", "CoreUObject", "Engine", "InputCore", "EnhancedInput", "UMG", "Slate", "SlateCore", "GameplayTags", "StateTreeModule", "GameplayStateTreeModule" });
 
-		PrivateDependencyModuleNames.AddRange(new string[] {  });
+		// Animation Budget Allocator 실험용 (Docs/UE/AnimationBudget.md)
+		PrivateDependencyModuleNames.AddRange(new string[] { "AnimationBudgetAllocator" });
 
 		// Uncomment if you are using Slate UI
 		// PrivateDependencyModuleNames.AddRange(new string[] { "Slate", "SlateCore" });

@@ -8,4 +8,8 @@
 
 - [StateTree로 터렛 만들기](StateTree.md)
 
+## 최적화
+
+- [Animation Budget Allocator로 애니메이션 비용 묶기](AnimationBudget.md)
+
 [저장소 소개로 돌아가기](../../README.md)

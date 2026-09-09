@@ -23,6 +23,7 @@ Unreal Engine 최적화, 성능 분석, 공식 문서 정리, 신기능 및 궁�
 엔진 기능을 직접 만들어 보면서 확인한 내용을 정리합니다
 
 - [StateTree로 터렛 만들기](Docs/UE/StateTree.md)
+- [Animation Budget Allocator로 애니메이션 비용 묶기](Docs/UE/AnimationBudget.md)
 
 
 ## 프로젝트 구성

@@ -1,0 +1,78 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 430" width="760" height="430" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Malgun Gothic', sans-serif">
+  <rect x="0" y="0" width="760" height="430" fill="#fcfcfb" stroke="#e0e0dc" stroke-width="1" rx="6"/>
+
+  <text x="46" y="30" font-size="15" font-weight="600" fill="#22262b">평가 간격을 고정했을 때의 비용</text>
+  <text x="46" y="48" font-size="12" fill="#6a7078">a.Budget.Debug.Force 로 예산 계산을 배제하고 측정. 스켈레탈 메시 400개, 스탠드얼론</text>
+
+  <g stroke="#e6e6e2" stroke-width="1">
+    <line x1="90" y1="360" x2="710" y2="360"/>
+    <line x1="90" y1="318.6" x2="710" y2="318.6"/>
+    <line x1="90" y1="277.1" x2="710" y2="277.1"/>
+    <line x1="90" y1="235.7" x2="710" y2="235.7"/>
+    <line x1="90" y1="194.3" x2="710" y2="194.3"/>
+    <line x1="90" y1="152.9" x2="710" y2="152.9"/>
+    <line x1="90" y1="111.4" x2="710" y2="111.4"/>
+    <line x1="90" y1="70" x2="710" y2="70"/>
+  </g>
+
+  <line x1="90" y1="70" x2="90" y2="360" stroke="#9aa0a6" stroke-width="1.2"/>
+  <line x1="90" y1="360" x2="710" y2="360" stroke="#9aa0a6" stroke-width="1.2"/>
+
+  <g font-size="11" fill="#6a7078" text-anchor="end">
+    <text x="80" y="364">0</text>
+    <text x="80" y="322.6">2</text>
+    <text x="80" y="281.1">4</text>
+    <text x="80" y="239.7">6</text>
+    <text x="80" y="198.3">8</text>
+    <text x="80" y="156.9">10</text>
+    <text x="80" y="115.4">12</text>
+    <text x="80" y="74">14</text>
+  </g>
+  <text x="30" y="215" font-size="11" fill="#6a7078" transform="rotate(-90 30 215)" text-anchor="middle">애니메이션 시간 (ms)</text>
+
+  <g font-size="11" fill="#6a7078" text-anchor="middle">
+    <text x="90" y="380">1 (미적용)</text>
+    <text x="296.7" y="380">2</text>
+    <text x="503.3" y="380">4</text>
+    <text x="710" y="380">8</text>
+  </g>
+  <text x="400" y="402" font-size="11" fill="#6a7078" text-anchor="middle">강제 평가 간격 (N 프레임에 1회)</text>
+
+  <!-- 1/N 이론값 -->
+  <polyline points="90.0,88.2 296.7,224.1 503.3,292.1 710.0,326.0"
+            fill="none" stroke="#b9bec4" stroke-width="1.6" stroke-dasharray="5 4"/>
+  <text x="600" y="348" font-size="11" fill="#8d9298">1/N 이론값</text>
+
+  <!-- 측정값 -->
+  <polyline points="90.0,88.2 296.7,218.7 503.3,291.9 710.0,328.9"
+            fill="none" stroke="#2f6f9f" stroke-width="2.4"/>
+  <g fill="#2f6f9f">
+    <circle cx="90" cy="88.2" r="4.5"/>
+    <circle cx="296.7" cy="218.7" r="4.5"/>
+    <circle cx="503.3" cy="291.9" r="4.5"/>
+    <circle cx="710" cy="328.9" r="4.5"/>
+  </g>
+  <g font-size="11.5" fill="#2f6f9f" font-weight="600">
+    <text x="104" y="84">13.12</text>
+    <text x="310" y="214">6.82</text>
+    <text x="517" y="308">3.29</text>
+    <text x="666" y="345">1.50</text>
+  </g>
+
+  <!-- 같은 평가 횟수에서 보간만 켠 경우 -->
+  <line x1="503.3" y1="203" x2="503.3" y2="286" stroke="#c8752a" stroke-width="1.3" stroke-dasharray="3 3"/>
+  <circle cx="503.3" cy="197.2" r="5.5" fill="#c8752a"/>
+  <g font-size="11.5" fill="#c8752a">
+    <text x="518" y="186" font-weight="600">7.86 — 보간만 켠 경우</text>
+    <text x="518" y="203">평가는 100회로 같은데 비용은 2.4배</text>
+  </g>
+
+  <g font-size="11.5">
+    <rect x="126" y="286" width="286" height="52" fill="#ffffff" stroke="#e0e0dc" rx="4"/>
+    <line x1="140" y1="303" x2="166" y2="303" stroke="#2f6f9f" stroke-width="2.4"/>
+    <circle cx="153" cy="303" r="4" fill="#2f6f9f"/>
+    <text x="174" y="307" fill="#3c4147">측정값 (보간 없이 스로틀링만)</text>
+    <circle cx="153" cy="325" r="4.5" fill="#c8752a"/>
+    <text x="174" y="329" fill="#3c4147">Force.Interp 를 켠 경우</text>
+  </g>
+</svg>
