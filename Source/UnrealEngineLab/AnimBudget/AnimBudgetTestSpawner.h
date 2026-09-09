@@ -3,6 +3,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "Components/SkinnedMeshComponent.h"
 #include "GameFramework/Actor.h"
 #include "Templates/SubclassOf.h"
 #include "AnimBudgetTestSpawner.generated.h"
@@ -48,6 +49,23 @@ public:
 
 	/** 지난 리포트 이후 모인 수치를 로그로 남기고 측정 구간을 초기화한다. */
 	void LogReport();
+
+	/** BeginPlay 기준 InSeconds 가 지난 뒤 콘솔 명령을 한 번 실행하도록 예약한다. */
+	void ScheduleCommand(float InSeconds, const FString& InCommand);
+
+	/** 현재 VisibilityBasedAnimTickOption 을 이미 스폰된 컴포넌트에 적용한다. 적용된 개수를 돌려준다. */
+	int32 ApplyTickOptionToSpawned();
+
+private:
+	/**
+	 * 콘솔 명령을 실행한다.
+	 *
+	 * shot 처럼 GameViewportClient 가 처리하는 명령은 GEngine->Exec 로는 전달되지 않아서,
+	 * 플레이어 컨트롤러를 통해 보내고 없을 때만 GEngine 으로 넘긴다.
+	 */
+	void ExecConsoleCommand(const FString& InCommand);
+
+public:
 
 	/** 격자 한 칸마다 사용할 스켈레탈 메시. */
 	UPROPERTY(EditAnywhere, Category = "Anim Budget Test")
@@ -102,6 +120,27 @@ public:
 	UPROPERTY(EditAnywhere, Category = "Anim Budget Test")
 	TArray<FString> StartupConsoleCommands;
 
+	/**
+	 * 스폰한 컴포넌트에 적용할 화면 밖 애니메이션 틱 옵션.
+	 *
+	 * 엔진 기본값은 AlwaysTickPoseAndRefreshBones 라서 화면 밖으로 나가도 포즈 평가가 계속 돈다.
+	 * OnlyTickPoseWhenRendered 로 내리면 렌더되지 않는 동안 평가 자체를 건너뛴다.
+	 */
+	UPROPERTY(EditAnywhere, Category = "Anim Budget Test")
+	EVisibilityBasedAnimTickOption VisibilityBasedAnimTickOption = EVisibilityBasedAnimTickOption::AlwaysTickPoseAndRefreshBones;
+
+	/**
+	 * DelayedCommandSeconds 가 지난 뒤 한 번만 실행할 콘솔 명령들.
+	 *
+	 * 수치가 수렴한 다음에 스크린샷을 찍는 것처럼, 시작 직후가 아니라 나중에 실행해야 하는 것에 쓴다.
+	 */
+	UPROPERTY(EditAnywhere, Category = "Anim Budget Test")
+	TArray<FString> DelayedConsoleCommands;
+
+	/** DelayedConsoleCommands 를 실행하기까지 기다릴 시간(초). 0 이면 실행하지 않는다. */
+	UPROPERTY(EditAnywhere, Category = "Anim Budget Test", meta = (ClampMin = "0.0"))
+	float DelayedCommandSeconds = 0.0f;
+
 private:
 	/** 컴포넌트의 작업량을 늘리거나 줄여야 할 때 allocator가 호출한다. */
 	void HandleReduceWork(USkeletalMeshComponentBudgeted* InComponent, bool bReduce);
@@ -133,6 +172,15 @@ private:
 
 	/** 다음 주기 리포트까지 남은 시간. */
 	float TimeUntilNextReport = 0.0f;
+
+	/** BeginPlay 이후 흐른 시간. DelayedConsoleCommands 실행 시점을 재는 데 쓴다. */
+	float TimeSinceBeginPlay = 0.0f;
+
+	/** DelayedConsoleCommands 를 이미 실행했는지. */
+	bool bDelayedCommandsFired = false;
+
+	/** ScheduleCommand 로 예약된 (실행 시각, 명령) 목록. 실행하면 제거한다. */
+	TArray<TPair<float, FString>> ScheduledCommands;
 
 	/** SpawnGrid마다 증가시켜 재생성 시 컴포넌트 이름이 겹치지 않게 한다. */
 	int32 SpawnGeneration = 0;

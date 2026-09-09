@@ -40,3 +40,7 @@ Scripts/IndustrialHarbor_Codex/__pycache__/
 Scripts/IndustrialHarbor_Codex/*.blend
 *.pyc
 cat_render.png
+
+# Animation Budget 테스트용 마네킹 (엔진 템플릿에서 복사해 쓰는 것이라 저장소에 넣지 않는다)
+# Templates/TemplateResources/High/Characters/Content/Mannequins -> Content/Characters/Mannequins
+Content/Characters/

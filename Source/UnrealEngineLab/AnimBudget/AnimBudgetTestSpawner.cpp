@@ -88,6 +88,70 @@ namespace AnimBudgetTest
 			}
 		}));
 
+	static FAutoConsoleCommandWithWorldAndArgs CmdTickOption(
+		TEXT("AnimBudgetTest.SetTickOption"),
+		TEXT("<0-4> Set VisibilityBasedAnimTickOption on the spawned components and rebuild the grid. 0=AlwaysTickPoseAndRefreshBones, 4=OnlyTickPoseWhenRendered."),
+		FConsoleCommandWithWorldAndArgsDelegate::CreateLambda([](const TArray<FString>& Args, UWorld* World)
+		{
+			if (AAnimBudgetTestSpawner* Spawner = FindSpawner(World))
+			{
+				const int32 Value = Args.Num() > 0 ? FMath::Clamp(FCString::Atoi(*Args[0]), 0, 4) : 0;
+				Spawner->VisibilityBasedAnimTickOption = (EVisibilityBasedAnimTickOption)Value;
+
+				// ShouldTickPose() 가 이 값을 매 틱 읽으므로 살아 있는 컴포넌트에 그대로 덮어쓰면 된다.
+				// 여기서 SpawnGrid 로 다시 만들면 안 된다. 파괴된 컴포넌트가 GC 전까지 남아
+				// 씬 비용이 두 배가 되고, 측정값이 10배 넘게 나빠진다.
+				const int32 Applied = Spawner->ApplyTickOptionToSpawned();
+				UE_LOG(LogAnimBudgetTest, Display, TEXT("VisibilityBasedAnimTickOption = %d, applied to %d components"), Value, Applied);
+			}
+		}));
+
+	static FAutoConsoleCommandWithWorldAndArgs CmdFaceAway(
+		TEXT("AnimBudgetTest.FaceAway"),
+		TEXT("<0|1> Turn the player view 180 degrees away from the grid, so the meshes go off screen."),
+		FConsoleCommandWithWorldAndArgsDelegate::CreateLambda([](const TArray<FString>& Args, UWorld* World)
+		{
+			if (World == nullptr)
+			{
+				return;
+			}
+
+			const bool bAway = Args.Num() > 0 ? (FCString::Atoi(*Args[0]) != 0) : true;
+			for (FConstPlayerControllerIterator It = World->GetPlayerControllerIterator(); It; ++It)
+			{
+				if (APlayerController* PlayerController = It->Get())
+				{
+					FRotator Rotation = PlayerController->GetControlRotation();
+					Rotation.Yaw = bAway ? 180.f : 0.f;
+					PlayerController->SetControlRotation(Rotation);
+					UE_LOG(LogAnimBudgetTest, Display, TEXT("Player view yaw = %.0f"), Rotation.Yaw);
+				}
+			}
+		}));
+
+	static FAutoConsoleCommandWithWorldAndArgs CmdSchedule(
+		TEXT("AnimBudgetTest.Schedule"),
+		TEXT("<seconds> <command...> Run a console command once, that many seconds after BeginPlay."),
+		FConsoleCommandWithWorldAndArgsDelegate::CreateLambda([](const TArray<FString>& Args, UWorld* World)
+		{
+			if (Args.Num() < 2)
+			{
+				UE_LOG(LogAnimBudgetTest, Warning, TEXT("AnimBudgetTest.Schedule <seconds> <command...>"));
+				return;
+			}
+
+			if (AAnimBudgetTestSpawner* Spawner = FindSpawner(World))
+			{
+				// 명령에 공백이 들어가므로 나머지 인자를 다시 합친다.
+				TArray<FString> CommandParts(Args.GetData() + 1, Args.Num() - 1);
+				const FString Command = FString::Join(CommandParts, TEXT(" "));
+				const float Seconds = FCString::Atof(*Args[0]);
+
+				Spawner->ScheduleCommand(Seconds, Command);
+				UE_LOG(LogAnimBudgetTest, Display, TEXT("Scheduled at %.1fs: %s"), Seconds, *Command);
+			}
+		}));
+
 	static FAutoConsoleCommandWithWorldAndArgs CmdReport(
 		TEXT("AnimBudgetTest.Report"),
 		TEXT("Log the current component and reduced-work counts."),
@@ -120,7 +184,7 @@ void AAnimBudgetTestSpawner::BeginPlay()
 		if (!Command.IsEmpty() && GEngine != nullptr)
 		{
 			UE_LOG(LogAnimBudgetTest, Display, TEXT("Startup command: %s"), *Command);
-			GEngine->Exec(GetWorld(), *Command);
+			ExecConsoleCommand(Command);
 		}
 	}
 
@@ -208,6 +272,28 @@ void AAnimBudgetTestSpawner::Tick(float DeltaSeconds)
 	TickRateAccumulator += TickRateSum;
 	++FramesSinceReport;
 
+	TimeSinceBeginPlay += DeltaSeconds;
+	if (!bDelayedCommandsFired && DelayedCommandSeconds > 0.0f && TimeSinceBeginPlay >= DelayedCommandSeconds)
+	{
+		bDelayedCommandsFired = true;
+		for (const FString& Command : DelayedConsoleCommands)
+		{
+			UE_LOG(LogAnimBudgetTest, Display, TEXT("Delayed command: %s"), *Command);
+			ExecConsoleCommand(Command);
+		}
+	}
+
+	for (int32 Index = ScheduledCommands.Num() - 1; Index >= 0; --Index)
+	{
+		if (TimeSinceBeginPlay >= ScheduledCommands[Index].Key)
+		{
+			const FString Command = ScheduledCommands[Index].Value;
+			ScheduledCommands.RemoveAt(Index);
+			UE_LOG(LogAnimBudgetTest, Display, TEXT("Scheduled command: %s"), *Command);
+			ExecConsoleCommand(Command);
+		}
+	}
+
 	if (ReportIntervalSeconds <= 0.0f)
 	{
 		return;
@@ -254,6 +340,9 @@ void AAnimBudgetTestSpawner::SpawnGrid(int32 InGridSize)
 			{
 				Component->OnReduceWork().BindUObject(this, &AAnimBudgetTestSpawner::HandleReduceWork);
 			}
+
+			// 화면 밖 처리를 좌우하는 값이라 등록 전에 정해 둔다.
+			Component->VisibilityBasedAnimTickOption = VisibilityBasedAnimTickOption;
 
 			Component->SetupAttachment(RootComponent);
 			Component->SetRelativeLocation(FVector(X * GridSpacing - HalfExtent, Y * GridSpacing - HalfExtent, 0.0f));
@@ -319,6 +408,52 @@ bool AAnimBudgetTestSpawner::GetPlayerViewLocation(FVector& OutViewLocation) con
 	}
 
 	return false;
+}
+
+void AAnimBudgetTestSpawner::ExecConsoleCommand(const FString& InCommand)
+{
+	if (InCommand.IsEmpty())
+	{
+		return;
+	}
+
+	UWorld* LocalWorld = GetWorld();
+	if (LocalWorld != nullptr)
+	{
+		for (FConstPlayerControllerIterator It = LocalWorld->GetPlayerControllerIterator(); It; ++It)
+		{
+			if (APlayerController* PlayerController = It->Get())
+			{
+				PlayerController->ConsoleCommand(InCommand, /*bWriteToLog*/ true);
+				return;
+			}
+		}
+	}
+
+	if (GEngine != nullptr)
+	{
+		GEngine->Exec(LocalWorld, *InCommand);
+	}
+}
+
+int32 AAnimBudgetTestSpawner::ApplyTickOptionToSpawned()
+{
+	int32 Applied = 0;
+	for (USkeletalMeshComponentBudgeted* Component : SpawnedComponents)
+	{
+		if (Component != nullptr)
+		{
+			Component->VisibilityBasedAnimTickOption = VisibilityBasedAnimTickOption;
+			++Applied;
+		}
+	}
+
+	return Applied;
+}
+
+void AAnimBudgetTestSpawner::ScheduleCommand(float InSeconds, const FString& InCommand)
+{
+	ScheduledCommands.Emplace(InSeconds, InCommand);
 }
 
 void AAnimBudgetTestSpawner::LogReport()
