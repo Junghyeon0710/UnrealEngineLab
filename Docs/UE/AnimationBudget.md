@@ -439,9 +439,43 @@ renderState: consideredRendered=400/400 worldTime=25.05 maxLastRenderTime=25.03
 
 카메라가 반대를 보고 있는데도 400개 전부가 "렌더링 중"으로 분류되고 있었다.
 
-### 원인 하나 - Lumen
+### 원인 하나 - 애니메이션은 원래 화면 밖이라고 멈추지 않는다
 
-CVar만 바꿔 가며 새 프로세스로 각각 측정했다.
+플러그인 이야기가 아니라 엔진 기본값 이야기다. 화면에서 사라지면 애니메이션도 알아서 꺼질 것 같지만 그렇지 않다. `USkinnedMeshComponent` 와 `USkeletalMeshComponent` 생성자가 둘 다 이 값을 이렇게 잡는다.
+
+```cpp
+VisibilityBasedAnimTickOption = EVisibilityBasedAnimTickOption::AlwaysTickPoseAndRefreshBones;
+```
+
+`ShouldTickPose()` 의 판정이 이렇다.
+
+```cpp
+const bool bShouldTickBasedOnVisibility =
+    (bShouldTickBasedOnMontage
+     || (VisibilityBasedAnimTickOption <= EVisibilityBasedAnimTickOption::AlwaysTickPose)
+     || bRecentlyRendered
+     || IsPlayingNetworkedRootMotionMontage());
+```
+
+열거형은 선언 순서가 그대로 값이 된다.
+
+| 값 | 이름 | 화면 밖일 때 |
+| --- | --- | --- |
+| 0 | `AlwaysTickPoseAndRefreshBones` | 포즈 평가와 본 갱신을 모두 한다 (**기본값**) |
+| 1 | `AlwaysTickPose` | 포즈는 평가하고 본 갱신만 건너뛴다 |
+| 2 | `OnlyTickMontagesAndRefreshBonesWhenPlayingMontages` | 몽타주만 갱신 |
+| 3 | `OnlyTickMontagesWhenNotRendered` | 몽타주만 갱신 |
+| 4 | `OnlyTickPoseWhenRendered` | 아무것도 하지 않는다 |
+
+기본값이 0이라서 `VisibilityBasedAnimTickOption <= AlwaysTickPose` 에서 이미 참이 되고, **`bRecentlyRendered` 는 보지도 않는다.** 화면 밖으로 나가도 포즈 평가와 본 갱신이 그대로 돈다.
+
+레벨에 올려 두기만 해도 계속 도는 게 정상 동작이라는 뜻이다. 컬링을 기대한다면 컴포넌트마다 `VisibilityBasedAnimTickOption` 을 `OnlyTickPoseWhenRendered` 로 내리거나, `Config` 프로퍼티라 INI에서 프로젝트 기본값을 바꿔야 한다.
+
+allocator를 붙여도 이 판정은 그대로 살아 있다. `FAnimationBudgetAllocator::ShouldComponentTick` 이 여러 조건을 OR로 묶는데 그중 하나가 `InComponent->ShouldTickPose()` 이기 때문이다. 기본값에서는 이 항이 항상 참이라, 화면 밖 컴포넌트도 온스크린과 같은 경로로 들어간다.
+
+### 원인 둘 - allocator의 화면 밖 판정도 걸리지 않는다
+
+`ShouldTickPose()` 를 빼고 보더라도, allocator가 컴포넌트를 화면 밖으로 분류하려면 `LastRenderTime` 이 오래되어야 한다. 그런데 그 값이 갱신되고 있었다. CVar만 바꿔 가며 새 프로세스로 각각 측정했다.
 
 | 조건 | 렌더 중으로 분류된 수 |
 | --- | --- |
@@ -451,11 +485,18 @@ CVar만 바꿔 가며 새 프로세스로 각각 측정했다.
 
 그림자는 원인이 아니었다. **Lumen이 켜져 있으면 시야 밖 프리미티브의 `LastRenderTime` 도 매 프레임 갱신된다.** UE5 기본값이 Lumen이므로, 기본 설정에서는 allocator 입장에서 화면 밖 컴포넌트가 아예 존재하지 않는 셈이다.
 
-### 원인 둘 - bTickEvenIfNotRendered
+여기서 쓰는 판정은 컴포넌트의 `bRecentlyRendered` 와 같은 식이다. 그래서 테스트 액터에서 센 값이 allocator가 보는 값과 일치한다.
 
-Lumen을 끄고 `0/400` 을 만든 뒤에도 품질은 여전히 0.208이었다.
+```cpp
+bRecentlyRendered = ((bUseScreenRenderStateForUpdate ? GetLastRenderTimeOnScreen() : GetLastRenderTime())
+                     > GetWorld()->TimeSeconds - 1.0f);
+```
 
-엔진의 `ShouldComponentTick` 을 보면, 화면 밖 컴포넌트가 `MaxTickedOffsreen` 제한 목록에 들어가려면 `bTickEvenIfNotRendered` 가 켜져 있어야 한다. 꺼져 있으면 다른 조건으로 살아남아 온스크린과 똑같이 처리된다.
+### 원인 셋 - bTickEvenIfNotRendered
+
+Lumen을 끄고 `0/400` 을 만든 뒤에도 품질은 여전히 0.208이었다. 위에서 본 `ShouldTickPose()` 가 계속 참을 돌려주기 때문이다.
+
+화면 밖 컴포넌트가 `MaxTickedOffsreen` 제한 목록(`NonRenderedComponentData`)에 들어가려면 `bTickEvenIfNotRendered` 가 켜져 있어야 한다. 꺼져 있으면 위의 조건들로 살아남아 온스크린과 똑같이 처리된다.
 
 켜자 바로 동작했다.
 
@@ -467,17 +508,21 @@ Lumen을 끄고 `0/400` 을 만든 뒤에도 품질은 여전히 0.208이었다.
 
 이름이 오해를 부르는 쪽이다. "렌더 안 돼도 틱해라"로 읽히지만 실제로는 **그 컴포넌트를 화면 밖 예산 관리 대상에 편입시키는 스위치**다. 켜야 비로소 화면 밖 비용이 줄어든다.
 
-두 조건을 합치면 이렇게 된다. 어느 쪽 하나만 어긋나도 결과가 같아서, 처음에 원인을 찾기 어려웠다.
+세 조건을 합치면 이렇게 된다. 어느 하나만 어긋나도 결과가 같아서, 처음에 원인을 찾기 어려웠다.
 
 ```mermaid
 flowchart TD
-    A[화면 밖으로 나간 컴포넌트] --> B{LastRenderTime 이<br/>최근으로 갱신되어 있는가}
-    B -- 예 --> Z[온스크린과 동일하게 처리<br/>감축이 일어나지 않는다]
+    A[화면 밖으로 나간 컴포넌트] --> V{VisibilityBasedAnimTickOption<br/>이 OnlyTickPoseWhenRendered 인가}
+    V -- 아니오, 기본값 --> Z[온스크린과 동일하게 처리<br/>감축이 일어나지 않는다]
+    V -- 예 --> B{LastRenderTime 이<br/>최근으로 갱신되어 있는가}
+    B -- 예 --> Z
     B -- 아니오 --> C{bTickEvenIfNotRendered<br/>가 켜져 있는가}
     C -- 아니오 --> Z
     C -- 예 --> Y[MaxTickedOffsreen 개수만 평가]
     L[Lumen 켜짐<br/>UE5 기본값] -. LastRenderTime 을 계속 갱신 .-> B
 ```
+
+기본값 상태에서는 첫 관문에서 이미 막힌다. 그래서 카메라를 돌려도 비용이 그대로였던 것이다.
 
 ### 덤으로 걸린 것
 
@@ -594,7 +639,7 @@ WorkUnitsToInterpolate = min(max(RemainingBudget - ...,
 `OnReduceWork` 를 바인드했는지 본다. C++ 전용이고, 바인드가 없으면 그 단계 전체가 건너뛰어진다.
 
 **화면 밖인데 비용이 그대로다**
-`bTickEvenIfNotRendered` 가 꺼져 있거나, Lumen 때문에 계속 렌더 중으로 분류되고 있다. 후자는 `GetLastRenderTime()` 을 직접 찍어 보면 바로 확인된다.
+관문이 세 개다. 먼저 `VisibilityBasedAnimTickOption` 이 기본값(`AlwaysTickPoseAndRefreshBones`)이면 화면 밖 여부를 아예 보지 않는다. 그다음 Lumen 때문에 계속 렌더 중으로 분류될 수 있고, 마지막으로 `bTickEvenIfNotRendered` 가 꺼져 있으면 `MaxTickedOffsreen` 대상이 되지 않는다. 두 번째는 `GetLastRenderTime()` 을 직접 찍어 보면 바로 확인된다.
 
 **SetComponentSignificance가 먹히지 않는다**
 등록 전에 호출한 것이다. 월드 `BeginPlay` 중 스폰하면 지연 등록되므로 첫 `Tick` 이후에 부른다. 로그에 경고가 남는다.
@@ -627,7 +672,8 @@ allocator 자체 오버헤드는 0.3 ms 수준으로 무시할 만하다.
 한계
 BudgetMs 는 MaxTickRate 상한 아래로는 내려가지 않는다.
 reduced work 는 OnReduceWork 구현에 전부 달려 있다.
-화면 밖 감축은 bTickEvenIfNotRendered 와 Lumen 설정에 막힌다.
+화면 밖 감축은 VisibilityBasedAnimTickOption 기본값에서 이미 막힌다.
+그 뒤로 Lumen 과 bTickEvenIfNotRendered 가 한 겹씩 더 있다.
 
 측정
 CSV 품질 지표는 일반 빌드에 없다. 직접 세야 한다.
