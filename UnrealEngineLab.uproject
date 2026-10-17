@@ -45,6 +45,10 @@
 		{
 			"Name": "AnimationBudgetAllocator",
 			"Enabled": true
+		},
+		{
+			"Name": "MotionWarping",
+			"Enabled": true
 		}
 	]
 }

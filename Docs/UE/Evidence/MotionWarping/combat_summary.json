@@ -1,0 +1,154 @@
+{
+  "far": {
+    "off": {
+      "montage": "/Game/MotionWarpingLab/AM_Attack_MotionWarping.AM_Attack_MotionWarping",
+      "impact_position_s": 0.4667,
+      "interpolated_from": [
+        0.42415887117385864,
+        0.476459264755249
+      ],
+      "enemy": [
+        212.97953151513786,
+        149.12987345127198,
+        89.64999961853027
+      ],
+      "target": {
+        "location": [
+          111.40467802330288,
+          78.00639534374227,
+          89.64999961853027
+        ],
+        "yaw": 35.0
+      },
+      "root_at_impact": [
+        79.5897480552875,
+        -1.2659739154559486e-14,
+        89.6500015141461
+      ],
+      "yaw_at_impact": 0.0,
+      "yaw_to_enemy": 48.188837813481214,
+      "facing_error_deg": 48.188837813481214,
+      "fist_to_enemy_centre_cm": 168.2364057952414,
+      "root_to_target_cm": 84.24480686305797,
+      "final_location": [
+        90.00000000000003,
+        -1.4432899320127035e-14,
+        89.6500015141461
+      ],
+      "final_yaw": 0.0
+    },
+    "on": {
+      "montage": "/Game/MotionWarpingLab/AM_Attack_MotionWarping.AM_Attack_MotionWarping",
+      "impact_position_s": 0.4667,
+      "interpolated_from": [
+        0.45106735825538635,
+        0.5014997124671936
+      ],
+      "enemy": [
+        212.97953151513786,
+        149.12987345127198,
+        89.64999961853027
+      ],
+      "target": {
+        "location": [
+          111.40467802330288,
+          78.00639534374227,
+          89.64999961853027
+        ],
+        "yaw": 35.0
+      },
+      "root_at_impact": [
+        107.9990650787386,
+        75.53929703110894,
+        89.64999985901403
+      ],
+      "yaw_at_impact": 34.08749595022295,
+      "yaw_to_enemy": 35.03018833412246,
+      "facing_error_deg": 0.9426923838995052,
+      "fist_to_enemy_centre_cm": 37.49473712668084,
+      "root_to_target_cm": 4.205326813980336,
+      "final_location": [
+        119.26249639360658,
+        83.24246812598543,
+        89.64999985901403
+      ],
+      "final_yaw": 35.0
+    }
+  },
+  "side": {
+    "off": {
+      "montage": "/Game/MotionWarpingLab/AM_Attack_MotionWarping.AM_Attack_MotionWarping",
+      "impact_position_s": 0.4667,
+      "interpolated_from": [
+        0.46544820070266724,
+        0.4721148908138275
+      ],
+      "enemy": [
+        70.00000000000001,
+        121.2435565298214,
+        89.64999961853027
+      ],
+      "target": {
+        "location": [
+          8.0,
+          13.856406460551014,
+          89.64999961853027
+        ],
+        "yaw": 59.99999999999999
+      },
+      "root_at_impact": [
+        80.45031444848073,
+        -9.853348907585478e-15,
+        89.65000011263791
+      ],
+      "yaw_at_impact": 0.0,
+      "yaw_to_enemy": 94.92630486811969,
+      "facing_error_deg": 94.92630486811969,
+      "fist_to_enemy_centre_cm": 171.838994499934,
+      "root_to_target_cm": 73.76346022038103,
+      "final_location": [
+        90.00000000000003,
+        -1.1102230246251565e-14,
+        89.65000011263791
+      ],
+      "final_yaw": 0.0
+    },
+    "on": {
+      "montage": "/Game/MotionWarpingLab/AM_Attack_MotionWarping.AM_Attack_MotionWarping",
+      "impact_position_s": 0.4667,
+      "interpolated_from": [
+        0.42414966225624084,
+        0.4746091663837433
+      ],
+      "enemy": [
+        70.00000000000001,
+        121.2435565298214,
+        89.64999961853027
+      ],
+      "target": {
+        "location": [
+          8.0,
+          13.856406460551014,
+          89.64999961853027
+        ],
+        "yaw": 59.99999999999999
+      },
+      "root_at_impact": [
+        8.847309733521183,
+        14.918155085460729,
+        89.65000011125944
+      ],
+      "yaw_at_impact": 59.034547088101775,
+      "yaw_to_enemy": 60.094787229349606,
+      "facing_error_deg": 1.0602401412478315,
+      "fist_to_enemy_centre_cm": 32.66277650747631,
+      "root_to_target_cm": 1.3583975585289483,
+      "final_location": [
+        12.923198133672036,
+        21.90236519814726,
+        89.65000011125944
+      ],
+      "final_yaw": 59.99999999999997
+    }
+  }
+}

@@ -1,310 +1,140 @@
-[
-  {
-    "case": "depth50_on",
-    "montage": "/Game/Characters/UEFN_Mannequin/Animations/Traversal/Hurdle/AM_M_Neutral_Traversal_Hurdle_1_0_stand_F_V2_Rfoot.AM_M_Neutral_Traversal_Hurdle_1_0_stand_F_V2_Rfoot",
-    "start": [
-      2300.0,
-      -2400.0,
-      88.27499532699585
-    ],
-    "capture_time_dilation": 0.25,
-    "capsule_half_height": 86.0,
-    "trigger_result": "(False, False)",
-    "frames": 24,
-    "frame_times": [
-      0.008333349600434303,
-      0.09134707413613796,
-      0.17872442491352558,
-      0.26643110159784555,
-      0.3545750258490443,
-      0.44096560031175613,
-      0.5226840013638139,
-      0.6032908745110035,
-      0.684344525448978,
-      0.771420075558126,
-      0.8523452254012227,
-      0.9398080492392182,
-      1.0263945758342743,
-      1.109499474056065,
-      1.197330922819674,
-      1.2773826718330383,
-      1.3624534709379077,
-      1.4502547457814217,
-      1.5313777979463339,
-      1.6177632473409176,
-      1.6981486482545733,
-      1.7786831753328443,
-      1.8654886996373534,
-      1.9458443010225892
-    ],
-    "gif": "motionwarping-gas-depth50-on.gif",
-    "gif_bytes": 3377517,
-    "samples": [
-      {
-        "target": "FrontLedge",
-        "window_end": 0.41688376665115356,
-        "sample_montage_position": 0.4168451130390167,
-        "point": [
-          2400.0000095871387,
-          -2399.999999878884,
-          100.50000530826256
-        ],
-        "target_location": [
-          2400.0000001216795,
-          -2399.9999999999995,
-          100.5
-        ],
-        "error_3d_cm": 1.0852982956656326e-05,
-        "error_xy_cm": 9.46623408059137e-06
-      },
-      {
-        "target": "BackFloor",
-        "window_end": 0.8445823192596436,
-        "sample_montage_position": 0.842755913734436,
-        "point": [
-          2511.960420414214,
-          -2399.9999999808088,
-          2.1671569407112656
-        ],
-        "target_location": [
-          2512.2838020324707,
-          -2400.0,
-          0.125
-        ],
-        "error_3d_cm": 2.067602631436142,
-        "error_xy_cm": 0.3233816182569177
-      }
-    ]
+{
+  "60cm": {
+    "off": {
+      "montage": "/Game/Characters/UEFN_Mannequin/Animations/Traversal/Mantle/AM_M_Neutral_Traversal_Mantle_1_0_stand_F_Lfoot.AM_M_Neutral_Traversal_Mantle_1_0_stand_F_Lfoot",
+      "block_top_cm": 60.0,
+      "frontledge_window_end_s": 0.6992424726486206,
+      "sample_position_s": 0.6979954242706299,
+      "attach": [
+        2483.0002579689026,
+        -6500.0,
+        100.27468293905258
+      ],
+      "frontledge_target": [
+        2500.0000004867184,
+        -6499.999999999999,
+        60.5
+      ],
+      "attach_error_cm": 43.25524995389801,
+      "hold_capsule_bottom_cm": 102.27529247183548,
+      "hold_gap_to_top_cm": 39.97529247183549,
+      "final_capsule_bottom_cm": 62.225011348724365,
+      "largest_step_after_montage_cm": 40.05048751831055,
+      "largest_step_time_s": 2.0901932939887047
+    },
+    "on": {
+      "montage": "/Game/Characters/UEFN_Mannequin/Animations/Traversal/Mantle/AM_M_Neutral_Traversal_Mantle_1_0_stand_F_Lfoot.AM_M_Neutral_Traversal_Mantle_1_0_stand_F_Lfoot",
+      "block_top_cm": 60.0,
+      "frontledge_window_end_s": 0.6992424726486206,
+      "sample_position_s": 0.7070923447608948,
+      "attach": [
+        2500.0002480427224,
+        -6499.999999981269,
+        60.50011900286253
+      ],
+      "frontledge_target": [
+        2500.0000004867184,
+        -6499.999999999999,
+        60.5
+      ],
+      "attach_error_cm": 0.0002746737278894054,
+      "hold_capsule_bottom_cm": 62.50040625225123,
+      "hold_gap_to_top_cm": 0.2004062522512342,
+      "final_capsule_bottom_cm": 62.22501063300942,
+      "largest_step_after_montage_cm": 0.2756028175354004,
+      "largest_step_time_s": 2.074875932186842
+    }
   },
-  {
-    "case": "depth50_off",
-    "montage": "/Game/Characters/UEFN_Mannequin/Animations/Traversal/Hurdle/AM_M_Neutral_Traversal_Hurdle_1_0_stand_F_V2_Rfoot.AM_M_Neutral_Traversal_Hurdle_1_0_stand_F_V2_Rfoot",
-    "start": [
-      2300.0,
-      -2400.0,
-      88.27499532699585
-    ],
-    "capture_time_dilation": 0.25,
-    "capsule_half_height": 86.0,
-    "trigger_result": "(False, False)",
-    "frames": 24,
-    "frame_times": [
-      0.008333350531756878,
-      0.09484685119241476,
-      0.18039682693779469,
-      0.2665304783731699,
-      0.352129178121686,
-      0.43759652879089117,
-      0.5235265782102942,
-      0.6042623035609722,
-      0.696264679543674,
-      0.7812867537140846,
-      0.8637178046628833,
-      0.9450760800391436,
-      1.0259515792131424,
-      1.1067539304494858,
-      1.1871819803491235,
-      1.2729477295652032,
-      1.3543805293738842,
-      1.4422409553080797,
-      1.5234493548050523,
-      1.6105051320046186,
-      1.6984878806397319,
-      1.7841523792594671,
-      1.8706408785656095,
-      1.9576726760715246
-    ],
-    "gif": "motionwarping-gas-depth50-off.gif",
-    "gif_bytes": 3411567,
-    "samples": [
-      {
-        "target": "FrontLedge",
-        "window_end": 0.41688376665115356,
-        "sample_montage_position": 0.420824259519577,
-        "point": [
-          2380.004873275757,
-          -2400.0,
-          100.27321195602417
-        ],
-        "target_location": [
-          2400.0000001216795,
-          -2399.9999999999995,
-          100.5
-        ],
-        "error_3d_cm": 19.996412938360386,
-        "error_xy_cm": 19.99512684592264
-      },
-      {
-        "target": "BackFloor",
-        "window_end": 0.8445823192596436,
-        "sample_montage_position": 0.8433859348297119,
-        "point": [
-          2497.0719146728516,
-          -2400.0,
-          2.796133816242218
-        ],
-        "target_location": [
-          2512.2838020324707,
-          -2400.0,
-          0.125
-        ],
-        "error_3d_cm": 15.444626020270395,
-        "error_xy_cm": 15.21188735961914
-      }
-    ]
+  "100cm": {
+    "off": {
+      "montage": "/Game/Characters/UEFN_Mannequin/Animations/Traversal/Mantle/AM_M_Neutral_Traversal_Mantle_1_0_stand_F_Lfoot.AM_M_Neutral_Traversal_Mantle_1_0_stand_F_Lfoot",
+      "block_top_cm": 100.0,
+      "frontledge_window_end_s": 0.6992424726486206,
+      "sample_position_s": 0.6961889863014221,
+      "attach": [
+        2482.9998936653137,
+        -6500.0,
+        100.27439391613007
+      ],
+      "frontledge_target": [
+        2500.0000004867184,
+        -6499.999999999999,
+        100.5
+      ],
+      "attach_error_cm": 17.00160374918342,
+      "hold_capsule_bottom_cm": 102.2753005027771,
+      "hold_gap_to_top_cm": -0.02469949722289755,
+      "final_capsule_bottom_cm": 102.27549886703491,
+      "largest_step_after_montage_cm": 0.0,
+      "largest_step_time_s": 2.622125430032611
+    },
+    "on": {
+      "montage": "/Game/Characters/UEFN_Mannequin/Animations/Traversal/Mantle/AM_M_Neutral_Traversal_Mantle_1_0_stand_F_Lfoot.AM_M_Neutral_Traversal_Mantle_1_0_stand_F_Lfoot",
+      "block_top_cm": 100.0,
+      "frontledge_window_end_s": 0.6992424726486206,
+      "sample_position_s": 0.6981076598167419,
+      "attach": [
+        2499.999786195891,
+        -6499.999999903326,
+        100.49981267850035
+      ],
+      "frontledge_target": [
+        2500.0000004867184,
+        -6499.999999999999,
+        100.5
+      ],
+      "attach_error_cm": 0.00028462240302559277,
+      "hold_capsule_bottom_cm": 102.50040086519924,
+      "hold_gap_to_top_cm": 0.20040086519924216,
+      "final_capsule_bottom_cm": 102.50061328360488,
+      "largest_step_after_montage_cm": 0.0,
+      "largest_step_time_s": 2.6012069722637534
+    }
   },
-  {
-    "case": "depth20_on",
-    "montage": "/Game/Characters/UEFN_Mannequin/Animations/Traversal/Hurdle/AM_M_Neutral_Traversal_Hurdle_1_0_stand_F_V2_Lfoot.AM_M_Neutral_Traversal_Hurdle_1_0_stand_F_V2_Lfoot",
-    "start": [
-      2330.0,
-      -2600.0,
-      88.27499532699585
-    ],
-    "capture_time_dilation": 0.25,
-    "capsule_half_height": 86.0,
-    "trigger_result": "(False, False)",
-    "frames": 24,
-    "frame_times": [
-      0.008333374746143818,
-      0.09318817313760519,
-      0.17907704878598452,
-      0.26487729977816343,
-      0.3492911998182535,
-      0.43097815103828907,
-      0.511455349624157,
-      0.591594023630023,
-      0.674563649110496,
-      0.761660274118185,
-      0.8457775469869375,
-      0.9272402999922633,
-      1.0113344239071012,
-      1.0986971762031317,
-      1.1848121276125312,
-      1.2712343037128448,
-      1.3594380533322692,
-      1.4464911799877882,
-      1.5265676537528634,
-      1.6144118048250675,
-      1.7006666036322713,
-      1.788201155140996,
-      1.8750318055972457,
-      1.9552419064566493
-    ],
-    "gif": "motionwarping-gas-depth20-on.gif",
-    "gif_bytes": 3448457,
-    "samples": [
-      {
-        "target": "FrontLedge",
-        "window_end": 0.39890336990356445,
-        "sample_montage_position": 0.3957023620605469,
-        "point": [
-          2399.9998173734534,
-          -2599.999999852077,
-          100.50026904773739
-        ],
-        "target_location": [
-          2400.000000048672,
-          -2599.9999999999995,
-          100.5
-        ],
-        "error_3d_cm": 0.0003252029249264155,
-        "error_xy_cm": 0.00018267527852951446
-      },
-      {
-        "target": "BackFloor",
-        "window_end": 0.8313348293304443,
-        "sample_montage_position": 0.8271874785423279,
-        "point": [
-          2475.9754972769247,
-          -2600.000000021138,
-          2.8162477278780074
-        ],
-        "target_location": [
-          2476.810344696045,
-          -2600.0,
-          0.125
-        ],
-        "error_3d_cm": 2.8177623295835796,
-        "error_xy_cm": 0.8348474191202515
-      }
-    ]
-  },
-  {
-    "case": "depth20_off",
-    "montage": "/Game/Characters/UEFN_Mannequin/Animations/Traversal/Hurdle/AM_M_Neutral_Traversal_Hurdle_1_0_stand_F_V2_Lfoot.AM_M_Neutral_Traversal_Hurdle_1_0_stand_F_V2_Lfoot",
-    "start": [
-      2330.0,
-      -2600.0,
-      88.27499532699585
-    ],
-    "capture_time_dilation": 0.25,
-    "capsule_half_height": 86.0,
-    "trigger_result": "(False, False)",
-    "frames": 24,
-    "frame_times": [
-      0.008333349600434303,
-      0.09300009999424219,
-      0.17980787437409163,
-      0.2628836492076516,
-      0.3490308243781328,
-      0.43663129955530167,
-      0.5223890002816916,
-      0.6093003749847412,
-      0.6906024003401399,
-      0.7777657266706228,
-      0.8591717993840575,
-      0.9473147476091981,
-      1.0291131986305118,
-      1.111105446703732,
-      1.1912293434143066,
-      1.2756250435486436,
-      1.3559230659157038,
-      1.4430478904396296,
-      1.5310235917568207,
-      1.6178219923749566,
-      1.705116717144847,
-      1.7924092188477516,
-      1.878645595163107,
-      1.9657191960141063
-    ],
-    "gif": "motionwarping-gas-depth20-off.gif",
-    "gif_bytes": 3499932,
-    "samples": [
-      {
-        "target": "FrontLedge",
-        "window_end": 0.39890336990356445,
-        "sample_montage_position": 0.3954015374183655,
-        "point": [
-          2405.0004348754883,
-          -2600.0,
-          100.28011083602905
-        ],
-        "target_location": [
-          2400.000000048672,
-          -2599.9999999999995,
-          100.5
-        ],
-        "error_3d_cm": 5.005267195831645,
-        "error_xy_cm": 5.0004348268162175
-      },
-      {
-        "target": "BackFloor",
-        "window_end": 0.8313348293304443,
-        "sample_montage_position": 0.8338650465011597,
-        "point": [
-          2496.4000854492188,
-          -2600.0,
-          2.2749953269958496
-        ],
-        "target_location": [
-          2476.810344696045,
-          -2600.0,
-          0.125
-        ],
-        "error_3d_cm": 19.707369755567676,
-        "error_xy_cm": 19.589740753173828
-      }
-    ]
+  "150cm": {
+    "off": {
+      "montage": "/Game/Characters/UEFN_Mannequin/Animations/Traversal/Mantle/AM_M_Neutral_Traversal_Mantle_1_0_stand_F_Lfoot.AM_M_Neutral_Traversal_Mantle_1_0_stand_F_Lfoot",
+      "block_top_cm": 150.0,
+      "frontledge_window_end_s": 0.6992424726486206,
+      "sample_position_s": 0.7036013007164001,
+      "attach": [
+        2483.0007071495056,
+        -6500.0,
+        100.27500441935263
+      ],
+      "frontledge_target": [
+        2500.0000004867184,
+        -6499.999999999999,
+        150.5
+      ],
+      "attach_error_cm": 53.02382629573854,
+      "hold_capsule_bottom_cm": 102.27529387725026,
+      "hold_gap_to_top_cm": -50.024706122749734,
+      "final_capsule_bottom_cm": 152.337504863739,
+      "largest_step_after_montage_cm": 50.0620059967041,
+      "largest_step_time_s": 2.11344396462664
+    },
+    "on": {
+      "montage": "/Game/Characters/UEFN_Mannequin/Animations/Traversal/Mantle/AM_M_Neutral_Traversal_Mantle_1_0_stand_F_Lfoot.AM_M_Neutral_Traversal_Mantle_1_0_stand_F_Lfoot",
+      "block_top_cm": 150.0,
+      "frontledge_window_end_s": 0.6992424726486206,
+      "sample_position_s": 0.7028524875640869,
+      "attach": [
+        2500.0001892532664,
+        -6499.999999953573,
+        150.50011869666577
+      ],
+      "frontledge_target": [
+        2500.0000004867184,
+        -6499.999999999999,
+        150.5
+      ],
+      "attach_error_cm": 0.0002229836547292802,
+      "hold_capsule_bottom_cm": 152.50040253290427,
+      "hold_gap_to_top_cm": 0.20040253290426335,
+      "final_capsule_bottom_cm": 152.50061314434805,
+      "largest_step_after_montage_cm": 0.0,
+      "largest_step_time_s": 2.631972605828196
+    }
   }
-]
+}

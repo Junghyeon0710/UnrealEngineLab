@@ -1,0 +1,23 @@
+{
+  "path": "/Game/MotionWarpingLab/AM_Attack_MotionWarping.AM_Attack_MotionWarping",
+  "class": "AnimMontage",
+  "play_length": 1.0,
+  "windows": [
+    {
+      "start": 0.05000000074505806,
+      "end": 0.46670001745224,
+      "notify_path": "/Game/MotionWarpingLab/AM_Attack_MotionWarping.AM_Attack_MotionWarping:AnimNotifyState_MotionWarping_3",
+      "modifier": "RootMotionModifier_SkewWarp",
+      "modifier_path": "/Game/MotionWarpingLab/AM_Attack_MotionWarping.AM_Attack_MotionWarping:AnimNotifyState_MotionWarping_3.RootMotionModifier_SkewWarp",
+      "warp_target_name": "AttackTarget",
+      "warp_translation": "True",
+      "ignore_z_axis": "True",
+      "warp_to_feet_location": "True",
+      "warp_rotation": "True",
+      "rotation_type": "<MotionWarpRotationType.DEFAULT: 0>",
+      "rotation_method": "<MotionWarpRotationMethod.SLERP: 0>",
+      "warp_point_anim_provider": "<WarpPointAnimProvider.NONE: 0>",
+      "warp_point_anim_bone_name": "None"
+    }
+  ]
+}

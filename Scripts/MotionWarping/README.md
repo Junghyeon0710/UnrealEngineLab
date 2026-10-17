@@ -1,79 +1,104 @@
-# GameAnimationSample Motion Warping 실험
+# Motion Warping 테스트 스크립트
 
-UE **5.8.3 / CL 58210709**의 실제 Game Animation Sample을 Unreal MCP로 조작해 Hurdle 동작을 비교한다. 원본 맵, Blueprint, Animation 에셋은 저장하지 않는다.
+[Motion Warping 문서](../../Docs/UE/MotionWarping.md)에서 쓴 테스트 스크립트다. UE 5.8.3 에디터를 Unreal MCP로 조작해서 테스트했다.
+
+- 파쿠르: Game Animation Sample(GASP) 프로젝트. 샘플의 맵, 블루프린트, 애니메이션은 저장하지 않는다.
+- 전투: 이 저장소 프로젝트. 템플릿 마네킹의 공격 애니메이션으로 몽타주와 테스트 맵을 `Content/MotionWarpingLab/` 에 만든다.
 
 ## 파일
 
 | 파일 | 역할 |
 | --- | --- |
-| `inspect_sample.py` | 프로젝트 조사, 한시적인 실험 Toolset 등록, MCP 8001 포트 시작 |
-| `mw_lab_runtime.py` | 에디터 안에서 실행되는 고정된 실험 작업. 소스 코드나 셸 명령을 MCP 인자로 받지 않음 |
-| `mcp_client.py` | 로컬 Unreal MCP 통신과 Toolset 검색 |
-| `run_sample_tests.py` | 네 번의 독립 PIE 세션, 실제 CVar 확인, 몽타주·좌표·PNG 기록 |
-| `export_captures.py` | 실제 PNG 인코딩, 비교 쌍의 몽타주 일치 검사, 측정 자료 내보내기 |
-| `generate_preview.mjs` | Markdown의 로컬 HTML 미리보기 생성. `marked.esm.js` 경로를 인자로 전달 |
+| `register_toolset.py` | 에디터 안에서 실행. `MotionWarpingLabToolset` 을 MCP 툴셋으로 등록한다 |
+| `mw_lab_runtime.py` | 툴셋이 부르는 작업들. PIE에 블록·캐릭터·카메라 생성, 동작 실행, 기록 |
+| `mcp_client.py` | Unreal MCP HTTP 클라이언트 |
+| `run_sample_tests.py` | 파쿠르. 높이 60 / 100 / 150cm × OFF / ON, 엔진 디버그 2회 |
+| `run_combat_tests.py` | 전투. 적 위치 2곳 × OFF / ON |
+| `export_captures.py` | 기록한 프레임으로 GIF·비교 이미지를 만들고 측정 요약을 내보낸다 |
 
-## 에디터 실행
+## 1. 에디터 실행
 
-현재 문서 저장소와 GameAnimationSample을 별도 에디터로 열고 MCP 포트도 각각 8000 / 8001로 분리했다. GameAnimationSample을 아래처럼 대화형으로 실행한다. 경로는 설치 위치에 맞춘다.
+엔진에 들어 있는 `ModelContextProtocol`(Unreal MCP) 플러그인과 툴셋 플러그인을 명령줄로 켰다. 이렇게 하면 GASP의 `.uproject` 를 고칠 필요가 없다.
 
 ```powershell
-$mwEditor = 'D:\Epic Games\UE_5.8\Engine\Binaries\Win64\UnrealEditor.exe'
-Start-Process -FilePath $mwEditor -ArgumentList @(
+$editor = 'D:\Epic Games\UE_5.8\Engine\Binaries\Win64\UnrealEditor.exe'
+Start-Process -FilePath $editor -ArgumentList @(
     '"D:\Unreal Projects\GameAnimationSample\GameAnimationSample.uproject"',
     '-EnablePlugins=ModelContextProtocol,EditorToolset,SlateInspectorToolset,PythonScriptPlugin,EditorScriptingUtilities',
     '-ModelContextProtocolStartServer',
-    '-ModelContextProtocolPort=8001',
-    '-ExecCmds="py D:/Unreal Projects/UnrealEngineLab/Scripts/MotionWarping/inspect_sample.py"'
+    '-ModelContextProtocolPort=8000'
 )
 ```
 
-명령줄의 `EnablePlugins`를 사용하므로 `.uproject`를 편집할 필요가 없다. 에디터가 이미 열려 있으면 필요한 플러그인을 활성화한 상태에서 `inspect_sample.py`를 에디터 Python으로 실행해도 된다.
+전투는 `UnrealEngineLab.uproject` 로 같은 명령을 쓴다. 이 프로젝트는 MCP와 `MotionWarping` 플러그인이 이미 켜져 있어서 `-EnablePlugins=SlateInspectorToolset,PythonScriptPlugin,EditorScriptingUtilities` 만 있으면 된다. 템플릿 마네킹은 먼저 복사해 둔다.
 
-`Saved/MotionWarpingLab/sample_inventory.json`이 생성되고 MCP `list_toolsets`에 `PythonTypes.MotionWarpingLabToolset...`이 나타나면 준비된 상태다. 포트 8001은 이 실험에서 시작한 GameAnimationSample용으로 사용한다.
-
-## 실행과 내보내기
-
-프로젝트 루트에서 실행한다. Python 3과 Pillow가 필요하다. `python`은 해당 환경의 Python 실행 파일로 대체할 수 있다.
-
-```powershell
-python Scripts/MotionWarping/run_sample_tests.py
-python Scripts/MotionWarping/export_captures.py
+```text
+D:\Epic Games\UE_5.8\Templates\TemplateResources\High\Characters\Content\Mannequins
+  -> Content/Characters/Mannequins
 ```
 
-기본 실행은 새 테스트를 수행한다. 기존 생성 폴더는 같은 `Saved/MotionWarpingLab/` 안에 날짜가 붙은 이름으로 보관한다. `--reuse`를 명시하면 이미 완료된 기록을 재사용한다. `--case depth50_on --case depth50_off`처럼 지정한 조건만 다시 실행할 수도 있다.
+다른 포트를 쓰면 `MW_MCP_ENDPOINT` 환경 변수로 알려 준다. 기본값은 `http://127.0.0.1:8000/mcp` 다.
 
-각 조건은 새 PIE 세션을 사용한다. 샘플 CMC 캐릭터를 초기 위치에 생성·빙의하고, 같은 상대 위치의 카메라를 사용한다. 기존 `GetTraversalCheckInputs → TryTraversalAction` 경로로 장애물 검사·Chooser 선택·몽타주 재생을 실행한다. 시작 이후 캐릭터 위치를 스크립트로 덮어쓰지 않는다.
+## 2. 실험 툴셋 등록
 
-촬영 전에 열린 에셋 에디터를 저장 없이 닫는다. `Shot`은 다른 렌더링 뷰포트가 열려 있으면 그 화면을 촬영할 수 있으므로, PIE 월드와 CameraActor를 검사하고 실제 이미지에 시험 장애물이 있는지도 확인해야 한다. 각 기록의 `capture_audit`와 `setup`에는 월드·카메라·장애물 경계를 남긴다.
+에디터 하단 콘솔(`Cmd`)에 입력한다. 테스트용 작업을 MCP 툴로 등록하는 스크립트다.
 
-카메라는 시작점 기준 X +120cm, Y -530cm, 월드 Z 230cm에서 X +120cm, 같은 Y, 월드 Z 95cm를 본다. FOV는 50도다. 시험 대상과 바닥 이외의 LevelBlock은 PIE에서 렌더링만 숨긴다. 충돌·Trace 설정은 바꾸지 않으며 원본 월드를 저장하지 않는다.
+```text
+py "D:/Unreal Projects/UnrealEngineLab/Scripts/MotionWarping/register_toolset.py"
+```
 
-Unreal `DrawDebug`로 노란 FrontLedge 목표, 하늘색 `attach` 본과 연결선, 초록 BackFloor 목표를 실제 월드 좌표에 표시한다. 구체와 선은 Foreground로 그려 가려지지 않게 하며 이동에는 관여하지 않는다. `attach`는 애니메이션의 기준 본으로, 손바닥 위치 자체는 아니다.
+MCP의 `list_toolsets` 에 `...MotionWarpingLabToolset` 이 보이면 준비된 것이다.
 
-| 이름 | 장애물 / 초기 위치 | `a.MotionWarping.Disable` |
-| --- | --- | --- |
-| `depth50_on` | `LevelBlock_Traversable_C_4`, `(2300, -2400, 90)` | 0 |
-| `depth50_off` | 위와 같음 | 1 |
-| `depth20_on` | `LevelBlock_Traversable_C_7`, `(2330, -2600, 90)` | 0 |
-| `depth20_off` | 위와 같음 | 1 |
+에디터 창이 최소화되어 있으면 PIE가 몇 프레임밖에 돌지 않는다. 실행 스크립트가 시작할 때 창을 복원한다.
 
-캡처 중 게임 시간 배율은 0.25, 프레임 상한은 30이다. GIF는 게임 시간 간격으로 인코딩하고 마지막 프레임을 잠시 유지한다. 실제 렌더링 프레임 외의 중간 포즈는 만들지 않는다.
+## 3. 실행과 내보내기
 
-`*-comparison.gif`는 Traversal 호출 이후 같은 시간에 가장 가까운 캡처를 나란히 배치한다. 0.5배 속도로 재생하고 접촉·착지 부근에서 잠시 멈춘다. 프레임 선택 기록은 `*_comparison_frames.json`에 둔다. 확대 스틸은 FrontLedge Window 끝에 가까운 이미지에서 양쪽의 같은 영역을 자른 것으로, 정확히 같은 몽타주 프레임을 강제한 촬영은 아니다.
+저장소 루트에서 실행한다. Python 3과 Pillow가 필요하다.
 
-녹화에 사용한 에디터 세션에서 Texture/Shadow/GI/Reflection 품질을 1로, Texture Streaming Pool을 1000MB로 설정했다. 백그라운드 CPU 제한은 촬영 중 해제하고 끝나면 원래 값으로 복구한다. 이 값들은 테스트 중 해당 에디터 인스턴스에 적용하며 프로젝트 설정 파일에는 저장하지 않는다.
+```powershell
+python Scripts/MotionWarping/run_sample_tests.py     # GASP 에디터에서
+python Scripts/MotionWarping/run_combat_tests.py     # UnrealEngineLab 에디터에서
+python Scripts/MotionWarping/export_captures.py      # --only mantle / --only combat
+```
 
-실행이 끝나면 PIE를 중지하고 Warping 비활성화 CVar와 프레임 상한을 해제한다. 중간에 테스트를 중단했다면 MCP의 `abort_recording` 작업으로 콜백을 해제한 뒤 PIE를 중지하고 `restore_session`을 호출할 수 있다.
+`--case mantle_h150_off`, `--case combat_far_on` 처럼 지정한 조건만 다시 돌릴 수 있다. 같은 이름의 이전 기록은 `Saved/MotionWarpingLab/archive/` 로 옮긴다. 조건마다 PIE를 새로 띄워서 테스트했다.
 
-## 출력과 측정 기준
+### 파쿠르
 
-- `Saved/MotionWarpingLab/<조건>/`: 원본 PNG, 매 Tick의 실제 위치·본 위치·몽타주 시간·Warp Target 기록. Git 제외.
-- `Docs/UE/Images/motionwarping-gas-*`: 문서용 실제 캡처와 GIF.
-- `Docs/UE/Evidence/MotionWarping/`: 원본 수치 기록, 몽타주의 실제 Window, 요약 JSON.
+| 항목 | 값 |
+| --- | --- |
+| 실험 위치 | `DefaultLevel` 의 빈 바닥, 블록 앞면 X=2500, 중심 Y=-6500 |
+| 블록 | `LevelBlock_Traversable`, 깊이 200cm, 폭 300cm, 높이 60 / 100 / 150cm |
+| 캐릭터 | `SandboxCharacter_CMC`, 블록 앞면에서 85cm, Yaw 0 |
+| 카메라 | 모든 조건에서 같은 CameraActor. 블록 앞면 기준 (+10, +760, 230)에서 (+10, 0, 160)을 봄, FOV 50 |
+| 실행 | 0.3초 뒤 `GetTraversalCheckInputs` -> `TryTraversalAction` |
+| 기록 | 매 틱 캡슐·`attach` 본·발 본·Warp Target·몽타주 위치. 약 0.05초(게임 시간)마다 `Shot` |
+| 촬영 중 시간 배율 | 0.2. 화면 캡처가 프레임을 놓치지 않게 느리게 돌렸다 |
 
-FrontLedge는 마지막 FrontLedge Window 종료 시점에 가까운 `attach` 본의 3D 오차를 사용한다. BackFloor는 해당 Window 종료 시점에 가까운 캐릭터 발 기준 위치의 XY 오차를 사용한다. 종료 시점과 정확히 일치한 프레임을 강제로 만든 결과는 아니다. 선택된 샘플의 실제 몽타주 시간도 요약에 보존한다.
+`LevelBlock_Traversable` 을 런타임에 스폰하면 Ledge 스플라인 길이가 갱신되지 않아서 `FrontLedge` 목표가 옆으로 밀린다. 그래서 스폰 직후 `UpdateSpline()` 을 호출한다. 자세한 내용은 문서의 [테스트하다 헤맨 부분](../../Docs/UE/MotionWarping.md#wrong-target)에 적어 두었다.
 
-50cm 조건에서는 오른발, 20cm 조건에서는 왼발 버전이 선택됐다. 내보낼 때는 각 ON/OFF 쌍이 같은 몽타주를 사용했는지 검사한다. 몽타주가 달라진 쌍을 보정만의 차이로 비교하지 않는다.
+### 전투
 
-[정리 글](../../Docs/UE/MotionWarping.md)
+| 항목 | 값 |
+| --- | --- |
+| 맵 | `/Game/MotionWarpingLab/MotionWarpingCombat` (엔진 Basic 템플릿으로 생성) |
+| 몽타주 | `/Game/MotionWarpingLab/AM_Attack_MotionWarping`, 원본 `MM_Attack_02`, Window 0.05 ~ 0.467초, 목표 `AttackTarget` |
+| 공격하는 쪽 | `ACharacter` + `SKM_Manny_Simple` + `ABP_Unarmed`, 원점에서 +X를 봄. `MotionWarping` 컴포넌트는 스폰 후 추가 |
+| 적 | `ACharacter` + `SKM_Quinn_Simple`, 260cm·35° / 140cm·60° |
+| 목표 | 적과 공격자를 잇는 선 위, 적 중심에서 124cm, 적을 바라보는 방향 |
+| 기록 | 매 틱 위치·방향·양손 위치·몽타주 위치. 약 0.033초(게임 시간)마다 `Shot` |
+
+테스트용 캐릭터는 메시를 스폰 후에 붙이기 때문에 `CacheInitialMeshOffset()` 을 다시 부르고, `bUseControllerRotationYaw` 를 끈다. 이유는 문서에 적어 두었다.
+
+몽타주를 만드는 작업은 PIE 중에 부르면 안 된다. 에디터 에셋 함수가 PIE에서는 동작하지 않아서, 기존 몽타주를 못 찾고 새로 만들려다 덮어쓰기 확인 창이 뜬다. 스크립트는 PIE를 먼저 멈춘다.
+
+## 출력
+
+- `Saved/MotionWarpingLab/<조건>/`: 원본 PNG와 `measurements.json`. Git에서 제외된다.
+- `Docs/UE/Images/motionwarping-mantle-*`, `motionwarping-combat-*`: 문서용 GIF와 비교 이미지.
+- `Docs/UE/Evidence/MotionWarping/summary.json`, `combat_summary.json`: 조건별 측정 요약.
+- `Docs/UE/Evidence/MotionWarping/montages.json`, `combat_montage.json`: 몽타주의 Window 설정.
+
+내보낼 때 OFF/ON 쌍이 같은 몽타주와 조건을 썼는지, CVar 값이 맞는지 같이 확인한다.
+
+끝나면 PIE를 멈추고 `a.MotionWarping.Disable`, `a.MotionWarping.Debug`, `t.MaxFPS` 를 원래대로 돌려 놓는다. 중간에 멈췄다면 `abort_recording` 으로 기록을 끊고 PIE를 멈춘 뒤 `restore_session` 을 호출하면 된다.
