@@ -1,0 +1,3257 @@
+{
+  "case": "depth50_on",
+  "project": "../../../../../Unreal Projects/GameAnimationSample/GameAnimationSample.uproject",
+  "motion_warping_disabled": 0,
+  "capture_time_dilation": 0.25,
+  "capsule_half_height": 86.0,
+  "start": [
+    2300.0,
+    -2400.0,
+    88.27499532699585
+  ],
+  "setup": {
+    "subject": "/Game/Levels/UEDPIE_0_DefaultLevel.DefaultLevel:PersistentLevel.LevelBlock_Traversable_C_4",
+    "bounds_center": [
+      2425.0,
+      -2400.0,
+      50.0
+    ],
+    "bounds_extent": [
+      25.0,
+      100.0,
+      50.0
+    ],
+    "hidden_background_blocks": [
+      "LevelBlock_C_73",
+      "LevelBlock_C_74",
+      "LevelBlock_C_7",
+      "LevelBlock_C_0",
+      "LevelBlock_C_4",
+      "LevelBlock_C_5",
+      "LevelBlock_C_6",
+      "LevelBlock_C_11",
+      "LevelBlock_C_2",
+      "LevelBlock_C_8",
+      "LevelBlock_C_10",
+      "LevelBlock_C_12",
+      "LevelBlock_C_13",
+      "LevelBlock_C_14",
+      "LevelBlock_C_27",
+      "LevelBlock_C_29",
+      "LevelBlock_C_3",
+      "LevelBlock_C_9",
+      "LevelBlock_C_15",
+      "LevelBlock_C_23",
+      "LevelBlock_C_61",
+      "LevelBlock_C_62",
+      "LevelBlock_C_63",
+      "LevelBlock_C_64",
+      "LevelBlock_C_65",
+      "LevelBlock_C_66",
+      "LevelBlock_C_67",
+      "LevelBlock_C_68",
+      "LevelBlock_C_69",
+      "LevelBlock_C_70",
+      "LevelBlock_C_71",
+      "LevelBlock_C_72",
+      "LevelBlock_Traversable_C_35",
+      "LevelBlock_Traversable_C_36",
+      "LevelBlock_Traversable_C_38",
+      "LevelBlock_Traversable_C_39",
+      "LevelBlock_Traversable_C_1",
+      "LevelBlock_Traversable_C_5",
+      "LevelBlock_Traversable_C_6",
+      "LevelBlock_Traversable_C_9",
+      "LevelBlock_Traversable_C_10",
+      "LevelBlock_Traversable_C_12",
+      "LevelBlock_Traversable_C_13",
+      "LevelBlock_Traversable_C_14",
+      "LevelBlock_Traversable_C_16",
+      "LevelBlock_Traversable_C_7",
+      "LevelBlock_Traversable_C_22",
+      "LevelBlock_Traversable_C_23",
+      "LevelBlock_Traversable_C_24",
+      "LevelBlock_Traversable_C_19",
+      "LevelBlock_Traversable_C_21",
+      "LevelBlock_Traversable_C_8",
+      "LevelBlock_Traversable_C_17",
+      "LevelBlock_Traversable_C_20",
+      "LevelBlock_Traversable_C_25",
+      "LevelBlock_Traversable_C_26",
+      "LevelBlock_Traversable_C_28",
+      "LevelBlock_Traversable_C_29",
+      "LevelBlock_Traversable_C_30"
+    ],
+    "camera_location": [
+      2420.0,
+      -2930.0,
+      230.0
+    ],
+    "camera_look_at": [
+      2420.0,
+      -2400.0,
+      95.0
+    ],
+    "camera_fov": 50.0
+  },
+  "capture_audit": {
+    "world": "/Game/Levels/UEDPIE_0_DefaultLevel.DefaultLevel",
+    "pawn": "/Game/Levels/UEDPIE_0_DefaultLevel.DefaultLevel:PersistentLevel.SandboxCharacter_CMC_C_0",
+    "view_target": "/Game/Levels/UEDPIE_0_DefaultLevel.DefaultLevel:PersistentLevel.CameraActor_0",
+    "camera_location": [
+      2420.0,
+      -2930.0,
+      230.0
+    ],
+    "camera_rotation": "<Struct 'Rotator' (0x000001EFFBD33940) {pitch: -14.290325, yaw: 90.000000, roll: 0.000000}>",
+    "camera_fov": 50.0
+  },
+  "samples": [
+    {
+      "t": 0.008333349600434303,
+      "location": [
+        2300.0,
+        -2400.0,
+        88.27499532699585
+      ],
+      "attach": [
+        2300.0,
+        -2400.0,
+        0.2749953269958496
+      ],
+      "montage": null,
+      "position": null,
+      "targets": {}
+    },
+    {
+      "t": 0.01666672434657812,
+      "location": [
+        2300.0,
+        -2400.0,
+        88.27499532699585
+      ],
+      "attach": [
+        2300.0,
+        -2400.0,
+        0.2749953269958496
+      ],
+      "montage": null,
+      "position": null,
+      "targets": {}
+    },
+    {
+      "t": 0.06634702440351248,
+      "location": [
+        2300.0,
+        -2400.0,
+        88.27499532699585
+      ],
+      "attach": [
+        2300.0,
+        -2400.0,
+        0.2749953269958496
+      ],
+      "montage": null,
+      "position": null,
+      "targets": {}
+    },
+    {
+      "t": 0.07468037493526936,
+      "location": [
+        2300.0,
+        -2400.0,
+        88.27499532699585
+      ],
+      "attach": [
+        2300.0,
+        -2400.0,
+        0.2749953269958496
+      ],
+      "montage": null,
+      "position": null,
+      "targets": {}
+    },
+    {
+      "t": 0.08301372453570366,
+      "location": [
+        2300.0,
+        -2400.0,
+        88.27499532699585
+      ],
+      "attach": [
+        2300.0,
+        -2400.0,
+        0.2749953269958496
+      ],
+      "montage": null,
+      "position": null,
+      "targets": {}
+    },
+    {
+      "t": 0.09134707413613796,
+      "location": [
+        2300.0,
+        -2400.0,
+        88.27499532699585
+      ],
+      "attach": [
+        2300.0,
+        -2400.0,
+        0.2749953269958496
+      ],
+      "montage": null,
+      "position": null,
+      "targets": {}
+    },
+    {
+      "t": 0.09968042466789484,
+      "location": [
+        2300.0,
+        -2400.0,
+        88.27499532699585
+      ],
+      "attach": [
+        2300.0,
+        -2400.0,
+        0.2749953269958496
+      ],
+      "montage": null,
+      "position": null,
+      "targets": {}
+    },
+    {
+      "t": 0.15372432488948107,
+      "location": [
+        2300.0,
+        -2400.0,
+        88.27499532699585
+      ],
+      "attach": [
+        2300.0,
+        -2400.0,
+        0.2749953269958496
+      ],
+      "montage": null,
+      "position": null,
+      "targets": {}
+    },
+    {
+      "t": 0.16205769963562489,
+      "location": [
+        2300.0,
+        -2400.0,
+        88.27499532699585
+      ],
+      "attach": [
+        2300.0,
+        -2400.0,
+        0.2749953269958496
+      ],
+      "montage": null,
+      "position": null,
+      "targets": {}
+    },
+    {
+      "t": 0.1703910492360592,
+      "location": [
+        2300.0,
+        -2400.0,
+        88.27499532699585
+      ],
+      "attach": [
+        2300.0,
+        -2400.0,
+        0.2749953269958496
+      ],
+      "montage": null,
+      "position": null,
+      "targets": {}
+    },
+    {
+      "t": 0.17872442491352558,
+      "location": [
+        2300.0,
+        -2400.0,
+        88.27499532699585
+      ],
+      "attach": [
+        2300.0,
+        -2400.0,
+        0.2749953269958496
+      ],
+      "montage": null,
+      "position": null,
+      "targets": {}
+    },
+    {
+      "t": 0.18705777451395988,
+      "location": [
+        2300.0,
+        -2400.0,
+        88.27499532699585
+      ],
+      "attach": [
+        2300.0,
+        -2400.0,
+        0.2749953269958496
+      ],
+      "montage": null,
+      "position": null,
+      "targets": {}
+    },
+    {
+      "t": 0.24143100157380104,
+      "location": [
+        2300.0,
+        -2400.0,
+        88.27499532699585
+      ],
+      "attach": [
+        2300.0,
+        -2400.0,
+        0.2749953269958496
+      ],
+      "montage": null,
+      "position": null,
+      "targets": {}
+    },
+    {
+      "t": 0.24976435117423534,
+      "location": [
+        2300.0,
+        -2400.0,
+        88.27499532699585
+      ],
+      "attach": [
+        2300.0,
+        -2400.0,
+        0.2749953269958496
+      ],
+      "montage": null,
+      "position": null,
+      "targets": {}
+    },
+    {
+      "t": 0.2580977017059922,
+      "location": [
+        2300.0,
+        -2400.0,
+        88.27499532699585
+      ],
+      "attach": [
+        2300.0,
+        -2400.0,
+        0.2749953269958496
+      ],
+      "montage": null,
+      "position": null,
+      "targets": {}
+    },
+    {
+      "t": 0.26643110159784555,
+      "location": [
+        2300.0,
+        -2400.0,
+        88.27499532699585
+      ],
+      "attach": [
+        2300.0,
+        -2400.0,
+        0.2749953269958496
+      ],
+      "montage": null,
+      "position": null,
+      "targets": {}
+    },
+    {
+      "t": 0.27476445119827986,
+      "location": [
+        2300.0,
+        -2400.0,
+        88.27499532699585
+      ],
+      "attach": [
+        2300.0,
+        -2400.0,
+        0.2749953269958496
+      ],
+      "montage": null,
+      "position": null,
+      "targets": {}
+    },
+    {
+      "t": 0.32957497518509626,
+      "location": [
+        2300.0,
+        -2400.0,
+        88.27499532699585
+      ],
+      "attach": [
+        2300.0,
+        -2400.0,
+        0.2749953269958496
+      ],
+      "montage": null,
+      "position": null,
+      "targets": {}
+    },
+    {
+      "t": 0.33790832571685314,
+      "location": [
+        2300.0,
+        -2400.0,
+        88.27499532699585
+      ],
+      "attach": [
+        2300.0,
+        -2400.0,
+        0.2749953269958496
+      ],
+      "montage": null,
+      "position": null,
+      "targets": {}
+    },
+    {
+      "t": 0.34624167531728745,
+      "location": [
+        2300.0,
+        -2400.0,
+        88.27499532699585
+      ],
+      "attach": [
+        2300.0,
+        -2400.0,
+        0.2749953269958496
+      ],
+      "montage": null,
+      "position": null,
+      "targets": {}
+    },
+    {
+      "t": 0.3545750258490443,
+      "location": [
+        2300.0,
+        -2400.0,
+        88.27499532699585
+      ],
+      "attach": [
+        2300.0,
+        -2400.0,
+        0.2749953269958496
+      ],
+      "montage": "/Game/Characters/UEFN_Mannequin/Animations/Traversal/Hurdle/AM_M_Neutral_Traversal_Hurdle_1_0_stand_F_V2_Rfoot.AM_M_Neutral_Traversal_Hurdle_1_0_stand_F_V2_Rfoot",
+      "position": 0.0,
+      "targets": {
+        "FrontLedge": [
+          2400.0000001216795,
+          -2399.9999999999995,
+          100.5
+        ],
+        "BackLedge": [
+          2450.0,
+          -2400.0,
+          100.0
+        ],
+        "BackFloor": [
+          2512.2838020324707,
+          -2400.0,
+          0.125
+        ]
+      }
+    },
+    {
+      "t": 0.3629083754494786,
+      "location": [
+        2300.2066192626953,
+        -2400.0,
+        88.27499532699585
+      ],
+      "attach": [
+        2300.466692348959,
+        -2400.0,
+        0.6009225023289152
+      ],
+      "montage": "/Game/Characters/UEFN_Mannequin/Animations/Traversal/Hurdle/AM_M_Neutral_Traversal_Hurdle_1_0_stand_F_V2_Rfoot.AM_M_Neutral_Traversal_Hurdle_1_0_stand_F_V2_Rfoot",
+      "position": 0.008333349600434303,
+      "targets": {
+        "FrontLedge": [
+          2400.0000001216795,
+          -2399.9999999999995,
+          100.5
+        ],
+        "BackLedge": [
+          2450.0,
+          -2400.0,
+          100.0
+        ],
+        "BackFloor": [
+          2512.2838020324707,
+          -2400.0,
+          0.125
+        ]
+      }
+    },
+    {
+      "t": 0.424298875965178,
+      "location": [
+        2303.5012130737305,
+        -2400.0,
+        88.27499532699585
+      ],
+      "attach": [
+        2318.0323817724916,
+        -2400.0,
+        19.27114462852478
+      ],
+      "montage": "/Game/Characters/UEFN_Mannequin/Animations/Traversal/Hurdle/AM_M_Neutral_Traversal_Hurdle_1_0_stand_F_V2_Rfoot.AM_M_Neutral_Traversal_Hurdle_1_0_stand_F_V2_Rfoot",
+      "position": 0.06972385197877884,
+      "targets": {
+        "FrontLedge": [
+          2400.0000001216795,
+          -2399.9999999999995,
+          100.5
+        ],
+        "BackLedge": [
+          2450.0,
+          -2400.0,
+          100.0
+        ],
+        "BackFloor": [
+          2512.2838020324707,
+          -2400.0,
+          0.125
+        ]
+      }
+    },
+    {
+      "t": 0.43263225071132183,
+      "location": [
+        2304.411521911621,
+        -2400.0,
+        88.27499532699585
+      ],
+      "attach": [
+        2321.9158141519283,
+        -2400.0,
+        23.43341858448947
+      ],
+      "montage": "/Game/Characters/UEFN_Mannequin/Animations/Traversal/Hurdle/AM_M_Neutral_Traversal_Hurdle_1_0_stand_F_V2_Rfoot.AM_M_Neutral_Traversal_Hurdle_1_0_stand_F_V2_Rfoot",
+      "position": 0.07805722951889038,
+      "targets": {
+        "FrontLedge": [
+          2400.0000001216795,
+          -2399.9999999999995,
+          100.5
+        ],
+        "BackLedge": [
+          2450.0,
+          -2400.0,
+          100.0
+        ],
+        "BackFloor": [
+          2512.2838020324707,
+          -2400.0,
+          0.125
+        ]
+      }
+    },
+    {
+      "t": 0.44096560031175613,
+      "location": [
+        2305.3218307495117,
+        -2400.0,
+        88.27499532699585
+      ],
+      "attach": [
+        2325.9104066473055,
+        -2400.0,
+        27.846037877468962
+      ],
+      "montage": "/Game/Characters/UEFN_Mannequin/Animations/Traversal/Hurdle/AM_M_Neutral_Traversal_Hurdle_1_0_stand_F_V2_Rfoot.AM_M_Neutral_Traversal_Hurdle_1_0_stand_F_V2_Rfoot",
+      "position": 0.08639057725667953,
+      "targets": {
+        "FrontLedge": [
+          2400.0000001216795,
+          -2399.9999999999995,
+          100.5
+        ],
+        "BackLedge": [
+          2450.0,
+          -2400.0,
+          100.0
+        ],
+        "BackFloor": [
+          2512.2838020324707,
+          -2400.0,
+          0.125
+        ]
+      }
+    },
+    {
+      "t": 0.449298950843513,
+      "location": [
+        2306.232147216797,
+        -2400.0,
+        88.27499532699585
+      ],
+      "attach": [
+        2329.9765597366522,
+        -2400.0,
+        32.46457516582069
+      ],
+      "montage": "/Game/Characters/UEFN_Mannequin/Animations/Traversal/Hurdle/AM_M_Neutral_Traversal_Hurdle_1_0_stand_F_V2_Rfoot.AM_M_Neutral_Traversal_Hurdle_1_0_stand_F_V2_Rfoot",
+      "position": 0.09472392499446869,
+      "targets": {
+        "FrontLedge": [
+          2400.0000001216795,
+          -2399.9999999999995,
+          100.5
+        ],
+        "BackLedge": [
+          2450.0,
+          -2400.0,
+          100.0
+        ],
+        "BackFloor": [
+          2512.2838020324707,
+          -2400.0,
+          0.125
+        ]
+      }
+    },
+    {
+      "t": 0.5060162013396621,
+      "location": [
+        2314.5821990966797,
+        -2400.0,
+        88.27499532699585
+      ],
+      "attach": [
+        2357.512601746035,
+        -2400.0,
+        65.90308880805969
+      ],
+      "montage": "/Game/Characters/UEFN_Mannequin/Animations/Traversal/Hurdle/AM_M_Neutral_Traversal_Hurdle_1_0_stand_F_V2_Rfoot.AM_M_Neutral_Traversal_Hurdle_1_0_stand_F_V2_Rfoot",
+      "position": 0.15144117176532745,
+      "targets": {
+        "FrontLedge": [
+          2400.0000001216795,
+          -2399.9999999999995,
+          100.5
+        ],
+        "BackLedge": [
+          2450.0,
+          -2400.0,
+          100.0
+        ],
+        "BackFloor": [
+          2512.2838020324707,
+          -2400.0,
+          0.125
+        ]
+      }
+    },
+    {
+      "t": 0.5143495760858059,
+      "location": [
+        2315.983169555664,
+        -2400.0,
+        88.27499532699585
+      ],
+      "attach": [
+        2361.0024132679027,
+        -2400.0,
+        70.60146717537724
+      ],
+      "montage": "/Game/Characters/UEFN_Mannequin/Animations/Traversal/Hurdle/AM_M_Neutral_Traversal_Hurdle_1_0_stand_F_V2_Rfoot.AM_M_Neutral_Traversal_Hurdle_1_0_stand_F_V2_Rfoot",
+      "position": 0.1597745418548584,
+      "targets": {
+        "FrontLedge": [
+          2400.0000001216795,
+          -2399.9999999999995,
+          100.5
+        ],
+        "BackLedge": [
+          2450.0,
+          -2400.0,
+          100.0
+        ],
+        "BackFloor": [
+          2512.2838020324707,
+          -2400.0,
+          0.125
+        ]
+      }
+    },
+    {
+      "t": 0.5226840013638139,
+      "location": [
+        2317.4131240844727,
+        -2400.0,
+        88.27499532699585
+      ],
+      "attach": [
+        2364.2523071401065,
+        -2400.0,
+        75.11493860150726
+      ],
+      "montage": "/Game/Characters/UEFN_Mannequin/Animations/Traversal/Hurdle/AM_M_Neutral_Traversal_Hurdle_1_0_stand_F_V2_Rfoot.AM_M_Neutral_Traversal_Hurdle_1_0_stand_F_V2_Rfoot",
+      "position": 0.1681089699268341,
+      "targets": {
+        "FrontLedge": [
+          2400.0000001216795,
+          -2399.9999999999995,
+          100.5
+        ],
+        "BackLedge": [
+          2450.0,
+          -2400.0,
+          100.0
+        ],
+        "BackFloor": [
+          2512.2838020324707,
+          -2400.0,
+          0.125
+        ]
+      }
+    },
+    {
+      "t": 0.5310173518955708,
+      "location": [
+        2319.2705188247746,
+        -2400.0,
+        88.27827063179132
+      ],
+      "attach": [
+        2367.551531391616,
+        -2400.0,
+        79.40117772027101
+      ],
+      "montage": "/Game/Characters/UEFN_Mannequin/Animations/Traversal/Hurdle/AM_M_Neutral_Traversal_Hurdle_1_0_stand_F_V2_Rfoot.AM_M_Neutral_Traversal_Hurdle_1_0_stand_F_V2_Rfoot",
+      "position": 0.17644232511520386,
+      "targets": {
+        "FrontLedge": [
+          2400.0000001216795,
+          -2399.9999999999995,
+          100.5
+        ],
+        "BackLedge": [
+          2450.0,
+          -2400.0,
+          100.0
+        ],
+        "BackFloor": [
+          2512.2838020324707,
+          -2400.0,
+          0.125
+        ]
+      }
+    },
+    {
+      "t": 0.5866241492331028,
+      "location": [
+        2332.1303088227132,
+        -2399.999999882793,
+        88.30049943563105
+      ],
+      "attach": [
+        2381.5150110512423,
+        -2399.999999882793,
+        98.82781768935303
+      ],
+      "montage": "/Game/Characters/UEFN_Mannequin/Animations/Traversal/Hurdle/AM_M_Neutral_Traversal_Hurdle_1_0_stand_F_V2_Rfoot.AM_M_Neutral_Traversal_Hurdle_1_0_stand_F_V2_Rfoot",
+      "position": 0.2320491224527359,
+      "targets": {
+        "FrontLedge": [
+          2400.0000001216795,
+          -2399.9999999999995,
+          100.5
+        ],
+        "BackLedge": [
+          2450.0,
+          -2400.0,
+          100.0
+        ],
+        "BackFloor": [
+          2512.2838020324707,
+          -2400.0,
+          0.125
+        ]
+      }
+    },
+    {
+      "t": 0.5949575249105692,
+      "location": [
+        2334.1426739412827,
+        -2399.999999882793,
+        88.30335928583688
+      ],
+      "attach": [
+        2382.297682070729,
+        -2399.999999882793,
+        99.87076069929331
+      ],
+      "montage": "/Game/Characters/UEFN_Mannequin/Animations/Traversal/Hurdle/AM_M_Neutral_Traversal_Hurdle_1_0_stand_F_V2_Rfoot.AM_M_Neutral_Traversal_Hurdle_1_0_stand_F_V2_Rfoot",
+      "position": 0.24038249254226685,
+      "targets": {
+        "FrontLedge": [
+          2400.0000001216795,
+          -2399.9999999999995,
+          100.5
+        ],
+        "BackLedge": [
+          2450.0,
+          -2400.0,
+          100.0
+        ],
+        "BackFloor": [
+          2512.2838020324707,
+          -2400.0,
+          0.125
+        ]
+      }
+    },
+    {
+      "t": 0.6032908745110035,
+      "location": [
+        2336.1597577518,
+        -2399.999999868672,
+        88.30610944103822
+      ],
+      "attach": [
+        2382.7478805400715,
+        -2399.999999868672,
+        100.29822374661327
+      ],
+      "montage": "/Game/Characters/UEFN_Mannequin/Animations/Traversal/Hurdle/AM_M_Neutral_Traversal_Hurdle_1_0_stand_F_V2_Rfoot.AM_M_Neutral_Traversal_Hurdle_1_0_stand_F_V2_Rfoot",
+      "position": 0.2487158477306366,
+      "targets": {
+        "FrontLedge": [
+          2400.0000001216795,
+          -2399.9999999999995,
+          100.5
+        ],
+        "BackLedge": [
+          2450.0,
+          -2400.0,
+          100.0
+        ],
+        "BackFloor": [
+          2512.2838020324707,
+          -2400.0,
+          0.125
+        ]
+      }
+    },
+    {
+      "t": 0.6116242250427604,
+      "location": [
+        2338.1644570907406,
+        -2399.999999868672,
+        88.30871978386475
+      ],
+      "attach": [
+        2382.9838235458187,
+        -2399.999999868672,
+        100.30871978386475
+      ],
+      "montage": "/Game/Characters/UEFN_Mannequin/Animations/Traversal/Hurdle/AM_M_Neutral_Traversal_Hurdle_1_0_stand_F_V2_Rfoot.AM_M_Neutral_Traversal_Hurdle_1_0_stand_F_V2_Rfoot",
+      "position": 0.25704920291900635,
+      "targets": {
+        "FrontLedge": [
+          2400.0000001216795,
+          -2399.9999999999995,
+          100.5
+        ],
+        "BackLedge": [
+          2450.0,
+          -2400.0,
+          100.0
+        ],
+        "BackFloor": [
+          2512.2838020324707,
+          -2400.0,
+          0.125
+        ]
+      }
+    },
+    {
+      "t": 0.6676778001710773,
+      "location": [
+        2354.684622168714,
+        -2399.999999868672,
+        101.10472242118112
+      ],
+      "attach": [
+        2387.8150085212533,
+        -2399.999999868672,
+        100.36364118338815
+      ],
+      "montage": "/Game/Characters/UEFN_Mannequin/Animations/Traversal/Hurdle/AM_M_Neutral_Traversal_Hurdle_1_0_stand_F_V2_Rfoot.AM_M_Neutral_Traversal_Hurdle_1_0_stand_F_V2_Rfoot",
+      "position": 0.3131027817726135,
+      "targets": {
+        "FrontLedge": [
+          2400.0000001216795,
+          -2399.9999999999995,
+          100.5
+        ],
+        "BackLedge": [
+          2450.0,
+          -2400.0,
+          100.0
+        ],
+        "BackFloor": [
+          2512.2838020324707,
+          -2400.0,
+          0.125
+        ]
+      }
+    },
+    {
+      "t": 0.6760111758485436,
+      "location": [
+        2357.571468112476,
+        -2399.9999997979025,
+        105.1699207571015
+      ],
+      "attach": [
+        2389.0776879763675,
+        -2399.9999997979025,
+        100.37863047389837
+      ],
+      "montage": "/Game/Characters/UEFN_Mannequin/Animations/Traversal/Hurdle/AM_M_Neutral_Traversal_Hurdle_1_0_stand_F_V2_Rfoot.AM_M_Neutral_Traversal_Hurdle_1_0_stand_F_V2_Rfoot",
+      "position": 0.32143616676330566,
+      "targets": {
+        "FrontLedge": [
+          2400.0000001216795,
+          -2399.9999999999995,
+          100.5
+        ],
+        "BackLedge": [
+          2450.0,
+          -2400.0,
+          100.0
+        ],
+        "BackFloor": [
+          2512.2838020324707,
+          -2400.0,
+          0.125
+        ]
+      }
+    },
+    {
+      "t": 0.684344525448978,
+      "location": [
+        2360.4574220598133,
+        -2399.9999998684743,
+        109.23507709139999
+      ],
+      "attach": [
+        2390.339488786498,
+        -2399.9999998684743,
+        100.39361590975936
+      ],
+      "montage": "/Game/Characters/UEFN_Mannequin/Animations/Traversal/Hurdle/AM_M_Neutral_Traversal_Hurdle_1_0_stand_F_V2_Rfoot.AM_M_Neutral_Traversal_Hurdle_1_0_stand_F_V2_Rfoot",
+      "position": 0.3297695219516754,
+      "targets": {
+        "FrontLedge": [
+          2400.0000001216795,
+          -2399.9999999999995,
+          100.5
+        ],
+        "BackLedge": [
+          2450.0,
+          -2400.0,
+          100.0
+        ],
+        "BackFloor": [
+          2512.2838020324707,
+          -2400.0,
+          0.125
+        ]
+      }
+    },
+    {
+      "t": 0.6926778759807348,
+      "location": [
+        2363.534318495895,
+        -2399.9999998684743,
+        114.08431289864409
+      ],
+      "attach": [
+        2391.8159099113004,
+        -2399.9999998684743,
+        100.41005752755034
+      ],
+      "montage": "/Game/Characters/UEFN_Mannequin/Animations/Traversal/Hurdle/AM_M_Neutral_Traversal_Hurdle_1_0_stand_F_V2_Rfoot.AM_M_Neutral_Traversal_Hurdle_1_0_stand_F_V2_Rfoot",
+      "position": 0.33810287714004517,
+      "targets": {
+        "FrontLedge": [
+          2400.0000001216795,
+          -2399.9999999999995,
+          100.5
+        ],
+        "BackLedge": [
+          2450.0,
+          -2400.0,
+          100.0
+        ],
+        "BackFloor": [
+          2512.2838020324707,
+          -2400.0,
+          0.125
+        ]
+      }
+    },
+    {
+      "t": 0.7464199755340815,
+      "location": [
+        2382.127585057756,
+        -2399.9999998684743,
+        149.93377122423038
+      ],
+      "attach": [
+        2400.0038172049726,
+        -2399.9999998684743,
+        100.50082597276554
+      ],
+      "montage": "/Game/Characters/UEFN_Mannequin/Animations/Traversal/Hurdle/AM_M_Neutral_Traversal_Hurdle_1_0_stand_F_V2_Rfoot.AM_M_Neutral_Traversal_Hurdle_1_0_stand_F_V2_Rfoot",
+      "position": 0.3918449878692627,
+      "targets": {
+        "FrontLedge": [
+          2400.0000001216795,
+          -2399.9999999999995,
+          100.5
+        ],
+        "BackLedge": [
+          2450.0,
+          -2400.0,
+          100.0
+        ],
+        "BackFloor": [
+          2512.2838020324707,
+          -2400.0,
+          0.125
+        ]
+      }
+    },
+    {
+      "t": 0.7547533502802253,
+      "location": [
+        2383.7800986114835,
+        -2399.9999999564084,
+        155.60612831925738
+      ],
+      "attach": [
+        2400.0041205231046,
+        -2399.9999999564084,
+        100.50149880265582
+      ],
+      "montage": "/Game/Characters/UEFN_Mannequin/Animations/Traversal/Hurdle/AM_M_Neutral_Traversal_Hurdle_1_0_stand_F_V2_Rfoot.AM_M_Neutral_Traversal_Hurdle_1_0_stand_F_V2_Rfoot",
+      "position": 0.40017837285995483,
+      "targets": {
+        "FrontLedge": [
+          2400.0000001216795,
+          -2399.9999999999995,
+          100.5
+        ],
+        "BackLedge": [
+          2450.0,
+          -2400.0,
+          100.0
+        ],
+        "BackFloor": [
+          2512.2838020324707,
+          -2400.0,
+          0.125
+        ]
+      }
+    },
+    {
+      "t": 0.7630867008119822,
+      "location": [
+        2385.609099205706,
+        -2399.9999999564084,
+        160.47660392258493
+      ],
+      "attach": [
+        2400.0020635688043,
+        -2399.9999999564084,
+        100.5007547709736
+      ],
+      "montage": "/Game/Characters/UEFN_Mannequin/Animations/Traversal/Hurdle/AM_M_Neutral_Traversal_Hurdle_1_0_stand_F_V2_Rfoot.AM_M_Neutral_Traversal_Hurdle_1_0_stand_F_V2_Rfoot",
+      "position": 0.4085117280483246,
+      "targets": {
+        "FrontLedge": [
+          2400.0000001216795,
+          -2399.9999999999995,
+          100.5
+        ],
+        "BackLedge": [
+          2450.0,
+          -2400.0,
+          100.0
+        ],
+        "BackFloor": [
+          2512.2838020324707,
+          -2400.0,
+          0.125
+        ]
+      }
+    },
+    {
+      "t": 0.771420075558126,
+      "location": [
+        2387.4381027725635,
+        -2399.999999878884,
+        165.34707218753502
+      ],
+      "attach": [
+        2400.0000095871387,
+        -2399.999999878884,
+        100.50000530826256
+      ],
+      "montage": "/Game/Characters/UEFN_Mannequin/Animations/Traversal/Hurdle/AM_M_Neutral_Traversal_Hurdle_1_0_stand_F_V2_Rfoot.AM_M_Neutral_Traversal_Hurdle_1_0_stand_F_V2_Rfoot",
+      "position": 0.4168451130390167,
+      "targets": {
+        "FrontLedge": [
+          2400.0000001216795,
+          -2399.9999999999995,
+          100.5
+        ],
+        "BackLedge": [
+          2450.0,
+          -2400.0,
+          100.0
+        ],
+        "BackFloor": [
+          2512.2838020324707,
+          -2400.0,
+          0.125
+        ]
+      }
+    },
+    {
+      "t": 0.7797534251585603,
+      "location": [
+        2389.268981773996,
+        -2399.9999999083507,
+        170.21738830628254
+      ],
+      "attach": [
+        2399.999830086374,
+        -2399.9999999083507,
+        100.49910179200032
+      ],
+      "montage": "/Game/Characters/UEFN_Mannequin/Animations/Traversal/Hurdle/AM_M_Neutral_Traversal_Hurdle_1_0_stand_F_V2_Rfoot.AM_M_Neutral_Traversal_Hurdle_1_0_stand_F_V2_Rfoot",
+      "position": 0.4251784682273865,
+      "targets": {
+        "FrontLedge": [
+          2400.0000001216795,
+          -2399.9999999999995,
+          100.5
+        ],
+        "BackLedge": [
+          2450.0,
+          -2400.0,
+          100.0
+        ],
+        "BackFloor": [
+          2512.2838020324707,
+          -2400.0,
+          0.125
+        ]
+      }
+    },
+    {
+      "t": 0.835678500123322,
+      "location": [
+        2403.795951683664,
+        -2399.9999999083507,
+        187.54636779847004
+      ],
+      "attach": [
+        2399.9986832930085,
+        -2399.9999999083507,
+        100.50145647349217
+      ],
+      "montage": "/Game/Characters/UEFN_Mannequin/Animations/Traversal/Hurdle/AM_M_Neutral_Traversal_Hurdle_1_0_stand_F_V2_Rfoot.AM_M_Neutral_Traversal_Hurdle_1_0_stand_F_V2_Rfoot",
+      "position": 0.4811035394668579,
+      "targets": {
+        "FrontLedge": [
+          2400.0000001216795,
+          -2399.9999999999995,
+          100.5
+        ],
+        "BackLedge": [
+          2450.0,
+          -2400.0,
+          100.0
+        ],
+        "BackFloor": [
+          2512.2838020324707,
+          -2400.0,
+          0.125
+        ]
+      }
+    },
+    {
+      "t": 0.8440118506550789,
+      "location": [
+        2406.5869715256804,
+        -2399.9999999500656,
+        187.93713275209927
+      ],
+      "attach": [
+        2400.3345067544096,
+        -2399.9999999500656,
+        100.47102741018796
+      ],
+      "montage": "/Game/Characters/UEFN_Mannequin/Animations/Traversal/Hurdle/AM_M_Neutral_Traversal_Hurdle_1_0_stand_F_V2_Rfoot.AM_M_Neutral_Traversal_Hurdle_1_0_stand_F_V2_Rfoot",
+      "position": 0.48943689465522766,
+      "targets": {
+        "FrontLedge": [
+          2400.0000001216795,
+          -2399.9999999999995,
+          100.5
+        ],
+        "BackLedge": [
+          2450.0,
+          -2400.0,
+          100.0
+        ],
+        "BackFloor": [
+          2512.2838020324707,
+          -2400.0,
+          0.125
+        ]
+      }
+    },
+    {
+      "t": 0.8523452254012227,
+      "location": [
+        2409.377508570558,
+        -2399.9999999500656,
+        188.32796574604856
+      ],
+      "attach": [
+        2400.6698288220227,
+        -2399.9999999500656,
+        100.44066322815763
+      ],
+      "montage": "/Game/Characters/UEFN_Mannequin/Animations/Traversal/Hurdle/AM_M_Neutral_Traversal_Hurdle_1_0_stand_F_V2_Rfoot.AM_M_Neutral_Traversal_Hurdle_1_0_stand_F_V2_Rfoot",
+      "position": 0.4977702796459198,
+      "targets": {
+        "FrontLedge": [
+          2400.0000001216795,
+          -2399.9999999999995,
+          100.5
+        ],
+        "BackLedge": [
+          2450.0,
+          -2400.0,
+          100.0
+        ],
+        "BackFloor": [
+          2512.2838020324707,
+          -2400.0,
+          0.125
+        ]
+      }
+    },
+    {
+      "t": 0.860766900703311,
+      "location": [
+        2412.4006362216724,
+        -2399.9999999500656,
+        188.40784794364254
+      ],
+      "attach": [
+        2401.032374884392,
+        -2399.9999999500656,
+        100.40784794364254
+      ],
+      "montage": "/Game/Characters/UEFN_Mannequin/Animations/Traversal/Hurdle/AM_M_Neutral_Traversal_Hurdle_1_0_stand_F_V2_Rfoot.AM_M_Neutral_Traversal_Hurdle_1_0_stand_F_V2_Rfoot",
+      "position": 0.5061919689178467,
+      "targets": {
+        "FrontLedge": [
+          2400.0000001216795,
+          -2399.9999999999995,
+          100.5
+        ],
+        "BackLedge": [
+          2450.0,
+          -2400.0,
+          100.0
+        ],
+        "BackFloor": [
+          2512.2838020324707,
+          -2400.0,
+          0.125
+        ]
+      }
+    },
+    {
+      "t": 0.9148079734295607,
+      "location": [
+        2433.3753802970455,
+        -2399.9999999500656,
+        188.1803306276911
+      ],
+      "attach": [
+        2403.551594515185,
+        -2399.9999999500656,
+        100.18033062769109
+      ],
+      "montage": "/Game/Characters/UEFN_Mannequin/Animations/Traversal/Hurdle/AM_M_Neutral_Traversal_Hurdle_1_0_stand_F_V2_Rfoot.AM_M_Neutral_Traversal_Hurdle_1_0_stand_F_V2_Rfoot",
+      "position": 0.5602330565452576,
+      "targets": {
+        "FrontLedge": [
+          2400.0000001216795,
+          -2399.9999999999995,
+          100.5
+        ],
+        "BackLedge": [
+          2450.0,
+          -2400.0,
+          100.0
+        ],
+        "BackFloor": [
+          2512.2838020324707,
+          -2400.0,
+          0.125
+        ]
+      }
+    },
+    {
+      "t": 0.923141349107027,
+      "location": [
+        2436.812830505784,
+        -2399.9999999500656,
+        188.1430439059843
+      ],
+      "attach": [
+        2403.9654565433816,
+        -2399.9999999500656,
+        100.14304390598431
+      ],
+      "montage": "/Game/Characters/UEFN_Mannequin/Animations/Traversal/Hurdle/AM_M_Neutral_Traversal_Hurdle_1_0_stand_F_V2_Rfoot.AM_M_Neutral_Traversal_Hurdle_1_0_stand_F_V2_Rfoot",
+      "position": 0.5685664415359497,
+      "targets": {
+        "FrontLedge": [
+          2400.0000001216795,
+          -2399.9999999999995,
+          100.5
+        ],
+        "BackLedge": [
+          2450.0,
+          -2400.0,
+          100.0
+        ],
+        "BackFloor": [
+          2512.2838020324707,
+          -2400.0,
+          0.125
+        ]
+      }
+    },
+    {
+      "t": 0.9314746987074614,
+      "location": [
+        2440.3555965702026,
+        -2400.0000000028567,
+        188.10461480176622
+      ],
+      "attach": [
+        2404.3932628910034,
+        -2400.0000000028567,
+        100.10461480176622
+      ],
+      "montage": "/Game/Characters/UEFN_Mannequin/Animations/Traversal/Hurdle/AM_M_Neutral_Traversal_Hurdle_1_0_stand_F_V2_Rfoot.AM_M_Neutral_Traversal_Hurdle_1_0_stand_F_V2_Rfoot",
+      "position": 0.5768997669219971,
+      "targets": {
+        "FrontLedge": [
+          2400.0000001216795,
+          -2399.9999999999995,
+          100.5
+        ],
+        "BackLedge": [
+          2450.0,
+          -2400.0,
+          100.0
+        ],
+        "BackFloor": [
+          2512.2838020324707,
+          -2400.0,
+          0.125
+        ]
+      }
+    },
+    {
+      "t": 0.9398080492392182,
+      "location": [
+        2443.8983582983155,
+        -2400.0000000028567,
+        188.0661857445849
+      ],
+      "attach": [
+        2404.8210687170167,
+        -2400.0000000028567,
+        100.06618574458491
+      ],
+      "montage": "/Game/Characters/UEFN_Mannequin/Animations/Traversal/Hurdle/AM_M_Neutral_Traversal_Hurdle_1_0_stand_F_V2_Rfoot.AM_M_Neutral_Traversal_Hurdle_1_0_stand_F_V2_Rfoot",
+      "position": 0.5852330923080444,
+      "targets": {
+        "FrontLedge": [
+          2400.0000001216795,
+          -2399.9999999999995,
+          100.5
+        ],
+        "BackLedge": [
+          2450.0,
+          -2400.0,
+          100.0
+        ],
+        "BackFloor": [
+          2512.2838020324707,
+          -2400.0,
+          0.125
+        ]
+      }
+    },
+    {
+      "t": 0.9481413988396525,
+      "location": [
+        2447.4410940085945,
+        -2399.999999950066,
+        188.0277569762232
+      ],
+      "attach": [
+        2405.2488714133797,
+        -2399.999999950066,
+        100.0277569762232
+      ],
+      "montage": "/Game/Characters/UEFN_Mannequin/Animations/Traversal/Hurdle/AM_M_Neutral_Traversal_Hurdle_1_0_stand_F_V2_Rfoot.AM_M_Neutral_Traversal_Hurdle_1_0_stand_F_V2_Rfoot",
+      "position": 0.5935664176940918,
+      "targets": {
+        "FrontLedge": [
+          2400.0000001216795,
+          -2399.9999999999995,
+          100.5
+        ],
+        "BackLedge": [
+          2450.0,
+          -2400.0,
+          100.0
+        ],
+        "BackFloor": [
+          2512.2838020324707,
+          -2400.0,
+          0.125
+        ]
+      }
+    },
+    {
+      "t": 1.0013944758102298,
+      "location": [
+        2466.6444168261223,
+        -2399.999999950066,
+        168.40364074686948
+      ],
+      "attach": [
+        2405.5517158678704,
+        -2399.999999950066,
+        99.99628257731382
+      ],
+      "montage": "/Game/Characters/UEFN_Mannequin/Animations/Traversal/Hurdle/AM_M_Neutral_Traversal_Hurdle_1_0_stand_F_V2_Rfoot.AM_M_Neutral_Traversal_Hurdle_1_0_stand_F_V2_Rfoot",
+      "position": 0.6468194723129272,
+      "targets": {
+        "FrontLedge": [
+          2400.0000001216795,
+          -2399.9999999999995,
+          100.5
+        ],
+        "BackLedge": [
+          2450.0,
+          -2400.0,
+          100.0
+        ],
+        "BackFloor": [
+          2512.2838020324707,
+          -2400.0,
+          0.125
+        ]
+      }
+    },
+    {
+      "t": 1.009727825410664,
+      "location": [
+        2468.6539491484664,
+        -2399.999999950066,
+        162.63275999032828
+      ],
+      "attach": [
+        2404.876525289824,
+        -2399.999999950066,
+        99.97251981698844
+      ],
+      "montage": "/Game/Characters/UEFN_Mannequin/Animations/Traversal/Hurdle/AM_M_Neutral_Traversal_Hurdle_1_0_stand_F_V2_Rfoot.AM_M_Neutral_Traversal_Hurdle_1_0_stand_F_V2_Rfoot",
+      "position": 0.6551527976989746,
+      "targets": {
+        "FrontLedge": [
+          2400.0000001216795,
+          -2399.9999999999995,
+          100.5
+        ],
+        "BackLedge": [
+          2450.0,
+          -2400.0,
+          100.0
+        ],
+        "BackFloor": [
+          2512.2838020324707,
+          -2400.0,
+          0.125
+        ]
+      }
+    },
+    {
+      "t": 1.0180612010881305,
+      "location": [
+        2470.6650764925457,
+        -2399.999999950066,
+        156.86185697788773
+      ],
+      "attach": [
+        2404.2028877718426,
+        -2399.999999950066,
+        99.94882063145218
+      ],
+      "montage": "/Game/Characters/UEFN_Mannequin/Animations/Traversal/Hurdle/AM_M_Neutral_Traversal_Hurdle_1_0_stand_F_V2_Rfoot.AM_M_Neutral_Traversal_Hurdle_1_0_stand_F_V2_Rfoot",
+      "position": 0.6634861826896667,
+      "targets": {
+        "FrontLedge": [
+          2400.0000001216795,
+          -2399.9999999999995,
+          100.5
+        ],
+        "BackLedge": [
+          2450.0,
+          -2400.0,
+          100.0
+        ],
+        "BackFloor": [
+          2512.2838020324707,
+          -2400.0,
+          0.125
+        ]
+      }
+    },
+    {
+      "t": 1.0263945758342743,
+      "location": [
+        2472.553388568231,
+        -2399.999999950066,
+        150.95996514063697
+      ],
+      "attach": [
+        2403.5267390931335,
+        -2399.999999950066,
+        99.92624703150611
+      ],
+      "montage": "/Game/Characters/UEFN_Mannequin/Animations/Traversal/Hurdle/AM_M_Neutral_Traversal_Hurdle_1_0_stand_F_V2_Rfoot.AM_M_Neutral_Traversal_Hurdle_1_0_stand_F_V2_Rfoot",
+      "position": 0.6718195676803589,
+      "targets": {
+        "FrontLedge": [
+          2400.0000001216795,
+          -2399.9999999999995,
+          100.5
+        ],
+        "BackLedge": [
+          2450.0,
+          -2400.0,
+          100.0
+        ],
+        "BackFloor": [
+          2512.2838020324707,
+          -2400.0,
+          0.125
+        ]
+      }
+    },
+    {
+      "t": 1.034727950580418,
+      "location": [
+        2474.368033767203,
+        -2399.999999950066,
+        144.97730956371697
+      ],
+      "attach": [
+        2402.851172805289,
+        -2399.999999950066,
+        99.90444884594353
+      ],
+      "montage": "/Game/Characters/UEFN_Mannequin/Animations/Traversal/Hurdle/AM_M_Neutral_Traversal_Hurdle_1_0_stand_F_V2_Rfoot.AM_M_Neutral_Traversal_Hurdle_1_0_stand_F_V2_Rfoot",
+      "position": 0.680152952671051,
+      "targets": {
+        "FrontLedge": [
+          2400.0000001216795,
+          -2399.9999999999995,
+          100.5
+        ],
+        "BackLedge": [
+          2450.0,
+          -2400.0,
+          100.0
+        ],
+        "BackFloor": [
+          2512.2838020324707,
+          -2400.0,
+          0.125
+        ]
+      }
+    },
+    {
+      "t": 1.0928327487781644,
+      "location": [
+        2488.187583993791,
+        -2399.999999950066,
+        113.74878062761465
+      ],
+      "attach": [
+        2399.0342713106857,
+        -2399.999999950066,
+        99.77397288835684
+      ],
+      "montage": "/Game/Characters/UEFN_Mannequin/Animations/Traversal/Hurdle/AM_M_Neutral_Traversal_Hurdle_1_0_stand_F_V2_Rfoot.AM_M_Neutral_Traversal_Hurdle_1_0_stand_F_V2_Rfoot",
+      "position": 0.7382577657699585,
+      "targets": {
+        "FrontLedge": [
+          2400.0000001216795,
+          -2399.9999999999995,
+          100.5
+        ],
+        "BackLedge": [
+          2450.0,
+          -2400.0,
+          100.0
+        ],
+        "BackFloor": [
+          2512.2838020324707,
+          -2400.0,
+          0.125
+        ]
+      }
+    },
+    {
+      "t": 1.1011661235243082,
+      "location": [
+        2490.27404269965,
+        -2399.999999950066,
+        110.70955864657724
+      ],
+      "attach": [
+        2398.6194177606853,
+        -2399.999999950066,
+        99.75940911044442
+      ],
+      "montage": "/Game/Characters/UEFN_Mannequin/Animations/Traversal/Hurdle/AM_M_Neutral_Traversal_Hurdle_1_0_stand_F_V2_Rfoot.AM_M_Neutral_Traversal_Hurdle_1_0_stand_F_V2_Rfoot",
+      "position": 0.7465911507606506,
+      "targets": {
+        "FrontLedge": [
+          2400.0000001216795,
+          -2399.9999999999995,
+          100.5
+        ],
+        "BackLedge": [
+          2450.0,
+          -2400.0,
+          100.0
+        ],
+        "BackFloor": [
+          2512.2838020324707,
+          -2400.0,
+          0.125
+        ]
+      }
+    },
+    {
+      "t": 1.109499474056065,
+      "location": [
+        2492.3616121612517,
+        -2400.0000000033015,
+        107.670377378889
+      ],
+      "attach": [
+        2398.205682595822,
+        -2400.0000000033015,
+        99.74489367527572
+      ],
+      "montage": "/Game/Characters/UEFN_Mannequin/Animations/Traversal/Hurdle/AM_M_Neutral_Traversal_Hurdle_1_0_stand_F_V2_Rfoot.AM_M_Neutral_Traversal_Hurdle_1_0_stand_F_V2_Rfoot",
+      "position": 0.754924476146698,
+      "targets": {
+        "FrontLedge": [
+          2400.0000001216795,
+          -2399.9999999999995,
+          100.5
+        ],
+        "BackLedge": [
+          2450.0,
+          -2400.0,
+          100.0
+        ],
+        "BackFloor": [
+          2512.2838020324707,
+          -2400.0,
+          0.125
+        ]
+      }
+    },
+    {
+      "t": 1.1178328236564994,
+      "location": [
+        2494.450741216196,
+        -2400.0000000033015,
+        104.63124907338869
+      ],
+      "attach": [
+        2397.793499394907,
+        -2400.0000000033015,
+        99.73043120229494
+      ],
+      "montage": "/Game/Characters/UEFN_Mannequin/Animations/Traversal/Hurdle/AM_M_Neutral_Traversal_Hurdle_1_0_stand_F_V2_Rfoot.AM_M_Neutral_Traversal_Hurdle_1_0_stand_F_V2_Rfoot",
+      "position": 0.7632578015327454,
+      "targets": {
+        "FrontLedge": [
+          2400.0000001216795,
+          -2399.9999999999995,
+          100.5
+        ],
+        "BackLedge": [
+          2450.0,
+          -2400.0,
+          100.0
+        ],
+        "BackFloor": [
+          2512.2838020324707,
+          -2400.0,
+          0.125
+        ]
+      }
+    },
+    {
+      "t": 1.1721885977312922,
+      "location": [
+        2506.9354729381826,
+        -2400.0000000033015,
+        90.9634882754355
+      ],
+      "attach": [
+        2395.667803260448,
+        -2400.0000000033015,
+        99.65671032133393
+      ],
+      "montage": "/Game/Characters/UEFN_Mannequin/Animations/Traversal/Hurdle/AM_M_Neutral_Traversal_Hurdle_1_0_stand_F_V2_Rfoot.AM_M_Neutral_Traversal_Hurdle_1_0_stand_F_V2_Rfoot",
+      "position": 0.8176136016845703,
+      "targets": {
+        "FrontLedge": [
+          2400.0000001216795,
+          -2399.9999999999995,
+          100.5
+        ],
+        "BackLedge": [
+          2450.0,
+          -2400.0,
+          100.0
+        ],
+        "BackFloor": [
+          2512.2838020324707,
+          -2400.0,
+          0.125
+        ]
+      }
+    },
+    {
+      "t": 1.1805425975471735,
+      "location": [
+        2508.7167736631973,
+        -2400.0000000033015,
+        89.59291676572315
+      ],
+      "attach": [
+        2395.418014202748,
+        -2400.0000000033015,
+        99.64770344785205
+      ],
+      "montage": "/Game/Characters/UEFN_Mannequin/Animations/Traversal/Hurdle/AM_M_Neutral_Traversal_Hurdle_1_0_stand_F_V2_Rfoot.AM_M_Neutral_Traversal_Hurdle_1_0_stand_F_V2_Rfoot",
+      "position": 0.8259676098823547,
+      "targets": {
+        "FrontLedge": [
+          2400.0000001216795,
+          -2399.9999999999995,
+          100.5
+        ],
+        "BackLedge": [
+          2450.0,
+          -2400.0,
+          100.0
+        ],
+        "BackFloor": [
+          2512.2838020324707,
+          -2400.0,
+          0.125
+        ]
+      }
+    },
+    {
+      "t": 1.1888759480789304,
+      "location": [
+        2510.4634192551803,
+        -2400.0000000033015,
+        88.36231273357001
+      ],
+      "attach": [
+        2395.183130558891,
+        -2400.0000000033015,
+        99.63920634929266
+      ],
+      "montage": "/Game/Characters/UEFN_Mannequin/Animations/Traversal/Hurdle/AM_M_Neutral_Traversal_Hurdle_1_0_stand_F_V2_Rfoot.AM_M_Neutral_Traversal_Hurdle_1_0_stand_F_V2_Rfoot",
+      "position": 0.8343009352684021,
+      "targets": {
+        "FrontLedge": [
+          2400.0000001216795,
+          -2399.9999999999995,
+          100.5
+        ],
+        "BackLedge": [
+          2450.0,
+          -2400.0,
+          100.0
+        ],
+        "BackFloor": [
+          2512.2838020324707,
+          -2400.0,
+          0.125
+        ]
+      }
+    },
+    {
+      "t": 1.197330922819674,
+      "location": [
+        2511.960420414214,
+        -2399.9999999808088,
+        88.16715694071127
+      ],
+      "attach": [
+        2395.013643070464,
+        -2399.9999999808088,
+        99.63295436502767
+      ],
+      "montage": "/Game/Characters/UEFN_Mannequin/Animations/Traversal/Hurdle/AM_M_Neutral_Traversal_Hurdle_1_0_stand_F_V2_Rfoot.AM_M_Neutral_Traversal_Hurdle_1_0_stand_F_V2_Rfoot",
+      "position": 0.842755913734436,
+      "targets": {
+        "FrontLedge": [
+          2400.0000001216795,
+          -2399.9999999999995,
+          100.5
+        ],
+        "BackLedge": [
+          2450.0,
+          -2400.0,
+          100.0
+        ],
+        "BackFloor": [
+          2512.2838020324707,
+          -2400.0,
+          0.125
+        ]
+      }
+    },
+    {
+      "t": 1.2056642724201083,
+      "location": [
+        2513.565753939224,
+        -2400.000000000244,
+        87.97934269827155
+      ],
+      "attach": [
+        2394.9764442468413,
+        -2400.000000000244,
+        99.63132023733405
+      ],
+      "montage": "/Game/Characters/UEFN_Mannequin/Animations/Traversal/Hurdle/AM_M_Neutral_Traversal_Hurdle_1_0_stand_F_V2_Rfoot.AM_M_Neutral_Traversal_Hurdle_1_0_stand_F_V2_Rfoot",
+      "position": 0.8510892391204834,
+      "targets": {
+        "FrontLedge": [
+          2400.0000001216795,
+          -2399.9999999999995,
+          100.5
+        ],
+        "BackLedge": [
+          2450.0,
+          -2400.0,
+          100.0
+        ],
+        "BackFloor": [
+          2512.2838020324707,
+          -2400.0,
+          0.125
+        ]
+      }
+    },
+    {
+      "t": 1.2607159717008471,
+      "location": [
+        2522.8597602868804,
+        -2400.000000000244,
+        87.63064184706954
+      ],
+      "attach": [
+        2394.976581575943,
+        -2400.000000000244,
+        99.63064184706954
+      ],
+      "montage": "/Game/Characters/UEFN_Mannequin/Animations/Traversal/Hurdle/AM_M_Neutral_Traversal_Hurdle_1_0_stand_F_V2_Rfoot.AM_M_Neutral_Traversal_Hurdle_1_0_stand_F_V2_Rfoot",
+      "position": 0.906140923500061,
+      "targets": {
+        "FrontLedge": [
+          2400.0000001216795,
+          -2399.9999999999995,
+          100.5
+        ],
+        "BackLedge": [
+          2450.0,
+          -2400.0,
+          100.0
+        ],
+        "BackFloor": [
+          2512.2838020324707,
+          -2400.0,
+          0.125
+        ]
+      }
+    },
+    {
+      "t": 1.269049322232604,
+      "location": [
+        2523.912204744888,
+        -2400.000000000244,
+        87.63064184706954
+      ],
+      "attach": [
+        2394.9756965661772,
+        -2400.000000000244,
+        99.63064184706954
+      ],
+      "montage": "/Game/Characters/UEFN_Mannequin/Animations/Traversal/Hurdle/AM_M_Neutral_Traversal_Hurdle_1_0_stand_F_V2_Rfoot.AM_M_Neutral_Traversal_Hurdle_1_0_stand_F_V2_Rfoot",
+      "position": 0.9144742488861084,
+      "targets": {
+        "FrontLedge": [
+          2400.0000001216795,
+          -2399.9999999999995,
+          100.5
+        ],
+        "BackLedge": [
+          2450.0,
+          -2400.0,
+          100.0
+        ],
+        "BackFloor": [
+          2512.2838020324707,
+          -2400.0,
+          0.125
+        ]
+      }
+    },
+    {
+      "t": 1.2773826718330383,
+      "location": [
+        2524.964649202896,
+        -2400.000000000244,
+        87.63064184706954
+      ],
+      "attach": [
+        2394.9748115564116,
+        -2400.000000000244,
+        99.63064184706954
+      ],
+      "montage": "/Game/Characters/UEFN_Mannequin/Animations/Traversal/Hurdle/AM_M_Neutral_Traversal_Hurdle_1_0_stand_F_V2_Rfoot.AM_M_Neutral_Traversal_Hurdle_1_0_stand_F_V2_Rfoot",
+      "position": 0.9228075742721558,
+      "targets": {
+        "FrontLedge": [
+          2400.0000001216795,
+          -2399.9999999999995,
+          100.5
+        ],
+        "BackLedge": [
+          2450.0,
+          -2400.0,
+          100.0
+        ],
+        "BackFloor": [
+          2512.2838020324707,
+          -2400.0,
+          0.125
+        ]
+      }
+    },
+    {
+      "t": 1.2857160223647952,
+      "location": [
+        2526.017108919693,
+        -2400.000000000244,
+        87.63064184706954
+      ],
+      "attach": [
+        2394.973926546646,
+        -2400.000000000244,
+        99.63064184706954
+      ],
+      "montage": "/Game/Characters/UEFN_Mannequin/Animations/Traversal/Hurdle/AM_M_Neutral_Traversal_Hurdle_1_0_stand_F_V2_Rfoot.AM_M_Neutral_Traversal_Hurdle_1_0_stand_F_V2_Rfoot",
+      "position": 0.9311408996582031,
+      "targets": {
+        "FrontLedge": [
+          2400.0000001216795,
+          -2399.9999999999995,
+          100.5
+        ],
+        "BackLedge": [
+          2450.0,
+          -2400.0,
+          100.0
+        ],
+        "BackFloor": [
+          2512.2838020324707,
+          -2400.0,
+          0.125
+        ]
+      }
+    },
+    {
+      "t": 1.345786745660007,
+      "location": [
+        2529.721439364029,
+        -2400.000000000244,
+        87.63064184706954
+      ],
+      "attach": [
+        2394.9764442468413,
+        -2400.000000000244,
+        99.63064184706954
+      ],
+      "montage": "/Game/Characters/UEFN_Mannequin/Animations/Traversal/Hurdle/AM_M_Neutral_Traversal_Hurdle_1_0_stand_F_V2_Rfoot.AM_M_Neutral_Traversal_Hurdle_1_0_stand_F_V2_Rfoot",
+      "position": 0.9912116527557373,
+      "targets": {
+        "FrontLedge": [
+          2400.0000001216795,
+          -2399.9999999999995,
+          100.5
+        ],
+        "BackLedge": [
+          2450.0,
+          -2400.0,
+          100.0
+        ],
+        "BackFloor": [
+          2512.2838020324707,
+          -2400.0,
+          0.125
+        ]
+      }
+    },
+    {
+      "t": 1.3541200961917639,
+      "location": [
+        2529.9633369470366,
+        -2400.000000000244,
+        87.63064184706954
+      ],
+      "attach": [
+        2394.9765357995757,
+        -2400.000000000244,
+        99.63064184706954
+      ],
+      "montage": "/Game/Characters/UEFN_Mannequin/Animations/Traversal/Hurdle/AM_M_Neutral_Traversal_Hurdle_1_0_stand_F_V2_Rfoot.AM_M_Neutral_Traversal_Hurdle_1_0_stand_F_V2_Rfoot",
+      "position": 0.9995449781417847,
+      "targets": {
+        "FrontLedge": [
+          2400.0000001216795,
+          -2399.9999999999995,
+          100.5
+        ],
+        "BackLedge": [
+          2450.0,
+          -2400.0,
+          100.0
+        ],
+        "BackFloor": [
+          2512.2838020324707,
+          -2400.0,
+          0.125
+        ]
+      }
+    },
+    {
+      "t": 1.3624534709379077,
+      "location": [
+        2529.9765510583647,
+        -2400.000000000244,
+        87.63064184706954
+      ],
+      "attach": [
+        2394.9765510583647,
+        -2400.000000000244,
+        99.63064184706954
+      ],
+      "montage": "/Game/Characters/UEFN_Mannequin/Animations/Traversal/Hurdle/AM_M_Neutral_Traversal_Hurdle_1_0_stand_F_V2_Rfoot.AM_M_Neutral_Traversal_Hurdle_1_0_stand_F_V2_Rfoot",
+      "position": 1.007878303527832,
+      "targets": {
+        "FrontLedge": [
+          2400.0000001216795,
+          -2399.9999999999995,
+          100.5
+        ],
+        "BackLedge": [
+          2450.0,
+          -2400.0,
+          100.0
+        ],
+        "BackFloor": [
+          2512.2838020324707,
+          -2400.0,
+          0.125
+        ]
+      }
+    },
+    {
+      "t": 1.370786820538342,
+      "location": [
+        2529.9765510583647,
+        -2400.000000000244,
+        87.63064184706954
+      ],
+      "attach": [
+        2394.9765510583647,
+        -2400.000000000244,
+        99.63064184706954
+      ],
+      "montage": "/Game/Characters/UEFN_Mannequin/Animations/Traversal/Hurdle/AM_M_Neutral_Traversal_Hurdle_1_0_stand_F_V2_Rfoot.AM_M_Neutral_Traversal_Hurdle_1_0_stand_F_V2_Rfoot",
+      "position": 1.0162116289138794,
+      "targets": {
+        "FrontLedge": [
+          2400.0000001216795,
+          -2399.9999999999995,
+          100.5
+        ],
+        "BackLedge": [
+          2450.0,
+          -2400.0,
+          100.0
+        ],
+        "BackFloor": [
+          2512.2838020324707,
+          -2400.0,
+          0.125
+        ]
+      }
+    },
+    {
+      "t": 1.4252546960487962,
+      "location": [
+        2529.9765510583647,
+        -2400.000000000244,
+        87.63064184706954
+      ],
+      "attach": [
+        2394.9765510583647,
+        -2400.000000000244,
+        99.63064184706954
+      ],
+      "montage": "/Game/Characters/UEFN_Mannequin/Animations/Traversal/Hurdle/AM_M_Neutral_Traversal_Hurdle_1_0_stand_F_V2_Rfoot.AM_M_Neutral_Traversal_Hurdle_1_0_stand_F_V2_Rfoot",
+      "position": 1.0706795454025269,
+      "targets": {
+        "FrontLedge": [
+          2400.0000001216795,
+          -2399.9999999999995,
+          100.5
+        ],
+        "BackLedge": [
+          2450.0,
+          -2400.0,
+          100.0
+        ],
+        "BackFloor": [
+          2512.2838020324707,
+          -2400.0,
+          0.125
+        ]
+      }
+    },
+    {
+      "t": 1.4335880456492305,
+      "location": [
+        2529.9765510583647,
+        -2400.000000000244,
+        87.63064184706954
+      ],
+      "attach": [
+        2394.9765510583647,
+        -2400.000000000244,
+        99.63064184706954
+      ],
+      "montage": "/Game/Characters/UEFN_Mannequin/Animations/Traversal/Hurdle/AM_M_Neutral_Traversal_Hurdle_1_0_stand_F_V2_Rfoot.AM_M_Neutral_Traversal_Hurdle_1_0_stand_F_V2_Rfoot",
+      "position": 1.0790128707885742,
+      "targets": {
+        "FrontLedge": [
+          2400.0000001216795,
+          -2399.9999999999995,
+          100.5
+        ],
+        "BackLedge": [
+          2450.0,
+          -2400.0,
+          100.0
+        ],
+        "BackFloor": [
+          2512.2838020324707,
+          -2400.0,
+          0.125
+        ]
+      }
+    },
+    {
+      "t": 1.4419213961809874,
+      "location": [
+        2529.9765510583647,
+        -2400.000000000244,
+        87.63064184706954
+      ],
+      "attach": [
+        2394.9765510583647,
+        -2400.000000000244,
+        99.63064184706954
+      ],
+      "montage": "/Game/Characters/UEFN_Mannequin/Animations/Traversal/Hurdle/AM_M_Neutral_Traversal_Hurdle_1_0_stand_F_V2_Rfoot.AM_M_Neutral_Traversal_Hurdle_1_0_stand_F_V2_Rfoot",
+      "position": 1.0873461961746216,
+      "targets": {
+        "FrontLedge": [
+          2400.0000001216795,
+          -2399.9999999999995,
+          100.5
+        ],
+        "BackLedge": [
+          2450.0,
+          -2400.0,
+          100.0
+        ],
+        "BackFloor": [
+          2512.2838020324707,
+          -2400.0,
+          0.125
+        ]
+      }
+    },
+    {
+      "t": 1.4502547457814217,
+      "location": [
+        2529.9765510583647,
+        -2400.000000000244,
+        87.63064184706954
+      ],
+      "attach": [
+        2394.9765510583647,
+        -2400.000000000244,
+        99.63064184706954
+      ],
+      "montage": "/Game/Characters/UEFN_Mannequin/Animations/Traversal/Hurdle/AM_M_Neutral_Traversal_Hurdle_1_0_stand_F_V2_Rfoot.AM_M_Neutral_Traversal_Hurdle_1_0_stand_F_V2_Rfoot",
+      "position": 1.095679521560669,
+      "targets": {
+        "FrontLedge": [
+          2400.0000001216795,
+          -2399.9999999999995,
+          100.5
+        ],
+        "BackLedge": [
+          2450.0,
+          -2400.0,
+          100.0
+        ],
+        "BackFloor": [
+          2512.2838020324707,
+          -2400.0,
+          0.125
+        ]
+      }
+    },
+    {
+      "t": 1.4585881205275655,
+      "location": [
+        2529.9765510583647,
+        -2400.000000000244,
+        87.63064184706954
+      ],
+      "attach": [
+        2394.9765510583647,
+        -2400.000000000244,
+        99.63064184706954
+      ],
+      "montage": "/Game/Characters/UEFN_Mannequin/Animations/Traversal/Hurdle/AM_M_Neutral_Traversal_Hurdle_1_0_stand_F_V2_Rfoot.AM_M_Neutral_Traversal_Hurdle_1_0_stand_F_V2_Rfoot",
+      "position": 1.1040128469467163,
+      "targets": {
+        "FrontLedge": [
+          2400.0000001216795,
+          -2399.9999999999995,
+          100.5
+        ],
+        "BackLedge": [
+          2450.0,
+          -2400.0,
+          100.0
+        ],
+        "BackFloor": [
+          2512.2838020324707,
+          -2400.0,
+          0.125
+        ]
+      }
+    },
+    {
+      "t": 1.5144447730854154,
+      "location": [
+        2529.9765510583647,
+        -2400.000000000244,
+        87.63064184706954
+      ],
+      "attach": [
+        2394.9765510583647,
+        -2400.000000000244,
+        99.63064184706954
+      ],
+      "montage": "/Game/Characters/UEFN_Mannequin/Animations/Traversal/Hurdle/AM_M_Neutral_Traversal_Hurdle_1_0_stand_F_V2_Rfoot.AM_M_Neutral_Traversal_Hurdle_1_0_stand_F_V2_Rfoot",
+      "position": 1.1598695516586304,
+      "targets": {
+        "FrontLedge": [
+          2400.0000001216795,
+          -2399.9999999999995,
+          100.5
+        ],
+        "BackLedge": [
+          2450.0,
+          -2400.0,
+          100.0
+        ],
+        "BackFloor": [
+          2512.2838020324707,
+          -2400.0,
+          0.125
+        ]
+      }
+    },
+    {
+      "t": 1.523044447414577,
+      "location": [
+        2529.9765510583647,
+        -2400.000000000244,
+        87.63064184706954
+      ],
+      "attach": [
+        2394.9765510583647,
+        -2400.000000000244,
+        99.63064184706954
+      ],
+      "montage": "/Game/Characters/UEFN_Mannequin/Animations/Traversal/Hurdle/AM_M_Neutral_Traversal_Hurdle_1_0_stand_F_V2_Rfoot.AM_M_Neutral_Traversal_Hurdle_1_0_stand_F_V2_Rfoot",
+      "position": 1.1684691905975342,
+      "targets": {
+        "FrontLedge": [
+          2400.0000001216795,
+          -2399.9999999999995,
+          100.5
+        ],
+        "BackLedge": [
+          2450.0,
+          -2400.0,
+          100.0
+        ],
+        "BackFloor": [
+          2512.2838020324707,
+          -2400.0,
+          0.125
+        ]
+      }
+    },
+    {
+      "t": 1.5313777979463339,
+      "location": [
+        2529.9765510583647,
+        -2400.000000000244,
+        87.63064184706954
+      ],
+      "attach": [
+        2394.9765510583647,
+        -2400.000000000244,
+        99.63064184706954
+      ],
+      "montage": "/Game/Characters/UEFN_Mannequin/Animations/Traversal/Hurdle/AM_M_Neutral_Traversal_Hurdle_1_0_stand_F_V2_Rfoot.AM_M_Neutral_Traversal_Hurdle_1_0_stand_F_V2_Rfoot",
+      "position": 1.1768025159835815,
+      "targets": {
+        "FrontLedge": [
+          2400.0000001216795,
+          -2399.9999999999995,
+          100.5
+        ],
+        "BackLedge": [
+          2450.0,
+          -2400.0,
+          100.0
+        ],
+        "BackFloor": [
+          2512.2838020324707,
+          -2400.0,
+          0.125
+        ]
+      }
+    },
+    {
+      "t": 1.5397366229444742,
+      "location": [
+        2529.9765510583647,
+        -2400.000000000244,
+        87.63064184706954
+      ],
+      "attach": [
+        2394.9765510583647,
+        -2400.000000000244,
+        99.63064184706954
+      ],
+      "montage": "/Game/Characters/UEFN_Mannequin/Animations/Traversal/Hurdle/AM_M_Neutral_Traversal_Hurdle_1_0_stand_F_V2_Rfoot.AM_M_Neutral_Traversal_Hurdle_1_0_stand_F_V2_Rfoot",
+      "position": 1.1851613521575928,
+      "targets": {
+        "FrontLedge": [
+          2400.0000001216795,
+          -2399.9999999999995,
+          100.5
+        ],
+        "BackLedge": [
+          2450.0,
+          -2400.0,
+          100.0
+        ],
+        "BackFloor": [
+          2512.2838020324707,
+          -2400.0,
+          0.125
+        ]
+      }
+    },
+    {
+      "t": 1.5927631724625826,
+      "location": [
+        2529.9765510583647,
+        -2400.000000000244,
+        87.63064184706954
+      ],
+      "attach": [
+        2394.9765510583647,
+        -2400.000000000244,
+        99.63064184706954
+      ],
+      "montage": "/Game/Characters/UEFN_Mannequin/Animations/Traversal/Hurdle/AM_M_Neutral_Traversal_Hurdle_1_0_stand_F_V2_Rfoot.AM_M_Neutral_Traversal_Hurdle_1_0_stand_F_V2_Rfoot",
+      "position": 1.2381879091262817,
+      "targets": {
+        "FrontLedge": [
+          2400.0000001216795,
+          -2399.9999999999995,
+          100.5
+        ],
+        "BackLedge": [
+          2450.0,
+          -2400.0,
+          100.0
+        ],
+        "BackFloor": [
+          2512.2838020324707,
+          -2400.0,
+          0.125
+        ]
+      }
+    },
+    {
+      "t": 1.6010965229943395,
+      "location": [
+        2529.9765510583647,
+        -2400.000000000244,
+        87.63064184706954
+      ],
+      "attach": [
+        2394.9765510583647,
+        -2400.000000000244,
+        99.63064184706954
+      ],
+      "montage": "/Game/Characters/UEFN_Mannequin/Animations/Traversal/Hurdle/AM_M_Neutral_Traversal_Hurdle_1_0_stand_F_V2_Rfoot.AM_M_Neutral_Traversal_Hurdle_1_0_stand_F_V2_Rfoot",
+      "position": 1.246521234512329,
+      "targets": {
+        "FrontLedge": [
+          2400.0000001216795,
+          -2399.9999999999995,
+          100.5
+        ],
+        "BackLedge": [
+          2450.0,
+          -2400.0,
+          100.0
+        ],
+        "BackFloor": [
+          2512.2838020324707,
+          -2400.0,
+          0.125
+        ]
+      }
+    },
+    {
+      "t": 1.6094298725947738,
+      "location": [
+        2529.9765510583647,
+        -2400.000000000244,
+        87.63064184706954
+      ],
+      "attach": [
+        2394.9765510583647,
+        -2400.000000000244,
+        99.63064184706954
+      ],
+      "montage": "/Game/Characters/UEFN_Mannequin/Animations/Traversal/Hurdle/AM_M_Neutral_Traversal_Hurdle_1_0_stand_F_V2_Rfoot.AM_M_Neutral_Traversal_Hurdle_1_0_stand_F_V2_Rfoot",
+      "position": 1.2548545598983765,
+      "targets": {
+        "FrontLedge": [
+          2400.0000001216795,
+          -2399.9999999999995,
+          100.5
+        ],
+        "BackLedge": [
+          2450.0,
+          -2400.0,
+          100.0
+        ],
+        "BackFloor": [
+          2512.2838020324707,
+          -2400.0,
+          0.125
+        ]
+      }
+    },
+    {
+      "t": 1.6177632473409176,
+      "location": [
+        2529.9765510583647,
+        -2400.000000000244,
+        87.63064184706954
+      ],
+      "attach": [
+        2394.9765510583647,
+        -2400.000000000244,
+        99.63064184706954
+      ],
+      "montage": "/Game/Characters/UEFN_Mannequin/Animations/Traversal/Hurdle/AM_M_Neutral_Traversal_Hurdle_1_0_stand_F_V2_Rfoot.AM_M_Neutral_Traversal_Hurdle_1_0_stand_F_V2_Rfoot",
+      "position": 1.2631878852844238,
+      "targets": {
+        "FrontLedge": [
+          2400.0000001216795,
+          -2399.9999999999995,
+          100.5
+        ],
+        "BackLedge": [
+          2450.0,
+          -2400.0,
+          100.0
+        ],
+        "BackFloor": [
+          2512.2838020324707,
+          -2400.0,
+          0.125
+        ]
+      }
+    },
+    {
+      "t": 1.626096623018384,
+      "location": [
+        2529.9765510583647,
+        -2400.000000000244,
+        87.63064184706954
+      ],
+      "attach": [
+        2394.9765510583647,
+        -2400.000000000244,
+        99.63064184706954
+      ],
+      "montage": "/Game/Characters/UEFN_Mannequin/Animations/Traversal/Hurdle/AM_M_Neutral_Traversal_Hurdle_1_0_stand_F_V2_Rfoot.AM_M_Neutral_Traversal_Hurdle_1_0_stand_F_V2_Rfoot",
+      "position": 1.2715212106704712,
+      "targets": {
+        "FrontLedge": [
+          2400.0000001216795,
+          -2399.9999999999995,
+          100.5
+        ],
+        "BackLedge": [
+          2450.0,
+          -2400.0,
+          100.0
+        ],
+        "BackFloor": [
+          2512.2838020324707,
+          -2400.0,
+          0.125
+        ]
+      }
+    },
+    {
+      "t": 1.6811889987438917,
+      "location": [
+        2529.9765510583647,
+        -2400.000000000244,
+        87.63064184706954
+      ],
+      "attach": [
+        2394.9765510583647,
+        -2400.000000000244,
+        99.63064184706954
+      ],
+      "montage": "/Game/Characters/UEFN_Mannequin/Animations/Traversal/Hurdle/AM_M_Neutral_Traversal_Hurdle_1_0_stand_F_V2_Rfoot.AM_M_Neutral_Traversal_Hurdle_1_0_stand_F_V2_Rfoot",
+      "position": 1.3266135454177856,
+      "targets": {
+        "FrontLedge": [
+          2400.0000001216795,
+          -2399.9999999999995,
+          100.5
+        ],
+        "BackLedge": [
+          2450.0,
+          -2400.0,
+          100.0
+        ],
+        "BackFloor": [
+          2512.2838020324707,
+          -2400.0,
+          0.125
+        ]
+      }
+    },
+    {
+      "t": 1.689815298654139,
+      "location": [
+        2529.9765510583647,
+        -2400.000000000244,
+        87.63064184706954
+      ],
+      "attach": [
+        2394.9765510583647,
+        -2400.000000000244,
+        99.63064184706954
+      ],
+      "montage": "/Game/Characters/UEFN_Mannequin/Animations/Traversal/Hurdle/AM_M_Neutral_Traversal_Hurdle_1_0_stand_F_V2_Rfoot.AM_M_Neutral_Traversal_Hurdle_1_0_stand_F_V2_Rfoot",
+      "position": 1.3352398872375488,
+      "targets": {
+        "FrontLedge": [
+          2400.0000001216795,
+          -2399.9999999999995,
+          100.5
+        ],
+        "BackLedge": [
+          2450.0,
+          -2400.0,
+          100.0
+        ],
+        "BackFloor": [
+          2512.2838020324707,
+          -2400.0,
+          0.125
+        ]
+      }
+    },
+    {
+      "t": 1.6981486482545733,
+      "location": [
+        2529.9765510583647,
+        -2400.000000000244,
+        87.63064184706954
+      ],
+      "attach": [
+        2394.9765510583647,
+        -2400.000000000244,
+        99.63064184706954
+      ],
+      "montage": "/Game/Characters/UEFN_Mannequin/Animations/Traversal/Hurdle/AM_M_Neutral_Traversal_Hurdle_1_0_stand_F_V2_Rfoot.AM_M_Neutral_Traversal_Hurdle_1_0_stand_F_V2_Rfoot",
+      "position": 1.3435732126235962,
+      "targets": {
+        "FrontLedge": [
+          2400.0000001216795,
+          -2399.9999999999995,
+          100.5
+        ],
+        "BackLedge": [
+          2450.0,
+          -2400.0,
+          100.0
+        ],
+        "BackFloor": [
+          2512.2838020324707,
+          -2400.0,
+          0.125
+        ]
+      }
+    },
+    {
+      "t": 1.7064819987863302,
+      "location": [
+        2529.9765510583647,
+        -2400.000000000244,
+        87.63064184706954
+      ],
+      "attach": [
+        2394.9765510583647,
+        -2400.000000000244,
+        99.63064184706954
+      ],
+      "montage": "/Game/Characters/UEFN_Mannequin/Animations/Traversal/Hurdle/AM_M_Neutral_Traversal_Hurdle_1_0_stand_F_V2_Rfoot.AM_M_Neutral_Traversal_Hurdle_1_0_stand_F_V2_Rfoot",
+      "position": 1.3519065380096436,
+      "targets": {
+        "FrontLedge": [
+          2400.0000001216795,
+          -2399.9999999999995,
+          100.5
+        ],
+        "BackLedge": [
+          2450.0,
+          -2400.0,
+          100.0
+        ],
+        "BackFloor": [
+          2512.2838020324707,
+          -2400.0,
+          0.125
+        ]
+      }
+    },
+    {
+      "t": 1.7620164509862661,
+      "location": [
+        2529.9765510583647,
+        -2400.000000000244,
+        87.63064184706954
+      ],
+      "attach": [
+        2394.9765510583647,
+        -2400.000000000244,
+        99.63064184706954
+      ],
+      "montage": "/Game/Characters/UEFN_Mannequin/Animations/Traversal/Hurdle/AM_M_Neutral_Traversal_Hurdle_1_0_stand_F_V2_Rfoot.AM_M_Neutral_Traversal_Hurdle_1_0_stand_F_V2_Rfoot",
+      "position": 1.4074410200119019,
+      "targets": {
+        "FrontLedge": [
+          2400.0000001216795,
+          -2399.9999999999995,
+          100.5
+        ],
+        "BackLedge": [
+          2450.0,
+          -2400.0,
+          100.0
+        ],
+        "BackFloor": [
+          2512.2838020324707,
+          -2400.0,
+          0.125
+        ]
+      }
+    },
+    {
+      "t": 1.77034982573241,
+      "location": [
+        2529.9765510583647,
+        -2400.000000000244,
+        87.63064184706954
+      ],
+      "attach": [
+        2394.9765510583647,
+        -2400.000000000244,
+        99.63064184706954
+      ],
+      "montage": "/Game/Characters/UEFN_Mannequin/Animations/Traversal/Hurdle/AM_M_Neutral_Traversal_Hurdle_1_0_stand_F_V2_Rfoot.AM_M_Neutral_Traversal_Hurdle_1_0_stand_F_V2_Rfoot",
+      "position": 1.4157743453979492,
+      "targets": {
+        "FrontLedge": [
+          2400.0000001216795,
+          -2399.9999999999995,
+          100.5
+        ],
+        "BackLedge": [
+          2450.0,
+          -2400.0,
+          100.0
+        ],
+        "BackFloor": [
+          2512.2838020324707,
+          -2400.0,
+          0.125
+        ]
+      }
+    },
+    {
+      "t": 1.7786831753328443,
+      "location": [
+        2529.9765510583647,
+        -2400.000000000244,
+        87.63064184706954
+      ],
+      "attach": [
+        2394.9765510583647,
+        -2400.000000000244,
+        99.63064184706954
+      ],
+      "montage": "/Game/Characters/UEFN_Mannequin/Animations/Traversal/Hurdle/AM_M_Neutral_Traversal_Hurdle_1_0_stand_F_V2_Rfoot.AM_M_Neutral_Traversal_Hurdle_1_0_stand_F_V2_Rfoot",
+      "position": 1.4241076707839966,
+      "targets": {
+        "FrontLedge": [
+          2400.0000001216795,
+          -2399.9999999999995,
+          100.5
+        ],
+        "BackLedge": [
+          2450.0,
+          -2400.0,
+          100.0
+        ],
+        "BackFloor": [
+          2512.2838020324707,
+          -2400.0,
+          0.125
+        ]
+      }
+    },
+    {
+      "t": 1.7870165258646011,
+      "location": [
+        2529.9765510583647,
+        -2400.000000000244,
+        87.63064184706954
+      ],
+      "attach": [
+        2394.9765510583647,
+        -2400.000000000244,
+        99.63064184706954
+      ],
+      "montage": "/Game/Characters/UEFN_Mannequin/Animations/Traversal/Hurdle/AM_M_Neutral_Traversal_Hurdle_1_0_stand_F_V2_Rfoot.AM_M_Neutral_Traversal_Hurdle_1_0_stand_F_V2_Rfoot",
+      "position": 1.432440996170044,
+      "targets": {
+        "FrontLedge": [
+          2400.0000001216795,
+          -2399.9999999999995,
+          100.5
+        ],
+        "BackLedge": [
+          2450.0,
+          -2400.0,
+          100.0
+        ],
+        "BackFloor": [
+          2512.2838020324707,
+          -2400.0,
+          0.125
+        ]
+      }
+    },
+    {
+      "t": 1.8488214500248432,
+      "location": [
+        2529.9765510583647,
+        -2400.000000000244,
+        87.63064184706954
+      ],
+      "attach": [
+        2394.9765510583647,
+        -2400.000000000244,
+        99.63064184706954
+      ],
+      "montage": "/Game/Characters/UEFN_Mannequin/Animations/Traversal/Hurdle/AM_M_Neutral_Traversal_Hurdle_1_0_stand_F_V2_Rfoot.AM_M_Neutral_Traversal_Hurdle_1_0_stand_F_V2_Rfoot",
+      "position": 1.4942458868026733,
+      "targets": {
+        "FrontLedge": [
+          2400.0000001216795,
+          -2399.9999999999995,
+          100.5
+        ],
+        "BackLedge": [
+          2450.0,
+          -2400.0,
+          100.0
+        ],
+        "BackFloor": [
+          2512.2838020324707,
+          -2400.0,
+          0.125
+        ]
+      }
+    },
+    {
+      "t": 1.8571547996252775,
+      "location": [
+        2529.9765510583647,
+        -2400.000000000244,
+        87.63064184706954
+      ],
+      "attach": [
+        2394.9765510583647,
+        -2400.000000000244,
+        99.63064184706954
+      ],
+      "montage": "/Game/Characters/UEFN_Mannequin/Animations/Traversal/Hurdle/AM_M_Neutral_Traversal_Hurdle_1_0_stand_F_V2_Rfoot.AM_M_Neutral_Traversal_Hurdle_1_0_stand_F_V2_Rfoot",
+      "position": 1.5025792121887207,
+      "targets": {
+        "FrontLedge": [
+          2400.0000001216795,
+          -2399.9999999999995,
+          100.5
+        ],
+        "BackLedge": [
+          2450.0,
+          -2400.0,
+          100.0
+        ],
+        "BackFloor": [
+          2512.2838020324707,
+          -2400.0,
+          0.125
+        ]
+      }
+    },
+    {
+      "t": 1.8654886996373534,
+      "location": [
+        2529.9765510583647,
+        -2400.000000000244,
+        87.63064184706954
+      ],
+      "attach": [
+        2394.9765510583647,
+        -2400.000000000244,
+        99.63064184706954
+      ],
+      "montage": "/Game/Characters/UEFN_Mannequin/Animations/Traversal/Hurdle/AM_M_Neutral_Traversal_Hurdle_1_0_stand_F_V2_Rfoot.AM_M_Neutral_Traversal_Hurdle_1_0_stand_F_V2_Rfoot",
+      "position": 1.5109131336212158,
+      "targets": {
+        "FrontLedge": [
+          2400.0000001216795,
+          -2399.9999999999995,
+          100.5
+        ],
+        "BackLedge": [
+          2450.0,
+          -2400.0,
+          100.0
+        ],
+        "BackFloor": [
+          2512.2838020324707,
+          -2400.0,
+          0.125
+        ]
+      }
+    },
+    {
+      "t": 1.8738220743834972,
+      "location": [
+        2529.9765510583647,
+        -2400.000000000244,
+        88.27499142211227
+      ],
+      "attach": [
+        2394.9765510583647,
+        -2400.000000000244,
+        100.27499142211227
+      ],
+      "montage": null,
+      "position": null,
+      "targets": {
+        "FrontLedge": [
+          2400.0000001216795,
+          -2399.9999999999995,
+          100.5
+        ],
+        "BackLedge": [
+          2450.0,
+          -2400.0,
+          100.0
+        ],
+        "BackFloor": [
+          2512.2838020324707,
+          -2400.0,
+          0.125
+        ]
+      }
+    },
+    {
+      "t": 1.929177600890398,
+      "location": [
+        2529.9765510583647,
+        -2400.000000000244,
+        88.27499142211227
+      ],
+      "attach": [
+        2412.225308837963,
+        -2400.000000000244,
+        87.49813380759505
+      ],
+      "montage": null,
+      "position": null,
+      "targets": {
+        "FrontLedge": [
+          2400.0000001216795,
+          -2399.9999999999995,
+          100.5
+        ],
+        "BackLedge": [
+          2450.0,
+          -2400.0,
+          100.0
+        ],
+        "BackFloor": [
+          2512.2838020324707,
+          -2400.0,
+          0.125
+        ]
+      }
+    },
+    {
+      "t": 1.9375109504908323,
+      "location": [
+        2529.9765510583647,
+        -2400.000000000244,
+        88.27499142211227
+      ],
+      "attach": [
+        2417.20698368795,
+        -2400.000000000244,
+        83.80800428908614
+      ],
+      "montage": null,
+      "position": null,
+      "targets": {
+        "FrontLedge": [
+          2400.0000001216795,
+          -2399.9999999999995,
+          100.5
+        ],
+        "BackLedge": [
+          2450.0,
+          -2400.0,
+          100.0
+        ],
+        "BackFloor": [
+          2512.2838020324707,
+          -2400.0,
+          0.125
+        ]
+      }
+    },
+    {
+      "t": 1.9458443010225892,
+      "location": [
+        2529.9765510583647,
+        -2400.000000000244,
+        88.27499142211227
+      ],
+      "attach": [
+        2422.6344738627204,
+        -2400.000000000244,
+        79.78764119666366
+      ],
+      "montage": null,
+      "position": null,
+      "targets": {
+        "FrontLedge": [
+          2400.0000001216795,
+          -2399.9999999999995,
+          100.5
+        ],
+        "BackLedge": [
+          2450.0,
+          -2400.0,
+          100.0
+        ],
+        "BackFloor": [
+          2512.2838020324707,
+          -2400.0,
+          0.125
+        ]
+      }
+    },
+    {
+      "t": 1.9541776506230235,
+      "location": [
+        2529.9765510583647,
+        -2400.000000000244,
+        88.27499142211227
+      ],
+      "attach": [
+        2428.4458847070464,
+        -2400.000000000244,
+        75.48289242308883
+      ],
+      "montage": null,
+      "position": null,
+      "targets": {
+        "FrontLedge": [
+          2400.0000001216795,
+          -2399.9999999999995,
+          100.5
+        ],
+        "BackLedge": [
+          2450.0,
+          -2400.0,
+          100.0
+        ],
+        "BackFloor": [
+          2512.2838020324707,
+          -2400.0,
+          0.125
+        ]
+      }
+    },
+    {
+      "t": 2.0094075528904796,
+      "location": [
+        2529.9765510583647,
+        -2400.000000000244,
+        88.27499142211227
+      ],
+      "attach": [
+        2472.1660499001273,
+        -2400.000000000244,
+        43.09758487265853
+      ],
+      "montage": null,
+      "position": null,
+      "targets": {
+        "FrontLedge": [
+          2400.0000001216795,
+          -2399.9999999999995,
+          100.5
+        ],
+        "BackLedge": [
+          2450.0,
+          -2400.0,
+          100.0
+        ],
+        "BackFloor": [
+          2512.2838020324707,
+          -2400.0,
+          0.125
+        ]
+      }
+    }
+  ],
+  "frames": [
+    {
+      "file": "frame_0000.png",
+      "t": 0.008333349600434303
+    },
+    {
+      "file": "frame_0001.png",
+      "t": 0.09134707413613796
+    },
+    {
+      "file": "frame_0002.png",
+      "t": 0.17872442491352558
+    },
+    {
+      "file": "frame_0003.png",
+      "t": 0.26643110159784555
+    },
+    {
+      "file": "frame_0004.png",
+      "t": 0.3545750258490443
+    },
+    {
+      "file": "frame_0005.png",
+      "t": 0.44096560031175613
+    },
+    {
+      "file": "frame_0006.png",
+      "t": 0.5226840013638139
+    },
+    {
+      "file": "frame_0007.png",
+      "t": 0.6032908745110035
+    },
+    {
+      "file": "frame_0008.png",
+      "t": 0.684344525448978
+    },
+    {
+      "file": "frame_0009.png",
+      "t": 0.771420075558126
+    },
+    {
+      "file": "frame_0010.png",
+      "t": 0.8523452254012227
+    },
+    {
+      "file": "frame_0011.png",
+      "t": 0.9398080492392182
+    },
+    {
+      "file": "frame_0012.png",
+      "t": 1.0263945758342743
+    },
+    {
+      "file": "frame_0013.png",
+      "t": 1.109499474056065
+    },
+    {
+      "file": "frame_0014.png",
+      "t": 1.197330922819674
+    },
+    {
+      "file": "frame_0015.png",
+      "t": 1.2773826718330383
+    },
+    {
+      "file": "frame_0016.png",
+      "t": 1.3624534709379077
+    },
+    {
+      "file": "frame_0017.png",
+      "t": 1.4502547457814217
+    },
+    {
+      "file": "frame_0018.png",
+      "t": 1.5313777979463339
+    },
+    {
+      "file": "frame_0019.png",
+      "t": 1.6177632473409176
+    },
+    {
+      "file": "frame_0020.png",
+      "t": 1.6981486482545733
+    },
+    {
+      "file": "frame_0021.png",
+      "t": 1.7786831753328443
+    },
+    {
+      "file": "frame_0022.png",
+      "t": 1.8654886996373534
+    },
+    {
+      "file": "frame_0023.png",
+      "t": 1.9458443010225892
+    }
+  ],
+  "trigger_result": "(False, False)",
+  "debug_overlay": {
+    "yellow": "FrontLedge world target",
+    "cyan": "attach bone world point and line to target",
+    "green": "BackFloor world target",
+    "rendering": "Unreal DrawDebug, foreground depth, does not affect movement"
+  },
+  "trigger_time": 0.3545750258490443
+}

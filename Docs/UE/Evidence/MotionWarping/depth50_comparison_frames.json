@@ -1,0 +1,397 @@
+{
+  "frames": [
+    {
+      "aligned_time_since_trigger": -0.32,
+      "selected": {
+        "off": {
+          "file": "frame_0000.png",
+          "recorded_game_time": 0.008333350531756878,
+          "since_trigger": -0.3437958275899291
+        },
+        "on": {
+          "file": "frame_0000.png",
+          "recorded_game_time": 0.008333349600434303,
+          "since_trigger": -0.34624167624861
+        }
+      }
+    },
+    {
+      "aligned_time_since_trigger": -0.24,
+      "selected": {
+        "off": {
+          "file": "frame_0001.png",
+          "recorded_game_time": 0.09484685119241476,
+          "since_trigger": -0.2572823269292712
+        },
+        "on": {
+          "file": "frame_0001.png",
+          "recorded_game_time": 0.09134707413613796,
+          "since_trigger": -0.26322795171290636
+        }
+      }
+    },
+    {
+      "aligned_time_since_trigger": -0.16,
+      "selected": {
+        "off": {
+          "file": "frame_0002.png",
+          "recorded_game_time": 0.18039682693779469,
+          "since_trigger": -0.1717323511838913
+        },
+        "on": {
+          "file": "frame_0002.png",
+          "recorded_game_time": 0.17872442491352558,
+          "since_trigger": -0.17585060093551874
+        }
+      }
+    },
+    {
+      "aligned_time_since_trigger": -0.08000000000000002,
+      "selected": {
+        "off": {
+          "file": "frame_0003.png",
+          "recorded_game_time": 0.2665304783731699,
+          "since_trigger": -0.08559869974851608
+        },
+        "on": {
+          "file": "frame_0003.png",
+          "recorded_game_time": 0.26643110159784555,
+          "since_trigger": -0.08814392425119877
+        }
+      }
+    },
+    {
+      "aligned_time_since_trigger": 0.0,
+      "selected": {
+        "off": {
+          "file": "frame_0004.png",
+          "recorded_game_time": 0.352129178121686,
+          "since_trigger": 0.0
+        },
+        "on": {
+          "file": "frame_0004.png",
+          "recorded_game_time": 0.3545750258490443,
+          "since_trigger": 0.0
+        }
+      }
+    },
+    {
+      "aligned_time_since_trigger": 0.08000000000000002,
+      "selected": {
+        "off": {
+          "file": "frame_0005.png",
+          "recorded_game_time": 0.43759652879089117,
+          "since_trigger": 0.08546735066920519
+        },
+        "on": {
+          "file": "frame_0005.png",
+          "recorded_game_time": 0.44096560031175613,
+          "since_trigger": 0.08639057446271181
+        }
+      }
+    },
+    {
+      "aligned_time_since_trigger": 0.15999999999999998,
+      "selected": {
+        "off": {
+          "file": "frame_0006.png",
+          "recorded_game_time": 0.5235265782102942,
+          "since_trigger": 0.17139740008860826
+        },
+        "on": {
+          "file": "frame_0006.png",
+          "recorded_game_time": 0.5226840013638139,
+          "since_trigger": 0.16810897551476955
+        }
+      }
+    },
+    {
+      "aligned_time_since_trigger": 0.24000000000000005,
+      "selected": {
+        "off": {
+          "file": "frame_0007.png",
+          "recorded_game_time": 0.6042623035609722,
+          "since_trigger": 0.25213312543928623
+        },
+        "on": {
+          "file": "frame_0007.png",
+          "recorded_game_time": 0.6032908745110035,
+          "since_trigger": 0.24871584866195917
+        }
+      }
+    },
+    {
+      "aligned_time_since_trigger": 0.32,
+      "selected": {
+        "off": {
+          "file": "frame_0008.png",
+          "recorded_game_time": 0.696264679543674,
+          "since_trigger": 0.344135501421988
+        },
+        "on": {
+          "file": "frame_0008.png",
+          "recorded_game_time": 0.684344525448978,
+          "since_trigger": 0.3297694995999336
+        }
+      }
+    },
+    {
+      "aligned_time_since_trigger": 0.39999999999999997,
+      "selected": {
+        "off": {
+          "file": "frame_0009.png",
+          "recorded_game_time": 0.7812867537140846,
+          "since_trigger": 0.42915757559239864
+        },
+        "on": {
+          "file": "frame_0009.png",
+          "recorded_game_time": 0.771420075558126,
+          "since_trigger": 0.41684504970908165
+        }
+      }
+    },
+    {
+      "aligned_time_since_trigger": 0.48000000000000004,
+      "selected": {
+        "off": {
+          "file": "frame_0010.png",
+          "recorded_game_time": 0.8637178046628833,
+          "since_trigger": 0.5115886265411973
+        },
+        "on": {
+          "file": "frame_0010.png",
+          "recorded_game_time": 0.8523452254012227,
+          "since_trigger": 0.4977701995521784
+        }
+      }
+    },
+    {
+      "aligned_time_since_trigger": 0.56,
+      "selected": {
+        "off": {
+          "file": "frame_0011.png",
+          "recorded_game_time": 0.9450760800391436,
+          "since_trigger": 0.5929469019174576
+        },
+        "on": {
+          "file": "frame_0011.png",
+          "recorded_game_time": 0.9398080492392182,
+          "since_trigger": 0.5852330233901739
+        }
+      }
+    },
+    {
+      "aligned_time_since_trigger": 0.6399999999999999,
+      "selected": {
+        "off": {
+          "file": "frame_0012.png",
+          "recorded_game_time": 1.0259515792131424,
+          "since_trigger": 0.6738224010914564
+        },
+        "on": {
+          "file": "frame_0012.png",
+          "recorded_game_time": 1.0263945758342743,
+          "since_trigger": 0.67181954998523
+        }
+      }
+    },
+    {
+      "aligned_time_since_trigger": 0.72,
+      "selected": {
+        "off": {
+          "file": "frame_0013.png",
+          "recorded_game_time": 1.1067539304494858,
+          "since_trigger": 0.7546247523277998
+        },
+        "on": {
+          "file": "frame_0013.png",
+          "recorded_game_time": 1.109499474056065,
+          "since_trigger": 0.7549244482070208
+        }
+      }
+    },
+    {
+      "aligned_time_since_trigger": 0.8,
+      "selected": {
+        "off": {
+          "file": "frame_0014.png",
+          "recorded_game_time": 1.1871819803491235,
+          "since_trigger": 0.8350528022274375
+        },
+        "on": {
+          "file": "frame_0014.png",
+          "recorded_game_time": 1.197330922819674,
+          "since_trigger": 0.8427558969706297
+        }
+      }
+    },
+    {
+      "aligned_time_since_trigger": 0.8799999999999999,
+      "selected": {
+        "off": {
+          "file": "frame_0015.png",
+          "recorded_game_time": 1.2729477295652032,
+          "since_trigger": 0.9208185514435172
+        },
+        "on": {
+          "file": "frame_0014.png",
+          "recorded_game_time": 1.197330922819674,
+          "since_trigger": 0.8427558969706297
+        }
+      }
+    },
+    {
+      "aligned_time_since_trigger": 0.96,
+      "selected": {
+        "off": {
+          "file": "frame_0015.png",
+          "recorded_game_time": 1.2729477295652032,
+          "since_trigger": 0.9208185514435172
+        },
+        "on": {
+          "file": "frame_0015.png",
+          "recorded_game_time": 1.2773826718330383,
+          "since_trigger": 0.922807645983994
+        }
+      }
+    },
+    {
+      "aligned_time_since_trigger": 1.04,
+      "selected": {
+        "off": {
+          "file": "frame_0016.png",
+          "recorded_game_time": 1.3543805293738842,
+          "since_trigger": 1.0022513512521982
+        },
+        "on": {
+          "file": "frame_0016.png",
+          "recorded_game_time": 1.3624534709379077,
+          "since_trigger": 1.0078784450888634
+        }
+      }
+    },
+    {
+      "aligned_time_since_trigger": 1.1199999999999999,
+      "selected": {
+        "off": {
+          "file": "frame_0017.png",
+          "recorded_game_time": 1.4422409553080797,
+          "since_trigger": 1.0901117771863937
+        },
+        "on": {
+          "file": "frame_0017.png",
+          "recorded_game_time": 1.4502547457814217,
+          "since_trigger": 1.0956797199323773
+        }
+      }
+    },
+    {
+      "aligned_time_since_trigger": 1.2,
+      "selected": {
+        "off": {
+          "file": "frame_0018.png",
+          "recorded_game_time": 1.5234493548050523,
+          "since_trigger": 1.1713201766833663
+        },
+        "on": {
+          "file": "frame_0018.png",
+          "recorded_game_time": 1.5313777979463339,
+          "since_trigger": 1.1768027720972896
+        }
+      }
+    },
+    {
+      "aligned_time_since_trigger": 1.28,
+      "selected": {
+        "off": {
+          "file": "frame_0019.png",
+          "recorded_game_time": 1.6105051320046186,
+          "since_trigger": 1.2583759538829327
+        },
+        "on": {
+          "file": "frame_0019.png",
+          "recorded_game_time": 1.6177632473409176,
+          "since_trigger": 1.2631882214918733
+        }
+      }
+    },
+    {
+      "aligned_time_since_trigger": 1.3599999999999999,
+      "selected": {
+        "off": {
+          "file": "frame_0020.png",
+          "recorded_game_time": 1.6984878806397319,
+          "since_trigger": 1.346358702518046
+        },
+        "on": {
+          "file": "frame_0020.png",
+          "recorded_game_time": 1.6981486482545733,
+          "since_trigger": 1.343573622405529
+        }
+      }
+    },
+    {
+      "aligned_time_since_trigger": 1.44,
+      "selected": {
+        "off": {
+          "file": "frame_0021.png",
+          "recorded_game_time": 1.7841523792594671,
+          "since_trigger": 1.4320232011377811
+        },
+        "on": {
+          "file": "frame_0021.png",
+          "recorded_game_time": 1.7786831753328443,
+          "since_trigger": 1.4241081494838
+        }
+      }
+    },
+    {
+      "aligned_time_since_trigger": 1.52,
+      "selected": {
+        "off": {
+          "file": "frame_0022.png",
+          "recorded_game_time": 1.8706408785656095,
+          "since_trigger": 1.5185117004439235
+        },
+        "on": {
+          "file": "frame_0022.png",
+          "recorded_game_time": 1.8654886996373534,
+          "since_trigger": 1.510913673788309
+        }
+      }
+    },
+    {
+      "aligned_time_since_trigger": 1.5999999999999999,
+      "selected": {
+        "off": {
+          "file": "frame_0023.png",
+          "recorded_game_time": 1.9576726760715246,
+          "since_trigger": 1.6055434979498386
+        },
+        "on": {
+          "file": "frame_0023.png",
+          "recorded_game_time": 1.9458443010225892,
+          "since_trigger": 1.5912692751735449
+        }
+      }
+    }
+  ],
+  "contact": {
+    "off": {
+      "frame": {
+        "file": "frame_0009.png",
+        "t": 0.7812867537140846
+      },
+      "nearest_sample_montage_position": 0.420824259519577,
+      "window_end": 0.41688376665115356
+    },
+    "on": {
+      "frame": {
+        "file": "frame_0009.png",
+        "t": 0.771420075558126
+      },
+      "nearest_sample_montage_position": 0.4168451130390167,
+      "window_end": 0.41688376665115356
+    }
+  }
+}

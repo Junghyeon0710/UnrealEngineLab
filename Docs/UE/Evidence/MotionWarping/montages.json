@@ -1,0 +1,126 @@
+{
+  "/Game/Characters/UEFN_Mannequin/Animations/Traversal/Hurdle/AM_M_Neutral_Traversal_Hurdle_1_0_stand_F_V2_Rfoot.AM_M_Neutral_Traversal_Hurdle_1_0_stand_F_V2_Rfoot": {
+    "path": "/Game/Characters/UEFN_Mannequin/Animations/Traversal/Hurdle/AM_M_Neutral_Traversal_Hurdle_1_0_stand_F_V2_Rfoot.AM_M_Neutral_Traversal_Hurdle_1_0_stand_F_V2_Rfoot",
+    "class": "AnimMontage",
+    "windows": [
+      {
+        "start": 0.16583840548992157,
+        "end": 0.37909770011901855,
+        "state": "/Game/Characters/UEFN_Mannequin/Animations/Traversal/Hurdle/AM_M_Neutral_Traversal_Hurdle_1_0_stand_F_V2_Rfoot.AM_M_Neutral_Traversal_Hurdle_1_0_stand_F_V2_Rfoot:AnimNotifyState_MotionWarping_0",
+        "state_class": "AnimNotifyState_MotionWarping",
+        "modifier": "RootMotionModifier_SkewWarp",
+        "modifier_path": "/Game/Characters/UEFN_Mannequin/Animations/Traversal/Hurdle/AM_M_Neutral_Traversal_Hurdle_1_0_stand_F_V2_Rfoot.AM_M_Neutral_Traversal_Hurdle_1_0_stand_F_V2_Rfoot:AnimNotifyState_MotionWarping_0.RootMotionModifier_SkewWarp",
+        "warp_target_name": "FrontLedge",
+        "warp_translation": "True",
+        "ignore_z_axis": "False",
+        "warp_rotation": "True",
+        "warp_point_anim_provider": "<WarpPointAnimProvider.BONE: 2>",
+        "warp_point_anim_bone_name": "attach"
+      },
+      {
+        "start": 0.3790982663631439,
+        "end": 0.41688376665115356,
+        "state": "/Game/Characters/UEFN_Mannequin/Animations/Traversal/Hurdle/AM_M_Neutral_Traversal_Hurdle_1_0_stand_F_V2_Rfoot.AM_M_Neutral_Traversal_Hurdle_1_0_stand_F_V2_Rfoot:AnimNotifyState_MotionWarping_3",
+        "state_class": "AnimNotifyState_MotionWarping",
+        "modifier": "RootMotionModifier_SkewWarp",
+        "modifier_path": "/Game/Characters/UEFN_Mannequin/Animations/Traversal/Hurdle/AM_M_Neutral_Traversal_Hurdle_1_0_stand_F_V2_Rfoot.AM_M_Neutral_Traversal_Hurdle_1_0_stand_F_V2_Rfoot:AnimNotifyState_MotionWarping_3.RootMotionModifier_SkewWarp",
+        "warp_target_name": "FrontLedge",
+        "warp_translation": "True",
+        "ignore_z_axis": "False",
+        "warp_rotation": "True",
+        "warp_point_anim_provider": "<WarpPointAnimProvider.BONE: 2>",
+        "warp_point_anim_bone_name": "attach"
+      },
+      {
+        "start": 0.46961793303489685,
+        "end": 0.5995854735374451,
+        "state": "/Game/Characters/UEFN_Mannequin/Animations/Traversal/Hurdle/AM_M_Neutral_Traversal_Hurdle_1_0_stand_F_V2_Rfoot.AM_M_Neutral_Traversal_Hurdle_1_0_stand_F_V2_Rfoot:AnimNotifyState_MotionWarping_2",
+        "state_class": "AnimNotifyState_MotionWarping",
+        "modifier": "RootMotionModifier_SkewWarp",
+        "modifier_path": "/Game/Characters/UEFN_Mannequin/Animations/Traversal/Hurdle/AM_M_Neutral_Traversal_Hurdle_1_0_stand_F_V2_Rfoot.AM_M_Neutral_Traversal_Hurdle_1_0_stand_F_V2_Rfoot:AnimNotifyState_MotionWarping_2.RootMotionModifier_SkewWarp",
+        "warp_target_name": "BackLedge",
+        "warp_translation": "True",
+        "ignore_z_axis": "False",
+        "warp_rotation": "False",
+        "warp_point_anim_provider": "<WarpPointAnimProvider.NONE: 0>",
+        "warp_point_anim_bone_name": "None"
+      },
+      {
+        "start": 0.6011513471603394,
+        "end": 0.8445823192596436,
+        "state": "/Game/Characters/UEFN_Mannequin/Animations/Traversal/Hurdle/AM_M_Neutral_Traversal_Hurdle_1_0_stand_F_V2_Rfoot.AM_M_Neutral_Traversal_Hurdle_1_0_stand_F_V2_Rfoot:AnimNotifyState_MotionWarping_1",
+        "state_class": "AnimNotifyState_MotionWarping",
+        "modifier": "RootMotionModifier_SkewWarp",
+        "modifier_path": "/Game/Characters/UEFN_Mannequin/Animations/Traversal/Hurdle/AM_M_Neutral_Traversal_Hurdle_1_0_stand_F_V2_Rfoot.AM_M_Neutral_Traversal_Hurdle_1_0_stand_F_V2_Rfoot:AnimNotifyState_MotionWarping_1.RootMotionModifier_SkewWarp",
+        "warp_target_name": "BackFloor",
+        "warp_translation": "True",
+        "ignore_z_axis": "False",
+        "warp_rotation": "False",
+        "warp_point_anim_provider": "<WarpPointAnimProvider.NONE: 0>",
+        "warp_point_anim_bone_name": "None"
+      }
+    ]
+  },
+  "/Game/Characters/UEFN_Mannequin/Animations/Traversal/Hurdle/AM_M_Neutral_Traversal_Hurdle_1_0_stand_F_V2_Lfoot.AM_M_Neutral_Traversal_Hurdle_1_0_stand_F_V2_Lfoot": {
+    "path": "/Game/Characters/UEFN_Mannequin/Animations/Traversal/Hurdle/AM_M_Neutral_Traversal_Hurdle_1_0_stand_F_V2_Lfoot.AM_M_Neutral_Traversal_Hurdle_1_0_stand_F_V2_Lfoot",
+    "class": "AnimMontage",
+    "windows": [
+      {
+        "start": 0.0781494751572609,
+        "end": 0.23490384221076965,
+        "state": "/Game/Characters/UEFN_Mannequin/Animations/Traversal/Hurdle/AM_M_Neutral_Traversal_Hurdle_1_0_stand_F_V2_Lfoot.AM_M_Neutral_Traversal_Hurdle_1_0_stand_F_V2_Lfoot:AnimNotifyState_MotionWarping_0",
+        "state_class": "AnimNotifyState_MotionWarping",
+        "modifier": "RootMotionModifier_SkewWarp",
+        "modifier_path": "/Game/Characters/UEFN_Mannequin/Animations/Traversal/Hurdle/AM_M_Neutral_Traversal_Hurdle_1_0_stand_F_V2_Lfoot.AM_M_Neutral_Traversal_Hurdle_1_0_stand_F_V2_Lfoot:AnimNotifyState_MotionWarping_0.RootMotionModifier_SkewWarp",
+        "warp_target_name": "FrontLedge",
+        "warp_translation": "True",
+        "ignore_z_axis": "False",
+        "warp_rotation": "True",
+        "warp_point_anim_provider": "<WarpPointAnimProvider.BONE: 2>",
+        "warp_point_anim_bone_name": "attach"
+      },
+      {
+        "start": 0.23492461442947388,
+        "end": 0.39890336990356445,
+        "state": "/Game/Characters/UEFN_Mannequin/Animations/Traversal/Hurdle/AM_M_Neutral_Traversal_Hurdle_1_0_stand_F_V2_Lfoot.AM_M_Neutral_Traversal_Hurdle_1_0_stand_F_V2_Lfoot:AnimNotifyState_MotionWarping_3",
+        "state_class": "AnimNotifyState_MotionWarping",
+        "modifier": "RootMotionModifier_SkewWarp",
+        "modifier_path": "/Game/Characters/UEFN_Mannequin/Animations/Traversal/Hurdle/AM_M_Neutral_Traversal_Hurdle_1_0_stand_F_V2_Lfoot.AM_M_Neutral_Traversal_Hurdle_1_0_stand_F_V2_Lfoot:AnimNotifyState_MotionWarping_3.RootMotionModifier_SkewWarp",
+        "warp_target_name": "FrontLedge",
+        "warp_translation": "True",
+        "ignore_z_axis": "False",
+        "warp_rotation": "True",
+        "warp_point_anim_provider": "<WarpPointAnimProvider.BONE: 2>",
+        "warp_point_anim_bone_name": "attach"
+      },
+      {
+        "start": 0.464920312166214,
+        "end": 0.598016619682312,
+        "state": "/Game/Characters/UEFN_Mannequin/Animations/Traversal/Hurdle/AM_M_Neutral_Traversal_Hurdle_1_0_stand_F_V2_Lfoot.AM_M_Neutral_Traversal_Hurdle_1_0_stand_F_V2_Lfoot:AnimNotifyState_MotionWarping_2",
+        "state_class": "AnimNotifyState_MotionWarping",
+        "modifier": "RootMotionModifier_SkewWarp",
+        "modifier_path": "/Game/Characters/UEFN_Mannequin/Animations/Traversal/Hurdle/AM_M_Neutral_Traversal_Hurdle_1_0_stand_F_V2_Lfoot.AM_M_Neutral_Traversal_Hurdle_1_0_stand_F_V2_Lfoot:AnimNotifyState_MotionWarping_2.RootMotionModifier_SkewWarp",
+        "warp_target_name": "BackLedge",
+        "warp_translation": "True",
+        "ignore_z_axis": "False",
+        "warp_rotation": "False",
+        "warp_point_anim_provider": "<WarpPointAnimProvider.NONE: 0>",
+        "warp_point_anim_bone_name": "None"
+      },
+      {
+        "start": 0.5995559692382812,
+        "end": 0.8313348293304443,
+        "state": "/Game/Characters/UEFN_Mannequin/Animations/Traversal/Hurdle/AM_M_Neutral_Traversal_Hurdle_1_0_stand_F_V2_Lfoot.AM_M_Neutral_Traversal_Hurdle_1_0_stand_F_V2_Lfoot:AnimNotifyState_MotionWarping_1",
+        "state_class": "AnimNotifyState_MotionWarping",
+        "modifier": "RootMotionModifier_SkewWarp",
+        "modifier_path": "/Game/Characters/UEFN_Mannequin/Animations/Traversal/Hurdle/AM_M_Neutral_Traversal_Hurdle_1_0_stand_F_V2_Lfoot.AM_M_Neutral_Traversal_Hurdle_1_0_stand_F_V2_Lfoot:AnimNotifyState_MotionWarping_1.RootMotionModifier_SkewWarp",
+        "warp_target_name": "BackFloor",
+        "warp_translation": "True",
+        "ignore_z_axis": "False",
+        "warp_rotation": "False",
+        "warp_point_anim_provider": "<WarpPointAnimProvider.NONE: 0>",
+        "warp_point_anim_bone_name": "None"
+      }
+    ]
+  }
+}
