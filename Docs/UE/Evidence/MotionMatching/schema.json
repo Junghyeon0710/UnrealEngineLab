@@ -1,0 +1,73 @@
+{
+ "path": "/Game/Characters/UEFN_Mannequin/Animations/MotionMatchingData/Schemas/PSS_Default.PSS_Default",
+ "sample_rate": 30,
+ "data_preprocessor": "<PoseSearchDataPreprocessor.NORMALIZE_WITH_COMMON_SCHEMA: 3>",
+ "channels": [
+  {
+   "class": "PoseSearchFeatureChannel_Trajectory",
+   "weight": 1.0,
+   "samples": [
+    {
+     "offset": -0.05000000074505806,
+     "flags": 32,
+     "weight": 0.30000001192092896
+    },
+    {
+     "offset": 0.0,
+     "flags": 144,
+     "weight": 1.0
+    },
+    {
+     "offset": 0.3499999940395355,
+     "flags": 160,
+     "weight": 1.0
+    },
+    {
+     "offset": 0.699999988079071,
+     "flags": 176,
+     "weight": 1.0
+    },
+    {
+     "offset": 1.0,
+     "flags": 4,
+     "weight": 1.5
+    }
+   ]
+  },
+  {
+   "class": "PoseSearchFeatureChannel_Group",
+   "sub_channels": [
+    {
+     "class": "PoseSearchFeatureChannel_Position",
+     "weight": 1.0,
+     "sample_time_offset": 0.0,
+     "origin_time_offset": 0.0,
+     "bone": "foot_l"
+    },
+    {
+     "class": "PoseSearchFeatureChannel_Velocity",
+     "weight": 0.30000001192092896,
+     "sample_time_offset": 0.0,
+     "origin_time_offset": 0.0,
+     "use_character_space_velocities": true,
+     "bone": "foot_l"
+    },
+    {
+     "class": "PoseSearchFeatureChannel_Velocity",
+     "weight": 0.30000001192092896,
+     "sample_time_offset": 0.0,
+     "origin_time_offset": 0.0,
+     "use_character_space_velocities": true,
+     "bone": "foot_r"
+    },
+    {
+     "class": "PoseSearchFeatureChannel_Heading",
+     "weight": 0.10000000149011612,
+     "sample_time_offset": 0.0,
+     "origin_time_offset": 0.0,
+     "bone": "pelvis"
+    }
+   ]
+  }
+ ]
+}
