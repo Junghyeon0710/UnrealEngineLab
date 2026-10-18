@@ -1,0 +1,527 @@
+{
+ "motion_matching": [
+  {
+   "t": 0.008333374746143818,
+   "x": -500.0,
+   "z": 100.0,
+   "section": "start floor",
+   "movement_mode": "ON_GROUND",
+   "database": "PSD_Relaxed_Stand_Idles",
+   "anim": "M_Relaxed_Stand_Idle_Loop",
+   "montage": null,
+   "valid_databases": [
+    "PSD_Relaxed_Stand_Idles"
+   ]
+  },
+  {
+   "t": 0.06409182399511337,
+   "x": -499.5726477870773,
+   "z": 88.27499580383301,
+   "section": "start floor",
+   "movement_mode": "ON_GROUND",
+   "database": "PSD_Relaxed_Stand_Run_F_Starts",
+   "anim": "M_Relaxed_Run_Start_F_Lfoot",
+   "montage": null,
+   "valid_databases": [
+    "PSD_Relaxed_Stand_Run_F_Starts",
+    "PSD_Relaxed_Stand_Run_F_GaitTransitions",
+    "PSD_Relaxed_Stand_Run_F_Loops"
+   ]
+  },
+  {
+   "t": 2.7345491759479046,
+   "x": 411.76903550717475,
+   "z": 88.27499580383301,
+   "section": "start floor",
+   "movement_mode": "ON_GROUND",
+   "database": "PSD_Relaxed_Stand_Run_F_Loops",
+   "anim": "M_Relaxed_Run_Loop_F",
+   "montage": null,
+   "valid_databases": [
+    "PSD_Relaxed_Stand_Run_F_Loops"
+   ]
+  },
+  {
+   "t": 17.255959367379546,
+   "x": 5704.684238835688,
+   "z": 88.18118623527648,
+   "section": "obstacles",
+   "movement_mode": "ON_GROUND",
+   "database": "PSD_Relaxed_Stand_Run_F_Loops",
+   "anim": "M_Relaxed_Run_Loop_F",
+   "montage": "AM_M_Relaxed_Traversal_Hurdle_1_0_run_F_V2_Lfoot",
+   "valid_databases": [
+    "PSD_Relaxed_Stand_Run_F_Loops"
+   ]
+  },
+  {
+   "t": 17.26429274212569,
+   "x": 5707.684666081782,
+   "z": 88.18118623527648,
+   "section": "obstacles",
+   "movement_mode": "TRAVERSING",
+   "database": null,
+   "anim": null,
+   "montage": "AM_M_Relaxed_Traversal_Hurdle_1_0_run_F_V2_Lfoot",
+   "valid_databases": []
+  },
+  {
+   "t": 18.123455045744777,
+   "x": 6031.69955172579,
+   "z": 86.38450692886302,
+   "section": "obstacles",
+   "movement_mode": "TRAVERSING",
+   "database": null,
+   "anim": null,
+   "montage": null,
+   "valid_databases": []
+  },
+  {
+   "t": 18.16922409646213,
+   "x": 6051.569090724189,
+   "z": 88.27498834652836,
+   "section": "obstacles",
+   "movement_mode": "ON_GROUND",
+   "database": "PSD_Relaxed_Stand_Run_FromTraversal",
+   "anim": "M_Relaxed_Traversal_Hurdle_1_0_run_F_V2_Lfoot",
+   "montage": null,
+   "valid_databases": [
+    "PSD_Relaxed_Stand_Run_FromTraversal"
+   ]
+  },
+  {
+   "t": 19.041050198487937,
+   "x": 6390.835449252853,
+   "z": 88.2401213440237,
+   "section": "obstacles",
+   "movement_mode": "ON_GROUND",
+   "database": "PSD_Relaxed_Stand_Run_FromTraversal",
+   "anim": "M_Relaxed_Traversal_Hurdle_1_0_run_F_V2_Lfoot",
+   "montage": "AM_M_Relaxed_Traversal_Mantle_1_0_run_F_Rfoot",
+   "valid_databases": [
+    "PSD_Relaxed_Stand_Run_F_Loops"
+   ]
+  },
+  {
+   "t": 19.04938354808837,
+   "x": 6394.6833950276205,
+   "z": 88.24898987487478,
+   "section": "obstacles",
+   "movement_mode": "TRAVERSING",
+   "database": null,
+   "anim": null,
+   "montage": "AM_M_Relaxed_Traversal_Mantle_1_0_run_F_Rfoot",
+   "valid_databases": []
+  },
+  {
+   "t": 19.74182069581002,
+   "x": 6667.3043719274465,
+   "z": 188.4934381387924,
+   "section": "obstacles",
+   "movement_mode": "TRAVERSING",
+   "database": null,
+   "anim": null,
+   "montage": null,
+   "valid_databases": []
+  },
+  {
+   "t": 19.750154046341777,
+   "x": 6670.3041068059865,
+   "z": 188.4934381387924,
+   "section": "obstacles",
+   "movement_mode": "ON_GROUND",
+   "database": "PSD_Relaxed_Stand_Run_FromTraversal",
+   "anim": "M_Relaxed_Traversal_Hurdle_1_0_run_F_Rfoot",
+   "montage": null,
+   "valid_databases": [
+    "PSD_Relaxed_Stand_Run_FromTraversal"
+   ]
+  },
+  {
+   "t": 19.792515022680163,
+   "x": 6686.42768155988,
+   "z": 188.4934381387924,
+   "section": "obstacles",
+   "movement_mode": "IN_AIR",
+   "database": "PSD_Relaxed_Stand_WalkAndRun_Jump",
+   "anim": "M_Relaxed_Jump_F_Off_Run_Lfoot",
+   "montage": null,
+   "valid_databases": [
+    "PSD_Relaxed_Stand_WalkAndRun_Jump",
+    "PSD_Relaxed_Stand_Jumps_FromTraversal"
+   ]
+  },
+  {
+   "t": 20.23704802338034,
+   "x": 6852.912963112602,
+   "z": 88.27500332724934,
+   "section": "obstacles",
+   "movement_mode": "ON_GROUND",
+   "database": "PSD_Relaxed_Stand_Run_Lands_Light",
+   "anim": "M_Relaxed_Jump_F_Land_Run_Light_Lfoot",
+   "montage": null,
+   "valid_databases": [
+    "PSD_Relaxed_Stand_Run_Lands_Light"
+   ]
+  },
+  {
+   "t": 21.08307502605021,
+   "x": 7170.160821363432,
+   "z": 88.27500332724934,
+   "section": "obstacles",
+   "movement_mode": "ON_GROUND",
+   "database": "PSD_Relaxed_Stand_Run_Lands_Light",
+   "anim": "M_Relaxed_Jump_F_Land_Run_Light_Lfoot",
+   "montage": "AM_M_Relaxed_Traversal_Mantle_1_0_run_F_Lfoot",
+   "valid_databases": [
+    "PSD_Relaxed_Stand_Run_F_Loops"
+   ]
+  },
+  {
+   "t": 21.13415495119989,
+   "x": 7184.6760086521535,
+   "z": 94.22484627266991,
+   "section": "obstacles",
+   "movement_mode": "TRAVERSING",
+   "database": null,
+   "anim": null,
+   "montage": "AM_M_Relaxed_Traversal_Mantle_1_0_run_F_Lfoot",
+   "valid_databases": []
+  },
+  {
+   "t": 21.980306805111468,
+   "x": 7467.653057902705,
+   "z": 238.46206423044725,
+   "section": "obstacles",
+   "movement_mode": "TRAVERSING",
+   "database": null,
+   "anim": null,
+   "montage": null,
+   "valid_databases": []
+  },
+  {
+   "t": 21.988640180788934,
+   "x": 7471.028544823303,
+   "z": 238.46206423044725,
+   "section": "obstacles",
+   "movement_mode": "ON_GROUND",
+   "database": "PSD_Relaxed_Stand_Run_FromTraversal",
+   "anim": "M_Relaxed_Traversal_Mantle_1_0_run_F_Rfoot",
+   "montage": null,
+   "valid_databases": [
+    "PSD_Relaxed_Stand_Run_FromTraversal"
+   ]
+  },
+  {
+   "t": 22.62773632630706,
+   "x": 7710.688112733578,
+   "z": 238.46206423044725,
+   "section": "obstacles",
+   "movement_mode": "ON_GROUND",
+   "database": "PSD_Relaxed_Stand_Run_FromTraversal",
+   "anim": "M_Relaxed_Traversal_Mantle_1_0_run_F_Rfoot",
+   "montage": "AM_M_Relaxed_Traversal_Mantle_1_0_run_F_Lfoot",
+   "valid_databases": [
+    "PSD_Relaxed_Stand_Run_F_Loops"
+   ]
+  },
+  {
+   "t": 22.636069675907493,
+   "x": 7712.895648089715,
+   "z": 239.8087480961697,
+   "section": "obstacles",
+   "movement_mode": "TRAVERSING",
+   "database": null,
+   "anim": null,
+   "montage": "AM_M_Relaxed_Traversal_Mantle_1_0_run_F_Lfoot",
+   "valid_databases": []
+  },
+  {
+   "t": 23.356073276139796,
+   "x": 7954.256315304866,
+   "z": 388.48264847269326,
+   "section": "obstacles",
+   "movement_mode": "TRAVERSING",
+   "database": null,
+   "anim": null,
+   "montage": null,
+   "valid_databases": []
+  },
+  {
+   "t": 23.36440662574023,
+   "x": 7957.631147978677,
+   "z": 388.48264847269326,
+   "section": "obstacles",
+   "movement_mode": "ON_GROUND",
+   "database": "PSD_Relaxed_Stand_Run_FromTraversal",
+   "anim": "M_Relaxed_Traversal_Mantle_1_0_run_F_Lfoot",
+   "montage": null,
+   "valid_databases": [
+    "PSD_Relaxed_Stand_Run_FromTraversal"
+   ]
+  },
+  {
+   "t": 24.25676595326513,
+   "x": 8291.277992827067,
+   "z": 388.48264847269326,
+   "section": "obstacles",
+   "movement_mode": "ON_GROUND",
+   "database": "PSD_Relaxed_Stand_Run_Stops",
+   "anim": "M_Relaxed_Run_Stop_F_Rfoot",
+   "montage": null,
+   "valid_databases": [
+    "PSD_Relaxed_Stand_Run_Stops"
+   ]
+  },
+  {
+   "t": 27.05397107731551,
+   "x": 8367.367000614213,
+   "z": 388.48264847269326,
+   "section": "obstacles",
+   "movement_mode": "ON_GROUND",
+   "database": "PSD_Relaxed_Stand_Idles",
+   "anim": "M_Relaxed_Stand_Idle_Loop",
+   "montage": null,
+   "valid_databases": [
+    "PSD_Relaxed_Stand_Idles"
+   ]
+  }
+ ],
+ "foot_placement_on": {
+  "start floor": {
+   "planted_ball_mean": 6.156072727272727,
+   "planted_ball_max": 16.56,
+   "planted_ball_min": 1.37,
+   "planted_ball_p10": 1.99,
+   "below_floor_ratio": 0.0,
+   "pelvis_above_capsule_mean": -1.5646545454545455,
+   "samples": 275
+  },
+  "ramp up 20": {
+   "planted_ball_mean": 7.46936170212766,
+   "planted_ball_max": 16.29,
+   "planted_ball_min": 1.91,
+   "planted_ball_p10": 2.14,
+   "below_floor_ratio": 0.0,
+   "pelvis_above_capsule_mean": -8.465390070921986,
+   "samples": 141
+  },
+  "plateau": {
+   "planted_ball_mean": 6.345125,
+   "planted_ball_max": 14.24,
+   "planted_ball_min": 1.92,
+   "planted_ball_p10": 2.02,
+   "below_floor_ratio": 0.0,
+   "pelvis_above_capsule_mean": -0.6445000000000001,
+   "samples": 80
+  },
+  "ramp down 30": {
+   "planted_ball_mean": 9.37861111111111,
+   "planted_ball_max": 21.35,
+   "planted_ball_min": 4.06,
+   "planted_ball_p10": 4.67,
+   "below_floor_ratio": 0.0,
+   "pelvis_above_capsule_mean": 2.136111111111111,
+   "samples": 108
+  },
+  "cross slope entry": {
+   "planted_ball_mean": 7.5834375000000005,
+   "planted_ball_max": 14.38,
+   "planted_ball_min": 2.07,
+   "planted_ball_p10": 2.14,
+   "below_floor_ratio": 0.0,
+   "pelvis_above_capsule_mean": 1.046875,
+   "samples": 32
+  },
+  "cross slope 20": {
+   "planted_ball_mean": 6.852168674698795,
+   "planted_ball_max": 17.38,
+   "planted_ball_min": 1.94,
+   "planted_ball_p10": 2.12,
+   "below_floor_ratio": 0.0,
+   "pelvis_above_capsule_mean": -2.3929518072289158,
+   "samples": 166
+  }
+ },
+ "foot_placement_off": {
+  "start floor": {
+   "planted_ball_mean": 6.46289156626506,
+   "planted_ball_max": 17.43,
+   "planted_ball_min": 1.62,
+   "planted_ball_p10": 2.28,
+   "below_floor_ratio": 0.0,
+   "pelvis_above_capsule_mean": -0.8993373493975904,
+   "samples": 166
+  },
+  "ramp up 20": {
+   "planted_ball_mean": 9.275569620253163,
+   "planted_ball_max": 25.42,
+   "planted_ball_min": -2.17,
+   "planted_ball_p10": 1.05,
+   "below_floor_ratio": 0.06329113924050633,
+   "pelvis_above_capsule_mean": 0.6167088607594936,
+   "samples": 79
+  },
+  "plateau": {
+   "planted_ball_mean": 7.2,
+   "planted_ball_max": 16.58,
+   "planted_ball_min": 2.19,
+   "planted_ball_p10": 2.37,
+   "below_floor_ratio": 0.0,
+   "pelvis_above_capsule_mean": 0.46475,
+   "samples": 40
+  },
+  "ramp down 30": {
+   "planted_ball_mean": -4.843999999999999,
+   "planted_ball_max": 10.7,
+   "planted_ball_min": -17.75,
+   "planted_ball_p10": -15.56,
+   "below_floor_ratio": 0.66,
+   "pelvis_above_capsule_mean": 0.6492,
+   "samples": 50
+  },
+  "cross slope entry": {
+   "planted_ball_mean": 8.119375,
+   "planted_ball_max": 15.67,
+   "planted_ball_min": 2.22,
+   "planted_ball_p10": 2.26,
+   "below_floor_ratio": 0.0,
+   "pelvis_above_capsule_mean": 0.7725,
+   "samples": 16
+  },
+  "cross slope 20": {
+   "planted_ball_mean": 10.565,
+   "planted_ball_max": 22.19,
+   "planted_ball_min": 4.08,
+   "planted_ball_p10": 4.97,
+   "below_floor_ratio": 0.0,
+   "pelvis_above_capsule_mean": 0.6276136363636363,
+   "samples": 88
+  }
+ },
+ "motion_warping": [
+  {
+   "montage": "AM_M_Relaxed_Traversal_Hurdle_1_0_run_F_V2_Lfoot",
+   "start_t": 17.255959367379546,
+   "start": [
+    5704.684238835688,
+    -0.47466063990948415,
+    88.18118623527648
+   ],
+   "targets": [
+    {
+     "name": "FrontLedge",
+     "location": [
+      5885.0000000975,
+      -0.4804149270041762,
+      70.5
+     ],
+     "yaw": -4.18308094602902e-07
+    },
+    {
+     "name": "BackLedge",
+     "location": [
+      5925.000000000389,
+      -0.4804149270055973,
+      70.0
+     ],
+     "yaw": 0.0
+    },
+    {
+     "name": "BackFloor",
+     "location": [
+      6005.844200134667,
+      -0.48041492701314165,
+      0.125
+     ],
+     "yaw": 0.0
+    }
+   ],
+   "last_t": 18.11512169521302,
+   "end": [
+    6027.725643843866,
+    -0.4804133796239398,
+    86.38643717658938
+   ]
+  },
+  {
+   "montage": "AM_M_Relaxed_Traversal_Mantle_1_0_run_F_Rfoot",
+   "start_t": 19.041050198487937,
+   "start": [
+    6390.835449252853,
+    -0.48041337962396025,
+    88.2401213440237
+   ],
+   "targets": [
+    {
+     "name": "FrontLedge",
+     "location": [
+      6585.000000194999,
+      -0.4804149270041762,
+      100.5
+     ],
+     "yaw": -4.18308094602902e-07
+    }
+   ],
+   "last_t": 19.733487346209586,
+   "end": [
+    6664.304637048906,
+    -0.48041466536116945,
+    188.4934381387924
+   ]
+  },
+  {
+   "montage": "AM_M_Relaxed_Traversal_Mantle_1_0_run_F_Lfoot",
+   "start_t": 21.08307502605021,
+   "start": [
+    7170.160821363432,
+    -0.4804146653611997,
+    88.27500332724934
+   ],
+   "targets": [
+    {
+     "name": "FrontLedge",
+     "location": [
+      7385.000001218745,
+      -0.4804149270041762,
+      150.5
+     ],
+     "yaw": -4.18308094602902e-07
+    }
+   ],
+   "last_t": 21.93459222931415,
+   "end": [
+    7450.775623649012,
+    -0.48041497930387556,
+    238.46206423044725
+   ]
+  },
+  {
+   "montage": "AM_M_Relaxed_Traversal_Mantle_1_0_run_F_Lfoot",
+   "start_t": 22.62773632630706,
+   "start": [
+    7710.688112733578,
+    -0.48041497930389915,
+    238.46206423044725
+   ],
+   "targets": [
+    {
+     "name": "FrontLedge",
+     "location": [
+      7885.000001706243,
+      -0.4804149270041762,
+      300.5
+     ],
+     "yaw": -4.18308094602902e-07
+    }
+   ],
+   "last_t": 23.34773992560804,
+   "end": [
+    7951.256464078059,
+    -0.4804147880554916,
+    388.48264847269326
+   ]
+  }
+ ],
+ "finish_with_foot_placement_off": 22.67072868347168
+}

@@ -1,0 +1,29 @@
+{
+ "map": "/Game/ParkourCourse/Maps/L_ParkourCourse",
+ "game_mode": "/Script/UnrealEngineLab.ParkourGameMode",
+ "note": "Units are cm. The course runs along +X and is 600 wide (Y -300..300). 'top' is the walkable surface height.",
+ "width": 600,
+ "thickness": 100,
+ "pieces": [
+  {"kind": "visuals", "label": "Level Visuals"},
+  {"kind": "floor", "label": "Start Floor", "x0": -800, "x1": 1500, "top": 0},
+  {"kind": "player_start", "label": "Player Start", "x": -500, "top": 0},
+  {"kind": "gate", "label": "Gate Start", "type": "START", "order": 0, "x": 0, "top": 0},
+
+  {"kind": "ramp", "label": "Ramp Up 20", "x0": 1500, "top0": 0, "length": 1100, "pitch": 20},
+  {"kind": "floor", "label": "Plateau", "x0": 2534, "x1": 3134, "top": 376},
+  {"kind": "gate", "label": "Gate 1", "type": "CHECKPOINT", "order": 1, "x": 2834, "top": 376},
+  {"kind": "ramp", "label": "Ramp Down 30", "x0": 3134, "top0": 376, "length": 752, "pitch": -30},
+
+  {"kind": "floor", "label": "Cross Slope Entry", "x0": 3785, "x1": 4085, "top": 0},
+  {"kind": "cross_slope", "label": "Cross Slope 20", "x0": 4085, "length": 1200, "roll": 20},
+  {"kind": "floor", "label": "Traversal Floor", "x0": 5285, "x1": 8885, "top": 0},
+
+  {"kind": "block", "label": "Hurdle 70", "traversable": true, "x0": 5885, "depth": 40, "height": 70},
+  {"kind": "block", "label": "Wall 100", "traversable": true, "x0": 6585, "depth": 80, "height": 100},
+  {"kind": "block", "label": "Ledge 150", "traversable": true, "x0": 7385, "depth": 500, "height": 150},
+  {"kind": "gate", "label": "Gate 2", "type": "CHECKPOINT", "order": 2, "x": 7635, "top": 150},
+  {"kind": "block", "label": "Ledge 300", "traversable": true, "x0": 7885, "depth": 700, "height": 300},
+  {"kind": "gate", "label": "Gate Finish", "type": "FINISH", "order": 3, "x": 8335, "top": 300}
+ ]
+}
