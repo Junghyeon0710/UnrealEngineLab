@@ -12,16 +12,17 @@
 6. [비용은 어떻게 계산하나](#cost)
 7. [직접 돌려 보기 - 출발, 반전, 정지](#run)
 8. [지금 애니메이션을 계속 이어 간다](#continuing)
-9. [데이터를 줄이면](#density)
-10. [상태 머신 모드와 비교하면](#state-machine)
-11. [테스트하다 헤맨 부분](#stuck)
-12. [막히기 쉬운 곳](#pitfalls)
-13. [정리 - 내가 이해한 Motion Matching](#summary)
-14. [부록 - 다시 테스트하기](#reproduce)
+9. [점프는 어떻게 찾나](#jump)
+10. [데이터를 줄이면](#density)
+11. [상태 머신 모드와 비교하면](#state-machine)
+12. [테스트하다 헤맨 부분](#stuck)
+13. [막히기 쉬운 곳](#pitfalls)
+14. [정리 - 내가 이해한 Motion Matching](#summary)
+15. [부록 - 다시 테스트하기](#reproduce)
 
 ---
 
-이 문서는 Unreal Engine 5.8.3 기준이다. 테스트는 Epic의 Game Animation Sample(이하 GASP) 프로젝트에서 했고, 테스트에 쓴 스크립트는 `Scripts/MotionMatching/` 에 있다. [Motion Warping 문서](MotionWarping.md)와 같은 캐릭터, 같은 맵을 썼다.
+이 문서는 Unreal Engine 5.8.3 기준이다. 테스트는 Epic의 Game Animation Sample(이하 GASP) 프로젝트에서 했고, 테스트에 쓴 스크립트는 `Scripts/MotionMatching/` 에 있다. [Motion Warping 문서](MotionWarping.md)와 같은 캐릭터, 같은 맵을 썼다. 점프([9절](#jump))만 이 저장소의 [파쿠르 타임어택](ParkourTimeAttack.md)에 가져온 Mover 캐릭터로 확인했다.
 
 ---
 
@@ -137,7 +138,7 @@ GASP는 데이터베이스를 동작별로 잘게 나눴다. 달리기만 해도
 
 (애니메이션 수 / 검색 대상 프레임 수)
 
-Extreme Sparse에는 반전 DB가 아예 없다. 이게 [9절](#density)의 결과로 그대로 이어진다.
+Extreme Sparse에는 반전 DB가 아예 없다. 이게 [10절](#density)의 결과로 그대로 이어진다.
 
 ---
 
@@ -272,9 +273,46 @@ GASP의 `Get_MMInterruptMode` 는 평소엔 `DoNotInterrupt` 이고, 이동 모�
 
 ---
 
+<a id="jump"></a>
+
+## 9. 점프는 어떻게 찾나
+
+위 테스트는 땅에서만 했다. 공중에서는 어떻게 고르는지 궁금해서, [파쿠르 타임어택](ParkourTimeAttack.md)에 가져온 GASP의 Mover 캐릭터(`SandboxCharacter_Mover`)로 평지에서 점프를 한 번 해 봤다. Mover 캐릭터는 CMC 캐릭터와 달리 Relaxed 데이터 세트(`CHT_PoseSearchDatabases_Relaxed`, `PSD_Relaxed_*`)를 쓰고, `DDCvar.LocomotionSetupMover` 를 0으로 바꿔서 Motion Matching 노드로 고르게 했다.
+
+이번에는 엔진의 `a.AnimNode.MotionMatching.DebugDrawInfo 1` 을 켰다. 캐릭터 옆에 지금 고른 DB(Current Database), 재생 중인 애니메이션(Current Asset), 다음 검색 대상(Databases to search), 섞이고 있는 애니메이션(Blend Stack)이 노란 글자로 뜬다. [12절](#stuck)에서 화면 캡처에 안 잡힌다고 했던 그 글자인데, `Shot showui` 로 찍으니 나왔다.
+
+![평지 점프 - Motion Matching 노드 디버그, 옆에서 본 화면, 0.5배속](Images/motionmatching-jump.gif)
+
+```text
+3.85초  점프 입력
+3.95초  공중   PSD_Relaxed_Stand_WalkAndRun_Jump   -> M_Relaxed_Jump_F_Start_Run_Rfoot
+4.81초  착지   PSD_Relaxed_Stand_Run_Lands_Light   -> M_Relaxed_Jump_F_Land_Run_Light_Lfoot
+```
+
+후보 DB는 이번에도 Chooser가 정한다. 점프를 누르면 Mover가 공중 모드로 바뀌고, 맨 위 표의 InAir 행으로 내려간다. InAir 표는 수평 속도(`Speed2D`) 하나로 DB를 고른다.
+
+![CHT_PoseSearchDatabases_Relaxed의 InAir 표](Images/motionmatching-chooser-inair.png)
+
+10cm/s 미만이면 제자리 점프(`Stand_Jump`), 400cm/s 미만이면 `WalkAndRun_Jump`, 그 이상이면 `Sprint_Jump` 다. 마지막 줄은 장애물을 넘은 직후(`JustTraversed`)용이다. 달리던 속도가 375cm/s라 `WalkAndRun_Jump` 가 골라졌다. 이 DB는 이어가기 보정(`ContinuingPoseCostBias`)이 -1.0으로, [4절](#database)의 반전 DB(-0.05)보다 훨씬 크다. 공중에서 한번 고른 동작을 쉽게 바꾸지 않게 해 둔 것 같다.
+
+DB 안에서 무엇을 틀지는 궤적이 정한다. `WalkAndRun_Jump` 에는 점프 시작(`Jump_F_Start_Run/Walk`), 턱에서 걸어 내려가기(`Jump_F_Off_Run/Walk`), 낙하 루프(`Jump_Loop_Fall`)가 같이 들어 있다. 그리고 점프 DB의 Schema는 궤적을 높이까지 넣어 3D로 비교한다.
+
+| Schema | 궤적 샘플 | 비교하는 것 |
+| --- | --- | --- |
+| `PSS_Relaxed_Loops` (달리기 루프) | -0.125, 0, 0.33, 0.8, 1.35초 | 위치, 속도 (수평 XY) |
+| `PSS_Relaxed_Jump` (점프, 착지) | -0.2, 0, 0.25, 0.5, 1.0초 | 위치, 속도 방향 (높이 포함 3D) |
+
+궤적은 AnimBP가 `MoverTrajectoryPredictor` 로 Mover에게 앞으로 1.5초(0.1초 x 15)를 예측시켜 만드는데, 공중에서는 중력까지 넣어 예측한다. 점프를 누른 순간은 위로 솟는 궤적이라 `Jump_F_Start_Run_Rfoot` 가 골라졌다. 파쿠르 코스에서 100cm 벽 위를 그냥 걸어 내려올 때는 바로 떨어지는 궤적이라, 같은 DB에서 `Jump_F_Off_Run_Lfoot` 가 골라졌다. 같은 공중 DB 안에서도 위로 가는지 아래로 가는지로 동작이 갈린다.
+
+착지는 AnimBP의 `JustLanded_Light` / `JustLanded_Heavy` 로 갈린다. 지금은 지면이고 직전 프레임은 공중일 때 참이 되고, 직전 수직 속도가 -500cm/s보다 빠르게 떨어졌으면 Heavy, 아니면 Light다. Chooser의 달리기 표는 이 값이 참인 프레임에만 착지 DB(`Run_Lands_Light` / `Run_Lands_Heavy`)를 남기고, 달리기 루프 DB는 그 프레임에서 뺀다. 착지 DB도 `PSS_Relaxed_Jump` 를 쓴다.
+
+GIF에서 착지 직후 검색 대상이 바로 `Run_F_Loops` 로 돌아가는데도 착지 애니메이션이 계속 나온다. [8절](#continuing)에서 본 이어가기 포즈다. 착지한 그 한 프레임에 착지 애니메이션을 고르고, 그다음부터는 착지 동작이 달리기로 이어지는 동안 그대로 간다.
+
+---
+
 <a id="density"></a>
 
-## 9. 데이터를 줄이면
+## 10. 데이터를 줄이면
 
 같은 입력을 `DDCvar.MMDatabaseLOD` 만 바꿔서 돌렸다. 반전 구간을 0.5배 속도로 나란히 놓았다.
 
@@ -303,7 +341,7 @@ Sparse는 반전 DB의 검색 프레임이 Dense의 1/6 정도인데도 이 경�
 
 <a id="state-machine"></a>
 
-## 10. 상태 머신 모드와 비교하면
+## 11. 상태 머신 모드와 비교하면
 
 GASP에는 같은 캐릭터를 상태 머신으로 움직이는 실험 모드도 있다. `DDCVar.LocomotionSetupCMC 1` 로 켠다.
 
@@ -333,7 +371,7 @@ Motion Matching 노드   매 업데이트마다 검색한다. 이어가기 포�
 
 <a id="stuck"></a>
 
-## 11. 테스트하다 헤맨 부분
+## 12. 테스트하다 헤맨 부분
 
 ### 반전했는데 뒤로 달렸다
 
@@ -343,7 +381,7 @@ GASP 캐릭터는 처음에 스트레이프 모드(`RotationMode = Strafe`)라�
 
 ### 엔진 디버그 그리기가 안 나왔다
 
-`a.AnimNode.MotionMatching.DebugDrawQuery`, `DebugDrawCurResult` 를 켜도 화면에 아무것도 나오지 않았다. 5.8 소스를 보면 CVar 정의만 남아 있고 노드 코드에서는 쓰이지 않는다. `DebugDrawInfo` 는 DB와 애니메이션 이름을 월드 텍스트로 띄우지만 화면 캡처에는 잡히지 않았다. 그래서 GASP의 `DDCvar.DrawCharacterDebugShapes` 로 화살표를 띄우고, DB와 애니메이션 이름은 AnimBP 변수에서 직접 읽었다.
+`a.AnimNode.MotionMatching.DebugDrawQuery`, `DebugDrawCurResult` 를 켜도 화면에 아무것도 나오지 않았다. 5.8 소스를 보면 CVar 정의만 남아 있고 노드 코드에서는 쓰이지 않는다. `DebugDrawInfo` 는 DB와 애니메이션 이름을 월드 텍스트로 띄우지만 화면 캡처에는 잡히지 않았다. 그래서 GASP의 `DDCvar.DrawCharacterDebugShapes` 로 화살표를 띄우고, DB와 애니메이션 이름은 AnimBP 변수에서 직접 읽었다. 나중에 알고 보니 이 글자는 디버그 캔버스에 그려져서 그냥 `Shot` 에는 안 찍히고, `Shot showui` 로 찍어야 나온다. [9절](#jump)의 점프 GIF는 그렇게 찍었다.
 
 ### 상태 머신 모드가 안 켜졌다
 
@@ -353,7 +391,7 @@ GASP 캐릭터는 처음에 스트레이프 모드(`RotationMode = Strafe`)라�
 
 <a id="pitfalls"></a>
 
-## 12. 막히기 쉬운 곳
+## 13. 막히기 쉬운 곳
 
 ### 원하는 애니메이션이 안 골라질 때
 
@@ -377,7 +415,7 @@ GASP 캐릭터는 처음에 스트레이프 모드(`RotationMode = Strafe`)라�
 
 <a id="summary"></a>
 
-## 13. 정리 - 내가 이해한 Motion Matching
+## 14. 정리 - 내가 이해한 Motion Matching
 
 ```text
 Schema        무엇을 비교할지. GASP는 궤적 5지점 + 발·골반 몇 개.
@@ -401,11 +439,13 @@ Motion Matching은
 
 <a id="reproduce"></a>
 
-## 14. 부록 - 다시 테스트하기
+## 15. 부록 - 다시 테스트하기
 
 테스트에 쓴 스크립트는 [Scripts/MotionMatching](../../Scripts/MotionMatching/README.md)에 있다. PIE에서 캐릭터를 세우고, 매 틱 정해진 입력을 넣으면서 AnimBP 변수와 발 위치를 기록하고, 찍은 프레임으로 GIF를 만드는 것까지 들어 있다. 에디터 조작은 Unreal MCP로 자동화했다.
 
 측정 요약은 [summary.json](Evidence/MotionMatching/summary.json), Schema 값은 [schema.json](Evidence/MotionMatching/schema.json), DB 통계는 [database_stats.json](Evidence/MotionMatching/database_stats.json)에 남겨 두었다. GASP의 원본 맵, 블루프린트, 애니메이션은 수정하거나 저장하지 않았다.
+
+점프 장면([9절](#jump))은 이 저장소 프로젝트에서 찍었다. 녹화와 GIF 만들기는 [Scripts/ParkourCourse](../../Scripts/ParkourCourse/README.md)의 `run_tests.py`(`debug_mm_jump`), `export_captures.py` 에 있다.
 
 ### 참고
 
@@ -418,6 +458,7 @@ Motion Matching은
   - `Public/PoseSearch/PoseSearchDatabase.h` - 비용 보정값, 검색 모드
   - `Public/PoseSearch/PoseSearchFeatureChannel_Trajectory.h` - 궤적 샘플 플래그
   - `Private/AnimNode_MotionMatching.cpp` - 디버그 CVar
+- 엔진 소스 `Engine/Plugins/Experimental/Mover/Source/Mover/Public/MoverPoseSearchTrajectoryPredictor.h` - Mover 궤적 예측, 공중에서 중력 반영
 
 ---
 
