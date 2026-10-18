@@ -1,0 +1,18 @@
+{
+ "path": "/Game/IsolatedExamples/LookAtPOI/DA_LookAtPOI__Loops.DA_LookAtPOI__Loops",
+ "class": "PDA_LookAtPOI_C",
+ "properties": {
+  "System Center Bone": "head",
+  "Root Bone": "root",
+  "LookAt Body Parts": [
+   "(DebugDrawDetails=(DrawColor=(R=0.244444,G=0.134838,B=0.134838,A=1.000000),DrawHorizontalLimit=True,DrawVerticalLimit=False),Enabled=True,label=\"Hips\",ParentBodyPartlabel=\"\",weight=1.000000,Bones=((BoneName=\"pelvis\")),IsCurveDrivenBodyPart=False,Curves=,Limits=((AplciationQuadrant=NewEnumerator1,Min=-15.000000,Max=15.000000),(AplciationQuadrant=NewEnumerator2,Min=-4.000000,Max=2.000000)),Springs=((SpringStrength=0.400000,CriticalDampening=0.600000)),Antimeridian=(EnableMeridian=True,Timer=1.000000,SpringStrength=0.500000,CriticalDampening=1.000000))",
+   "(DebugDrawDetails=(DrawColor=(R=0.006933,G=0.432292,B=0.398662,A=1.000000),DrawHorizontalLimit=True,DrawVerticalLimit=False),Enabled=True,label=\"Torso\",ParentBodyPartlabel=\"Hips\",weight=1.000000,Bones=((BoneName=\"spine_01\",BoneWeight=0.200000),(BoneName=\"spine_02\",BoneWeight=0.400000),(BoneName=\"spine_03\",BoneWeight=0.600000),(BoneName=\"spine_04\",BoneWeight=0.800000),(BoneName=\"spine_05\")),IsCurveDrivenBodyPart=False,Curves=,Limits=((Max=35.000000),(AplciationQuadrant=NewEnumerator2,Min=-15.000000,Max=10.000000)),Springs=((SpringStrength=0.500000,CriticalDampening=0.600000)),Antimeridian=(EnableMeridian=True,Timer=1.000000,SpringStrength=0.500000,CriticalDampening=1.000000))",
+   "(DebugDrawDetails=(DrawColor=(R=0.500304,G=0.502894,B=0.087546,A=1.000000),DrawHorizontalLimit=True,DrawVerticalLimit=True),Enabled=True,label=\"Head\",ParentBodyPartlabel=\"Torso\",weight=1.000000,Bones=((BoneName=\"neck_01\",BoneWeight=0.300000),(BoneName=\"neck_02\",BoneWeight=0.600000),(BoneName=\"head\")),IsCurveDrivenBodyPart=False,Curves=,Limits=((Max=65.000000),(AplciationQuadrant=NewEnumerator2,Min=-35.000000,Max=50.000000)),Springs=((SpringStrength=1.100000,CriticalDampening=0.900000)),Antimeridian=(EnableMeridian=True,Timer=2.000000,SpringStrength=0.800000,CriticalDampening=1.000000))",
+   "(DebugDrawDetails=(DrawColor=(R=0.106566,G=0.243478,B=0.243478,A=1.000000),DrawHorizontalLimit=True,DrawVerticalLimit=False),Enabled=True,label=\"Eyes\",ParentBodyPartlabel=\"Head\",weight=1.000000,Bones=,IsCurveDrivenBodyPart=True,Curves=((HorizontalCurveName=\"face__r_eye_h\",VerticalCurveName=\"face__r_eye_v\"),(HorizontalCurveName=\"face__l_eye_h\",VerticalCurveName=\"face__l_eye_v\")),Limits=((Max=90.000000)),Springs=((SpringStrength=8.000000,CriticalDampening=1.000000)),Antimeridian=(EnableMeridian=True,Timer=1.500000,SpringStrength=1.000000,CriticalDampening=1.000000))"
+  ],
+  "Foot Fix": "(Enable=True,PelvisJoint=\"pelvis\",FootList=((UpperLeg=\"thigh_l\",LowerLeg=\"calf_l\",Ankle=\"foot_l\",LimbAxis=(X=-1.000000,Y=0.000000,Z=0.000000)),(UpperLeg=\"thigh_r\",LowerLeg=\"calf_r\",Ankle=\"foot_r\")))",
+  "Clamp Min Distance": 40.0,
+  "Fade Out Distance": 500.0,
+  "Antimeridian Cooldown": 0.5
+ }
+}

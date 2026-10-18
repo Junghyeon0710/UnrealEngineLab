@@ -12,6 +12,7 @@
 
 - [Motion Warping으로 루트 모션을 장애물에 맞추기](MotionWarping.md)
 - [Motion Matching으로 이동 애니메이션 고르기](MotionMatching.md)
+- [Control Rig로 런타임에 포즈 고치기](ControlRig.md)
 
 ## 최적화
 

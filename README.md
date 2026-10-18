@@ -26,6 +26,7 @@ Unreal Engine 최적화, 성능 분석, 공식 문서 정리, 신기능 및 궁�
 - [Animation Budget Allocator로 애니메이션 비용 묶기](Docs/UE/AnimationBudget.md)
 - [Motion Warping으로 루트 모션을 장애물에 맞추기](Docs/UE/MotionWarping.md)
 - [Motion Matching으로 이동 애니메이션 고르기](Docs/UE/MotionMatching.md)
+- [Control Rig로 런타임에 포즈 고치기](Docs/UE/ControlRig.md)
 
 
 ## 프로젝트 구성

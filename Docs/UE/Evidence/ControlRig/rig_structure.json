@@ -1,0 +1,801 @@
+{
+ "path": "/Game/Blueprints/ControlRigs/CR_Biped_FootPlacement.CR_Biped_FootPlacement",
+ "variables": [
+  {
+   "name": "LeftLegLength",
+   "type": "double",
+   "default": "0.000000"
+  },
+  {
+   "name": "RightLegLength",
+   "type": "double",
+   "default": "0.000000"
+  },
+  {
+   "name": "Ground Normal",
+   "type": "FVector",
+   "default": "(X=0.000000,Y=0.000000,Z=0.000000)"
+  },
+  {
+   "name": "Roll Limit Degrees",
+   "type": "double",
+   "default": "0.000000"
+  },
+  {
+   "name": "DebugDraw",
+   "type": "bool",
+   "default": "True"
+  },
+  {
+   "name": "DoRaycast",
+   "type": "bool",
+   "default": "False"
+  },
+  {
+   "name": "LeftFootPinned",
+   "type": "bool",
+   "default": "False"
+  },
+  {
+   "name": "LeftPinWeight",
+   "type": "double",
+   "default": "0.000000"
+  },
+  {
+   "name": "LeftFootPinTransformWorldSpace",
+   "type": "FTransform",
+   "default": "(Rotation=(X=-0.286778,Y=-0.743633,Z=0.264320,W=0.543050),Translation=(X=19.050000,Y=35.789999,Z=0.000000),Scale3D=(X=1.000000,Y=1.000000,Z=1.000000))"
+  },
+  {
+   "name": "RightFootPinned",
+   "type": "bool",
+   "default": "False"
+  },
+  {
+   "name": "RightPinWeight",
+   "type": "double",
+   "default": "0.000000"
+  },
+  {
+   "name": "RightFootPinTransformWorldSpace",
+   "type": "FTransform",
+   "default": "(Rotation=(X=0.000000,Y=0.000000,Z=0.000000,W=1.000000),Translation=(X=0.000000,Y=0.000000,Z=0.000000),Scale3D=(X=1.000000,Y=1.000000,Z=1.000000))"
+  },
+  {
+   "name": "LeftFootPinAnimTransformWorldSpace",
+   "type": "FTransform",
+   "default": "(Rotation=(X=0.000000,Y=-0.000000,Z=0.000000,W=1.000000),Translation=(X=0.000000,Y=0.000000,Z=0.000000),Scale3D=(X=1.000000,Y=1.000000,Z=1.000000))"
+  },
+  {
+   "name": "RightFootPinAnimTransformWorldSpace",
+   "type": "FTransform",
+   "default": "(Rotation=(X=0.000000,Y=-0.000000,Z=0.000000,W=1.000000),Translation=(X=0.000000,Y=0.000000,Z=0.000000),Scale3D=(X=1.000000,Y=1.000000,Z=1.000000))"
+  },
+  {
+   "name": "Enable Foot Pinning",
+   "type": "bool",
+   "default": "False"
+  },
+  {
+   "name": "Enable Slope Warping",
+   "type": "bool",
+   "default": "True"
+  },
+  {
+   "name": "MaxFootPinRadius",
+   "type": "double",
+   "default": "40.000000"
+  },
+  {
+   "name": "ClampFootMinHeightToReferencePose",
+   "type": "bool",
+   "default": "False"
+  },
+  {
+   "name": "FootContactLockThreshold",
+   "type": "double",
+   "default": "0.970000"
+  },
+  {
+   "name": "PinYawLimitDegrees",
+   "type": "double",
+   "default": "0.000000"
+  },
+  {
+   "name": "Pelvis Offset",
+   "type": "FVector",
+   "default": "(X=0.000000,Y=0.000000,Z=0.000000)"
+  },
+  {
+   "name": "FootToToeAxis_Left",
+   "type": "FVector",
+   "default": "(X=0.000000,Y=0.000000,Z=0.000000)"
+  },
+  {
+   "name": "FootToToeAxis_Right",
+   "type": "FVector",
+   "default": "(X=0.000000,Y=0.000000,Z=0.000000)"
+  },
+  {
+   "name": "AllowHeelLift",
+   "type": "bool",
+   "default": "True"
+  },
+  {
+   "name": "Toe Length",
+   "type": "double",
+   "default": "5.000000"
+  },
+  {
+   "name": "Hyper Extension Limit Factor",
+   "type": "double",
+   "default": "0.980000"
+  },
+  {
+   "name": "Pelvis Smoothing Time",
+   "type": "double",
+   "default": "0.200000"
+  },
+  {
+   "name": "PinBlendOutSmoothingTime",
+   "type": "double",
+   "default": "0.200000"
+  },
+  {
+   "name": "HeelUpAngleDegrees_Start",
+   "type": "double",
+   "default": "15.000000"
+  },
+  {
+   "name": "HeelUpAngleDegrees_End",
+   "type": "double",
+   "default": "25.000000"
+  },
+  {
+   "name": "Floor Smoothing Time",
+   "type": "double",
+   "default": "0.050000"
+  },
+  {
+   "name": "UseIKBoneTargets",
+   "type": "bool",
+   "default": "True"
+  },
+  {
+   "name": "Has Teleported",
+   "type": "bool",
+   "default": "False"
+  },
+  {
+   "name": "WorldZDamper",
+   "type": "double",
+   "default": "0.000000"
+  },
+  {
+   "name": "WorldZDamperVelocity",
+   "type": "double",
+   "default": "0.000000"
+  },
+  {
+   "name": "RootDamperSmoothingTime",
+   "type": "double",
+   "default": "0.150000"
+  },
+  {
+   "name": "WorldZDamperAlpha",
+   "type": "double",
+   "default": "0.000000"
+  },
+  {
+   "name": "WorldZDamperEnabled",
+   "type": "bool",
+   "default": "True"
+  },
+  {
+   "name": "LeftSmoothGroundWorldTransform",
+   "type": "FTransform",
+   "default": "(Rotation=(X=0.000000,Y=0.000000,Z=0.000000,W=1.000000),Translation=(X=0.000000,Y=0.000000,Z=0.000000),Scale3D=(X=1.000000,Y=1.000000,Z=1.000000))"
+  },
+  {
+   "name": "RightSmoothGroundWorldTransform",
+   "type": "FTransform",
+   "default": "(Rotation=(X=0.000000,Y=0.000000,Z=0.000000,W=1.000000),Translation=(X=0.000000,Y=0.000000,Z=0.000000),Scale3D=(X=1.000000,Y=1.000000,Z=1.000000))"
+  },
+  {
+   "name": "SlopeWarpingAlpha",
+   "type": "double",
+   "default": "0.000000"
+  },
+  {
+   "name": "PendingReset",
+   "type": "bool",
+   "default": "False"
+  },
+  {
+   "name": "ForceReset",
+   "type": "bool",
+   "default": "False"
+  },
+  {
+   "name": "Debug Draw Scene Query",
+   "type": "bool",
+   "default": "False"
+  },
+  {
+   "name": "Adjust Feet Targets For Collision",
+   "type": "bool",
+   "default": "False"
+  },
+  {
+   "name": "GroundMovementWorldDelta",
+   "type": "FTransform",
+   "default": "(Rotation=(X=0.000000,Y=0.000000,Z=0.000000,W=1.000000),Translation=(X=0.000000,Y=0.000000,Z=0.000000),Scale3D=(X=1.000000,Y=1.000000,Z=1.000000))"
+  },
+  {
+   "name": "WorldPrevTransform",
+   "type": "FTransform",
+   "default": "(Rotation=(X=0.000000,Y=0.000000,Z=0.000000,W=1.000000),Translation=(X=0.000000,Y=0.000000,Z=0.000000),Scale3D=(X=1.000000,Y=1.000000,Z=1.000000))"
+  }
+ ],
+ "hierarchy": [
+  {
+   "name": "calculated_toe_target_l_null",
+   "type": "NULL: 2>",
+   "parent": "root"
+  },
+  {
+   "name": "calculated_toe_target_l_ctrl",
+   "type": "CONTROL: 4>",
+   "parent": "calculated_toe_target_l_null"
+  },
+  {
+   "name": "calculated_toe_target_r_null",
+   "type": "NULL: 2>",
+   "parent": "root"
+  },
+  {
+   "name": "calculated_toe_target_r_ctrl",
+   "type": "CONTROL: 4>",
+   "parent": "calculated_toe_target_r_null"
+  },
+  {
+   "name": "pelvis_null",
+   "type": "NULL: 2>",
+   "parent": "root"
+  },
+  {
+   "name": "pelvis_ctrl",
+   "type": "CONTROL: 4>",
+   "parent": "pelvis_null"
+  },
+  {
+   "name": "toe_l_null",
+   "type": "NULL: 2>",
+   "parent": "root"
+  },
+  {
+   "name": "toe_l_ctrl",
+   "type": "CONTROL: 4>",
+   "parent": "toe_l_null"
+  },
+  {
+   "name": "toe_r_null",
+   "type": "NULL: 2>",
+   "parent": "root"
+  },
+  {
+   "name": "toe_r_ctrl",
+   "type": "CONTROL: 4>",
+   "parent": "toe_r_null"
+  },
+  {
+   "name": "clamped_toe_l_null",
+   "type": "NULL: 2>",
+   "parent": "toe_r_null"
+  },
+  {
+   "name": "clamped_toe_l_ctrl",
+   "type": "CONTROL: 4>",
+   "parent": "clamped_toe_l_null"
+  },
+  {
+   "name": "clamped_foot_l_null",
+   "type": "NULL: 2>",
+   "parent": "toe_r_null"
+  },
+  {
+   "name": "clamped_foot_l_ctrl",
+   "type": "CONTROL: 4>",
+   "parent": "clamped_foot_l_null"
+  },
+  {
+   "name": "foot_l_null",
+   "type": "NULL: 2>",
+   "parent": "root"
+  },
+  {
+   "name": "foot_l_ctrl",
+   "type": "CONTROL: 4>",
+   "parent": "foot_l_null"
+  },
+  {
+   "name": "clamped_toe_r_null",
+   "type": "NULL: 2>",
+   "parent": "root"
+  },
+  {
+   "name": "clamped_toe_r_ctrl",
+   "type": "CONTROL: 4>",
+   "parent": "clamped_toe_r_null"
+  },
+  {
+   "name": "clamped_foot_r_null",
+   "type": "NULL: 2>",
+   "parent": "root"
+  },
+  {
+   "name": "clamped_foot_r_ctrl",
+   "type": "CONTROL: 4>",
+   "parent": "clamped_foot_r_null"
+  },
+  {
+   "name": "foot_r_null",
+   "type": "NULL: 2>",
+   "parent": "root"
+  },
+  {
+   "name": "foot_r_ctrl",
+   "type": "CONTROL: 4>",
+   "parent": "foot_r_null"
+  },
+  {
+   "name": "smoothed_floor_l_null",
+   "type": "NULL: 2>",
+   "parent": "root"
+  },
+  {
+   "name": "smoothed_floor_l_ctrl",
+   "type": "CONTROL: 4>",
+   "parent": "smoothed_floor_l_null"
+  },
+  {
+   "name": "smoothed_floor_r_null",
+   "type": "NULL: 2>",
+   "parent": "root"
+  },
+  {
+   "name": "smoothed_floor_r_ctrl",
+   "type": "CONTROL: 4>",
+   "parent": "smoothed_floor_r_null"
+  },
+  {
+   "name": "animated_slope_angle_null",
+   "type": "NULL: 2>",
+   "parent": "root"
+  },
+  {
+   "name": "animated_slope_angle_ctrl",
+   "type": "CONTROL: 4>",
+   "parent": "animated_slope_angle_null"
+  },
+  {
+   "name": "floor_l_collision",
+   "type": "CONTROL: 4>",
+   "parent": "None"
+  },
+  {
+   "name": "floor_r_collision",
+   "type": "CONTROL: 4>",
+   "parent": "None"
+  },
+  {
+   "name": "contact_l",
+   "type": "CURVE: 8>",
+   "parent": "None"
+  },
+  {
+   "name": "contact_r",
+   "type": "CURVE: 8>",
+   "parent": "None"
+  },
+  {
+   "name": "animated_toe_target_l_null",
+   "type": "NULL: 2>",
+   "parent": "None"
+  },
+  {
+   "name": "animated_toe_target_l_ctrl",
+   "type": "CONTROL: 4>",
+   "parent": "animated_toe_target_l_null"
+  },
+  {
+   "name": "animated_toe_target_r_null",
+   "type": "NULL: 2>",
+   "parent": "None"
+  },
+  {
+   "name": "animated_toe_target_r_ctrl",
+   "type": "CONTROL: 4>",
+   "parent": "animated_toe_target_r_null"
+  },
+  {
+   "name": "animated_pelvis_null",
+   "type": "NULL: 2>",
+   "parent": "None"
+  },
+  {
+   "name": "animated_pelvis_ctrl",
+   "type": "CONTROL: 4>",
+   "parent": "animated_pelvis_null"
+  }
+ ],
+ "bone_count": 88,
+ "graphs": [
+  {
+   "name": "RigVMModel::",
+   "nodes": 111,
+   "comments": [
+    "Align pelvis control to pelvis initial",
+    "Pre calculate limb lengths and store as variable",
+    "Align floor collision controls in 2D with feet",
+    "Draw Leg Chain Before Adjustments (Color: Cyan)",
+    "Handle Teleport",
+    "Calculate the animated toe targets and store them for use later",
+    "Update global root damper",
+    "Update ground collision controls. Do Scene Queries (if enabled). This looks for the ground under the feet",
+    "Set collision to initial if slope warping is disabled. This will cause slope effects to smoothly blend out",
+    "Update Smoothed Floor Controls towards actual hit result",
+    "Update the foot pinning logic",
+    "Update leg controls: find where we want to place the feet",
+    "Modify the actual animation pose based on the controls",
+    "Post IK Solve Fixup",
+    "Store World Transform for next solve",
+    "Do debug draw post solve (green)"
+   ]
+  },
+  {
+   "name": "RigVMModel::|RigVMFunction_Sequence",
+   "nodes": 13,
+   "comments": []
+  },
+  {
+   "name": "RigVMModel::|RigVMFunction_MathBoolOr",
+   "nodes": 4,
+   "comments": []
+  },
+  {
+   "name": "FunctionLibrary::",
+   "nodes": 28,
+   "comments": []
+  },
+  {
+   "name": "FunctionLibrary::|Update Leg Controls",
+   "nodes": 88,
+   "comments": [
+    "Calculate the target for the toe",
+    "Debug Draw",
+    "Set toe control from floor by projecting toe target (BlendedToeTarget) onto the smoothed ground planes",
+    "Init Local Variables",
+    "Calculate Foot Target based on Toe",
+    "Heel stays in animated position relative to toe, allowing it to lift from the floor.",
+    "Animated Toe to Foot (Global Space)",
+    "Blend between heel down and heel up based on slope angle",
+    "Foot Adjusted for new Toe Target (adjusted to slope)",
+    "Heel adjusts to floor plane, so heel will stay on ground",
+    "Foot adjusted from toe target, not yet adjusted for slope",
+    "Set Foot Control Target Rotation: Aim Foot at Toe Position"
+   ]
+  },
+  {
+   "name": "FunctionLibrary::|Update Leg Controls|RigVMFunction_Sequence",
+   "nodes": 6,
+   "comments": []
+  },
+  {
+   "name": "FunctionLibrary::|Init Leg",
+   "nodes": 13,
+   "comments": [
+    "Align toe control",
+    "Align floor control"
+   ]
+  },
+  {
+   "name": "FunctionLibrary::|Init Leg|RigVMFunction_Sequence",
+   "nodes": 4,
+   "comments": []
+  },
+  {
+   "name": "FunctionLibrary::|Solve Leg IK",
+   "nodes": 82,
+   "comments": [
+    "Set clamped toe null ready for the post solve step",
+    "Clamp Leg Effector to max leg length: we take the max of some max extension of the leg and the animated pose, so that if the animation wants a straight leg it can get it",
+    "Correct null transform based on max leg length",
+    "Hyper extension check",
+    "No Hyperextension: Copy over null transform as-is",
+    "Stop foot going above a max height relative to upper leg to stop extreme poses on steep slopes",
+    "Aim foot to point at toe target",
+    "Finally, do IK solve",
+    "Pole Vector Calculation: We want the pole vector to always be 90 degrees away from upper leg -> target, so it can cleanly define the solving plane",
+    "Upper leg to target",
+    "Pole vector direction vector",
+    "Side vector: this defines the plane we want to rotate the leg in. Its defined in local space of the lower leg",
+    "Pole vector as location (direction + upper leg position)",
+    "Side vector in character space"
+   ]
+  },
+  {
+   "name": "FunctionLibrary::|Solve Leg IK|RigVMFunction_Sequence",
+   "nodes": 6,
+   "comments": []
+  },
+  {
+   "name": "FunctionLibrary::|Calculate Limb Length",
+   "nodes": 7,
+   "comments": []
+  },
+  {
+   "name": "FunctionLibrary::|Clamp Pelvis Offset",
+   "nodes": 21,
+   "comments": [
+    "Upper Leg To Pelvis",
+    "Proposed Upper Leg Position (global space)",
+    "Proposed pelvis adjustment translation",
+    "Clamped Pelvis Pos",
+    "Clamped Upper Leg Position (Global)",
+    "Proposed Foot To Upper Leg",
+    "Relaxation Modifier",
+    "Current Animation leg extension... We don't want to break the animation by forcing a relaxation if the current animation is fully extended"
+   ]
+  },
+  {
+   "name": "FunctionLibrary::|Update Floor Control",
+   "nodes": 63,
+   "comments": [
+    "Handle Ground Movement",
+    "Handle fade in / out of slope warping effect by tying public boolean to alpha",
+    "Smooth Translation to target ground",
+    "Smooth rotation to target ground",
+    "Limit target rotation to max slope angle"
+   ]
+  },
+  {
+   "name": "FunctionLibrary::|Update Floor Control|RigVMFunction_Sequence",
+   "nodes": 5,
+   "comments": []
+  },
+  {
+   "name": "FunctionLibrary::|Do Scene Query",
+   "nodes": 65,
+   "comments": [
+    "Cache the animated target transform",
+    "First raycast forward from center of capsule to the foot position (XY) to check that the space is clear. This is so that we can detect the feet clipping through walls in front",
+    "Raycast 2: do the main check down to the ground to find the floor",
+    "Debug draw"
+   ]
+  },
+  {
+   "name": "FunctionLibrary::|Do Scene Query|RigVMFunction_Sequence",
+   "nodes": 5,
+   "comments": []
+  },
+  {
+   "name": "FunctionLibrary::|DebugDrawLegs",
+   "nodes": 19,
+   "comments": [
+    "Add a new line to show the toe end point, so we visualize the rotation of the toe"
+   ]
+  },
+  {
+   "name": "FunctionLibrary::|Wants To Lock",
+   "nodes": 6,
+   "comments": []
+  },
+  {
+   "name": "FunctionLibrary::|Update Pelvis Control",
+   "nodes": 34,
+   "comments": [
+    "Calculate target pelvis offset",
+    "Damp towards target position",
+    "Finally apply a clamp to prevent hyper extension",
+    "Damp towards target to prevent pops",
+    "Take the average of the desired hip positions from both legs to decide on a target.\r\n\r\nIMPORTANT: we take the target animated positions as input not the current bone since they could be modified by the global root damper ",
+    "Set the pelvis null from the offset"
+   ]
+  },
+  {
+   "name": "FunctionLibrary::|Update Foot Pinning",
+   "nodes": 93,
+   "comments": [
+    "Handle Moving Platforms by translating foot pins",
+    "Foot is locked to pin",
+    "Check for unlock",
+    "Unlock",
+    "Move pin to follow height of animation",
+    "Clamp pin yaw",
+    "Calculate the difference between current animated toe position and the pinned position",
+    "Contstrain a max yaw diff from animated to pin",
+    "Take flattened side vector of feet to get yaw",
+    "Capture animated foot transform every frame foot is pinned",
+    "Clamp pin distance",
+    "Foot is unlocked / unlocking",
+    "Check for lock",
+    "Lock",
+    "Tolerance for locking when fading out a previous lock",
+    "Locking while still blending out a pin, use the correct blended transform to avoid a pop",
+    "Initialize local variables",
+    "Fade out pin weight"
+   ]
+  },
+  {
+   "name": "FunctionLibrary::|Update Foot Pinning|RigVMFunction_Sequence",
+   "nodes": 4,
+   "comments": []
+  },
+  {
+   "name": "FunctionLibrary::|DebugDrawFootPins",
+   "nodes": 34,
+   "comments": []
+  },
+  {
+   "name": "FunctionLibrary::|ComputePinnedToeTransform",
+   "nodes": 8,
+   "comments": [
+    "Align current animated rotation to the socket pin in the z axis. This allows the pitch of the foot to be free to animate even when locked"
+   ]
+  },
+  {
+   "name": "FunctionLibrary::|CalculateTargetAnimatedToeTransformGlobal",
+   "nodes": 10,
+   "comments": [
+    "Drive target from IK_Foot targets. Since we want a target toe, we need to apply the diff of the IK_Foot to the normal foot to the toe"
+   ]
+  },
+  {
+   "name": "FunctionLibrary::|CalculateTargetAnimatedToeTransformGlobal|Multiply",
+   "nodes": 4,
+   "comments": []
+  },
+  {
+   "name": "FunctionLibrary::|ClampTransformMinHeightFromReference",
+   "nodes": 4,
+   "comments": []
+  },
+  {
+   "name": "FunctionLibrary::|CollidePositionWithPlane",
+   "nodes": 6,
+   "comments": [
+    "This function will try colliding a point with the ground plane. If the collision is lower than the input point, the position is left untouched. If the ground is higher, we adjust the point to stay above the ground"
+   ]
+  },
+  {
+   "name": "FunctionLibrary::|AdjustPositionToPlane",
+   "nodes": 22,
+   "comments": [
+    "This function adjusts the target point to maintain the specified animated height offset from the ground",
+    "This accounts for rotation on the IK root bone: this is how sloped animations are signalled. If an animation was authored for a 45 degree slope, we should not adjust points made for this same 45 degree angle"
+   ]
+  },
+  {
+   "name": "FunctionLibrary::|Update Foot Post Solve",
+   "nodes": 106,
+   "comments": [
+    "If toe is colliding with floor, bring it up and aim foot",
+    "We are using pythagoras to solve for the correct toe position on the floor. B^2 = L^2 - A^2, where L is the foot to toe length, A is the foot to toe in direction of ground plane and B is the foot to toe along the ground. To do this we need to decompose the foot to toe into 2 perpendicular directions, one along ground normal and the other perpendicular to ground",
+    "Aim at collided position",
+    "Debug Draw",
+    "Foot To Toe (before fixup)",
+    "Foot to desired toe position along ground",
+    "Bottom of toe, location to start collision resolution",
+    "Detect if toe is above or below ground",
+    "Add back foot position to get to global space",
+    "Foot To Toe Length (From initial pose). This is L",
+    "Foot to impact point",
+    "Foot to impact point (along ground normal)",
+    "Init Local Variables",
+    "Debug Draw Hit",
+    "Did toes collide with floor?",
+    "Current Toe End Location",
+    "Min toe height above ground",
+    "IMPORTANT: This is the initial (reference) height",
+    "Animated Toe End Location"
+   ]
+  },
+  {
+   "name": "FunctionLibrary::|Update Foot Post Solve|RigVMFunction_Sequence",
+   "nodes": 5,
+   "comments": []
+  },
+  {
+   "name": "FunctionLibrary::|CalculateSlopeAngle",
+   "nodes": 12,
+   "comments": [
+    "Calculate the angle of the rotation against the ground... positive = up hill, negative = downhill. Note that walking accross the slope gives an angle of 0",
+    "Flatten so that pitch doesn't affect angle calculation"
+   ]
+  },
+  {
+   "name": "FunctionLibrary::|Reset",
+   "nodes": 26,
+   "comments": []
+  },
+  {
+   "name": "FunctionLibrary::|UpdateRootDamper",
+   "nodes": 60,
+   "comments": [
+    "Account for ground movement",
+    "Handle fading in / out of the effect via the alpha",
+    "Debug draw",
+    "Translate the current damped z by the global displacement along the current ground plane. This is done so that the global z damper doesn't pull is down into slopes when walking up them. We only want to see its effects along the ground normal, not perpendicular to it",
+    "Apply Damper to root bone (need to convert to component space)",
+    "Update the smoother",
+    "The purpose of the root damper is to smooth out any discontinuity coming from the movement component. For example when moving up a ledge / curb or falling down a small ledge, we don't want the character to 'pop' down. This effect is done in world space, unlike the pelvis offset.\r\n\r\nImportant: we don't want this damper to change the animated result when moving up a constant slope, so we only damp in the direction of the ground normal.\r\n\r\nIn order for this to work properly the correct ground normal must be fed in from the movement component.",
+    "Z movement parallel to ground",
+    "Z Movement along ground normal",
+    "World Displacement",
+    "Check if damper has any effect",
+    "Damper is completely disabled... keep current values in sync with world position in case it is reactivated"
+   ]
+  },
+  {
+   "name": "FunctionLibrary::|UpdateRootDamper|RigVMFunction_Sequence",
+   "nodes": 5,
+   "comments": []
+  },
+  {
+   "name": "FunctionLibrary::|CheckEarlyOut",
+   "nodes": 27,
+   "comments": [
+    "Can only early out of ik solver if we don't have external foot targets that are different from the animated position"
+   ]
+  },
+  {
+   "name": "FunctionLibrary::|CheckEarlyOut|RigVMFunction_MathBoolAnd",
+   "nodes": 9,
+   "comments": []
+  },
+  {
+   "name": "FunctionLibrary::|DebugDrawExternalIKTargets",
+   "nodes": 13,
+   "comments": []
+  },
+  {
+   "name": "FunctionLibrary::|DebugDrawGroundCollision",
+   "nodes": 14,
+   "comments": []
+  },
+  {
+   "name": "FunctionLibrary::|CalculatePinnedToeTargetTransformGlobal",
+   "nodes": 27,
+   "comments": [
+    "Decide if we are fully locked or unlocking",
+    "Fully locked, target is the pin transform",
+    "Blend between toe and toe pin for the target",
+    "Unlocking (pin weight between 0 and 1) Calculate the animated transform away from the animation point at unlock. This is important to prevent feet getting 'dragged behing' as the pin weight falls to 0",
+    "This gives the animated diff between unlock point and current. Note we work in world space for storing variables because character space moves from frame to frame so can't be relied on for past positions"
+   ]
+  },
+  {
+   "name": "FunctionLibrary::|AlphaLinearInterp",
+   "nodes": 19,
+   "comments": []
+  },
+  {
+   "name": "FunctionLibrary::|ApplyGroundDeltaToWorldTransform",
+   "nodes": 8,
+   "comments": [
+    "We apply the delta from the previous frame's position since that is what the delta will be relative to. If we use the current frame there will be some drift introduced when standing on rotating platforms"
+   ]
+  },
+  {
+   "name": "FunctionLibrary::|ApplyGroundDeltaToWorldTransform|Add",
+   "nodes": 4,
+   "comments": []
+  },
+  {
+   "name": "FunctionLibrary::|DebugDrawSlopeAnim",
+   "nodes": 5,
+   "comments": []
+  }
+ ]
+}
