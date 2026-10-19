@@ -19,5 +19,8 @@ public class UnrealEngineLabEditor : ModuleRules
 			"FieldNotification", "ModelViewViewModel", "ModelViewViewModelBlueprint", "ModelViewViewModelEditor",
 			"UnrealEngineLab"
 		});
+
+		// GameplayMessage 실험용 블루프린트 노드 생성 (Docs/UE/GameplayMessage.md)
+		PrivateDependencyModuleNames.AddRange(new string[] { "GameplayTags", "GameplayMessageRuntime" });
 	}
 }

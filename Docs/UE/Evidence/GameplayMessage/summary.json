@@ -1,0 +1,55 @@
+{
+ "demo": {
+  "fps": 30,
+  "shot_interval_s": 0.6,
+  "counters": {
+   "channels": {
+    "Lab.Message.Accolade.DoubleKill": 2,
+    "Lab.Message.Accolade.TripleKill": 1,
+    "Lab.Message.Damage": 13,
+    "Lab.Message.Elimination": 6
+   },
+   "feed_lines": 6,
+   "accolades_shown": 3
+  }
+ },
+ "order": [
+  "frame 9093  before BroadcastMessage",
+  "frame 9093  listener A (Lab.Message.Test, Exact)",
+  "frame 9093  listener B (Lab.Message.Test, Exact)",
+  "frame 9093  listener C (Lab.Message, Partial)",
+  "frame 9093  after BroadcastMessage"
+ ],
+ "mismatch": {
+  "feed_before": 6,
+  "feed_after": 6,
+  "count_before": 6,
+  "count_after": 6
+ },
+ "benchmark_median_of_3": [
+  {
+   "listeners": 1,
+   "broadcasts": 100000,
+   "gameplay_message_us": 0.205,
+   "multicast_delegate_us": 0.029,
+   "ratio": 7.1,
+   "all_delivered": true
+  },
+  {
+   "listeners": 10,
+   "broadcasts": 100000,
+   "gameplay_message_us": 0.716,
+   "multicast_delegate_us": 0.05,
+   "ratio": 14.3,
+   "all_delivered": true
+  },
+  {
+   "listeners": 100,
+   "broadcasts": 10000,
+   "gameplay_message_us": 5.548,
+   "multicast_delegate_us": 0.253,
+   "ratio": 22.0,
+   "all_delivered": true
+  }
+ ]
+}

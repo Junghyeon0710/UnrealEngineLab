@@ -21,6 +21,9 @@ public class UnrealEngineLab : ModuleRules
 		// MVVM 실험용 (Docs/UE/MVVM.md)
 		PublicDependencyModuleNames.AddRange(new string[] { "FieldNotification", "ModelViewViewModel" });
 
+		// GameplayMessage 실험용 (Docs/UE/GameplayMessage.md)
+		PublicDependencyModuleNames.Add("GameplayMessageRuntime");
+
 		// Uncomment if you are using Slate UI
 		// PrivateDependencyModuleNames.AddRange(new string[] { "Slate", "SlateCore" });
 		

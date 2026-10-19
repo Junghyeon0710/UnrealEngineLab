@@ -7,6 +7,7 @@
 ## Gameplay
 
 - [StateTree로 터렛 만들기](StateTree.md)
+- [Lyra의 GameplayMessage로 시스템끼리 메시지 주고받기](GameplayMessage.md)
 
 ## 애니메이션
 
