@@ -1,0 +1,28 @@
+{
+ "fps": 30,
+ "idle_10s": {
+  "frames": 297,
+  "model_changes": 0,
+  "classic_binding_calls": 1188,
+  "mvvm_getter_calls": 0,
+  "seconds": 9.9
+ },
+ "demo_10s": {
+  "frames": 300,
+  "model_changes": 13,
+  "classic_binding_calls": 1200,
+  "mvvm_getter_calls": 33,
+  "seconds": 10.0
+ },
+ "per_frame_classic_calls": 4.0,
+ "burst_three_heals_one_tick": {
+  "mvvm_getter_calls": 15,
+  "model_changes": 3
+ },
+ "heal_button_click": {
+  "t": 11.46,
+  "health_before": 28,
+  "health_after": 53,
+  "mvvm_getter_calls": 5
+ }
+}

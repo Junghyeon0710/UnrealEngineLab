@@ -18,6 +18,9 @@ public class UnrealEngineLab : ModuleRules
 		// Animation Budget Allocator 실험용 (Docs/UE/AnimationBudget.md)
 		PrivateDependencyModuleNames.AddRange(new string[] { "AnimationBudgetAllocator" });
 
+		// MVVM 실험용 (Docs/UE/MVVM.md)
+		PublicDependencyModuleNames.AddRange(new string[] { "FieldNotification", "ModelViewViewModel" });
+
 		// Uncomment if you are using Slate UI
 		// PrivateDependencyModuleNames.AddRange(new string[] { "Slate", "SlateCore" });
 		
