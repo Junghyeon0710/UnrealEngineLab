@@ -1,0 +1,1381 @@
+{
+  "name": "NiagaraToolsets.NiagaraToolset_Component",
+  "version": "1.0",
+  "description": "나이아가라 컴포넌트 오퍼레이션을 위한 나이아가라 툴세트입니다.\n\n다음으로 작업할 경우 이 툴세트를 사용하세요.\n- 액터의 나이아가라 컴포넌트\n- 런타임 나이아가라 시스템 조작\n- 컴포넌트 인스턴스에서 사용자 변수 오버라이드\n- 레벨 또는 블루프린트 내 FX 관련 오퍼레이션\n\n이는 런타임 나이아가라 오퍼레이션을 위한 주요 툴세트입니다.",
+  "tools": [
+    {
+      "description": "컴포넌트에서 사용자 변수의 값을 설정합니다.\n이는 특정 컴포넌트 인스턴스에서 사용자에게 노출된 파라미터의 디폴트 값을 오버라이드합니다.",
+      "name": "NiagaraToolsets.NiagaraToolset_Component.SetVariable",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "component": {
+            "type": "object",
+            "title": "/Script/Niagara.NiagaraComponent",
+            "description": "변수를 설정할 나이아가라 컴포넌트입니다.",
+            "properties": {
+              "refPath": {
+                "type": "string",
+                "description": "소프트 경로 스트링으로 저장된 레퍼런스입니다."
+              }
+            },
+            "required": [
+              "refPath"
+            ]
+          },
+          "variable": {
+            "title": "NiagaraExt_VariableInst",
+            "description": "설정할 이름과 새로운 값을 포함하는 변수 인스턴스입니다.",
+            "type": "object",
+            "properties": {
+              "value": {
+                "type": "object",
+                "title": "NiagaraToolsetInstancedValue",
+                "description": "JSON 변환을 단순화하는 FInstancedStruct용의 래퍼 구조체입니다.\n\n허용된 여러 구조체 타입 중 하나가 될 수 있는 인스턴스드 값을 나타냅니다.\n허용되는 타입은 BaseStruct 메타데이터(자동으로 검색된 파생 타입) 및\n선택적 AdditionalTypes 메타데이터(명시적으로 지정된 타입)에 의해 결정됩니다.\n\n이 타입으로 작업할 때는 JSON 스키마의 oneOf 배열을 확인하여 유효한 타입을 모두 파악해야 합니다.\nBaseStruct에서 파생된 특수 타입이 먼저 나열되고, 그 뒤에 추가 타입이 나열됩니다.",
+                "properties": {
+                  "struct": {
+                    "type": "object",
+                    "title": "/Script/CoreUObject.ScriptStruct",
+                    "description": "이 인스턴스드 값의 구조체 타입입니다. 스키마에서 허용된 타입 중 하나와 일치해야 합니다.",
+                    "properties": {
+                      "refPath": {
+                        "type": "string",
+                        "description": "소프트 경로 스트링으로 저장된 레퍼런스입니다."
+                      }
+                    },
+                    "required": [
+                      "refPath"
+                    ]
+                  },
+                  "value": {
+                    "oneOf": [
+                      {
+                        "type": "object",
+                        "title": "/Script/NiagaraEditor.NiagaraExt_VariableValue_Enum",
+                        "description": "UEnum 레퍼런스를 위한 래퍼입니다. 열거형 값을 나이아가라 변수에 전달하는 경우, 이 구조체를 사용하세요.",
+                        "properties": {
+                          "enum": {
+                            "type": "object",
+                            "title": "/Script/CoreUObject.Enum",
+                            "description": "UEnum 타입에 대한 레퍼런스입니다.",
+                            "properties": {
+                              "refPath": {
+                                "type": "string",
+                                "description": "소프트 경로 스트링으로 저장된 레퍼런스입니다."
+                              }
+                            },
+                            "required": [
+                              "refPath"
+                            ]
+                          },
+                          "enumName": {
+                            "type": "string",
+                            "description": "열거형 값 이름입니다."
+                          },
+                          "displayName": {
+                            "type": "string",
+                            "description": "EnumName의 표시 값입니다. 내부적인 EnumName보다 설명이 자세하고 유용한 경우가 많습니다. 정보 용도로만 사용되며, 열거형의 실제 설정 값은 EnumName입니다."
+                          }
+                        },
+                        "required": [
+                          "enum",
+                          "enumName",
+                          "displayName"
+                        ]
+                      },
+                      {
+                        "type": "object",
+                        "title": "/Script/NiagaraEditor.NiagaraExt_VariableValue_DataInterface",
+                        "description": "데이터 인터페이스 레퍼런스를 위한 래퍼입니다. 나이아가라 변수에 데이터 인터페이스 인스턴스를 전달하는 경우, 이 구조체를 사용하세요.",
+                        "properties": {
+                          "dataInterfaceClass": {
+                            "type": "object",
+                            "title": "Class@/Script/Niagara.NiagaraDataInterface",
+                            "description": "DataInterface의 클래스입니다.",
+                            "properties": {
+                              "refPath": {
+                                "type": "string",
+                                "description": "소프트 경로 스트링으로 저장된 레퍼런스입니다."
+                              }
+                            },
+                            "required": [
+                              "refPath"
+                            ]
+                          },
+                          "dataInterface": {
+                            "type": "object",
+                            "title": "/Script/Niagara.NiagaraDataInterface",
+                            "description": "DataInterface 오브젝트에 대한 레퍼런스입니다.",
+                            "properties": {
+                              "refPath": {
+                                "type": "string",
+                                "description": "소프트 경로 스트링으로 저장된 레퍼런스입니다."
+                              }
+                            },
+                            "required": [
+                              "refPath"
+                            ]
+                          }
+                        },
+                        "required": [
+                          "dataInterfaceClass",
+                          "dataInterface"
+                        ]
+                      },
+                      {
+                        "type": "object",
+                        "title": "/Script/NiagaraEditor.NiagaraExt_VariableValue_Object",
+                        "description": "UObject 레퍼런스를 위한 래퍼입니다. UObject 인스턴스(텍스처, 머티리얼 등)를 나이아가라 변수에 전달하는 경우, 이 구조체를 사용하세요.",
+                        "properties": {
+                          "objectClass": {
+                            "type": "object",
+                            "title": "Class@/Script/CoreUObject.Object",
+                            "description": "오브젝트 레퍼런스의 클래스 타입 컨스트레인트입니다.",
+                            "properties": {
+                              "refPath": {
+                                "type": "string",
+                                "description": "소프트 경로 스트링으로 저장된 레퍼런스입니다."
+                              }
+                            },
+                            "required": [
+                              "refPath"
+                            ]
+                          },
+                          "object": {
+                            "type": "object",
+                            "title": "/Script/CoreUObject.Object",
+                            "description": "UObject 인스턴스에 대한 레퍼런스입니다.",
+                            "properties": {
+                              "refPath": {
+                                "type": "string",
+                                "description": "소프트 경로 스트링으로 저장된 레퍼런스입니다."
+                              }
+                            },
+                            "required": [
+                              "refPath"
+                            ]
+                          }
+                        },
+                        "required": [
+                          "objectClass",
+                          "object"
+                        ]
+                      },
+                      {
+                        "type": "object",
+                        "title": "/Script/Niagara.NiagaraFloat",
+                        "description": "플로트",
+                        "properties": {
+                          "value": {
+                            "type": "number"
+                          }
+                        },
+                        "required": [
+                          "value"
+                        ]
+                      },
+                      {
+                        "type": "object",
+                        "title": "/Script/Niagara.NiagaraBool",
+                        "description": "부울",
+                        "properties": {
+                          "value": {
+                            "type": "integer",
+                            "description": "FNiagaraBool::True(-1) 또는 FNiagaraBool::False(0) 중 하나여야 합니다."
+                          }
+                        },
+                        "required": [
+                          "value"
+                        ]
+                      },
+                      {
+                        "type": "object",
+                        "title": "/Script/Niagara.NiagaraInt32",
+                        "description": "Int 32",
+                        "properties": {
+                          "value": {
+                            "type": "integer"
+                          }
+                        },
+                        "required": [
+                          "value"
+                        ]
+                      },
+                      {
+                        "type": "object",
+                        "title": "/Script/Niagara.NiagaraPosition",
+                        "description": "위치",
+                        "properties": {
+                          "x": {
+                            "type": "number"
+                          },
+                          "y": {
+                            "type": "number"
+                          },
+                          "z": {
+                            "type": "number"
+                          }
+                        },
+                        "required": [
+                          "x",
+                          "y",
+                          "z"
+                        ]
+                      },
+                      {
+                        "type": "object",
+                        "title": "/Script/Niagara.NiagaraID",
+                        "description": "나이아가라 ID",
+                        "properties": {
+                          "index": {
+                            "type": "integer",
+                            "description": "이 파티클에 대한 간접 테이블에 있는 인덱스입니다. 이 파티클 데이터에 대한 빠른 액세스를 가능하게 합니다.\n현재 활동 중인 파티클 사이에서 항상 고유하지만, 해당되는 파티클이 사라진 후에 재사용됩니다."
+                          },
+                          "acquireTag": {
+                            "type": "integer",
+                            "description": "이 ID를 확보한 시점에 대한 고유 태그.\n파티클 하나가 사라지고 다른 파티클이 해당 인덱스를 재사용할 경우 두 파티클을 서로 구분할 수 있도록 합니다."
+                          }
+                        },
+                        "required": [
+                          "index",
+                          "acquireTag"
+                        ]
+                      },
+                      {
+                        "type": "object",
+                        "title": "/Script/CoreUObject.Vector",
+                        "description": "3D 공간에서의 포인트 혹은 FVector 입니다.\n전체 C++ 클래스는 다음 위치에 있습니다. Engine\\Source\\Runtime\\Core\\Public\\Math\\Vector.h",
+                        "properties": {
+                          "x": {
+                            "type": "number"
+                          },
+                          "y": {
+                            "type": "number"
+                          },
+                          "z": {
+                            "type": "number"
+                          }
+                        },
+                        "required": [
+                          "x",
+                          "y",
+                          "z"
+                        ]
+                      },
+                      {
+                        "type": "object",
+                        "title": "/Script/CoreUObject.Vector2D",
+                        "description": "2D 벡터 - 2D 공간에서의 포인트 혹은 FVector 입니다.\n전체 C++ 클래스는 다음 위치에 있습니다. Engine\\Source\\Runtime\\Core\\Public\\Math\\Vector2D.h",
+                        "properties": {
+                          "x": {
+                            "type": "number"
+                          },
+                          "y": {
+                            "type": "number"
+                          }
+                        },
+                        "required": [
+                          "x",
+                          "y"
+                        ]
+                      },
+                      {
+                        "type": "object",
+                        "title": "/Script/CoreUObject.Vector4",
+                        "description": "4-D 호모지니어스 벡터 입니다.\n전체 C++ 클래스는 다음 위치에 있습니다. Engine\\Source\\Runtime\\Core\\Public\\Math\\Vector4.h",
+                        "properties": {
+                          "x": {
+                            "type": "number"
+                          },
+                          "y": {
+                            "type": "number"
+                          },
+                          "z": {
+                            "type": "number"
+                          },
+                          "w": {
+                            "type": "number"
+                          }
+                        },
+                        "required": [
+                          "x",
+                          "y",
+                          "z",
+                          "w"
+                        ]
+                      },
+                      {
+                        "type": "object",
+                        "title": "/Script/CoreUObject.Quat",
+                        "description": "쿼터니언입니다.\n풀 C++코드는 여기 있습니다: Engine\\Source\\Runtime\\Core\\Public\\Math\\Quat.h",
+                        "properties": {
+                          "x": {
+                            "type": "number"
+                          },
+                          "y": {
+                            "type": "number"
+                          },
+                          "z": {
+                            "type": "number"
+                          },
+                          "w": {
+                            "type": "number"
+                          }
+                        },
+                        "required": [
+                          "x",
+                          "y",
+                          "z",
+                          "w"
+                        ]
+                      },
+                      {
+                        "type": "object",
+                        "title": "/Script/CoreUObject.LinearColor",
+                        "description": "선형색 \nFull C++ 클래스는 여기 있습니다: Engine\\Source\\Runtime\\Core\\Public\\Math\\Color.h",
+                        "properties": {
+                          "r": {
+                            "type": "number"
+                          },
+                          "g": {
+                            "type": "number"
+                          },
+                          "b": {
+                            "type": "number"
+                          },
+                          "a": {
+                            "type": "number"
+                          }
+                        },
+                        "required": [
+                          "r",
+                          "g",
+                          "b",
+                          "a"
+                        ]
+                      },
+                      {
+                        "type": "object",
+                        "title": "/Script/CoreUObject.Rotator",
+                        "description": "3D 공간에서 직교 회전입니다.\n풀 C ++ 클래스는 다음 위치에 있습니다: Engine\\Source\\Runtime\\Core\\Public\\Math\\Rotator.h",
+                        "properties": {
+                          "pitch": {
+                            "type": "number",
+                            "description": "Y 축을 중심으로 하는 피치입니다 (각도 단위)."
+                          },
+                          "yaw": {
+                            "type": "number",
+                            "description": "Z 축을 중심으로 하는 요입니다 (각도 단위)."
+                          },
+                          "roll": {
+                            "type": "number",
+                            "description": "X 축을 중심으로 하는 롤입니다 (각도 단위)."
+                          }
+                        },
+                        "required": [
+                          "pitch",
+                          "yaw",
+                          "roll"
+                        ]
+                      }
+                    ],
+                    "description": "Value can be one of 14 types defined by Struct. The first 3 type(s) are specialized types for this context. Additional types may also be valid depending on usage."
+                  }
+                },
+                "required": [
+                  "struct"
+                ]
+              },
+              "name": {
+                "type": "string"
+              },
+              "type": {
+                "type": "object",
+                "title": "ToolsetNiagaraTypeDefinition",
+                "description": "JSON 변환을 위해 UStruct 포인터만 노출하는 FNiagaraTypeDefinition용 래퍼 구조체입니다.\n\nFNiagaraTypeDefinition은 내부 스테이트를 갖는 복잡한 구조체입니다. 이 래퍼는 재구성에 충분한\n구조체 필드만 노출하여 JSON 변환을 간소화합니다.",
+                "properties": {
+                  "classStructOrEnum": {
+                    "type": "object",
+                    "title": "/Script/CoreUObject.Object",
+                    "description": "이 나이아가라 타입을 정의하는 UScriptStruct, UEnum 또는 UClass에 대한 레퍼런스입니다.",
+                    "properties": {
+                      "refPath": {
+                        "type": "string",
+                        "description": "소프트 경로 스트링으로 저장된 레퍼런스입니다."
+                      }
+                    },
+                    "required": [
+                      "refPath"
+                    ]
+                  }
+                },
+                "required": [
+                  "classStructOrEnum"
+                ]
+              }
+            },
+            "required": [
+              "value",
+              "name",
+              "type"
+            ]
+          }
+        },
+        "required": [
+          "component",
+          "variable"
+        ]
+      }
+    },
+    {
+      "description": "컴포넌트에 대한 나이아가라 시스템을 설정합니다.\n적절하게 초기화되도록 보장하려면 에셋 프로퍼티를 직접 설정하는 대신 이를 사용하세요.",
+      "name": "NiagaraToolsets.NiagaraToolset_Component.SetSystem",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "niagaraComponent": {
+            "type": "object",
+            "title": "/Script/Niagara.NiagaraComponent",
+            "description": "시스템을 설정할 나이아가라 컴포넌트입니다.",
+            "properties": {
+              "refPath": {
+                "type": "string",
+                "description": "소프트 경로 스트링으로 저장된 레퍼런스입니다."
+              }
+            },
+            "required": [
+              "refPath"
+            ]
+          },
+          "system": {
+            "type": "object",
+            "title": "/Script/Niagara.NiagaraSystem",
+            "description": "컴포넌트에 할당할 나이아가라 시스템 에셋입니다.",
+            "properties": {
+              "refPath": {
+                "type": "string",
+                "description": "소프트 경로 스트링으로 저장된 레퍼런스입니다."
+              }
+            },
+            "required": [
+              "refPath"
+            ]
+          },
+          "bResetExistingOverrideParameters": {
+            "type": "boolean",
+            "description": "true인 경우 모든 사용자 변수를 시스템 디폴트로 리셋하고, false인 경우 일치하는 오버라이드를 보존합니다."
+          }
+        },
+        "required": [
+          "niagaraComponent",
+          "system",
+          "bResetExistingOverrideParameters"
+        ]
+      }
+    },
+    {
+      "description": "컴포넌트에 있는 특정 사용자 변수의 현재 값을 구합니다.\n이는 컴포넌트 레벨의 오버라이드를 포함하여 외부로 노출된 파라미터의 현재 값을 얻습니다.",
+      "name": "NiagaraToolsets.NiagaraToolset_Component.GetVariable",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "component": {
+            "type": "object",
+            "title": "/Script/Niagara.NiagaraComponent",
+            "description": "변수를 얻을 나이아가라 컴포넌트입니다.",
+            "properties": {
+              "refPath": {
+                "type": "string",
+                "description": "소프트 경로 스트링으로 저장된 레퍼런스입니다."
+              }
+            },
+            "required": [
+              "refPath"
+            ]
+          },
+          "var": {
+            "title": "NiagaraExt_Variable",
+            "description": "조회할 변수 정의(이름 및 타입)입니다.",
+            "type": "object",
+            "properties": {
+              "name": {
+                "type": "string"
+              },
+              "type": {
+                "type": "object",
+                "title": "ToolsetNiagaraTypeDefinition",
+                "description": "JSON 변환을 위해 UStruct 포인터만 노출하는 FNiagaraTypeDefinition용 래퍼 구조체입니다.\n\nFNiagaraTypeDefinition은 내부 스테이트를 갖는 복잡한 구조체입니다. 이 래퍼는 재구성에 충분한\n구조체 필드만 노출하여 JSON 변환을 간소화합니다.",
+                "properties": {
+                  "classStructOrEnum": {
+                    "type": "object",
+                    "title": "/Script/CoreUObject.Object",
+                    "description": "이 나이아가라 타입을 정의하는 UScriptStruct, UEnum 또는 UClass에 대한 레퍼런스입니다.",
+                    "properties": {
+                      "refPath": {
+                        "type": "string",
+                        "description": "소프트 경로 스트링으로 저장된 레퍼런스입니다."
+                      }
+                    },
+                    "required": [
+                      "refPath"
+                    ]
+                  }
+                },
+                "required": [
+                  "classStructOrEnum"
+                ]
+              }
+            },
+            "required": [
+              "name",
+              "type"
+            ]
+          }
+        },
+        "required": [
+          "component",
+          "var"
+        ]
+      },
+      "outputSchema": {
+        "type": "object",
+        "properties": {
+          "returnValue": {
+            "title": "NiagaraExt_VariableInst",
+            "description": "현재 값을 포함하는 변수 인스턴스를 반환합니다.",
+            "type": "object",
+            "properties": {
+              "value": {
+                "type": "object",
+                "title": "NiagaraToolsetInstancedValue",
+                "description": "JSON 변환을 단순화하는 FInstancedStruct용의 래퍼 구조체입니다.\n\n허용된 여러 구조체 타입 중 하나가 될 수 있는 인스턴스드 값을 나타냅니다.\n허용되는 타입은 BaseStruct 메타데이터(자동으로 검색된 파생 타입) 및\n선택적 AdditionalTypes 메타데이터(명시적으로 지정된 타입)에 의해 결정됩니다.\n\n이 타입으로 작업할 때는 JSON 스키마의 oneOf 배열을 확인하여 유효한 타입을 모두 파악해야 합니다.\nBaseStruct에서 파생된 특수 타입이 먼저 나열되고, 그 뒤에 추가 타입이 나열됩니다.",
+                "properties": {
+                  "struct": {
+                    "type": "object",
+                    "title": "/Script/CoreUObject.ScriptStruct",
+                    "description": "이 인스턴스드 값의 구조체 타입입니다. 스키마에서 허용된 타입 중 하나와 일치해야 합니다.",
+                    "properties": {
+                      "refPath": {
+                        "type": "string",
+                        "description": "소프트 경로 스트링으로 저장된 레퍼런스입니다."
+                      }
+                    },
+                    "required": [
+                      "refPath"
+                    ]
+                  },
+                  "value": {
+                    "oneOf": [
+                      {
+                        "type": "object",
+                        "title": "/Script/NiagaraEditor.NiagaraExt_VariableValue_Enum",
+                        "description": "UEnum 레퍼런스를 위한 래퍼입니다. 열거형 값을 나이아가라 변수에 전달하는 경우, 이 구조체를 사용하세요.",
+                        "properties": {
+                          "enum": {
+                            "type": "object",
+                            "title": "/Script/CoreUObject.Enum",
+                            "description": "UEnum 타입에 대한 레퍼런스입니다.",
+                            "properties": {
+                              "refPath": {
+                                "type": "string",
+                                "description": "소프트 경로 스트링으로 저장된 레퍼런스입니다."
+                              }
+                            },
+                            "required": [
+                              "refPath"
+                            ]
+                          },
+                          "enumName": {
+                            "type": "string",
+                            "description": "열거형 값 이름입니다."
+                          },
+                          "displayName": {
+                            "type": "string",
+                            "description": "EnumName의 표시 값입니다. 내부적인 EnumName보다 설명이 자세하고 유용한 경우가 많습니다. 정보 용도로만 사용되며, 열거형의 실제 설정 값은 EnumName입니다."
+                          }
+                        },
+                        "required": [
+                          "enum",
+                          "enumName",
+                          "displayName"
+                        ]
+                      },
+                      {
+                        "type": "object",
+                        "title": "/Script/NiagaraEditor.NiagaraExt_VariableValue_DataInterface",
+                        "description": "데이터 인터페이스 레퍼런스를 위한 래퍼입니다. 나이아가라 변수에 데이터 인터페이스 인스턴스를 전달하는 경우, 이 구조체를 사용하세요.",
+                        "properties": {
+                          "dataInterfaceClass": {
+                            "type": "object",
+                            "title": "Class@/Script/Niagara.NiagaraDataInterface",
+                            "description": "DataInterface의 클래스입니다.",
+                            "properties": {
+                              "refPath": {
+                                "type": "string",
+                                "description": "소프트 경로 스트링으로 저장된 레퍼런스입니다."
+                              }
+                            },
+                            "required": [
+                              "refPath"
+                            ]
+                          },
+                          "dataInterface": {
+                            "type": "object",
+                            "title": "/Script/Niagara.NiagaraDataInterface",
+                            "description": "DataInterface 오브젝트에 대한 레퍼런스입니다.",
+                            "properties": {
+                              "refPath": {
+                                "type": "string",
+                                "description": "소프트 경로 스트링으로 저장된 레퍼런스입니다."
+                              }
+                            },
+                            "required": [
+                              "refPath"
+                            ]
+                          }
+                        },
+                        "required": [
+                          "dataInterfaceClass",
+                          "dataInterface"
+                        ]
+                      },
+                      {
+                        "type": "object",
+                        "title": "/Script/NiagaraEditor.NiagaraExt_VariableValue_Object",
+                        "description": "UObject 레퍼런스를 위한 래퍼입니다. UObject 인스턴스(텍스처, 머티리얼 등)를 나이아가라 변수에 전달하는 경우, 이 구조체를 사용하세요.",
+                        "properties": {
+                          "objectClass": {
+                            "type": "object",
+                            "title": "Class@/Script/CoreUObject.Object",
+                            "description": "오브젝트 레퍼런스의 클래스 타입 컨스트레인트입니다.",
+                            "properties": {
+                              "refPath": {
+                                "type": "string",
+                                "description": "소프트 경로 스트링으로 저장된 레퍼런스입니다."
+                              }
+                            },
+                            "required": [
+                              "refPath"
+                            ]
+                          },
+                          "object": {
+                            "type": "object",
+                            "title": "/Script/CoreUObject.Object",
+                            "description": "UObject 인스턴스에 대한 레퍼런스입니다.",
+                            "properties": {
+                              "refPath": {
+                                "type": "string",
+                                "description": "소프트 경로 스트링으로 저장된 레퍼런스입니다."
+                              }
+                            },
+                            "required": [
+                              "refPath"
+                            ]
+                          }
+                        },
+                        "required": [
+                          "objectClass",
+                          "object"
+                        ]
+                      },
+                      {
+                        "type": "object",
+                        "title": "/Script/Niagara.NiagaraFloat",
+                        "description": "플로트",
+                        "properties": {
+                          "value": {
+                            "type": "number"
+                          }
+                        },
+                        "required": [
+                          "value"
+                        ]
+                      },
+                      {
+                        "type": "object",
+                        "title": "/Script/Niagara.NiagaraBool",
+                        "description": "부울",
+                        "properties": {
+                          "value": {
+                            "type": "integer",
+                            "description": "FNiagaraBool::True(-1) 또는 FNiagaraBool::False(0) 중 하나여야 합니다."
+                          }
+                        },
+                        "required": [
+                          "value"
+                        ]
+                      },
+                      {
+                        "type": "object",
+                        "title": "/Script/Niagara.NiagaraInt32",
+                        "description": "Int 32",
+                        "properties": {
+                          "value": {
+                            "type": "integer"
+                          }
+                        },
+                        "required": [
+                          "value"
+                        ]
+                      },
+                      {
+                        "type": "object",
+                        "title": "/Script/Niagara.NiagaraPosition",
+                        "description": "위치",
+                        "properties": {
+                          "x": {
+                            "type": "number"
+                          },
+                          "y": {
+                            "type": "number"
+                          },
+                          "z": {
+                            "type": "number"
+                          }
+                        },
+                        "required": [
+                          "x",
+                          "y",
+                          "z"
+                        ]
+                      },
+                      {
+                        "type": "object",
+                        "title": "/Script/Niagara.NiagaraID",
+                        "description": "나이아가라 ID",
+                        "properties": {
+                          "index": {
+                            "type": "integer",
+                            "description": "이 파티클에 대한 간접 테이블에 있는 인덱스입니다. 이 파티클 데이터에 대한 빠른 액세스를 가능하게 합니다.\n현재 활동 중인 파티클 사이에서 항상 고유하지만, 해당되는 파티클이 사라진 후에 재사용됩니다."
+                          },
+                          "acquireTag": {
+                            "type": "integer",
+                            "description": "이 ID를 확보한 시점에 대한 고유 태그.\n파티클 하나가 사라지고 다른 파티클이 해당 인덱스를 재사용할 경우 두 파티클을 서로 구분할 수 있도록 합니다."
+                          }
+                        },
+                        "required": [
+                          "index",
+                          "acquireTag"
+                        ]
+                      },
+                      {
+                        "type": "object",
+                        "title": "/Script/CoreUObject.Vector",
+                        "description": "3D 공간에서의 포인트 혹은 FVector 입니다.\n전체 C++ 클래스는 다음 위치에 있습니다. Engine\\Source\\Runtime\\Core\\Public\\Math\\Vector.h",
+                        "properties": {
+                          "x": {
+                            "type": "number"
+                          },
+                          "y": {
+                            "type": "number"
+                          },
+                          "z": {
+                            "type": "number"
+                          }
+                        },
+                        "required": [
+                          "x",
+                          "y",
+                          "z"
+                        ]
+                      },
+                      {
+                        "type": "object",
+                        "title": "/Script/CoreUObject.Vector2D",
+                        "description": "2D 벡터 - 2D 공간에서의 포인트 혹은 FVector 입니다.\n전체 C++ 클래스는 다음 위치에 있습니다. Engine\\Source\\Runtime\\Core\\Public\\Math\\Vector2D.h",
+                        "properties": {
+                          "x": {
+                            "type": "number"
+                          },
+                          "y": {
+                            "type": "number"
+                          }
+                        },
+                        "required": [
+                          "x",
+                          "y"
+                        ]
+                      },
+                      {
+                        "type": "object",
+                        "title": "/Script/CoreUObject.Vector4",
+                        "description": "4-D 호모지니어스 벡터 입니다.\n전체 C++ 클래스는 다음 위치에 있습니다. Engine\\Source\\Runtime\\Core\\Public\\Math\\Vector4.h",
+                        "properties": {
+                          "x": {
+                            "type": "number"
+                          },
+                          "y": {
+                            "type": "number"
+                          },
+                          "z": {
+                            "type": "number"
+                          },
+                          "w": {
+                            "type": "number"
+                          }
+                        },
+                        "required": [
+                          "x",
+                          "y",
+                          "z",
+                          "w"
+                        ]
+                      },
+                      {
+                        "type": "object",
+                        "title": "/Script/CoreUObject.Quat",
+                        "description": "쿼터니언입니다.\n풀 C++코드는 여기 있습니다: Engine\\Source\\Runtime\\Core\\Public\\Math\\Quat.h",
+                        "properties": {
+                          "x": {
+                            "type": "number"
+                          },
+                          "y": {
+                            "type": "number"
+                          },
+                          "z": {
+                            "type": "number"
+                          },
+                          "w": {
+                            "type": "number"
+                          }
+                        },
+                        "required": [
+                          "x",
+                          "y",
+                          "z",
+                          "w"
+                        ]
+                      },
+                      {
+                        "type": "object",
+                        "title": "/Script/CoreUObject.LinearColor",
+                        "description": "선형색 \nFull C++ 클래스는 여기 있습니다: Engine\\Source\\Runtime\\Core\\Public\\Math\\Color.h",
+                        "properties": {
+                          "r": {
+                            "type": "number"
+                          },
+                          "g": {
+                            "type": "number"
+                          },
+                          "b": {
+                            "type": "number"
+                          },
+                          "a": {
+                            "type": "number"
+                          }
+                        },
+                        "required": [
+                          "r",
+                          "g",
+                          "b",
+                          "a"
+                        ]
+                      },
+                      {
+                        "type": "object",
+                        "title": "/Script/CoreUObject.Rotator",
+                        "description": "3D 공간에서 직교 회전입니다.\n풀 C ++ 클래스는 다음 위치에 있습니다: Engine\\Source\\Runtime\\Core\\Public\\Math\\Rotator.h",
+                        "properties": {
+                          "pitch": {
+                            "type": "number",
+                            "description": "Y 축을 중심으로 하는 피치입니다 (각도 단위)."
+                          },
+                          "yaw": {
+                            "type": "number",
+                            "description": "Z 축을 중심으로 하는 요입니다 (각도 단위)."
+                          },
+                          "roll": {
+                            "type": "number",
+                            "description": "X 축을 중심으로 하는 롤입니다 (각도 단위)."
+                          }
+                        },
+                        "required": [
+                          "pitch",
+                          "yaw",
+                          "roll"
+                        ]
+                      }
+                    ],
+                    "description": "Value can be one of 14 types defined by Struct. The first 3 type(s) are specialized types for this context. Additional types may also be valid depending on usage."
+                  }
+                },
+                "required": [
+                  "struct"
+                ]
+              },
+              "name": {
+                "type": "string"
+              },
+              "type": {
+                "type": "object",
+                "title": "ToolsetNiagaraTypeDefinition",
+                "description": "JSON 변환을 위해 UStruct 포인터만 노출하는 FNiagaraTypeDefinition용 래퍼 구조체입니다.\n\nFNiagaraTypeDefinition은 내부 스테이트를 갖는 복잡한 구조체입니다. 이 래퍼는 재구성에 충분한\n구조체 필드만 노출하여 JSON 변환을 간소화합니다.",
+                "properties": {
+                  "classStructOrEnum": {
+                    "type": "object",
+                    "title": "/Script/CoreUObject.Object",
+                    "description": "이 나이아가라 타입을 정의하는 UScriptStruct, UEnum 또는 UClass에 대한 레퍼런스입니다.",
+                    "properties": {
+                      "refPath": {
+                        "type": "string",
+                        "description": "소프트 경로 스트링으로 저장된 레퍼런스입니다."
+                      }
+                    },
+                    "required": [
+                      "refPath"
+                    ]
+                  }
+                },
+                "required": [
+                  "classStructOrEnum"
+                ]
+              }
+            },
+            "required": [
+              "value",
+              "name",
+              "type"
+            ]
+          }
+        },
+        "required": [
+          "returnValue"
+        ]
+      }
+    },
+    {
+      "description": "현재 컴포넌트에 설정되어 있는 모든 사용자 변수 값을 반환합니다.\n이는 컴포넌트 레벨에서 오버라이드할 수 있는, 사용자가 노출한 모든 파라미터의 현재 값을 얻습니다.",
+      "name": "NiagaraToolsets.NiagaraToolset_Component.GetUserVariables",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "component": {
+            "type": "object",
+            "title": "/Script/Niagara.NiagaraComponent",
+            "description": "사용자 변수를 얻을 나이아가라 컴포넌트입니다.",
+            "properties": {
+              "refPath": {
+                "type": "string",
+                "description": "소프트 경로 스트링으로 저장된 레퍼런스입니다."
+              }
+            },
+            "required": [
+              "refPath"
+            ]
+          }
+        },
+        "required": [
+          "component"
+        ]
+      },
+      "outputSchema": {
+        "type": "object",
+        "properties": {
+          "returnValue": {
+            "type": "array",
+            "items": {
+              "title": "NiagaraExt_VariableInst",
+              "type": "object",
+              "properties": {
+                "value": {
+                  "type": "object",
+                  "title": "NiagaraToolsetInstancedValue",
+                  "description": "JSON 변환을 단순화하는 FInstancedStruct용의 래퍼 구조체입니다.\n\n허용된 여러 구조체 타입 중 하나가 될 수 있는 인스턴스드 값을 나타냅니다.\n허용되는 타입은 BaseStruct 메타데이터(자동으로 검색된 파생 타입) 및\n선택적 AdditionalTypes 메타데이터(명시적으로 지정된 타입)에 의해 결정됩니다.\n\n이 타입으로 작업할 때는 JSON 스키마의 oneOf 배열을 확인하여 유효한 타입을 모두 파악해야 합니다.\nBaseStruct에서 파생된 특수 타입이 먼저 나열되고, 그 뒤에 추가 타입이 나열됩니다.",
+                  "properties": {
+                    "struct": {
+                      "type": "object",
+                      "title": "/Script/CoreUObject.ScriptStruct",
+                      "description": "이 인스턴스드 값의 구조체 타입입니다. 스키마에서 허용된 타입 중 하나와 일치해야 합니다.",
+                      "properties": {
+                        "refPath": {
+                          "type": "string",
+                          "description": "소프트 경로 스트링으로 저장된 레퍼런스입니다."
+                        }
+                      },
+                      "required": [
+                        "refPath"
+                      ]
+                    },
+                    "value": {
+                      "oneOf": [
+                        {
+                          "type": "object",
+                          "title": "/Script/NiagaraEditor.NiagaraExt_VariableValue_Enum",
+                          "description": "UEnum 레퍼런스를 위한 래퍼입니다. 열거형 값을 나이아가라 변수에 전달하는 경우, 이 구조체를 사용하세요.",
+                          "properties": {
+                            "enum": {
+                              "type": "object",
+                              "title": "/Script/CoreUObject.Enum",
+                              "description": "UEnum 타입에 대한 레퍼런스입니다.",
+                              "properties": {
+                                "refPath": {
+                                  "type": "string",
+                                  "description": "소프트 경로 스트링으로 저장된 레퍼런스입니다."
+                                }
+                              },
+                              "required": [
+                                "refPath"
+                              ]
+                            },
+                            "enumName": {
+                              "type": "string",
+                              "description": "열거형 값 이름입니다."
+                            },
+                            "displayName": {
+                              "type": "string",
+                              "description": "EnumName의 표시 값입니다. 내부적인 EnumName보다 설명이 자세하고 유용한 경우가 많습니다. 정보 용도로만 사용되며, 열거형의 실제 설정 값은 EnumName입니다."
+                            }
+                          },
+                          "required": [
+                            "enum",
+                            "enumName",
+                            "displayName"
+                          ]
+                        },
+                        {
+                          "type": "object",
+                          "title": "/Script/NiagaraEditor.NiagaraExt_VariableValue_DataInterface",
+                          "description": "데이터 인터페이스 레퍼런스를 위한 래퍼입니다. 나이아가라 변수에 데이터 인터페이스 인스턴스를 전달하는 경우, 이 구조체를 사용하세요.",
+                          "properties": {
+                            "dataInterfaceClass": {
+                              "type": "object",
+                              "title": "Class@/Script/Niagara.NiagaraDataInterface",
+                              "description": "DataInterface의 클래스입니다.",
+                              "properties": {
+                                "refPath": {
+                                  "type": "string",
+                                  "description": "소프트 경로 스트링으로 저장된 레퍼런스입니다."
+                                }
+                              },
+                              "required": [
+                                "refPath"
+                              ]
+                            },
+                            "dataInterface": {
+                              "type": "object",
+                              "title": "/Script/Niagara.NiagaraDataInterface",
+                              "description": "DataInterface 오브젝트에 대한 레퍼런스입니다.",
+                              "properties": {
+                                "refPath": {
+                                  "type": "string",
+                                  "description": "소프트 경로 스트링으로 저장된 레퍼런스입니다."
+                                }
+                              },
+                              "required": [
+                                "refPath"
+                              ]
+                            }
+                          },
+                          "required": [
+                            "dataInterfaceClass",
+                            "dataInterface"
+                          ]
+                        },
+                        {
+                          "type": "object",
+                          "title": "/Script/NiagaraEditor.NiagaraExt_VariableValue_Object",
+                          "description": "UObject 레퍼런스를 위한 래퍼입니다. UObject 인스턴스(텍스처, 머티리얼 등)를 나이아가라 변수에 전달하는 경우, 이 구조체를 사용하세요.",
+                          "properties": {
+                            "objectClass": {
+                              "type": "object",
+                              "title": "Class@/Script/CoreUObject.Object",
+                              "description": "오브젝트 레퍼런스의 클래스 타입 컨스트레인트입니다.",
+                              "properties": {
+                                "refPath": {
+                                  "type": "string",
+                                  "description": "소프트 경로 스트링으로 저장된 레퍼런스입니다."
+                                }
+                              },
+                              "required": [
+                                "refPath"
+                              ]
+                            },
+                            "object": {
+                              "type": "object",
+                              "title": "/Script/CoreUObject.Object",
+                              "description": "UObject 인스턴스에 대한 레퍼런스입니다.",
+                              "properties": {
+                                "refPath": {
+                                  "type": "string",
+                                  "description": "소프트 경로 스트링으로 저장된 레퍼런스입니다."
+                                }
+                              },
+                              "required": [
+                                "refPath"
+                              ]
+                            }
+                          },
+                          "required": [
+                            "objectClass",
+                            "object"
+                          ]
+                        },
+                        {
+                          "type": "object",
+                          "title": "/Script/Niagara.NiagaraFloat",
+                          "description": "플로트",
+                          "properties": {
+                            "value": {
+                              "type": "number"
+                            }
+                          },
+                          "required": [
+                            "value"
+                          ]
+                        },
+                        {
+                          "type": "object",
+                          "title": "/Script/Niagara.NiagaraBool",
+                          "description": "부울",
+                          "properties": {
+                            "value": {
+                              "type": "integer",
+                              "description": "FNiagaraBool::True(-1) 또는 FNiagaraBool::False(0) 중 하나여야 합니다."
+                            }
+                          },
+                          "required": [
+                            "value"
+                          ]
+                        },
+                        {
+                          "type": "object",
+                          "title": "/Script/Niagara.NiagaraInt32",
+                          "description": "Int 32",
+                          "properties": {
+                            "value": {
+                              "type": "integer"
+                            }
+                          },
+                          "required": [
+                            "value"
+                          ]
+                        },
+                        {
+                          "type": "object",
+                          "title": "/Script/Niagara.NiagaraPosition",
+                          "description": "위치",
+                          "properties": {
+                            "x": {
+                              "type": "number"
+                            },
+                            "y": {
+                              "type": "number"
+                            },
+                            "z": {
+                              "type": "number"
+                            }
+                          },
+                          "required": [
+                            "x",
+                            "y",
+                            "z"
+                          ]
+                        },
+                        {
+                          "type": "object",
+                          "title": "/Script/Niagara.NiagaraID",
+                          "description": "나이아가라 ID",
+                          "properties": {
+                            "index": {
+                              "type": "integer",
+                              "description": "이 파티클에 대한 간접 테이블에 있는 인덱스입니다. 이 파티클 데이터에 대한 빠른 액세스를 가능하게 합니다.\n현재 활동 중인 파티클 사이에서 항상 고유하지만, 해당되는 파티클이 사라진 후에 재사용됩니다."
+                            },
+                            "acquireTag": {
+                              "type": "integer",
+                              "description": "이 ID를 확보한 시점에 대한 고유 태그.\n파티클 하나가 사라지고 다른 파티클이 해당 인덱스를 재사용할 경우 두 파티클을 서로 구분할 수 있도록 합니다."
+                            }
+                          },
+                          "required": [
+                            "index",
+                            "acquireTag"
+                          ]
+                        },
+                        {
+                          "type": "object",
+                          "title": "/Script/CoreUObject.Vector",
+                          "description": "3D 공간에서의 포인트 혹은 FVector 입니다.\n전체 C++ 클래스는 다음 위치에 있습니다. Engine\\Source\\Runtime\\Core\\Public\\Math\\Vector.h",
+                          "properties": {
+                            "x": {
+                              "type": "number"
+                            },
+                            "y": {
+                              "type": "number"
+                            },
+                            "z": {
+                              "type": "number"
+                            }
+                          },
+                          "required": [
+                            "x",
+                            "y",
+                            "z"
+                          ]
+                        },
+                        {
+                          "type": "object",
+                          "title": "/Script/CoreUObject.Vector2D",
+                          "description": "2D 벡터 - 2D 공간에서의 포인트 혹은 FVector 입니다.\n전체 C++ 클래스는 다음 위치에 있습니다. Engine\\Source\\Runtime\\Core\\Public\\Math\\Vector2D.h",
+                          "properties": {
+                            "x": {
+                              "type": "number"
+                            },
+                            "y": {
+                              "type": "number"
+                            }
+                          },
+                          "required": [
+                            "x",
+                            "y"
+                          ]
+                        },
+                        {
+                          "type": "object",
+                          "title": "/Script/CoreUObject.Vector4",
+                          "description": "4-D 호모지니어스 벡터 입니다.\n전체 C++ 클래스는 다음 위치에 있습니다. Engine\\Source\\Runtime\\Core\\Public\\Math\\Vector4.h",
+                          "properties": {
+                            "x": {
+                              "type": "number"
+                            },
+                            "y": {
+                              "type": "number"
+                            },
+                            "z": {
+                              "type": "number"
+                            },
+                            "w": {
+                              "type": "number"
+                            }
+                          },
+                          "required": [
+                            "x",
+                            "y",
+                            "z",
+                            "w"
+                          ]
+                        },
+                        {
+                          "type": "object",
+                          "title": "/Script/CoreUObject.Quat",
+                          "description": "쿼터니언입니다.\n풀 C++코드는 여기 있습니다: Engine\\Source\\Runtime\\Core\\Public\\Math\\Quat.h",
+                          "properties": {
+                            "x": {
+                              "type": "number"
+                            },
+                            "y": {
+                              "type": "number"
+                            },
+                            "z": {
+                              "type": "number"
+                            },
+                            "w": {
+                              "type": "number"
+                            }
+                          },
+                          "required": [
+                            "x",
+                            "y",
+                            "z",
+                            "w"
+                          ]
+                        },
+                        {
+                          "type": "object",
+                          "title": "/Script/CoreUObject.LinearColor",
+                          "description": "선형색 \nFull C++ 클래스는 여기 있습니다: Engine\\Source\\Runtime\\Core\\Public\\Math\\Color.h",
+                          "properties": {
+                            "r": {
+                              "type": "number"
+                            },
+                            "g": {
+                              "type": "number"
+                            },
+                            "b": {
+                              "type": "number"
+                            },
+                            "a": {
+                              "type": "number"
+                            }
+                          },
+                          "required": [
+                            "r",
+                            "g",
+                            "b",
+                            "a"
+                          ]
+                        },
+                        {
+                          "type": "object",
+                          "title": "/Script/CoreUObject.Rotator",
+                          "description": "3D 공간에서 직교 회전입니다.\n풀 C ++ 클래스는 다음 위치에 있습니다: Engine\\Source\\Runtime\\Core\\Public\\Math\\Rotator.h",
+                          "properties": {
+                            "pitch": {
+                              "type": "number",
+                              "description": "Y 축을 중심으로 하는 피치입니다 (각도 단위)."
+                            },
+                            "yaw": {
+                              "type": "number",
+                              "description": "Z 축을 중심으로 하는 요입니다 (각도 단위)."
+                            },
+                            "roll": {
+                              "type": "number",
+                              "description": "X 축을 중심으로 하는 롤입니다 (각도 단위)."
+                            }
+                          },
+                          "required": [
+                            "pitch",
+                            "yaw",
+                            "roll"
+                          ]
+                        }
+                      ],
+                      "description": "Value can be one of 14 types defined by Struct. The first 3 type(s) are specialized types for this context. Additional types may also be valid depending on usage."
+                    }
+                  },
+                  "required": [
+                    "struct"
+                  ]
+                },
+                "name": {
+                  "type": "string"
+                },
+                "type": {
+                  "type": "object",
+                  "title": "ToolsetNiagaraTypeDefinition",
+                  "description": "JSON 변환을 위해 UStruct 포인터만 노출하는 FNiagaraTypeDefinition용 래퍼 구조체입니다.\n\nFNiagaraTypeDefinition은 내부 스테이트를 갖는 복잡한 구조체입니다. 이 래퍼는 재구성에 충분한\n구조체 필드만 노출하여 JSON 변환을 간소화합니다.",
+                  "properties": {
+                    "classStructOrEnum": {
+                      "type": "object",
+                      "title": "/Script/CoreUObject.Object",
+                      "description": "이 나이아가라 타입을 정의하는 UScriptStruct, UEnum 또는 UClass에 대한 레퍼런스입니다.",
+                      "properties": {
+                        "refPath": {
+                          "type": "string",
+                          "description": "소프트 경로 스트링으로 저장된 레퍼런스입니다."
+                        }
+                      },
+                      "required": [
+                        "refPath"
+                      ]
+                    }
+                  },
+                  "required": [
+                    "classStructOrEnum"
+                  ]
+                }
+              },
+              "required": [
+                "value",
+                "name",
+                "type"
+              ]
+            },
+            "description": "현재 값을 포함하는 사용자 변수 인스턴스의 배열을 반환합니다."
+          }
+        },
+        "required": [
+          "returnValue"
+        ]
+      }
+    }
+  ]
+}

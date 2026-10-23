@@ -1,0 +1,1991 @@
+{
+  "name": "PCGToolset.PCGToolset",
+  "version": "1.0",
+  "description": "PCG 그래프를 빌드 및 수정하는 데 사용되는 툴세트입니다.",
+  "tools": [
+    {
+      "description": "파라미터 및/또는 제목을 변경하여 노드를 업데이트합니다.",
+      "name": "PCGToolset.PCGToolset.UpdateNode",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "node": {
+            "type": "object",
+            "title": "/Script/PCG.PCGNode",
+            "description": "수정할 노드입니다.",
+            "properties": {
+              "refPath": {
+                "type": "string",
+                "description": "소프트 경로 스트링으로 저장된 레퍼런스입니다."
+              }
+            },
+            "required": [
+              "refPath"
+            ]
+          },
+          "jsonParams": {
+            "type": "string",
+            "description": "오버라이드할 파라미터의 딕셔너리를 나타내는 JSON 스트링입니다. 선택 사항입니다. 디폴트는 비어 있습니다. 디폴트가 아닌 파라미터만 포함해야 합니다."
+          },
+          "nodeTitle": {
+            "type": "string",
+            "description": "노드의 표시 제목입니다. 선택 사항입니다. 디폴트는 비어 있습니다. 비어 있으면 기존 제목을 그대로 유지합니다."
+          }
+        },
+        "required": [
+          "node",
+          "jsonParams",
+          "nodeTitle"
+        ]
+      },
+      "outputSchema": {
+        "type": "object",
+        "properties": {
+          "returnValue": {
+            "type": "boolean",
+            "description": "성공/실패를 나타내는 부울을 반환합니다."
+          }
+        },
+        "required": [
+          "returnValue"
+        ]
+      }
+    },
+    {
+      "description": "새로운 노드와 값으로 기존 코멘트 박스를 업데이트합니다.\n 참고: 노드의 바운딩 박스가 다른 노드를 포함하는 경우, 해당 노드들도 코멘트에 포함됩니다.",
+      "name": "PCGToolset.PCGToolset.UpdateCommentBox",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "graph": {
+            "type": "object",
+            "title": "/Script/PCG.PCGGraph",
+            "description": "코멘트를 추가할 그래프입니다.",
+            "properties": {
+              "refPath": {
+                "type": "string",
+                "description": "소프트 경로 스트링으로 저장된 레퍼런스입니다."
+              }
+            },
+            "required": [
+              "refPath"
+            ]
+          },
+          "commentId": {
+            "type": "string",
+            "description": "업데이트할 코멘트의 고유 ID입니다."
+          },
+          "nodes": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "title": "/Script/PCG.PCGNode",
+              "properties": {
+                "refPath": {
+                  "type": "string",
+                  "description": "소프트 경로 스트링으로 저장된 레퍼런스입니다."
+                }
+              },
+              "required": [
+                "refPath"
+              ]
+            },
+            "description": "코멘트 박스에 포함할 노드의 목록입니다. 비어 있는 경우, 박스는 현재 치수를 유지합니다."
+          },
+          "comment": {
+            "type": "string",
+            "description": "코멘트 박스에 넣을 새로운 코멘트입니다. 비어 있는 경우, 기존과 동일한 텍스트를 그대로 유지합니다. 디폴트는 비어 있습니다.",
+            "default": "/**\n\t * Updates an existing comment box with new nodes and value. \n\t *  Note: If the bounding box of the nodes include other nodes, they will be included in the comment.\n\t *\n\t * @param Graph - Graph to add comment to.\n\t * @param CommentId - The unique id of the comment to update.\n\t * @param Nodes - The list of nodes to include in the comment box. If empty, the box will keep its current dimensions.\n\t * @param Comment - The new comment to put on the comment box. If empty, will keep the same text as it was. Default is empty.\n\t * @param Color - The color of the comment box. Defaults to White\n\t * @return boolean representing success/failed\n\t */"
+          },
+          "color": {
+            "type": "object",
+            "title": "LinearColor",
+            "properties": {
+              "r": {
+                "type": "number",
+                "minimum": 0
+              },
+              "g": {
+                "type": "number",
+                "minimum": 0
+              },
+              "b": {
+                "type": "number",
+                "minimum": 0
+              },
+              "a": {
+                "type": "number",
+                "minimum": 0
+              }
+            },
+            "required": [
+              "r",
+              "g",
+              "b",
+              "a"
+            ],
+            "description": "코멘트 박스의 컬러입니다. 디폴트는 흰색입니다.",
+            "default": {
+              "r": 1,
+              "g": 1,
+              "b": 1,
+              "a": 1
+            }
+          }
+        },
+        "required": [
+          "graph",
+          "commentId",
+          "nodes"
+        ]
+      },
+      "outputSchema": {
+        "type": "object",
+        "properties": {
+          "returnValue": {
+            "type": "boolean",
+            "description": "성공/실패를 나타내는 부울을 반환합니다."
+          }
+        },
+        "required": [
+          "returnValue"
+        ]
+      }
+    },
+    {
+      "description": "관련된 그래프 인스턴스를 가진 PCG 볼륨을 씬에 스폰하며, 선택적으로 그래프 파라미터 오버라이드를 적용할 수 있습니다.",
+      "name": "PCGToolset.PCGToolset.SpawnGraphInstance",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "graph": {
+            "type": "object",
+            "title": "/Script/PCG.PCGGraph",
+            "description": "인스턴스를 스폰할 PCG 그래프입니다.",
+            "properties": {
+              "refPath": {
+                "type": "string",
+                "description": "소프트 경로 스트링으로 저장된 레퍼런스입니다."
+              }
+            },
+            "required": [
+              "refPath"
+            ]
+          },
+          "name": {
+            "type": "string",
+            "description": "씬에 스폰할 PCGVolume 액터의 이름입니다."
+          },
+          "transform": {
+            "type": "object",
+            "title": "ToolsetTransform",
+            "description": "새 PCGVolume 액터에 사용할 트랜스폼입니다. 특별한 이유가 없는 한 원점에 배치하고 {\"x\": 25,\"y\": 25,\"z\": 10}의 디폴트 scale3D를 사용하세요.",
+            "properties": {
+              "location": {
+                "description": "월드 스페이스 위치입니다.",
+                "title": "Vector",
+                "type": "object",
+                "properties": {
+                  "x": {
+                    "type": "number"
+                  },
+                  "y": {
+                    "type": "number"
+                  },
+                  "z": {
+                    "type": "number"
+                  }
+                },
+                "required": [
+                  "x",
+                  "y",
+                  "z"
+                ]
+              },
+              "rotation": {
+                "description": "월드 스페이스 회전입니다.",
+                "title": "Rotator",
+                "type": "object",
+                "properties": {
+                  "pitch": {
+                    "type": "number",
+                    "description": "Y 축을 중심으로 하는 피치입니다 (각도 단위)."
+                  },
+                  "yaw": {
+                    "type": "number",
+                    "description": "Z 축을 중심으로 하는 요입니다 (각도 단위)."
+                  },
+                  "roll": {
+                    "type": "number",
+                    "description": "X 축을 중심으로 하는 롤입니다 (각도 단위)."
+                  }
+                },
+                "required": [
+                  "pitch",
+                  "yaw",
+                  "roll"
+                ]
+              },
+              "scale": {
+                "description": "스케일입니다.",
+                "title": "Vector",
+                "type": "object",
+                "properties": {
+                  "x": {
+                    "type": "number"
+                  },
+                  "y": {
+                    "type": "number"
+                  },
+                  "z": {
+                    "type": "number"
+                  }
+                },
+                "required": [
+                  "x",
+                  "y",
+                  "z"
+                ]
+              }
+            }
+          },
+          "jsonParams": {
+            "type": "string",
+            "description": "(선택 사항) 설정할 파라미터의 JsonObject를 나타내는 JSON 스트링입니다. 반드시 {{\"property_1_name\": \"property_1_value\"}, ...} 포맷이어야 합니다. 설정하지 않은 경우, 그래프 파라미터의 디폴트 값이 사용됩니다."
+          }
+        },
+        "required": [
+          "graph",
+          "name",
+          "transform",
+          "jsonParams"
+        ]
+      },
+      "outputSchema": {
+        "type": "object",
+        "properties": {
+          "returnValue": {
+            "title": "PCGGraphInstanceInfo",
+            "description": "생성된 액터 및 이에 해당하는 그래프 인스턴스의 정보가 포함된 UStruct를 반환합니다.",
+            "type": "object",
+            "properties": {
+              "actor": {
+                "type": "object",
+                "title": "/Script/PCG.PCGVolume",
+                "description": "UObject 또는 UClass에 대한 레퍼런스를 나타냅니다.",
+                "properties": {
+                  "refPath": {
+                    "type": "string",
+                    "description": "소프트 경로 스트링으로 저장된 레퍼런스입니다."
+                  }
+                },
+                "required": [
+                  "refPath"
+                ]
+              },
+              "graph": {
+                "type": "object",
+                "title": "/Script/PCG.PCGGraph",
+                "description": "UObject 또는 UClass에 대한 레퍼런스를 나타냅니다.",
+                "properties": {
+                  "refPath": {
+                    "type": "string",
+                    "description": "소프트 경로 스트링으로 저장된 레퍼런스입니다."
+                  }
+                },
+                "required": [
+                  "refPath"
+                ]
+              }
+            },
+            "required": [
+              "actor",
+              "graph"
+            ]
+          }
+        },
+        "required": [
+          "returnValue"
+        ]
+      }
+    },
+    {
+      "description": "지정된 노드의 코멘트를 변경합니다.",
+      "name": "PCGToolset.PCGToolset.SetNodeComment",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "node": {
+            "type": "object",
+            "title": "/Script/PCG.PCGNode",
+            "description": "코멘트를 설정할 노드입니다.",
+            "properties": {
+              "refPath": {
+                "type": "string",
+                "description": "소프트 경로 스트링으로 저장된 레퍼런스입니다."
+              }
+            },
+            "required": [
+              "refPath"
+            ]
+          },
+          "nodeComment": {
+            "type": "string",
+            "description": "노드에 어태치되는 코멘트입니다."
+          }
+        },
+        "required": [
+          "node",
+          "nodeComment"
+        ]
+      },
+      "outputSchema": {
+        "type": "object",
+        "properties": {
+          "returnValue": {
+            "type": "boolean",
+            "description": "성공/실패를 나타내는 부울을 반환합니다."
+          }
+        },
+        "required": [
+          "returnValue"
+        ]
+      }
+    },
+    {
+      "description": "특정 PCG 그래프에 하나 이상의 그래프 사용자 파라미터를 추가하여 그래프 인스턴스별로 오버라이드할 수 있도록 만듭니다.",
+      "name": "PCGToolset.PCGToolset.SetGraphParams",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "graph": {
+            "type": "object",
+            "title": "/Script/PCG.PCGGraph",
+            "description": "그래프 파라미터를 추가할 그래프입니다.",
+            "properties": {
+              "refPath": {
+                "type": "string",
+                "description": "소프트 경로 스트링으로 저장된 레퍼런스입니다."
+              }
+            },
+            "required": [
+              "refPath"
+            ]
+          },
+          "params": {
+            "type": "array",
+            "items": {
+              "title": "PCGParamDefinition",
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string"
+                },
+                "type": {
+                  "type": "string",
+                  "title": "EPCGMetadataTypes",
+                  "enum": [
+                    "Float",
+                    "Double",
+                    "Integer32",
+                    "Integer64",
+                    "Vector2",
+                    "Vector",
+                    "Vector4",
+                    "Quaternion",
+                    "Transform",
+                    "String",
+                    "Boolean",
+                    "Rotator",
+                    "Name",
+                    "SoftObjectPath",
+                    "SoftClassPath",
+                    "EndLegacyTypes",
+                    "Byte",
+                    "Text",
+                    "Enum",
+                    "Struct",
+                    "Object",
+                    "SoftObject",
+                    "Class",
+                    "SoftClass",
+                    "Count",
+                    "Unknown"
+                  ]
+                },
+                "description": {
+                  "type": "string"
+                },
+                "containerType": {
+                  "type": "string",
+                  "title": "EPropertyBagContainerType",
+                  "enum": [
+                    "None",
+                    "Array",
+                    "Set",
+                    "Map",
+                    "Count"
+                  ]
+                },
+                "defaultValueJson": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "name",
+                "type",
+                "description",
+                "containerType",
+                "defaultValueJson"
+              ]
+            },
+            "description": "TArray<FPCGParamDefinition> Name, Type, Description, ContainerType(선택 사항), DefaultValueJson(선택 사항)으로 구성된 UStruct의 배열입니다. 사용자가 특별한 디폴트 값을 명시적으로 원하는 경우 DefaultValueJson을 설정해야 하며, 그렇지 않은 경우 표준 UE 디폴트 값을 사용하려면 DefaultValueJson을 생략하세요!"
+          }
+        },
+        "required": [
+          "graph",
+          "params"
+        ]
+      },
+      "outputSchema": {
+        "type": "object",
+        "properties": {
+          "returnValue": {
+            "type": "boolean",
+            "description": "성공/실패를 나타내는 부울을 반환합니다."
+          }
+        },
+        "required": [
+          "returnValue"
+        ]
+      }
+    },
+    {
+      "description": "특정 액터의 그래프 인스턴스 파라미터를 설정하며, 액터는 그래프 인스턴스를 가지고 있어야 합니다.",
+      "name": "PCGToolset.PCGToolset.SetGraphInstanceParams",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "pCGVolume": {
+            "type": "object",
+            "title": "/Script/PCG.PCGVolume",
+            "description": "그래프 인스턴스 파라미터를 설정할 액터입니다.",
+            "properties": {
+              "refPath": {
+                "type": "string",
+                "description": "소프트 경로 스트링으로 저장된 레퍼런스입니다."
+              }
+            },
+            "required": [
+              "refPath"
+            ]
+          },
+          "jsonParams": {
+            "type": "string",
+            "description": "설정할 파라미터의 JsonObject를 나타내는 JSON 스트링입니다. 반드시 {{\"property_1_name\": \"property_1_value\"}, ...} 포맷이어야 합니다."
+          }
+        },
+        "required": [
+          "pCGVolume",
+          "jsonParams"
+        ]
+      },
+      "outputSchema": {
+        "type": "object",
+        "properties": {
+          "returnValue": {
+            "type": "boolean",
+            "description": "성공/실패를 나타내는 부울을 반환합니다."
+          }
+        },
+        "required": [
+          "returnValue"
+        ]
+      }
+    },
+    {
+      "description": "PCG 그래프의 설명을 설정합니다.",
+      "name": "PCGToolset.PCGToolset.SetGraphDescription",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "graph": {
+            "type": "object",
+            "title": "/Script/PCG.PCGGraph",
+            "description": "설명을 설정할 그래프입니다.",
+            "properties": {
+              "refPath": {
+                "type": "string",
+                "description": "소프트 경로 스트링으로 저장된 레퍼런스입니다."
+              }
+            },
+            "required": [
+              "refPath"
+            ]
+          },
+          "description": {
+            "type": "string",
+            "description": "그래프의 새 설명입니다."
+          }
+        },
+        "required": [
+          "graph",
+          "description"
+        ]
+      },
+      "outputSchema": {
+        "type": "object",
+        "properties": {
+          "returnValue": {
+            "type": "boolean",
+            "description": "성공/실패를 나타내는 부울을 반환합니다."
+          }
+        },
+        "required": [
+          "returnValue"
+        ]
+      }
+    },
+    {
+      "description": "지정된 그래프 인스턴스 파라미터를 그래프의 디폴트 값으로 리셋합니다. 액터는 그래프 인스턴스를 가지고 있어야 합니다.",
+      "name": "PCGToolset.PCGToolset.ResetGraphInstanceParams",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "pCGVolume": {
+            "type": "object",
+            "title": "/Script/PCG.PCGVolume",
+            "description": "그래프 인스턴스 파라미터를 리셋할 액터입니다.",
+            "properties": {
+              "refPath": {
+                "type": "string",
+                "description": "소프트 경로 스트링으로 저장된 레퍼런스입니다."
+              }
+            },
+            "required": [
+              "refPath"
+            ]
+          },
+          "paramNames": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "리셋할 파라미터의 이름입니다."
+          }
+        },
+        "required": [
+          "pCGVolume",
+          "paramNames"
+        ]
+      },
+      "outputSchema": {
+        "type": "object",
+        "properties": {
+          "returnValue": {
+            "type": "boolean",
+            "description": "성공/실패를 나타내는 부울을 반환합니다."
+          }
+        },
+        "required": [
+          "returnValue"
+        ]
+      }
+    },
+    {
+      "description": "노드의 위치를 변경합니다.",
+      "name": "PCGToolset.PCGToolset.RepositionNode",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "node": {
+            "type": "object",
+            "title": "/Script/PCG.PCGNode",
+            "description": "위치를 수정할 노드입니다.",
+            "properties": {
+              "refPath": {
+                "type": "string",
+                "description": "소프트 경로 스트링으로 저장된 레퍼런스입니다."
+              }
+            },
+            "required": [
+              "refPath"
+            ]
+          },
+          "xPositionIdx": {
+            "type": "integer",
+            "description": "에디터에서 노드 위치의 X 좌표입니다."
+          },
+          "yPositionIdx": {
+            "type": "integer",
+            "description": "에디터에서 노드 위치의 Y 좌표입니다."
+          }
+        },
+        "required": [
+          "node",
+          "xPositionIdx",
+          "yPositionIdx"
+        ]
+      },
+      "outputSchema": {
+        "type": "object",
+        "properties": {
+          "returnValue": {
+            "type": "boolean",
+            "description": "성공/실패를 나타내는 부울을 반환합니다."
+          }
+        },
+        "required": [
+          "returnValue"
+        ]
+      }
+    },
+    {
+      "description": "그래프에서 노드를 제거하며, 해당 노드에 연결된 에지도 함께 제거합니다.",
+      "name": "PCGToolset.PCGToolset.RemoveNode",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "graph": {
+            "type": "object",
+            "title": "/Script/PCG.PCGGraph",
+            "description": "노드를 제거할 그래프입니다.",
+            "properties": {
+              "refPath": {
+                "type": "string",
+                "description": "소프트 경로 스트링으로 저장된 레퍼런스입니다."
+              }
+            },
+            "required": [
+              "refPath"
+            ]
+          },
+          "node": {
+            "type": "object",
+            "title": "/Script/PCG.PCGNode",
+            "description": "제거할 노드입니다.",
+            "properties": {
+              "refPath": {
+                "type": "string",
+                "description": "소프트 경로 스트링으로 저장된 레퍼런스입니다."
+              }
+            },
+            "required": [
+              "refPath"
+            ]
+          }
+        },
+        "required": [
+          "graph",
+          "node"
+        ]
+      },
+      "outputSchema": {
+        "type": "object",
+        "properties": {
+          "returnValue": {
+            "type": "boolean",
+            "description": "성공/실패를 나타내는 부울을 반환합니다."
+          }
+        },
+        "required": [
+          "returnValue"
+        ]
+      }
+    },
+    {
+      "description": "특정 PCG 그래프에 대한 그래프 파라미터를 제거하여 더는 오버라이드할 수 없도록 만듭니다.",
+      "name": "PCGToolset.PCGToolset.RemoveGraphParams",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "graph": {
+            "type": "object",
+            "title": "/Script/PCG.PCGGraph",
+            "description": "그래프 파라미터를 제거할 그래프입니다.",
+            "properties": {
+              "refPath": {
+                "type": "string",
+                "description": "소프트 경로 스트링으로 저장된 레퍼런스입니다."
+              }
+            },
+            "required": [
+              "refPath"
+            ]
+          },
+          "paramNames": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "제거할 기존 파라미터 이름의 배열입니다."
+          }
+        },
+        "required": [
+          "graph",
+          "paramNames"
+        ]
+      },
+      "outputSchema": {
+        "type": "object",
+        "properties": {
+          "returnValue": {
+            "type": "boolean",
+            "description": "성공/실패를 나타내는 부울을 반환합니다."
+          }
+        },
+        "required": [
+          "returnValue"
+        ]
+      }
+    },
+    {
+      "description": "그래프에서 코멘트 박스를 제거합니다. 코멘트 박스가 포함하는 노드에는 영향을 미치지 않습니다.",
+      "name": "PCGToolset.PCGToolset.RemoveCommentBox",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "graph": {
+            "type": "object",
+            "title": "/Script/PCG.PCGGraph",
+            "description": "코멘트를 제거할 그래프입니다.",
+            "properties": {
+              "refPath": {
+                "type": "string",
+                "description": "소프트 경로 스트링으로 저장된 레퍼런스입니다."
+              }
+            },
+            "required": [
+              "refPath"
+            ]
+          },
+          "commentId": {
+            "type": "string",
+            "description": "제거할 코멘트의 고유 ID입니다."
+          }
+        },
+        "required": [
+          "graph",
+          "commentId"
+        ]
+      },
+      "outputSchema": {
+        "type": "object",
+        "properties": {
+          "returnValue": {
+            "type": "boolean",
+            "description": "성공/실패를 나타내는 부울을 반환합니다."
+          }
+        },
+        "required": [
+          "returnValue"
+        ]
+      }
+    },
+    {
+      "description": "사용 가능한 네이티브 PCG 노드 타입 이름의 목록을 반환합니다.",
+      "name": "PCGToolset.PCGToolset.ListNativeNodes",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "bCommonOnly": {
+            "type": "boolean",
+            "description": "자주 사용되는 네이티브 노드만 반환할지 여부입니다. 사용자가 특별히 요청한 경우에만 bCommonOnly = false를 사용하세요.",
+            "default": true
+          }
+        }
+      },
+      "outputSchema": {
+        "type": "object",
+        "properties": {
+          "returnValue": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "네이티브 노드 타입 이름의 배열을 반환합니다."
+          }
+        },
+        "required": [
+          "returnValue"
+        ]
+      }
+    },
+    {
+      "description": "씬에 PCG 그래프 인스턴스가 있는 모든 액터를 구합니다.",
+      "name": "PCGToolset.PCGToolset.ListGraphInstances",
+      "inputSchema": {
+        "type": "object"
+      },
+      "outputSchema": {
+        "type": "object",
+        "properties": {
+          "returnValue": {
+            "type": "array",
+            "items": {
+              "title": "PCGGraphInstanceInfo",
+              "type": "object",
+              "properties": {
+                "actor": {
+                  "type": "object",
+                  "title": "/Script/PCG.PCGVolume",
+                  "description": "UObject 또는 UClass에 대한 레퍼런스를 나타냅니다.",
+                  "properties": {
+                    "refPath": {
+                      "type": "string",
+                      "description": "소프트 경로 스트링으로 저장된 레퍼런스입니다."
+                    }
+                  },
+                  "required": [
+                    "refPath"
+                  ]
+                },
+                "graph": {
+                  "type": "object",
+                  "title": "/Script/PCG.PCGGraph",
+                  "description": "UObject 또는 UClass에 대한 레퍼런스를 나타냅니다.",
+                  "properties": {
+                    "refPath": {
+                      "type": "string",
+                      "description": "소프트 경로 스트링으로 저장된 레퍼런스입니다."
+                    }
+                  },
+                  "required": [
+                    "refPath"
+                  ]
+                }
+              },
+              "required": [
+                "actor",
+                "graph"
+              ]
+            },
+            "description": "그래프 인스턴스가 있는 모든 액터에 대한 FPCGGraphInstanceInfo의 배열을 반환합니다."
+          }
+        },
+        "required": [
+          "returnValue"
+        ]
+      }
+    },
+    {
+      "description": "서브그래프 네이티브 노드와 함께 사용할 수 있는 PCG 그래프를 나열합니다. 이 그래프만 서브그래프 네이티브 노드와 함께\n사용되어야 합니다.",
+      "name": "PCGToolset.PCGToolset.ListAvailableSubgraphs",
+      "inputSchema": {
+        "type": "object"
+      },
+      "outputSchema": {
+        "type": "object",
+        "properties": {
+          "returnValue": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "서브그래프 네이티브 노드와 함께 사용할 수 있는 그래프 에셋 경로의 배열을 반환합니다."
+          }
+        },
+        "required": [
+          "returnValue"
+        ]
+      }
+    },
+    {
+      "description": "이름, 위치 및 모든 파라미터 값을 포함하여 노드 세부 정보를 반환합니다.",
+      "name": "PCGToolset.PCGToolset.GetNodeInfo",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "node": {
+            "type": "object",
+            "title": "/Script/PCG.PCGNode",
+            "description": "정보를 구할 노드입니다.",
+            "properties": {
+              "refPath": {
+                "type": "string",
+                "description": "소프트 경로 스트링으로 저장된 레퍼런스입니다."
+              }
+            },
+            "required": [
+              "refPath"
+            ]
+          }
+        },
+        "required": [
+          "node"
+        ]
+      },
+      "outputSchema": {
+        "type": "object",
+        "properties": {
+          "returnValue": {
+            "title": "PCGNodeInfo",
+            "description": "이름, 위치, 타입, 파라미터 오버라이드를 비롯한 노드 세부 정보가 포함된 FPCGNodeInfo를 반환합니다.",
+            "type": "object",
+            "properties": {
+              "name": {
+                "type": "string"
+              },
+              "path": {
+                "type": "string"
+              },
+              "position": {
+                "type": "string"
+              },
+              "title": {
+                "type": "string"
+              },
+              "bEnabled": {
+                "type": "boolean"
+              },
+              "comment": {
+                "type": "string"
+              },
+              "nodeType": {
+                "type": "string"
+              },
+              "paramOverrides": {
+                "type": "object",
+                "title": "FInstancedPropertyBag"
+              }
+            },
+            "required": [
+              "name",
+              "path",
+              "position",
+              "title",
+              "bEnabled",
+              "comment",
+              "nodeType",
+              "paramOverrides"
+            ]
+          }
+        },
+        "required": [
+          "returnValue"
+        ]
+      }
+    },
+    {
+      "description": "마지막 그래프 실행에서 특정 노드의 출력 데이터에 대한 JSON 데이터 뷰를 반환합니다.\n첫 호출 시 검사를 활성화하므로 향후 ExecuteGraphInstance 호출로 노드별 데이터가 저장됩니다.\n검사 데이터가 없으면 오류를 반환하고 재실행을 요청합니다.\n\n중요: 검사 스테이트는 그래프 에셋 레벨에서 공유됩니다. 여러 액터가 동일한 그래프를\n사용하는 경우, 이 툴 및 ExecuteGraphInstance를 한 번에 하나의 액터에 대해서만 호출해야 합니다.\n다음 액터에 대해 호출하기 전에 각 호출이 완전히 완료될 때까지 기다리세요. 동일한 그래프를 공유하는 액터에 대해\n동시 호출을 수행하면 프리즈 현상이 발생합니다.",
+      "name": "PCGToolset.PCGToolset.GetNodeDataView",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "pCGVolume": {
+            "type": "object",
+            "title": "/Script/PCG.PCGVolume",
+            "description": "그래프가 실행된 PCG 볼륨입니다.",
+            "properties": {
+              "refPath": {
+                "type": "string",
+                "description": "소프트 경로 스트링으로 저장된 레퍼런스입니다."
+              }
+            },
+            "required": [
+              "refPath"
+            ]
+          },
+          "node": {
+            "type": "object",
+            "title": "/Script/PCG.PCGNode",
+            "description": "출력을 검사할 노드입니다.",
+            "properties": {
+              "refPath": {
+                "type": "string",
+                "description": "소프트 경로 스트링으로 저장된 레퍼런스입니다."
+              }
+            },
+            "required": [
+              "refPath"
+            ]
+          },
+          "pinLabel": {
+            "type": "string",
+            "description": "읽어올 출력 핀 라벨입니다. 디폴트는 'Out'입니다.",
+            "default": "Out"
+          },
+          "attributeName": {
+            "type": "string",
+            "description": "단일 어트리뷰트/프로퍼티로 필터링합니다(예: '$Position', '$Density', 'MyCustomAttr'). 비어 있으면 모든 어트리뷰트를 의미합니다."
+          },
+          "startIndex": {
+            "type": "integer",
+            "description": "엘리먼트 범위의 시작 인덱스로, 0부터 시작하고 해당 인덱스를 포함합니다. 디폴트는 0입니다.",
+            "default": 0
+          },
+          "endIndex": {
+            "type": "integer",
+            "description": "엘리먼트 범위의 끝 인덱스로, 해당 인덱스는 제외합니다. -1은 모든 엘리먼트를 의미합니다(Python 슬라이스 규칙). 디폴트는 -1입니다.",
+            "default": -1
+          }
+        },
+        "required": [
+          "pCGVolume",
+          "node",
+          "attributeName"
+        ]
+      },
+      "outputSchema": {
+        "type": "object",
+        "properties": {
+          "returnValue": {
+            "type": "string",
+            "description": "데이터 뷰 콘텐츠가 포함된 JSON 스트링을 반환합니다."
+          }
+        },
+        "required": [
+          "returnValue"
+        ]
+      }
+    },
+    {
+      "description": "입력/출력 핀, 파라미터 및 해당 타입을 포함하여 PCG 노드 타입에 대한\n스키마를 반환합니다.",
+      "name": "PCGToolset.PCGToolset.GetNativeNodeSchema",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "nodeName": {
+            "type": "string",
+            "description": "노드 이름입니다."
+          }
+        },
+        "required": [
+          "nodeName"
+        ]
+      },
+      "outputSchema": {
+        "type": "object",
+        "properties": {
+          "returnValue": {
+            "title": "PCGNativeNodeSchema",
+            "description": "노드 이름, 설명, 프로퍼티 스키마(JSON), 입력/출력 핀이 포함된 FPCGNativeNodeSchema를 반환합니다.",
+            "type": "object",
+            "properties": {
+              "name": {
+                "type": "string"
+              },
+              "description": {
+                "type": "string"
+              },
+              "propertiesSchema": {
+                "type": "string"
+              },
+              "inputPins": {
+                "type": "array",
+                "items": {
+                  "title": "PCGPinInfo",
+                  "type": "object",
+                  "properties": {
+                    "name": {
+                      "type": "string"
+                    },
+                    "type": {
+                      "type": "string"
+                    },
+                    "description": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "name",
+                    "type",
+                    "description"
+                  ]
+                }
+              },
+              "outputPins": {
+                "type": "array",
+                "items": {
+                  "title": "PCGPinInfo",
+                  "type": "object",
+                  "properties": {
+                    "name": {
+                      "type": "string"
+                    },
+                    "type": {
+                      "type": "string"
+                    },
+                    "description": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "name",
+                    "type",
+                    "description"
+                  ]
+                }
+              }
+            },
+            "required": [
+              "name",
+              "description",
+              "propertiesSchema",
+              "inputPins",
+              "outputPins"
+            ]
+          }
+        },
+        "required": [
+          "returnValue"
+        ]
+      }
+    },
+    {
+      "description": "모든 노드, 연결, 노출된 파라미터 및 코멘트 박스를 포함하여\nPCG 그래프의 전체 구조를 반환합니다.",
+      "name": "PCGToolset.PCGToolset.GetGraphStructure",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "graph": {
+            "type": "object",
+            "title": "/Script/PCG.PCGGraph",
+            "description": "검사할 그래프입니다.",
+            "properties": {
+              "refPath": {
+                "type": "string",
+                "description": "소프트 경로 스트링으로 저장된 레퍼런스입니다."
+              }
+            },
+            "required": [
+              "refPath"
+            ]
+          }
+        },
+        "required": [
+          "graph"
+        ]
+      },
+      "outputSchema": {
+        "type": "object",
+        "properties": {
+          "returnValue": {
+            "title": "PCGGraphStructure",
+            "description": "그래프 이름, 설명, 노드 및 에지가 포함된 FPCGGraphStructure를 반환합니다.",
+            "type": "object",
+            "properties": {
+              "name": {
+                "type": "string"
+              },
+              "description": {
+                "type": "string"
+              },
+              "nodes": {
+                "type": "array",
+                "items": {
+                  "title": "PCGNodeInfo",
+                  "type": "object",
+                  "properties": {
+                    "name": {
+                      "type": "string"
+                    },
+                    "path": {
+                      "type": "string"
+                    },
+                    "position": {
+                      "type": "string"
+                    },
+                    "title": {
+                      "type": "string"
+                    },
+                    "bEnabled": {
+                      "type": "boolean"
+                    },
+                    "comment": {
+                      "type": "string"
+                    },
+                    "nodeType": {
+                      "type": "string"
+                    },
+                    "paramOverrides": {
+                      "type": "object",
+                      "title": "FInstancedPropertyBag"
+                    }
+                  },
+                  "required": [
+                    "name",
+                    "path",
+                    "position",
+                    "title",
+                    "bEnabled",
+                    "comment",
+                    "nodeType",
+                    "paramOverrides"
+                  ]
+                }
+              },
+              "edges": {
+                "type": "array",
+                "items": {
+                  "title": "PCGEdgeInfo",
+                  "type": "object",
+                  "properties": {
+                    "srcNode": {
+                      "type": "string"
+                    },
+                    "srcPin": {
+                      "type": "string"
+                    },
+                    "destNode": {
+                      "type": "string"
+                    },
+                    "destPin": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "srcNode",
+                    "srcPin",
+                    "destNode",
+                    "destPin"
+                  ]
+                }
+              }
+            },
+            "required": [
+              "name",
+              "description",
+              "nodes",
+              "edges"
+            ]
+          }
+        },
+        "required": [
+          "returnValue"
+        ]
+      }
+    },
+    {
+      "description": "PCG 그래프의 그래프 파라미터에 대한 스키마를 반환합니다.",
+      "name": "PCGToolset.PCGToolset.GetGraphSchema",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "graph": {
+            "type": "object",
+            "title": "/Script/PCG.PCGGraph",
+            "description": "그래프 파라미터를 구할 그래프입니다.",
+            "properties": {
+              "refPath": {
+                "type": "string",
+                "description": "소프트 경로 스트링으로 저장된 레퍼런스입니다."
+              }
+            },
+            "required": [
+              "refPath"
+            ]
+          }
+        },
+        "required": [
+          "graph"
+        ]
+      },
+      "outputSchema": {
+        "type": "object",
+        "properties": {
+          "returnValue": {
+            "title": "PCGGraphSchema",
+            "description": "그래프 이름, 파라미터 스키마(JSON), 입력/출력 핀이 포함된 FPCGGraphSchema를 반환합니다.",
+            "type": "object",
+            "properties": {
+              "name": {
+                "type": "string"
+              },
+              "graphParamsSchema": {
+                "type": "string"
+              },
+              "inputPins": {
+                "type": "array",
+                "items": {
+                  "title": "PCGPinInfo",
+                  "type": "object",
+                  "properties": {
+                    "name": {
+                      "type": "string"
+                    },
+                    "type": {
+                      "type": "string"
+                    },
+                    "description": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "name",
+                    "type",
+                    "description"
+                  ]
+                }
+              },
+              "outputPins": {
+                "type": "array",
+                "items": {
+                  "title": "PCGPinInfo",
+                  "type": "object",
+                  "properties": {
+                    "name": {
+                      "type": "string"
+                    },
+                    "type": {
+                      "type": "string"
+                    },
+                    "description": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "name",
+                    "type",
+                    "description"
+                  ]
+                }
+              }
+            },
+            "required": [
+              "name",
+              "graphParamsSchema",
+              "inputPins",
+              "outputPins"
+            ]
+          }
+        },
+        "required": [
+          "returnValue"
+        ]
+      }
+    },
+    {
+      "description": "특정 액터의 그래프 인스턴스 파라미터를 구합니다. 액터는 그래프 인스턴스를 가지고 있어야 합니다.",
+      "name": "PCGToolset.PCGToolset.GetGraphInstanceParams",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "pCGVolume": {
+            "type": "object",
+            "title": "/Script/PCG.PCGVolume",
+            "description": "그래프 인스턴스 파라미터를 구할 액터입니다.",
+            "properties": {
+              "refPath": {
+                "type": "string",
+                "description": "소프트 경로 스트링으로 저장된 레퍼런스입니다."
+              }
+            },
+            "required": [
+              "refPath"
+            ]
+          }
+        },
+        "required": [
+          "pCGVolume"
+        ]
+      },
+      "outputSchema": {
+        "type": "object",
+        "properties": {
+          "returnValue": {
+            "type": "object",
+            "title": "FInstancedPropertyBag",
+            "description": "필터링된 그래프 인스턴스 파라미터를 포함하는 FInstancedPropertyBag을 반환합니다."
+          }
+        },
+        "required": [
+          "returnValue"
+        ]
+      }
+    },
+    {
+      "description": "PCG 그래프의 설명을 반환합니다.",
+      "name": "PCGToolset.PCGToolset.GetGraphDescription",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "graph": {
+            "type": "object",
+            "title": "/Script/PCG.PCGGraph",
+            "description": "설명을 구할 그래프입니다.",
+            "properties": {
+              "refPath": {
+                "type": "string",
+                "description": "소프트 경로 스트링으로 저장된 레퍼런스입니다."
+              }
+            },
+            "required": [
+              "refPath"
+            ]
+          }
+        },
+        "required": [
+          "graph"
+        ]
+      },
+      "outputSchema": {
+        "type": "object",
+        "properties": {
+          "returnValue": {
+            "type": "string",
+            "description": "그래프의 설명 텍스트를 반환하며, 그래프에 설정된 설명이 없는 경우 빈 스트링을 반환합니다."
+          }
+        },
+        "required": [
+          "returnValue"
+        ]
+      }
+    },
+    {
+      "description": "그래프 인스턴스를 실행하고 실행하는 동안 발생한 모든 문제를 반환합니다.",
+      "name": "PCGToolset.PCGToolset.ExecuteGraphInstance",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "pCGVolume": {
+            "type": "object",
+            "title": "/Script/PCG.PCGVolume",
+            "description": "그래프 인스턴스를 실행할 PCG 볼륨입니다.",
+            "properties": {
+              "refPath": {
+                "type": "string",
+                "description": "소프트 경로 스트링으로 저장된 레퍼런스입니다."
+              }
+            },
+            "required": [
+              "refPath"
+            ]
+          }
+        },
+        "required": [
+          "pCGVolume"
+        ]
+      },
+      "outputSchema": {
+        "type": "object",
+        "properties": {
+          "returnValue": {
+            "type": "array",
+            "items": {
+              "title": "PCGNodeExecutionMessage",
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string"
+                },
+                "severity": {
+                  "type": "string"
+                },
+                "reporterNode": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "message",
+                "severity",
+                "reporterNode"
+              ]
+            },
+            "description": "그래프 인스턴스를 실행하는 동안 방출된 메시지 배열을 반환합니다(문제 없이 성공한 경우 비어 있음)."
+          }
+        },
+        "required": [
+          "returnValue"
+        ]
+      }
+    },
+    {
+      "description": "사용자가 월드 빌딩에서 나중에 사용할 스플라인을 뷰포트에서 직접 그리도록 트리거합니다. 사용자가 작업을 마칠 때까지 기다립니다.",
+      "name": "PCGToolset.PCGToolset.DrawSpline",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "actorLabel": {
+            "type": "string",
+            "description": "생성된 액터의 라벨이거나, bRedraw의 경우 스플라인을 다시 그릴 액터의 라벨입니다."
+          },
+          "actorTag": {
+            "type": "string",
+            "description": "액터에 할당된 태그입니다."
+          },
+          "bRedraw": {
+            "type": "boolean",
+            "description": "false: 스플라인을 가진 새 액터를 생성합니다. true: 해당 라벨을 가진 액터를 찾아 스플라인을 대체합니다."
+          },
+          "bClosedSpline": {
+            "type": "boolean",
+            "description": "true: 닫힌 스플라인(영역)이고, false: 경로입니다."
+          }
+        },
+        "required": [
+          "actorLabel",
+          "actorTag",
+          "bRedraw",
+          "bClosedSpline"
+        ]
+      },
+      "outputSchema": {
+        "type": "object",
+        "properties": {
+          "returnValue": {
+            "description": "Always null",
+            "type": "null"
+          }
+        },
+        "required": [
+          "returnValue"
+        ]
+      }
+    },
+    {
+      "description": "지정된 핀에 연결된 두 노드 사이의 에지를 제거합니다.",
+      "name": "PCGToolset.PCGToolset.DisconnectNodePins",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "fromNode": {
+            "type": "object",
+            "title": "/Script/PCG.PCGNode",
+            "description": "추가할 에지의 소스 노드입니다.",
+            "properties": {
+              "refPath": {
+                "type": "string",
+                "description": "소프트 경로 스트링으로 저장된 레퍼런스입니다."
+              }
+            },
+            "required": [
+              "refPath"
+            ]
+          },
+          "fromPinLabel": {
+            "type": "string",
+            "description": "소스 노드의 소스 핀 라벨입니다."
+          },
+          "toNode": {
+            "type": "object",
+            "title": "/Script/PCG.PCGNode",
+            "description": "추가할 에지의 대상 노드입니다.",
+            "properties": {
+              "refPath": {
+                "type": "string",
+                "description": "소프트 경로 스트링으로 저장된 레퍼런스입니다."
+              }
+            },
+            "required": [
+              "refPath"
+            ]
+          },
+          "toPinLabel": {
+            "type": "string",
+            "description": "대상 노드의 대상 핀 라벨입니다."
+          }
+        },
+        "required": [
+          "fromNode",
+          "fromPinLabel",
+          "toNode",
+          "toPinLabel"
+        ]
+      },
+      "outputSchema": {
+        "type": "object",
+        "properties": {
+          "returnValue": {
+            "type": "boolean",
+            "description": "성공/실패를 나타내는 부울을 반환합니다."
+          }
+        },
+        "required": [
+          "returnValue"
+        ]
+      }
+    },
+    {
+      "description": "새로운 저장된 PCG 그래프 에셋을 생성합니다.",
+      "name": "PCGToolset.PCGToolset.CreateGraph",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "새 PCG 그래프 에셋의 이름입니다(예: 'PCG_ForestScatter')."
+          },
+          "path": {
+            "type": "string",
+            "description": "에셋이 생성될 콘텐츠 폴더 경로입니다. 디폴트는 '/Game/PCG'입니다.",
+            "default": "/Game/PCG"
+          }
+        },
+        "required": [
+          "name"
+        ]
+      },
+      "outputSchema": {
+        "type": "object",
+        "properties": {
+          "returnValue": {
+            "type": "object",
+            "title": "/Script/PCG.PCGGraph",
+            "description": "생성된 PCG 그래프를 반환합니다.",
+            "properties": {
+              "refPath": {
+                "type": "string",
+                "description": "소프트 경로 스트링으로 저장된 레퍼런스입니다."
+              }
+            },
+            "required": [
+              "refPath"
+            ]
+          }
+        },
+        "required": [
+          "returnValue"
+        ]
+      }
+    },
+    {
+      "description": "지정된 핀에 연결된 두 노드 사이에 에지를 추가합니다.",
+      "name": "PCGToolset.PCGToolset.ConnectNodePins",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "fromNode": {
+            "type": "object",
+            "title": "/Script/PCG.PCGNode",
+            "description": "추가할 에지의 소스 노드입니다.",
+            "properties": {
+              "refPath": {
+                "type": "string",
+                "description": "소프트 경로 스트링으로 저장된 레퍼런스입니다."
+              }
+            },
+            "required": [
+              "refPath"
+            ]
+          },
+          "fromPinLabel": {
+            "type": "string",
+            "description": "소스 노드의 소스 핀 라벨입니다."
+          },
+          "toNode": {
+            "type": "object",
+            "title": "/Script/PCG.PCGNode",
+            "description": "추가할 에지의 대상 노드입니다.",
+            "properties": {
+              "refPath": {
+                "type": "string",
+                "description": "소프트 경로 스트링으로 저장된 레퍼런스입니다."
+              }
+            },
+            "required": [
+              "refPath"
+            ]
+          },
+          "toPinLabel": {
+            "type": "string",
+            "description": "대상 노드의 대상 핀 라벨입니다."
+          }
+        },
+        "required": [
+          "fromNode",
+          "fromPinLabel",
+          "toNode",
+          "toPinLabel"
+        ]
+      },
+      "outputSchema": {
+        "type": "object",
+        "properties": {
+          "returnValue": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "title": "/Script/PCG.PCGNode",
+              "properties": {
+                "refPath": {
+                  "type": "string",
+                  "description": "소프트 경로 스트링으로 저장된 레퍼런스입니다."
+                }
+              },
+              "required": [
+                "refPath"
+              ]
+            },
+            "description": "연결이 작동할 수 있도록 추가된 노드(변환 및/또는 필터) 목록을 반환합니다."
+          }
+        },
+        "required": [
+          "returnValue"
+        ]
+      }
+    },
+    {
+      "description": "그래프에 서브그래프 노드를 추가합니다.",
+      "name": "PCGToolset.PCGToolset.AddSubgraphNode",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "graph": {
+            "type": "object",
+            "title": "/Script/PCG.PCGGraph",
+            "description": "수정할 그래프입니다.",
+            "properties": {
+              "refPath": {
+                "type": "string",
+                "description": "소프트 경로 스트링으로 저장된 레퍼런스입니다."
+              }
+            },
+            "required": [
+              "refPath"
+            ]
+          },
+          "subGraphForNode": {
+            "type": "object",
+            "title": "/Script/PCG.PCGGraph",
+            "description": "추가된 노드에서 사용할 서브그래프입니다.",
+            "properties": {
+              "refPath": {
+                "type": "string",
+                "description": "소프트 경로 스트링으로 저장된 레퍼런스입니다."
+              }
+            },
+            "required": [
+              "refPath"
+            ]
+          },
+          "nodeName": {
+            "type": "string",
+            "description": "추가된 노드의 이름입니다. (그래프 내에서 고유 식별자여야 함)"
+          },
+          "jsonParams": {
+            "type": "string",
+            "description": "그래프에서 오버라이드할 파라미터 딕셔너리를 나타내는 JSON 스트링입니다. 선택 사항입니다. 디폴트는 비어 있습니다. 디폴트가 아닌 파라미터만 포함해야 합니다."
+          },
+          "nodeTitle": {
+            "type": "string",
+            "description": "노드의 표시 제목입니다. 선택 사항입니다. 디폴트는 비어 있습니다."
+          },
+          "nodeComment": {
+            "type": "string",
+            "description": "필요한 경우 노드에 어태치되는 코멘트입니다. 디폴트는 비어 있으며 기존 코멘트를 지웁니다."
+          },
+          "xPositionIdx": {
+            "type": "integer",
+            "description": "에디터에서 노드 위치의 X 좌표입니다. 선택 사항입니다. 디폴트는 0입니다. 일반적인 노드의 X 크기는 200입니다.",
+            "default": 0
+          },
+          "yPositionIdx": {
+            "type": "integer",
+            "description": "에디터에서 노드 위치의 Y 좌표입니다. 선택 사항입니다. 디폴트는 0입니다. 일반적인 노드의 Y 크기는 100입니다.",
+            "default": 0
+          }
+        },
+        "required": [
+          "graph",
+          "subGraphForNode",
+          "nodeName",
+          "jsonParams",
+          "nodeTitle",
+          "nodeComment"
+        ]
+      },
+      "outputSchema": {
+        "type": "object",
+        "properties": {
+          "returnValue": {
+            "type": "object",
+            "title": "/Script/PCG.PCGNode",
+            "description": "추가된 노드 오브젝트를 반환합니다.",
+            "properties": {
+              "refPath": {
+                "type": "string",
+                "description": "소프트 경로 스트링으로 저장된 레퍼런스입니다."
+              }
+            },
+            "required": [
+              "refPath"
+            ]
+          }
+        },
+        "required": [
+          "returnValue"
+        ]
+      }
+    },
+    {
+      "description": "그래프에 네이티브 노드를 추가합니다.",
+      "name": "PCGToolset.PCGToolset.AddNode",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "graph": {
+            "type": "object",
+            "title": "/Script/PCG.PCGGraph",
+            "description": "수정할 그래프입니다.",
+            "properties": {
+              "refPath": {
+                "type": "string",
+                "description": "소프트 경로 스트링으로 저장된 레퍼런스입니다."
+              }
+            },
+            "required": [
+              "refPath"
+            ]
+          },
+          "nativeNodeType": {
+            "type": "string",
+            "description": "추가된 노드의 네이티브 타입입니다."
+          },
+          "nodeName": {
+            "type": "string",
+            "description": "추가된 노드의 이름입니다. (그래프 내에서 고유 식별자여야 함)"
+          },
+          "jsonParams": {
+            "type": "string",
+            "description": "노드에 설정할 파라미터의 딕셔너리를 나타내는 JSON 스트링입니다. 선택 사항입니다. 디폴트는 비어 있습니다. 디폴트가 아닌 파라미터만 포함하면 됩니다."
+          },
+          "nodeTitle": {
+            "type": "string",
+            "description": "노드의 표시 제목입니다. 선택 사항입니다. 디폴트는 비어 있습니다."
+          },
+          "nodeComment": {
+            "type": "string",
+            "description": "필요한 경우 노드에 어태치되는 코멘트입니다. 디폴트는 비어 있습니다."
+          },
+          "xPositionIdx": {
+            "type": "integer",
+            "description": "에디터에서 노드 위치의 X 좌표입니다. 선택 사항입니다. 디폴트는 0입니다. 일반적인 노드의 X 크기는 200입니다.",
+            "default": 0
+          },
+          "yPositionIdx": {
+            "type": "integer",
+            "description": "에디터에서 노드 위치의 Y 좌표입니다. 선택 사항입니다. 디폴트는 0입니다. 일반적인 노드의 Y 크기는 100입니다.",
+            "default": 0
+          }
+        },
+        "required": [
+          "graph",
+          "nativeNodeType",
+          "nodeName",
+          "jsonParams",
+          "nodeTitle",
+          "nodeComment"
+        ]
+      },
+      "outputSchema": {
+        "type": "object",
+        "properties": {
+          "returnValue": {
+            "type": "object",
+            "title": "/Script/PCG.PCGNode",
+            "description": "추가된 노드 오브젝트를 반환합니다.",
+            "properties": {
+              "refPath": {
+                "type": "string",
+                "description": "소프트 경로 스트링으로 저장된 레퍼런스입니다."
+              }
+            },
+            "required": [
+              "refPath"
+            ]
+          }
+        },
+        "required": [
+          "returnValue"
+        ]
+      }
+    },
+    {
+      "description": "지정된 노드 주위에 코멘트 박스를 추가합니다.\n 참고: 노드의 바운딩 박스가 다른 노드를 포함하는 경우, 해당 노드들도 코멘트에 포함됩니다.",
+      "name": "PCGToolset.PCGToolset.AddCommentBox",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "graph": {
+            "type": "object",
+            "title": "/Script/PCG.PCGGraph",
+            "description": "코멘트를 추가할 그래프입니다.",
+            "properties": {
+              "refPath": {
+                "type": "string",
+                "description": "소프트 경로 스트링으로 저장된 레퍼런스입니다."
+              }
+            },
+            "required": [
+              "refPath"
+            ]
+          },
+          "nodes": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "title": "/Script/PCG.PCGNode",
+              "properties": {
+                "refPath": {
+                  "type": "string",
+                  "description": "소프트 경로 스트링으로 저장된 레퍼런스입니다."
+                }
+              },
+              "required": [
+                "refPath"
+              ]
+            },
+            "description": "코멘트 박스에 포함할 노드의 목록입니다."
+          },
+          "comment": {
+            "type": "string",
+            "description": "코멘트 박스에 넣을 코멘트입니다.",
+            "default": "/**\n\t * Adds a comment box around the given nodes. \n\t *  Note: If the bounding box of the nodes include other nodes, they will be included in the comment.\n\t *\n\t * @param Graph - Graph to add comment to.\n\t * @param Nodes - The list of nodes to include in the comment box.\n\t * @param Comment - The comment to put on the comment box.\n\t * @param Color - The color of the comment box. Defaults to White\n\t * @return The unique id of the comment node. (Can be used to edit/remove the comment)\n\t */"
+          },
+          "color": {
+            "type": "object",
+            "title": "LinearColor",
+            "properties": {
+              "r": {
+                "type": "number",
+                "minimum": 0
+              },
+              "g": {
+                "type": "number",
+                "minimum": 0
+              },
+              "b": {
+                "type": "number",
+                "minimum": 0
+              },
+              "a": {
+                "type": "number",
+                "minimum": 0
+              }
+            },
+            "required": [
+              "r",
+              "g",
+              "b",
+              "a"
+            ],
+            "description": "코멘트 박스의 컬러입니다. 디폴트는 흰색입니다.",
+            "default": {
+              "r": 1,
+              "g": 1,
+              "b": 1,
+              "a": 1
+            }
+          }
+        },
+        "required": [
+          "graph",
+          "nodes"
+        ]
+      },
+      "outputSchema": {
+        "type": "object",
+        "properties": {
+          "returnValue": {
+            "type": "string",
+            "description": "코멘트 노드의 고유 ID를 반환합니다. (코멘트를 편집하거나 제거하는 데 사용할 수 있음)"
+          }
+        },
+        "required": [
+          "returnValue"
+        ]
+      }
+    }
+  ]
+}

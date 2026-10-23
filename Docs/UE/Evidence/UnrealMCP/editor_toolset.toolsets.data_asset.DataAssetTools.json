@@ -1,0 +1,63 @@
+{
+  "name": "editor_toolset.toolsets.data_asset.DataAssetTools",
+  "version": "1.0",
+  "description": "Provides tools for working with Data Assets.",
+  "tools": [
+    {
+      "description": "Creates a new DataAsset asset in the project.\n\n        Args:\n            folder_path: The path to the folder that will contain the asset.\n            asset_name: The name of the asset in the folder.\n            asset_type: The specific kind of DataClass to make.\n\n        Returns:\n            The DataAsset that was created.",
+      "name": "editor_toolset.toolsets.data_asset.DataAssetTools.create",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "folder_path": {
+            "type": "string"
+          },
+          "asset_name": {
+            "type": "string"
+          },
+          "asset_type": {
+            "type": "object",
+            "title": "/Script/CoreUObject.Class",
+            "description": "UObject 또는 UClass에 대한 레퍼런스를 나타냅니다.",
+            "properties": {
+              "refPath": {
+                "type": "string",
+                "description": "소프트 경로 스트링으로 저장된 레퍼런스입니다."
+              }
+            },
+            "required": [
+              "refPath"
+            ]
+          }
+        },
+        "required": [
+          "folder_path",
+          "asset_name",
+          "asset_type"
+        ]
+      },
+      "outputSchema": {
+        "type": "object",
+        "properties": {
+          "returnValue": {
+            "type": "object",
+            "title": "/Script/Engine.DataAsset",
+            "description": "UObject 또는 UClass에 대한 레퍼런스를 나타냅니다.",
+            "properties": {
+              "refPath": {
+                "type": "string",
+                "description": "소프트 경로 스트링으로 저장된 레퍼런스입니다."
+              }
+            },
+            "required": [
+              "refPath"
+            ]
+          }
+        },
+        "required": [
+          "returnValue"
+        ]
+      }
+    }
+  ]
+}

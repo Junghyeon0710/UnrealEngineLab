@@ -1,0 +1,73 @@
+{
+  "name": "PCGToolset.PCGSpatialToolset",
+  "version": "1.0",
+  "description": "PCGSpatial Toolset",
+  "tools": [
+    {
+      "description": "지정된 파라미터를 사용하여 파이어 앤 포겟 모드로 인스턴트 PCG 그래프를 실행합니다.\n(반드시 직접 호출해야 하며, Python 컨텍스트 실행 컨텍스트 내에서는 호출할 수 없음)",
+      "name": "PCGToolset.PCGSpatialToolset.RunPCGInstantGraph",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "graph": {
+            "type": "object",
+            "title": "/Script/PCG.PCGGraph",
+            "description": "실행할 PCG 그래프입니다.",
+            "properties": {
+              "refPath": {
+                "type": "string",
+                "description": "소프트 경로 스트링으로 저장된 레퍼런스입니다."
+              }
+            },
+            "required": [
+              "refPath"
+            ]
+          },
+          "params": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string"
+            },
+            "description": "그래프에 전달할 키-값 파라미터입니다."
+          }
+        },
+        "required": [
+          "graph",
+          "params"
+        ]
+      },
+      "outputSchema": {
+        "type": "object",
+        "properties": {
+          "returnValue": {
+            "type": "array",
+            "items": {
+              "title": "PCGNodeExecutionMessage",
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string"
+                },
+                "severity": {
+                  "type": "string"
+                },
+                "reporterNode": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "message",
+                "severity",
+                "reporterNode"
+              ]
+            },
+            "description": "그래프를 실행하는 동안 방출된 노드별 실행 메시지 배열을 반환합니다(문제 없이 성공한 경우 비어 있음)."
+          }
+        },
+        "required": [
+          "returnValue"
+        ]
+      }
+    }
+  ]
+}

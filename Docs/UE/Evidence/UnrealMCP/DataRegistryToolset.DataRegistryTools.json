@@ -1,0 +1,433 @@
+{
+  "name": "DataRegistryToolset.DataRegistryTools",
+  "version": "1.0",
+  "description": "데이터 레지스트리를 쿼리하고 검사하는 데 사용되는 툴을 제공합니다.",
+  "tools": [
+    {
+      "description": "데이터 레지스트리의 런타임 소스를 반환합니다.\n이는 메타 소스에서 생성된 트랜션트 자손 소스를 포함하여 확장된 목록입니다.\n레지스트리에 메타 소스가 없는 경우에는 ListDataSources와 같습니다.",
+      "name": "DataRegistryToolset.DataRegistryTools.ListRuntimeSources",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "registryName": {
+            "type": "string",
+            "description": "레지스트리 이름입니다."
+          }
+        },
+        "required": [
+          "registryName"
+        ]
+      },
+      "outputSchema": {
+        "type": "object",
+        "properties": {
+          "returnValue": {
+            "type": "array",
+            "items": {
+              "title": "DataRegistrySourceSummary",
+              "type": "object",
+              "properties": {
+                "sourceClass": {
+                  "type": "object",
+                  "title": "Class@/Script/CoreUObject.Object",
+                  "description": "소스의 클래스입니다.",
+                  "properties": {
+                    "refPath": {
+                      "type": "string",
+                      "description": "소프트 경로 스트링으로 저장된 레퍼런스입니다."
+                    }
+                  },
+                  "required": [
+                    "refPath"
+                  ]
+                },
+                "debugString": {
+                  "type": "string",
+                  "description": "사람이 읽을 수 있는 소스에 대한 설명입니다."
+                },
+                "sourceAssetPath": {
+                  "type": "object",
+                  "title": "/Script/CoreUObject.Object",
+                  "description": "기본 에셋의 경로입니다(있는 경우).",
+                  "properties": {
+                    "refPath": {
+                      "type": "string",
+                      "description": "소프트 경로 스트링으로 저장된 레퍼런스입니다."
+                    }
+                  },
+                  "required": [
+                    "refPath"
+                  ]
+                },
+                "availability": {
+                  "type": "string",
+                  "title": "EDataRegistryAvailability",
+                  "enum": [
+                    "DoesNotExist",
+                    "Unknown",
+                    "Remote",
+                    "OnDisk",
+                    "LocalAsset",
+                    "PreCached"
+                  ],
+                  "description": "이 소스의 가용성입니다."
+                },
+                "bIsInitialized": {
+                  "type": "boolean",
+                  "description": "소스가 초기화되었는지 여부입니다."
+                },
+                "bIsTransient": {
+                  "type": "boolean",
+                  "description": "런타임 전용 트랜션트 소스인지 여부입니다."
+                },
+                "parentSourceDebugString": {
+                  "type": "string",
+                  "description": "트랜션트 자손인 경우, 부모(원본) 소스의 디버그 스트링입니다. 그렇지 않은 경우, 비어 있습니다."
+                }
+              },
+              "required": [
+                "sourceClass",
+                "debugString",
+                "sourceAssetPath",
+                "availability",
+                "bIsInitialized",
+                "bIsTransient",
+                "parentSourceDebugString"
+              ]
+            },
+            "description": "런타임 순서대로 정렬된 소스 요약 정보의 목록을 반환합니다."
+          }
+        },
+        "required": [
+          "returnValue"
+        ]
+      }
+    },
+    {
+      "description": "등록된 모든 데이터 레지스트리의 이름을 반환합니다.",
+      "name": "DataRegistryToolset.DataRegistryTools.ListRegistries",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "structFilter": {
+            "type": "object",
+            "title": "/Script/CoreUObject.ScriptStruct",
+            "description": "null이 아닌 경우, 아이템 구조체가 이 구조체에서 상속하는 레지스트리만 반환됩니다.",
+            "properties": {
+              "refPath": {
+                "type": "string",
+                "description": "소프트 경로 스트링으로 저장된 레퍼런스입니다."
+              }
+            },
+            "required": [
+              "refPath"
+            ],
+            "default": null
+          }
+        }
+      },
+      "outputSchema": {
+        "type": "object",
+        "properties": {
+          "returnValue": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "레지스트리 이름의 목록을 반환합니다."
+          }
+        },
+        "required": [
+          "returnValue"
+        ]
+      }
+    },
+    {
+      "description": "데이터 레지스트리의 모든 아이템 이름을 반환합니다.",
+      "name": "DataRegistryToolset.DataRegistryTools.ListItems",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "registryName": {
+            "type": "string",
+            "description": "레지스트리 이름입니다."
+          }
+        },
+        "required": [
+          "registryName"
+        ]
+      },
+      "outputSchema": {
+        "type": "object",
+        "properties": {
+          "returnValue": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "레지스트리에 정의되어 있고, 레지스트리 순서대로 정렬된 모든 아이템 이름을 반환합니다."
+          }
+        },
+        "required": [
+          "returnValue"
+        ]
+      }
+    },
+    {
+      "description": "데이터 레지스트리에 환경설정되어 있는 에디터 정의 소스를 반환합니다.\n이러한 소스는 메타 소스의 런타임 익스텐션이 적용되기 전에 레지스트리 에셋에\n작성된 그대로의 소스입니다.",
+      "name": "DataRegistryToolset.DataRegistryTools.ListDataSources",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "registryName": {
+            "type": "string",
+            "description": "레지스트리 이름입니다."
+          }
+        },
+        "required": [
+          "registryName"
+        ]
+      },
+      "outputSchema": {
+        "type": "object",
+        "properties": {
+          "returnValue": {
+            "type": "array",
+            "items": {
+              "title": "DataRegistrySourceSummary",
+              "type": "object",
+              "properties": {
+                "sourceClass": {
+                  "type": "object",
+                  "title": "Class@/Script/CoreUObject.Object",
+                  "description": "소스의 클래스입니다.",
+                  "properties": {
+                    "refPath": {
+                      "type": "string",
+                      "description": "소프트 경로 스트링으로 저장된 레퍼런스입니다."
+                    }
+                  },
+                  "required": [
+                    "refPath"
+                  ]
+                },
+                "debugString": {
+                  "type": "string",
+                  "description": "사람이 읽을 수 있는 소스에 대한 설명입니다."
+                },
+                "sourceAssetPath": {
+                  "type": "object",
+                  "title": "/Script/CoreUObject.Object",
+                  "description": "기본 에셋의 경로입니다(있는 경우).",
+                  "properties": {
+                    "refPath": {
+                      "type": "string",
+                      "description": "소프트 경로 스트링으로 저장된 레퍼런스입니다."
+                    }
+                  },
+                  "required": [
+                    "refPath"
+                  ]
+                },
+                "availability": {
+                  "type": "string",
+                  "title": "EDataRegistryAvailability",
+                  "enum": [
+                    "DoesNotExist",
+                    "Unknown",
+                    "Remote",
+                    "OnDisk",
+                    "LocalAsset",
+                    "PreCached"
+                  ],
+                  "description": "이 소스의 가용성입니다."
+                },
+                "bIsInitialized": {
+                  "type": "boolean",
+                  "description": "소스가 초기화되었는지 여부입니다."
+                },
+                "bIsTransient": {
+                  "type": "boolean",
+                  "description": "런타임 전용 트랜션트 소스인지 여부입니다."
+                },
+                "parentSourceDebugString": {
+                  "type": "string",
+                  "description": "트랜션트 자손인 경우, 부모(원본) 소스의 디버그 스트링입니다. 그렇지 않은 경우, 비어 있습니다."
+                }
+              },
+              "required": [
+                "sourceClass",
+                "debugString",
+                "sourceAssetPath",
+                "availability",
+                "bIsInitialized",
+                "bIsTransient",
+                "parentSourceDebugString"
+              ]
+            },
+            "description": "정의된 순서대로 정렬된 소스 요약 정보의 목록을 반환합니다."
+          }
+        },
+        "required": [
+          "returnValue"
+        ]
+      }
+    },
+    {
+      "description": "아이템 구조체 스키마를 JSON으로 반환합니다.",
+      "name": "DataRegistryToolset.DataRegistryTools.GetSchema",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "registryName": {
+            "type": "string",
+            "description": "레지스트리 이름입니다."
+          }
+        },
+        "required": [
+          "registryName"
+        ]
+      },
+      "outputSchema": {
+        "type": "object",
+        "properties": {
+          "returnValue": {
+            "type": "string",
+            "description": "구조체의 필드와 타입을 설명하는 JSON 스트링을 반환합니다."
+          }
+        },
+        "required": [
+          "returnValue"
+        ]
+      }
+    },
+    {
+      "description": "특정 레지스트리에 대한 세부 정보를 반환합니다.",
+      "name": "DataRegistryToolset.DataRegistryTools.GetRegistryInfo",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "registryName": {
+            "type": "string",
+            "description": "레지스트리 이름입니다."
+          }
+        },
+        "required": [
+          "registryName"
+        ]
+      },
+      "outputSchema": {
+        "type": "object",
+        "properties": {
+          "returnValue": {
+            "title": "DataRegistryInfo",
+            "description": "설명 및 ID 포맷을 포함한 세부 정보를 반환합니다.",
+            "type": "object",
+            "properties": {
+              "registryName": {
+                "type": "string",
+                "description": "레지스트리 이름입니다."
+              },
+              "description": {
+                "type": "string",
+                "description": "사람이 읽을 수 있는 설명입니다."
+              },
+              "itemStruct": {
+                "type": "object",
+                "title": "/Script/CoreUObject.ScriptStruct",
+                "description": "이 레지스트리의 아이템에 사용되는 UScriptStruct입니다. null일 수 있습니다.",
+                "properties": {
+                  "refPath": {
+                    "type": "string",
+                    "description": "소프트 경로 스트링으로 저장된 레퍼런스입니다."
+                  }
+                },
+                "required": [
+                  "refPath"
+                ]
+              },
+              "itemCount": {
+                "type": "integer",
+                "description": "이 레지스트리에 알려진 아이템 ID의 수입니다."
+              },
+              "availability": {
+                "type": "string",
+                "title": "EDataRegistryAvailability",
+                "enum": [
+                  "DoesNotExist",
+                  "Unknown",
+                  "Remote",
+                  "OnDisk",
+                  "LocalAsset",
+                  "PreCached"
+                ],
+                "description": "이 레지스트리의 모든 소스 중 가장 낮은 가용성입니다. DoesNotExist는 레지스트리가\n초기화되지 않았음을 나타냅니다."
+              },
+              "idFormat": {
+                "type": "string",
+                "description": "ID 포맷의 베이스 GameplayTag입니다(있는 경우)."
+              }
+            },
+            "required": [
+              "registryName",
+              "description",
+              "itemStruct",
+              "itemCount",
+              "availability",
+              "idFormat"
+            ]
+          }
+        },
+        "required": [
+          "returnValue"
+        ]
+      }
+    },
+    {
+      "description": "캐시된 아이템 데이터를 반환합니다.\n반환되려면 아이템이 레지스트리 캐시에 로드되어 있어야 합니다.",
+      "name": "DataRegistryToolset.DataRegistryTools.GetItems",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "registryName": {
+            "type": "string",
+            "description": "레지스트리 이름입니다."
+          },
+          "itemNames": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "얻을 아이템 이름입니다."
+          }
+        },
+        "required": [
+          "registryName",
+          "itemNames"
+        ]
+      },
+      "outputSchema": {
+        "type": "object",
+        "properties": {
+          "returnValue": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "object",
+              "title": "FInstancedStruct",
+              "properties": {
+                "_structType": {
+                  "type": "string",
+                  "description": "UScriptStruct path name for polymorphic type identification (e.g. /Script/Module.StructName)."
+                }
+              }
+            },
+            "description": "아이템 이름에서 해당하는 구조체 데이터로 이어지는 맵을 반환합니다. 캐시에서 찾을 수 없는 이름은 결과에서 생략됩니다."
+          }
+        },
+        "required": [
+          "returnValue"
+        ]
+      }
+    }
+  ]
+}

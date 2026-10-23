@@ -1,0 +1,183 @@
+{
+  "name": "GameplayTagsToolset.GameplayTagsToolset",
+  "version": "1.0",
+  "description": "프로젝트의 GameplayTagsManager에서 게임플레이 태그를 읽고 관리하는 데 사용되는 툴을 제공합니다.",
+  "tools": [
+    {
+      "description": "게임플레이 태그의 이름을 변경하고 프로젝트의 모든 레퍼런스를 업데이트합니다.\n이 함수는 사용자의 명시적인 지시나 허가를 받은 후에만 호출해야 합니다.",
+      "name": "GameplayTagsToolset.GameplayTagsToolset.RenameTag",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "oldTagName": {
+            "type": "string",
+            "description": "이름을 변경할 태그의 완전히 정규화된 기존 이름입니다."
+          },
+          "newTagName": {
+            "type": "string",
+            "description": "태그의 완전히 정규화된 새 이름입니다."
+          }
+        },
+        "required": [
+          "oldTagName",
+          "newTagName"
+        ]
+      }
+    },
+    {
+      "description": "프로젝트에서 게임플레이 태그를 제거합니다.\n이 함수는 사용자의 명시적인 지시나 허가를 받은 후에만 호출해야 합니다.",
+      "name": "GameplayTagsToolset.GameplayTagsToolset.RemoveTag",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "tagName": {
+            "type": "string",
+            "description": "제거할 태그의 완전히 정규화된 이름입니다(예: 'Character.State.Dead')."
+          }
+        },
+        "required": [
+          "tagName"
+        ]
+      }
+    },
+    {
+      "description": "프로젝트에 등록된 게임플레이 태그를 반환합니다.",
+      "name": "GameplayTagsToolset.GameplayTagsToolset.ListTags",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "parentTag": {
+            "type": "string",
+            "description": "비어 있지 않은 경우, 이 태그의 후손인 태그만 반환됩니다. 예를 들어 'Character.State'를 전달하면 'Character.State.Dead', 'Character.State.Stunned' 등을 반환합니다. 모든 태그를 반환하려면 빈 스트링을 전달하세요."
+          }
+        },
+        "required": [
+          "parentTag"
+        ]
+      },
+      "outputSchema": {
+        "type": "object",
+        "properties": {
+          "returnValue": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "완전히 정규화된 태그 이름의 정렬된 목록을 반환합니다."
+          }
+        },
+        "required": [
+          "returnValue"
+        ]
+      }
+    },
+    {
+      "description": "특정 게임플레이 태그의 세부 정보를 반환합니다.",
+      "name": "GameplayTagsToolset.GameplayTagsToolset.GetTagInfo",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "tagName": {
+            "type": "string",
+            "description": "태그의 완전히 정규화된 이름입니다(예: 'Character.State.Dead')."
+          }
+        },
+        "required": [
+          "tagName"
+        ]
+      },
+      "outputSchema": {
+        "type": "object",
+        "properties": {
+          "returnValue": {
+            "title": "GameplayTagInfo",
+            "description": "태그의 개발자 코멘트, 소스 INI 파일, 직계 자손을 반환합니다. 태그가 없는 경우 스크립트 오류가 발생합니다.",
+            "type": "object",
+            "properties": {
+              "comment": {
+                "type": "string",
+                "description": "태그의 용도를 설명하는 개발자 코멘트입니다."
+              },
+              "source": {
+                "type": "string",
+                "description": "이 태그를 정의하는 INI 소스 파일의 이름입니다(예: 'DefaultGameplayTags.ini')."
+              },
+              "children": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "이 태그의 직계 자손의 완전히 정규화된 이름입니다."
+              }
+            },
+            "required": [
+              "comment",
+              "source",
+              "children"
+            ]
+          }
+        },
+        "required": [
+          "returnValue"
+        ]
+      }
+    },
+    {
+      "description": "게임플레이 태그를 레퍼런스하는 에셋을 반환합니다.",
+      "name": "GameplayTagsToolset.GameplayTagsToolset.FindReferencersByTag",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "tagName": {
+            "type": "string",
+            "description": "검색할 완전히 정규화된 게임플레이 태그입니다. 예: 'Character.State.Dead')."
+          }
+        },
+        "required": [
+          "tagName"
+        ]
+      },
+      "outputSchema": {
+        "type": "object",
+        "properties": {
+          "returnValue": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "해당 태그를 레퍼런스하는 패키지 경로의 목록을 반환합니다."
+          }
+        },
+        "required": [
+          "returnValue"
+        ]
+      }
+    },
+    {
+      "description": "프로젝트에 새 게임플레이 태그를 추가합니다.\n이 함수는 사용자의 명시적인 지시나 허가를 받은 후에만 호출해야 합니다.",
+      "name": "GameplayTagsToolset.GameplayTagsToolset.AddTag",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "tagName": {
+            "type": "string",
+            "description": "추가할 태그의 완전히 정규화된 이름입니다(예: 'Character.State.Dead')."
+          },
+          "comment": {
+            "type": "string",
+            "description": "해당 태그의 용도를 설명하는 선택적 개발자 코멘트입니다.",
+            "default": "/**\n\t * Adds a new gameplay tag to the project.\n\t * This should ONLY be called after getting explicit direction or permission from the user.\n\t * @param TagName The fully-qualified name of the tag to add, e.g. \"Character.State.Dead\".\n\t * @param Comment An optional developer comment describing the tag's purpose.\n\t * @param TagSource The INI source to add the tag to. Uses the default source if empty.\n\t */"
+          },
+          "tagSource": {
+            "type": "string",
+            "description": "태그를 추가할 INI 소스입니다. 비어 있으면 디폴트 소스를 사용합니다."
+          }
+        },
+        "required": [
+          "tagName",
+          "tagSource"
+        ]
+      }
+    }
+  ]
+}

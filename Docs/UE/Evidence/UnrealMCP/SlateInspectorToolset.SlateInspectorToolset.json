@@ -1,0 +1,529 @@
+{
+  "name": "SlateInspectorToolset.SlateInspectorToolset",
+  "version": "1.0",
+  "description": "플레이라이트 스타일의 슬레이트 UI 자동화 툴세트입니다.\n\n언리얼 에디터 UI를 프로그래밍 방식으로 제어하는 데 사용되는\n스냅샷, 스크린샷, 인터랙션 툴을 노출합니다.  ModelContextProtocol 플러그인이\n이를 자동으로 탐지할 수 있도록 UToolsetRegistry를 통해 등록됩니다.\n\n얕은 루트 관찰자(뎁스 0)가 최상위 창을 지속적으로\n트래킹합니다.  특정 창 또는 패널로 작업하기 전에 Observe()를 호출하여\n깊은 위젯 커버리지를 확보하고, 작업이 끝나면 Unobserve()를\n호출하세요.  관찰자는 약 100ms마다 서브트리를 순회하여 새로 나타난 위젯에 레퍼런스를 할당하고\n레퍼런스 캐시를 최신 상태로 유지합니다.\n\n입력 시뮬레이션은 AutomationDriver 대신 직접 슬레이트 이벤트 API(ProcessKeyCharEvent,\nProcessMouseButtonDownEvent 등)를 사용합니다. AutomationDriver의\n동기식 API는 게임 스레드(MCP 툴 호출이 실행되는 위치)에서 호출될 때\n데드록을 유발하기 때문입니다.",
+  "tools": [
+    {
+      "description": "최상위 슬레이트 에디터 창을 나열하거나, 선택하거나, 닫습니다.",
+      "name": "SlateInspectorToolset.SlateInspectorToolset.Windows",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "action": {
+            "type": "string",
+            "description": "'list'는 JSON 배열을 반환하고, 'select'는 창을 맨 앞으로 가져오며, 'close'는 창을 완전히 소멸시킵니다.",
+            "default": "list"
+          },
+          "index": {
+            "type": "integer",
+            "description": "선택/닫기를 수행할 창의 인덱스입니다.",
+            "default": -1
+          }
+        }
+      },
+      "outputSchema": {
+        "type": "object",
+        "properties": {
+          "returnValue": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "returnValue"
+        ]
+      }
+    },
+    {
+      "description": "슬레이트 위젯 트리 내에 텍스트가 있는지 여부를 확인합니다.\n비블로킹: 한 번만 확인하고 즉시 반환합니다. 대기하기 위해 폴링합니다.",
+      "name": "SlateInspectorToolset.SlateInspectorToolset.WaitFor",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "text": {
+            "type": "string",
+            "description": "있어야 하는 텍스트입니다(비어 있는 경우 건너뜀)."
+          },
+          "textGone": {
+            "type": "string",
+            "description": "없어야 하는 텍스트입니다(비어 있는 경우 건너뜀)."
+          }
+        },
+        "required": [
+          "text",
+          "textGone"
+        ]
+      },
+      "outputSchema": {
+        "type": "object",
+        "properties": {
+          "returnValue": {
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "returnValue"
+        ]
+      }
+    },
+    {
+      "description": "해당 식별자를 사용하여 관찰자를 제거합니다.",
+      "name": "SlateInspectorToolset.SlateInspectorToolset.Unobserve",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "identifier": {
+            "type": "string",
+            "description": "Observe()가 반환한 식별자입니다."
+          }
+        },
+        "required": [
+          "identifier"
+        ]
+      },
+      "outputSchema": {
+        "type": "object",
+        "properties": {
+          "returnValue": {
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "returnValue"
+        ]
+      }
+    },
+    {
+      "description": "슬레이트 텍스트 입력 위젯에 텍스트를 입력합니다. 위젯에 먼저 포커스한 다음\n글자별로 하나의 키 이벤트를 전송합니다.",
+      "name": "SlateInspectorToolset.SlateInspectorToolset.Type",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "ref": {
+            "type": "string",
+            "description": "슬레이트 텍스트 박스 레퍼런스입니다."
+          },
+          "text": {
+            "type": "string",
+            "description": "입력할 텍스트입니다."
+          },
+          "submit": {
+            "type": "boolean",
+            "description": "입력 후 Enter 키를 누릅니다.",
+            "default": false
+          }
+        },
+        "required": [
+          "ref",
+          "text"
+        ]
+      },
+      "outputSchema": {
+        "type": "object",
+        "properties": {
+          "returnValue": {
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "returnValue"
+        ]
+      }
+    },
+    {
+      "description": "슬레이트 UI 접근성 스냅샷을 캡처합니다.  현재 위젯 트리를 읽고\n액션 툴(클릭, 타입, 호버 등)을 위한 레퍼런스를 찾는 데 이를 사용합니다.\n얕은 루트 관찰자(뎁스 0)가 최상위 창을 자동으로 커버합니다.\n특정 창 또는 패널과 인터랙션하기 전에 Observe()를 호출하여 깊은 커버리지를 확보한 다음\n해당 서브트리를 스냅샷하여 콘텐츠를 확인하세요.\n이전 스냅샷에 의해 검색된 레퍼런스는 유효한 상태로 유지됩니다. 모든 액션을 수행하기 전에\n매번 스냅샷을 다시 호출할 필요는 없습니다.",
+      "name": "SlateInspectorToolset.SlateInspectorToolset.Snapshot",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "ref": {
+            "type": "string",
+            "description": "서브트리 루트 레퍼런스입니다. 비어 있는 경우 모든 창을 대상으로 합니다."
+          },
+          "maxDepth": {
+            "type": "integer",
+            "description": "최대 뎁스(디폴트 30)입니다.",
+            "default": 30
+          },
+          "bIncludeSourceLocations": {
+            "type": "boolean",
+            "description": "각 위젯이 C++의 어느 위치에서 생성되었는지 보여주는 [src=File:Line] 태그를 포함합니다.",
+            "default": false
+          }
+        },
+        "required": [
+          "ref"
+        ]
+      },
+      "outputSchema": {
+        "type": "object",
+        "properties": {
+          "returnValue": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "returnValue"
+        ]
+      }
+    },
+    {
+      "description": "텍스트 라벨을 사용하여 슬레이트 콤보박스의 옵션을 선택합니다.\n드롭다운을 열고 일치하는 텍스트를 찾은 다음 클릭합니다.",
+      "name": "SlateInspectorToolset.SlateInspectorToolset.SelectOption",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "ref": {
+            "type": "string",
+            "description": "슬레이트 콤보박스 레퍼런스입니다."
+          },
+          "value": {
+            "type": "string",
+            "description": "선택할 정확한 옵션 텍스트입니다."
+          }
+        },
+        "required": [
+          "ref",
+          "value"
+        ]
+      },
+      "outputSchema": {
+        "type": "object",
+        "properties": {
+          "returnValue": {
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "returnValue"
+        ]
+      }
+    },
+    {
+      "description": "슬레이트 위젯 또는 활성화된 에디터 창의 스크린샷을 찍습니다. 에디터 UI의 경우\nSceneTools.take_screenshot보다 이 기능을 권장하며, SceneTools는 3D 뷰포트용으로만 사용하세요.",
+      "name": "SlateInspectorToolset.SlateInspectorToolset.Screenshot",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "ref": {
+            "type": "string",
+            "description": "슬레이트 위젯 레퍼런스입니다. 비어 있는 경우, 활성 창을 대상으로 합니다."
+          }
+        },
+        "required": [
+          "ref"
+        ]
+      },
+      "outputSchema": {
+        "type": "object",
+        "properties": {
+          "returnValue": {
+            "title": "ToolsetImage",
+            "type": "object",
+            "properties": {
+              "mimeType": {
+                "type": "string",
+                "description": "이미지가 인코딩된 포맷입니다."
+              },
+              "data": {
+                "type": "string",
+                "description": "base64 스트링으로 인코딩된 이미지 데이터입니다."
+              }
+            },
+            "required": [
+              "mimeType",
+              "data"
+            ]
+          }
+        },
+        "required": [
+          "returnValue"
+        ]
+      }
+    },
+    {
+      "description": "현재 포커스된 슬레이트 위젯에서 키보드 키를 눌렀다 뗍니다.\n모디파이어 접두사('Ctrl+C', 'Shift+1')를 지원합니다.",
+      "name": "SlateInspectorToolset.SlateInspectorToolset.PressKey",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "key": {
+            "type": "string",
+            "description": "선택적인 모디파이어가 포함된 키 이름입니다(예: 'Enter', 'Ctrl+A', 'Shift+Tab')."
+          }
+        },
+        "required": [
+          "key"
+        ]
+      },
+      "outputSchema": {
+        "type": "object",
+        "properties": {
+          "returnValue": {
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "returnValue"
+        ]
+      }
+    },
+    {
+      "description": "위젯 서브트리에 관찰자를 등록하여 레퍼런스가 지속적으로\n최신 상태를 유지하도록 합니다(~100ms 틱).  작업할 창이나 패널에서\n이 함수를 호출하세요. 해당 서브트리에 새로 나타나는 위젯에\n레퍼런스가 자동으로 할당됩니다.  작업이 끝나면 관찰을 중단하세요.\n얕은 루트 관찰자(뎁스 0)는 이미 최상위 창을 포함하고 있습니다.",
+      "name": "SlateInspectorToolset.SlateInspectorToolset.Observe",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "ref": {
+            "type": "string",
+            "description": "관찰할 루트 위젯 레퍼런스입니다. 비어 있으면 표시되는 모든 창을 의미합니다."
+          },
+          "maxDepth": {
+            "type": "integer",
+            "description": "루트에서 탐색할 최대 깊이입니다.",
+            "default": 30
+          }
+        },
+        "required": [
+          "ref"
+        ]
+      },
+      "outputSchema": {
+        "type": "object",
+        "properties": {
+          "returnValue": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "returnValue"
+        ]
+      }
+    },
+    {
+      "description": "디버깅을 위해 모든 활성 관찰자를 JSON 배열로 나열합니다.\n각 엔트리에는 관찰자 식별자, 루트 관찰자 여부,\n루트 위젯 레퍼런스(있는 경우), 최대 뎁스, 캐시된 스냅샷 크기가 포함됩니다.",
+      "name": "SlateInspectorToolset.SlateInspectorToolset.ListObservers",
+      "inputSchema": {
+        "type": "object"
+      },
+      "outputSchema": {
+        "type": "object",
+        "properties": {
+          "returnValue": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "returnValue"
+        ]
+      }
+    },
+    {
+      "description": "슬레이트 위젯 위로 호버링하여 호버 스테이트 또는 툴팁을 트리거합니다.",
+      "name": "SlateInspectorToolset.SlateInspectorToolset.Hover",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "ref": {
+            "type": "string",
+            "description": "슬레이트 위젯 레퍼런스입니다."
+          }
+        },
+        "required": [
+          "ref"
+        ]
+      },
+      "outputSchema": {
+        "type": "object",
+        "properties": {
+          "returnValue": {
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "returnValue"
+        ]
+      }
+    },
+    {
+      "description": "여러 슬레이트 폼 필드를 한 번에 채웁니다.",
+      "name": "SlateInspectorToolset.SlateInspectorToolset.FillForm",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "fields": {
+            "type": "array",
+            "items": {
+              "title": "SlateInspectorToolsetFormField",
+              "type": "object",
+              "properties": {
+                "ref": {
+                  "type": "string",
+                  "description": "폼 필드 위젯의 레퍼런스 식별자입니다."
+                },
+                "value": {
+                  "type": "string",
+                  "description": "설정할 값입니다."
+                },
+                "fieldType": {
+                  "type": "string",
+                  "description": "필드의 타입은 'textbox', 'checkbox', 'combobox'입니다."
+                }
+              },
+              "required": [
+                "ref",
+                "value",
+                "fieldType"
+              ]
+            },
+            "description": "{Ref, Value, FieldType}의 배열입니다. FieldType은 'textbox', 'checkbox' 또는 'combobox'입니다."
+          }
+        },
+        "required": [
+          "fields"
+        ]
+      },
+      "outputSchema": {
+        "type": "object",
+        "properties": {
+          "returnValue": {
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "returnValue"
+        ]
+      }
+    },
+    {
+      "description": "하나의 슬레이트 위젯에서 다른 위젯으로 드래그합니다(마우스 누름, 이동, 릴리즈).",
+      "name": "SlateInspectorToolset.SlateInspectorToolset.Drag",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "startRef": {
+            "type": "string",
+            "description": "드래그 소스의 슬레이트 위젯 레퍼런스입니다."
+          },
+          "endRef": {
+            "type": "string",
+            "description": "드롭 타깃의 슬레이트 위젯 레퍼런스입니다."
+          },
+          "modifiers": {
+            "title": "SlateInspectorToolsetModifierKeys",
+            "description": "드래그 동안 눌린 모디파이어 키입니다.",
+            "default": {
+              "bShift": false,
+              "bCtrl": false,
+              "bAlt": false,
+              "bCmd": false
+            },
+            "type": "object",
+            "properties": {
+              "bShift": {
+                "type": "boolean"
+              },
+              "bCtrl": {
+                "type": "boolean"
+              },
+              "bAlt": {
+                "type": "boolean"
+              },
+              "bCmd": {
+                "type": "boolean"
+              }
+            },
+            "required": [
+              "bShift",
+              "bCtrl",
+              "bAlt",
+              "bCmd"
+            ]
+          }
+        },
+        "required": [
+          "startRef",
+          "endRef"
+        ]
+      },
+      "outputSchema": {
+        "type": "object",
+        "properties": {
+          "returnValue": {
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "returnValue"
+        ]
+      }
+    },
+    {
+      "description": "레퍼런스로 식별된 슬레이트 위젯을 클릭합니다.",
+      "name": "SlateInspectorToolset.SlateInspectorToolset.Click",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "ref": {
+            "type": "string",
+            "description": "슬레이트 위젯 레퍼런스입니다."
+          },
+          "button": {
+            "type": "string",
+            "description": "'왼쪽', '오른쪽', '가운데' 버튼입니다.",
+            "default": "left"
+          },
+          "doubleClick": {
+            "type": "boolean",
+            "description": "더블클릭인 경우 true입니다.",
+            "default": false
+          },
+          "modifiers": {
+            "title": "SlateInspectorToolsetModifierKeys",
+            "description": "클릭하는 동안 누르고 있는 모디파이어 키입니다.",
+            "default": {
+              "bShift": false,
+              "bCtrl": false,
+              "bAlt": false,
+              "bCmd": false
+            },
+            "type": "object",
+            "properties": {
+              "bShift": {
+                "type": "boolean"
+              },
+              "bCtrl": {
+                "type": "boolean"
+              },
+              "bAlt": {
+                "type": "boolean"
+              },
+              "bCmd": {
+                "type": "boolean"
+              }
+            },
+            "required": [
+              "bShift",
+              "bCtrl",
+              "bAlt",
+              "bCmd"
+            ]
+          }
+        },
+        "required": [
+          "ref"
+        ]
+      },
+      "outputSchema": {
+        "type": "object",
+        "properties": {
+          "returnValue": {
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "returnValue"
+        ]
+      }
+    }
+  ]
+}

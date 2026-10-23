@@ -1,0 +1,443 @@
+[
+  {
+    "toolset": "EditorToolset.EditorAppToolset",
+    "tool": "GetCameraTransform",
+    "arguments": {},
+    "result": {
+      "location": {
+        "x": -1412.16701,
+        "y": 24.155375,
+        "z": 270.277731
+      },
+      "rotation": {
+        "pitch": 3.357953041723258,
+        "yaw": -0.5644660089407003,
+        "roll": 8.99999999998408e-06
+      },
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      }
+    }
+  },
+  {
+    "toolset": "EditorToolset.EditorAppToolset",
+    "tool": "SetCameraTransform",
+    "arguments": {
+      "transform": {
+        "location": {
+          "x": -450,
+          "y": -650,
+          "z": 350
+        },
+        "rotation": {
+          "pitch": -18,
+          "yaw": 55,
+          "roll": 0
+        }
+      }
+    },
+    "result": null
+  },
+  {
+    "toolset": "editor_toolset.toolsets.scene.SceneTools",
+    "tool": "add_to_scene_from_asset",
+    "arguments": {
+      "asset_path": "/Engine/BasicShapes/Cube.Cube",
+      "name": "MCP_DemoCube",
+      "xform": {
+        "location": {
+          "x": 0,
+          "y": 0,
+          "z": 100
+        }
+      }
+    },
+    "result": {
+      "refPath": "/Engine/Maps/Templates/Template_Default.Template_Default:PersistentLevel.StaticMeshActor_3"
+    }
+  },
+  {
+    "toolset": "EditorToolset.EditorAppToolset",
+    "tool": "SelectActors",
+    "arguments": {
+      "actors": [
+        {
+          "refPath": "/Engine/Maps/Templates/Template_Default.Template_Default:PersistentLevel.StaticMeshActor_3"
+        }
+      ]
+    },
+    "result": null
+  },
+  {
+    "toolset": "editor_toolset.toolsets.actor.ActorTools",
+    "tool": "set_actor_transform",
+    "arguments": {
+      "actor": {
+        "refPath": "/Engine/Maps/Templates/Template_Default.Template_Default:PersistentLevel.StaticMeshActor_3"
+      },
+      "xform": {
+        "location": {
+          "x": 0,
+          "y": 0,
+          "z": 100
+        },
+        "rotation": {
+          "pitch": 0,
+          "yaw": 0,
+          "roll": 0
+        }
+      }
+    },
+    "result": true
+  },
+  {
+    "toolset": "editor_toolset.toolsets.actor.ActorTools",
+    "tool": "get_actor_transform",
+    "arguments": {
+      "actor": {
+        "refPath": "/Engine/Maps/Templates/Template_Default.Template_Default:PersistentLevel.StaticMeshActor_3"
+      }
+    },
+    "result": {
+      "location": {
+        "x": 0,
+        "y": 0,
+        "z": 100
+      },
+      "rotation": {
+        "pitch": 0,
+        "yaw": 0,
+        "roll": 0
+      },
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      }
+    }
+  },
+  {
+    "toolset": "editor_toolset.toolsets.actor.ActorTools",
+    "tool": "set_actor_transform",
+    "arguments": {
+      "actor": {
+        "refPath": "/Engine/Maps/Templates/Template_Default.Template_Default:PersistentLevel.StaticMeshActor_3"
+      },
+      "xform": {
+        "location": {
+          "x": 0,
+          "y": 0,
+          "z": 100
+        },
+        "rotation": {
+          "pitch": 0,
+          "yaw": 0,
+          "roll": 0
+        }
+      }
+    },
+    "result": true
+  },
+  {
+    "toolset": "editor_toolset.toolsets.actor.ActorTools",
+    "tool": "get_actor_transform",
+    "arguments": {
+      "actor": {
+        "refPath": "/Engine/Maps/Templates/Template_Default.Template_Default:PersistentLevel.StaticMeshActor_3"
+      }
+    },
+    "result": {
+      "location": {
+        "x": 0,
+        "y": 0,
+        "z": 100
+      },
+      "rotation": {
+        "pitch": 0,
+        "yaw": 0,
+        "roll": 0
+      },
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      }
+    }
+  },
+  {
+    "toolset": "editor_toolset.toolsets.actor.ActorTools",
+    "tool": "set_actor_transform",
+    "arguments": {
+      "actor": {
+        "refPath": "/Engine/Maps/Templates/Template_Default.Template_Default:PersistentLevel.StaticMeshActor_3"
+      },
+      "xform": {
+        "location": {
+          "x": 100,
+          "y": 0,
+          "z": 100
+        },
+        "rotation": {
+          "pitch": 0,
+          "yaw": 0,
+          "roll": 0
+        }
+      }
+    },
+    "result": true
+  },
+  {
+    "toolset": "editor_toolset.toolsets.actor.ActorTools",
+    "tool": "get_actor_transform",
+    "arguments": {
+      "actor": {
+        "refPath": "/Engine/Maps/Templates/Template_Default.Template_Default:PersistentLevel.StaticMeshActor_3"
+      }
+    },
+    "result": {
+      "location": {
+        "x": 100,
+        "y": 0,
+        "z": 100
+      },
+      "rotation": {
+        "pitch": 0,
+        "yaw": 0,
+        "roll": 0
+      },
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      }
+    }
+  },
+  {
+    "toolset": "editor_toolset.toolsets.actor.ActorTools",
+    "tool": "set_actor_transform",
+    "arguments": {
+      "actor": {
+        "refPath": "/Engine/Maps/Templates/Template_Default.Template_Default:PersistentLevel.StaticMeshActor_3"
+      },
+      "xform": {
+        "location": {
+          "x": 200,
+          "y": 0,
+          "z": 100
+        },
+        "rotation": {
+          "pitch": 0,
+          "yaw": 0,
+          "roll": 0
+        }
+      }
+    },
+    "result": true
+  },
+  {
+    "toolset": "editor_toolset.toolsets.actor.ActorTools",
+    "tool": "get_actor_transform",
+    "arguments": {
+      "actor": {
+        "refPath": "/Engine/Maps/Templates/Template_Default.Template_Default:PersistentLevel.StaticMeshActor_3"
+      }
+    },
+    "result": {
+      "location": {
+        "x": 200,
+        "y": 0,
+        "z": 100
+      },
+      "rotation": {
+        "pitch": 0,
+        "yaw": 0,
+        "roll": 0
+      },
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      }
+    }
+  },
+  {
+    "toolset": "editor_toolset.toolsets.actor.ActorTools",
+    "tool": "set_actor_transform",
+    "arguments": {
+      "actor": {
+        "refPath": "/Engine/Maps/Templates/Template_Default.Template_Default:PersistentLevel.StaticMeshActor_3"
+      },
+      "xform": {
+        "location": {
+          "x": 200,
+          "y": 0,
+          "z": 180
+        },
+        "rotation": {
+          "pitch": 0,
+          "yaw": 0,
+          "roll": 0
+        }
+      }
+    },
+    "result": true
+  },
+  {
+    "toolset": "editor_toolset.toolsets.actor.ActorTools",
+    "tool": "get_actor_transform",
+    "arguments": {
+      "actor": {
+        "refPath": "/Engine/Maps/Templates/Template_Default.Template_Default:PersistentLevel.StaticMeshActor_3"
+      }
+    },
+    "result": {
+      "location": {
+        "x": 200,
+        "y": 0,
+        "z": 180
+      },
+      "rotation": {
+        "pitch": 0,
+        "yaw": 0,
+        "roll": 0
+      },
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      }
+    }
+  },
+  {
+    "toolset": "editor_toolset.toolsets.actor.ActorTools",
+    "tool": "set_actor_transform",
+    "arguments": {
+      "actor": {
+        "refPath": "/Engine/Maps/Templates/Template_Default.Template_Default:PersistentLevel.StaticMeshActor_3"
+      },
+      "xform": {
+        "location": {
+          "x": 200,
+          "y": 0,
+          "z": 180
+        },
+        "rotation": {
+          "pitch": 0,
+          "yaw": 45,
+          "roll": 0
+        }
+      }
+    },
+    "result": true
+  },
+  {
+    "toolset": "editor_toolset.toolsets.actor.ActorTools",
+    "tool": "get_actor_transform",
+    "arguments": {
+      "actor": {
+        "refPath": "/Engine/Maps/Templates/Template_Default.Template_Default:PersistentLevel.StaticMeshActor_3"
+      }
+    },
+    "result": {
+      "location": {
+        "x": 200,
+        "y": 0,
+        "z": 180
+      },
+      "rotation": {
+        "pitch": 0,
+        "yaw": 45.00000000000003,
+        "roll": 0
+      },
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      }
+    }
+  },
+  {
+    "toolset": "editor_toolset.toolsets.actor.ActorTools",
+    "tool": "set_actor_transform",
+    "arguments": {
+      "actor": {
+        "refPath": "/Engine/Maps/Templates/Template_Default.Template_Default:PersistentLevel.StaticMeshActor_3"
+      },
+      "xform": {
+        "location": {
+          "x": 200,
+          "y": 0,
+          "z": 180
+        },
+        "rotation": {
+          "pitch": 0,
+          "yaw": 90,
+          "roll": 0
+        }
+      }
+    },
+    "result": true
+  },
+  {
+    "toolset": "editor_toolset.toolsets.actor.ActorTools",
+    "tool": "get_actor_transform",
+    "arguments": {
+      "actor": {
+        "refPath": "/Engine/Maps/Templates/Template_Default.Template_Default:PersistentLevel.StaticMeshActor_3"
+      }
+    },
+    "result": {
+      "location": {
+        "x": 200,
+        "y": 0,
+        "z": 180
+      },
+      "rotation": {
+        "pitch": 0,
+        "yaw": 89.99999999999999,
+        "roll": 0
+      },
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      }
+    }
+  },
+  {
+    "toolset": "editor_toolset.toolsets.scene.SceneTools",
+    "tool": "remove_from_scene",
+    "arguments": {
+      "actor": {
+        "refPath": "/Engine/Maps/Templates/Template_Default.Template_Default:PersistentLevel.StaticMeshActor_3"
+      }
+    },
+    "result": true
+  },
+  {
+    "toolset": "EditorToolset.EditorAppToolset",
+    "tool": "SetCameraTransform",
+    "arguments": {
+      "transform": {
+        "location": {
+          "x": -1412.16701,
+          "y": 24.155375,
+          "z": 270.277731
+        },
+        "rotation": {
+          "pitch": 3.357953041723258,
+          "yaw": -0.5644660089407003,
+          "roll": 8.99999999998408e-06
+        },
+        "scale": {
+          "x": 1,
+          "y": 1,
+          "z": 1
+        }
+      }
+    },
+    "result": null
+  }
+]

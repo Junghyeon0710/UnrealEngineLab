@@ -1,0 +1,174 @@
+{
+  "name": "ToolsetRegistry.AgentSkillToolset",
+  "version": "1.0",
+  "description": "스킬의 나열, 읽기, 생성/업데이트에 사용되는 툴을 제공합니다.",
+  "tools": [
+    {
+      "description": "기존 AgentSkill을 업데이트합니다.\n이 함수는 사용자의 명시적인 지시나 허가를 받은 후에만 호출해야 합니다.",
+      "name": "ToolsetRegistry.AgentSkillToolset.UpdateSkill",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "skillPath": {
+            "type": "string",
+            "description": "수정할 스킬의 전체 경로입니다. 예: /Game/Skills/MySkill.MySkill_C."
+          },
+          "description": {
+            "type": "string",
+            "description": "스킬에 대한 간략한 설명입니다."
+          },
+          "details": {
+            "title": "AgentSkillDetails",
+            "description": "스킬을 사용하는 방법의 세부 정보입니다.",
+            "type": "object",
+            "properties": {
+              "instructions": {
+                "type": "string",
+                "description": "스킬 사용 방법의 세부 정보입니다."
+              }
+            },
+            "required": [
+              "instructions"
+            ]
+          }
+        },
+        "required": [
+          "skillPath",
+          "description",
+          "details"
+        ]
+      },
+      "outputSchema": {
+        "type": "object",
+        "properties": {
+          "returnValue": {
+            "type": "boolean",
+            "description": "스킬이 업데이트된 경우, true를 반환합니다."
+          }
+        },
+        "required": [
+          "returnValue"
+        ]
+      }
+    },
+    {
+      "description": "프로젝트 내의 모든 AgentSkills에 대한 요약을 구합니다.",
+      "name": "ToolsetRegistry.AgentSkillToolset.ListSkills",
+      "inputSchema": {
+        "type": "object"
+      },
+      "outputSchema": {
+        "type": "object",
+        "properties": {
+          "returnValue": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string"
+            },
+            "description": "키가 스킬 경로이고 값이 설명인 딕셔너리를 반환합니다."
+          }
+        },
+        "required": [
+          "returnValue"
+        ]
+      }
+    },
+    {
+      "description": "특정 AgentSkills 세트의 세부 정보를 반환합니다.",
+      "name": "ToolsetRegistry.AgentSkillToolset.GetSkills",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "skillPaths": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "얻을 AgentSkills의 경로의 목록입니다."
+          }
+        },
+        "required": [
+          "skillPaths"
+        ]
+      },
+      "outputSchema": {
+        "type": "object",
+        "properties": {
+          "returnValue": {
+            "type": "object",
+            "additionalProperties": {
+              "title": "AgentSkillDetails",
+              "type": "object",
+              "properties": {
+                "instructions": {
+                  "type": "string",
+                  "description": "스킬 사용 방법의 세부 정보입니다."
+                }
+              },
+              "required": [
+                "instructions"
+              ]
+            },
+            "description": "키가 스킬 경로이고 값이 세부 정보인 딕셔너리를 반환합니다."
+          }
+        },
+        "required": [
+          "returnValue"
+        ]
+      }
+    },
+    {
+      "description": "새 AgentSkill을 생성합니다.\n이 함수는 사용자의 명시적인 지시나 허가를 받은 후에만 호출해야 합니다.",
+      "name": "ToolsetRegistry.AgentSkillToolset.CreateSkill",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "folderPath": {
+            "type": "string",
+            "description": "스킬을 생성할 폴더입니다. 예: /Game/Skills/"
+          },
+          "assetName": {
+            "type": "string",
+            "description": "생성할 스킬의 이름입니다(예: MySkill)."
+          },
+          "description": {
+            "type": "string",
+            "description": "스킬에 대한 간략한 설명입니다."
+          },
+          "details": {
+            "title": "AgentSkillDetails",
+            "description": "스킬을 사용하는 방법의 세부 정보입니다.",
+            "type": "object",
+            "properties": {
+              "instructions": {
+                "type": "string",
+                "description": "스킬 사용 방법의 세부 정보입니다."
+              }
+            },
+            "required": [
+              "instructions"
+            ]
+          }
+        },
+        "required": [
+          "folderPath",
+          "assetName",
+          "description",
+          "details"
+        ]
+      },
+      "outputSchema": {
+        "type": "object",
+        "properties": {
+          "returnValue": {
+            "type": "string",
+            "description": "생성된 스킬 클래스의 경로를 반환합니다. 실패 시 비어 있습니다."
+          }
+        },
+        "required": [
+          "returnValue"
+        ]
+      }
+    }
+  ]
+}

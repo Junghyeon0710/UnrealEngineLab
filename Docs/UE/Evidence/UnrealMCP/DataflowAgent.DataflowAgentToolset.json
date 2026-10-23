@@ -1,0 +1,933 @@
+{
+  "name": "DataflowAgent.DataflowAgentToolset",
+  "version": "1.0",
+  "description": "데이터플로 에이전트 툴세트로, 데이터플로 그래프 편집 오퍼레이션을 AI 에이전트 툴로 노출합니다.",
+  "tools": [
+    {
+      "description": "JSON을 통해 기존 노드의 편집 가능한 프로퍼티를 업데이트합니다.",
+      "name": "DataflowAgent.DataflowAgentToolset.UpdateNode",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "node": {
+            "type": "object",
+            "title": "/Script/DataflowEngine.DataflowEdNode",
+            "description": "수정할 에디터 노드입니다.",
+            "properties": {
+              "refPath": {
+                "type": "string",
+                "description": "소프트 경로 스트링으로 저장된 레퍼런스입니다."
+              }
+            },
+            "required": [
+              "refPath"
+            ]
+          },
+          "jsonParams": {
+            "type": "string",
+            "description": "오버라이드할 프로퍼티의 JSON 오브젝트입니다(예: {\"Value\": 3.14})."
+          }
+        },
+        "required": [
+          "node",
+          "jsonParams"
+        ]
+      }
+    },
+    {
+      "description": "시리얼라이즈된 스트링 표현을 사용하여 기존 변수의 값을 설정합니다.\n포맷은 변수의 타입에 따라 달라집니다(예: 플로트의 경우 '3.14', 부울의 경우 'true',\n인티저의 경우 '42', FName의 경우 'MyName').",
+      "name": "DataflowAgent.DataflowAgentToolset.SetVariable",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "graph": {
+            "type": "object",
+            "title": "/Script/DataflowEngine.Dataflow",
+            "description": "수정할 데이터 플로 에셋입니다.",
+            "properties": {
+              "refPath": {
+                "type": "string",
+                "description": "소프트 경로 스트링으로 저장된 레퍼런스입니다."
+              }
+            },
+            "required": [
+              "refPath"
+            ]
+          },
+          "name": {
+            "type": "string",
+            "description": "설정할 변수의 이름입니다."
+          },
+          "value": {
+            "type": "string",
+            "description": "할당할 시리얼라이즈된 스트링 값입니다."
+          }
+        },
+        "required": [
+          "graph",
+          "name",
+          "value"
+        ]
+      },
+      "outputSchema": {
+        "type": "object",
+        "properties": {
+          "returnValue": {
+            "type": "boolean",
+            "description": "성공 시 true를 반환하고, 변수를 찾을 수 없거나 값을 파싱할 수 없는 경우 false를 반환합니다."
+          }
+        },
+        "required": [
+          "returnValue"
+        ]
+      }
+    },
+    {
+      "description": "그래프 에디터에서 노드를 새 위치로 이동합니다.",
+      "name": "DataflowAgent.DataflowAgentToolset.RepositionNode",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "node": {
+            "type": "object",
+            "title": "/Script/DataflowEngine.DataflowEdNode",
+            "description": "위치를 재설정할 에디터 노드입니다.",
+            "properties": {
+              "refPath": {
+                "type": "string",
+                "description": "소프트 경로 스트링으로 저장된 레퍼런스입니다."
+              }
+            },
+            "required": [
+              "refPath"
+            ]
+          },
+          "x": {
+            "type": "integer",
+            "description": "새 X 위치입니다."
+          },
+          "y": {
+            "type": "integer",
+            "description": "새 Y 위치입니다."
+          }
+        },
+        "required": [
+          "node",
+          "x",
+          "y"
+        ]
+      }
+    },
+    {
+      "description": "데이터플로 그래프에서 변수를 제거합니다.",
+      "name": "DataflowAgent.DataflowAgentToolset.RemoveVariable",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "graph": {
+            "type": "object",
+            "title": "/Script/DataflowEngine.Dataflow",
+            "description": "수정할 데이터 플로 에셋입니다.",
+            "properties": {
+              "refPath": {
+                "type": "string",
+                "description": "소프트 경로 스트링으로 저장된 레퍼런스입니다."
+              }
+            },
+            "required": [
+              "refPath"
+            ]
+          },
+          "name": {
+            "type": "string",
+            "description": "제거할 변수의 이름입니다."
+          }
+        },
+        "required": [
+          "graph",
+          "name"
+        ]
+      }
+    },
+    {
+      "description": "데이터플로 그래프에서 노드와 해당 노드의 모든 연결을 제거합니다.",
+      "name": "DataflowAgent.DataflowAgentToolset.RemoveNode",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "graph": {
+            "type": "object",
+            "title": "/Script/DataflowEngine.Dataflow",
+            "description": "노드를 포함하는 데이터플로 에셋입니다.",
+            "properties": {
+              "refPath": {
+                "type": "string",
+                "description": "소프트 경로 스트링으로 저장된 레퍼런스입니다."
+              }
+            },
+            "required": [
+              "refPath"
+            ]
+          },
+          "node": {
+            "type": "object",
+            "title": "/Script/DataflowEngine.DataflowEdNode",
+            "description": "제거할 에디터 노드입니다.",
+            "properties": {
+              "refPath": {
+                "type": "string",
+                "description": "소프트 경로 스트링으로 저장된 레퍼런스입니다."
+              }
+            },
+            "required": [
+              "refPath"
+            ]
+          }
+        },
+        "required": [
+          "graph",
+          "node"
+        ]
+      }
+    },
+    {
+      "description": "그래프에서 코멘트 박스 노드를 제거합니다.",
+      "name": "DataflowAgent.DataflowAgentToolset.RemoveCommentBox",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "graph": {
+            "type": "object",
+            "title": "/Script/DataflowEngine.Dataflow",
+            "description": "코멘트를 포함하는 데이터플로 에셋입니다.",
+            "properties": {
+              "refPath": {
+                "type": "string",
+                "description": "소프트 경로 스트링으로 저장된 레퍼런스입니다."
+              }
+            },
+            "required": [
+              "refPath"
+            ]
+          },
+          "commentId": {
+            "type": "string",
+            "description": "AddCommentBox에서 반환된 노드 GUID 스트링입니다."
+          }
+        },
+        "required": [
+          "graph",
+          "commentId"
+        ]
+      }
+    },
+    {
+      "description": "데이터플로 그래프에 정의된 모든 변수를 JSON 배열로 반환합니다.\n각 엔트리에는 'name', 'type' 및 'value' 필드가 포함됩니다.",
+      "name": "DataflowAgent.DataflowAgentToolset.ListVariables",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "graph": {
+            "type": "object",
+            "title": "/Script/DataflowEngine.Dataflow",
+            "description": "검사할 데이터플로 에셋입니다.",
+            "properties": {
+              "refPath": {
+                "type": "string",
+                "description": "소프트 경로 스트링으로 저장된 레퍼런스입니다."
+              }
+            },
+            "required": [
+              "refPath"
+            ]
+          }
+        },
+        "required": [
+          "graph"
+        ]
+      },
+      "outputSchema": {
+        "type": "object",
+        "properties": {
+          "returnValue": {
+            "type": "string",
+            "description": "변수 디스크립터의 JSON 배열을 반환하며, 실패 시 빈 스트링을 반환합니다."
+          }
+        },
+        "required": [
+          "returnValue"
+        ]
+      }
+    },
+    {
+      "description": "등록된 모든 데이터플로 노드 타입의 JSON 목록을 반환합니다.",
+      "name": "DataflowAgent.DataflowAgentToolset.ListNodeTypes",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "bCommonOnly": {
+            "type": "boolean",
+            "description": "true인 경우, 지원이 중단되거나 실험 단계의 노드를 제외한 일반 노드만 반환합니다. 디폴트는 true입니다.",
+            "default": true
+          }
+        }
+      },
+      "outputSchema": {
+        "type": "object",
+        "properties": {
+          "returnValue": {
+            "type": "string",
+            "description": "노드 타입 이름의 JSON 배열을 반환합니다."
+          }
+        },
+        "required": [
+          "returnValue"
+        ]
+      }
+    },
+    {
+      "description": "지정된 에셋 클래스에 대해 등록된 데이터플로 템플릿의 JSON 목록을 반환합니다.\n부모 클래스에 대해 등록된 템플릿이 포함됩니다(클래스 계층구조 탐색).",
+      "name": "DataflowAgent.DataflowAgentToolset.ListDataflowTemplatesForAssetClass",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "className": {
+            "type": "string",
+            "description": "'U'/'A' 접두사를 포함하거나 포함하지 않은 에셋 클래스 이름입니다."
+          },
+          "bIncludeBlank": {
+            "type": "boolean",
+            "description": "true인 경우, 시작 부분에 'Blank'(빈 그래프) 옵션을 포함합니다.",
+            "default": true
+          }
+        },
+        "required": [
+          "className"
+        ]
+      },
+      "outputSchema": {
+        "type": "object",
+        "properties": {
+          "returnValue": {
+            "type": "string",
+            "description": "`{ \"templateId\", \"displayName\", \"tooltip\" }` 오브젝트의 JSON 배열을 반환합니다. 'templateId'는 불투명한 코드이므로, 이 값을 AssignDataflowTemplate 또는 CreateDataflowCompatibleAssetFromTemplate으로 다시 전달하세요."
+          }
+        },
+        "required": [
+          "returnValue"
+        ]
+      }
+    },
+    {
+      "description": "임베디드 데이터플로 그래프를 호스팅할 수 있는 모든 UClass\n(즉, IDataflowInstanceInterface를 구현하는 모든 클래스)의 JSON 목록을 반환합니다. 각 엔트리는 'className',\n'displayName' 및 'modulePath' 필드를 가집니다.\n\n여기서 얻은 'className' 값을 CreateDataflowCompatibleAsset 또는\nListDataflowTemplatesForAssetClass의 입력으로 사용하세요.",
+      "name": "DataflowAgent.DataflowAgentToolset.ListDataflowCompatibleAssetTypes",
+      "inputSchema": {
+        "type": "object"
+      },
+      "outputSchema": {
+        "type": "object",
+        "properties": {
+          "returnValue": {
+            "type": "string",
+            "description": "호환되는 에셋 타입 디스크립터의 JSON 배열을 반환합니다."
+          }
+        },
+        "required": [
+          "returnValue"
+        ]
+      }
+    },
+    {
+      "description": "입력/출력 핀 및 편집 가능한 UPROPERTY 파라미터를 포함하는 데이터플로 노드 타입의\n스키마를 반환합니다.",
+      "name": "DataflowAgent.DataflowAgentToolset.GetNodeTypeSchema",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "typeName": {
+            "type": "string",
+            "description": "노드 타입 이름입니다(예: 'FAddFloatsDataflowNode')."
+          }
+        },
+        "required": [
+          "typeName"
+        ]
+      },
+      "outputSchema": {
+        "type": "object",
+        "properties": {
+          "returnValue": {
+            "type": "string",
+            "description": "이름, 카테고리, 툴팁, 입력 핀, 출력 핀, 프로퍼티가 포함된 JSON 오브젝트를 반환합니다."
+          }
+        },
+        "required": [
+          "returnValue"
+        ]
+      }
+    },
+    {
+      "description": "노드에 대한 정보(이름, 타입, 위치, 핀)를 JSON 오브젝트로 반환합니다.",
+      "name": "DataflowAgent.DataflowAgentToolset.GetNodeInfo",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "node": {
+            "type": "object",
+            "title": "/Script/DataflowEngine.DataflowEdNode",
+            "description": "쿼리할 에디터 노드입니다.",
+            "properties": {
+              "refPath": {
+                "type": "string",
+                "description": "소프트 경로 스트링으로 저장된 레퍼런스입니다."
+              }
+            },
+            "required": [
+              "refPath"
+            ]
+          }
+        },
+        "required": [
+          "node"
+        ]
+      },
+      "outputSchema": {
+        "type": "object",
+        "properties": {
+          "returnValue": {
+            "type": "string",
+            "description": "노드 정보가 포함된 JSON 스트링을 반환하며, 실패 시 오류 메시지를 반환합니다."
+          }
+        },
+        "required": [
+          "returnValue"
+        ]
+      }
+    },
+    {
+      "description": "모든 노드와 연결을 포함하는 데이터플로 그래프의 전체 구조를 반환합니다.",
+      "name": "DataflowAgent.DataflowAgentToolset.GetGraphStructure",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "graph": {
+            "type": "object",
+            "title": "/Script/DataflowEngine.Dataflow",
+            "description": "검사할 데이터플로 에셋입니다.",
+            "properties": {
+              "refPath": {
+                "type": "string",
+                "description": "소프트 경로 스트링으로 저장된 레퍼런스입니다."
+              }
+            },
+            "required": [
+              "refPath"
+            ]
+          }
+        },
+        "required": [
+          "graph"
+        ]
+      },
+      "outputSchema": {
+        "type": "object",
+        "properties": {
+          "returnValue": {
+            "type": "string",
+            "description": "그래프 구조(노드 + 연결)가 포함된 JSON 스트링을 반환하며, 실패 시 오류 메시지를 반환합니다."
+          }
+        },
+        "required": [
+          "returnValue"
+        ]
+      }
+    },
+    {
+      "description": "두 노드 핀 사이의 연결을 제거합니다.",
+      "name": "DataflowAgent.DataflowAgentToolset.DisconnectNodePins",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "fromNode": {
+            "type": "object",
+            "title": "/Script/DataflowEngine.DataflowEdNode",
+            "description": "소스 에디터 노드입니다.",
+            "properties": {
+              "refPath": {
+                "type": "string",
+                "description": "소프트 경로 스트링으로 저장된 레퍼런스입니다."
+              }
+            },
+            "required": [
+              "refPath"
+            ]
+          },
+          "fromPin": {
+            "type": "string",
+            "description": "소스 노드의 출력 핀 이름입니다."
+          },
+          "toNode": {
+            "type": "object",
+            "title": "/Script/DataflowEngine.DataflowEdNode",
+            "description": "대상 에디터 노드입니다.",
+            "properties": {
+              "refPath": {
+                "type": "string",
+                "description": "소프트 경로 스트링으로 저장된 레퍼런스입니다."
+              }
+            },
+            "required": [
+              "refPath"
+            ]
+          },
+          "toPin": {
+            "type": "string",
+            "description": "대상 노드의 입력 핀 이름입니다."
+          }
+        },
+        "required": [
+          "fromNode",
+          "fromPin",
+          "toNode",
+          "toPin"
+        ]
+      }
+    },
+    {
+      "description": "새로 저장된 데이터플로 그래프 에셋을 생성합니다.",
+      "name": "DataflowAgent.DataflowAgentToolset.CreateGraph",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "'DF_Simulation' 같은 새 데이터플로 에셋의 이름입니다."
+          },
+          "path": {
+            "type": "string",
+            "description": "에셋이 생성될 콘텐츠 폴더 경로입니다. 디폴트는 '/Game/Dataflow'입니다."
+          }
+        },
+        "required": [
+          "name",
+          "path"
+        ]
+      },
+      "outputSchema": {
+        "type": "object",
+        "properties": {
+          "returnValue": {
+            "type": "string",
+            "description": "생성된 그래프의 전체 에셋 경로를 반환하고, 실패 시 빈 스트링을 반환합니다."
+          }
+        },
+        "required": [
+          "returnValue"
+        ]
+      }
+    },
+    {
+      "description": "새 데이터플로 호환 에셋을 생성하고, 등록된 템플릿에서 임베디드 데이터플로 그래프를\n한 단계로 초기화합니다.",
+      "name": "DataflowAgent.DataflowAgentToolset.CreateDataflowCompatibleAssetFromTemplate",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "className": {
+            "type": "string",
+            "description": "'U'/'A' 접두사를 포함하거나 포함하지 않은 에셋 클래스 이름입니다."
+          },
+          "name": {
+            "type": "string",
+            "description": "새 에셋에 부여할 이름입니다."
+          },
+          "path": {
+            "type": "string",
+            "description": "콘텐츠 폴더 경로입니다."
+          },
+          "templateId": {
+            "type": "string",
+            "description": "ListDataflowTemplatesForAssetClass에 의해 반환된 템플릿 식별자입니다. 비어 있는 임베디드 그래프가 포함된 상태로 생성하려면 빈 스트링을 전달합니다 (CreateDataflowCompatibleAsset과 동일함)."
+          }
+        },
+        "required": [
+          "className",
+          "name",
+          "path",
+          "templateId"
+        ]
+      },
+      "outputSchema": {
+        "type": "object",
+        "properties": {
+          "returnValue": {
+            "type": "string",
+            "description": "생성된 에셋의 전체 에셋 경로를 반환하거나, 실패 시 빈 스트링을 반환합니다."
+          }
+        },
+        "required": [
+          "returnValue"
+        ]
+      }
+    },
+    {
+      "description": "비어 있는 엠베디드 데이터플로 그래프를 포함하는 새 데이터플로 호환 에셋(예: ChaosClothAsset, GeometryCollection,\nFleshAsset, GroomAsset)을 생성합니다.",
+      "name": "DataflowAgent.DataflowAgentToolset.CreateDataflowCompatibleAsset",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "className": {
+            "type": "string",
+            "description": "'U'/'A' 접두사를 포함하거나 포함하지 않은 에셋 클래스 이름입니다 (예: 'ChaosClothAsset' 또는 'UChaosClothAsset')."
+          },
+          "name": {
+            "type": "string",
+            "description": "새 에셋에 부여할 이름입니다."
+          },
+          "path": {
+            "type": "string",
+            "description": "에셋이 생성될 콘텐츠 폴더 경로입니다. 디폴트는 '/Game/Dataflow'입니다.",
+            "default": "/Game/Dataflow"
+          }
+        },
+        "required": [
+          "className",
+          "name"
+        ]
+      },
+      "outputSchema": {
+        "type": "object",
+        "properties": {
+          "returnValue": {
+            "type": "string",
+            "description": "생성된 에셋의 전체 에셋 경로를 반환하거나, 실패 시 빈 스트링을 반환합니다."
+          }
+        },
+        "required": [
+          "returnValue"
+        ]
+      }
+    },
+    {
+      "description": "한 노드의 출력 핀을 다른 노드의 입력 핀에 연결합니다.",
+      "name": "DataflowAgent.DataflowAgentToolset.ConnectNodePins",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "fromNode": {
+            "type": "object",
+            "title": "/Script/DataflowEngine.DataflowEdNode",
+            "description": "소스 EdNode입니다.",
+            "properties": {
+              "refPath": {
+                "type": "string",
+                "description": "소프트 경로 스트링으로 저장된 레퍼런스입니다."
+              }
+            },
+            "required": [
+              "refPath"
+            ]
+          },
+          "fromPin": {
+            "type": "string",
+            "description": "소스 노드의 출력 핀 이름입니다."
+          },
+          "toNode": {
+            "type": "object",
+            "title": "/Script/DataflowEngine.DataflowEdNode",
+            "description": "대상 EdNode입니다.",
+            "properties": {
+              "refPath": {
+                "type": "string",
+                "description": "소프트 경로 스트링으로 저장된 레퍼런스입니다."
+              }
+            },
+            "required": [
+              "refPath"
+            ]
+          },
+          "toPin": {
+            "type": "string",
+            "description": "대상 노드의 입력 핀 이름입니다."
+          }
+        },
+        "required": [
+          "fromNode",
+          "fromPin",
+          "toNode",
+          "toPin"
+        ]
+      },
+      "outputSchema": {
+        "type": "object",
+        "properties": {
+          "returnValue": {
+            "type": "boolean",
+            "description": "성공 시 true를 반환하고, 실패 시 false를 반환합니다."
+          }
+        },
+        "required": [
+          "returnValue"
+        ]
+      }
+    },
+    {
+      "description": "템플릿 그래프를 복제하여 임베드함으로써, 기존 데이터플로 호환 에셋에\n데이터플로 템플릿을 할당합니다. 기존에 모든 임베디드 그래프를 대체합니다.",
+      "name": "DataflowAgent.DataflowAgentToolset.AssignDataflowTemplate",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "asset": {
+            "type": "object",
+            "title": "/Script/CoreUObject.Object",
+            "description": "타깃 에셋입니다(IDataflowInstanceInterface를 구현해야 함).",
+            "properties": {
+              "refPath": {
+                "type": "string",
+                "description": "소프트 경로 스트링으로 저장된 레퍼런스입니다."
+              }
+            },
+            "required": [
+              "refPath"
+            ]
+          },
+          "templateId": {
+            "type": "string",
+            "description": "ListDataflowTemplatesForAssetClass에 의해 반환된 템플릿 식별자입니다. 새로운 빈 그래프를 할당하려면 빈 스트링을 전달하세요."
+          }
+        },
+        "required": [
+          "asset",
+          "templateId"
+        ]
+      },
+      "outputSchema": {
+        "type": "object",
+        "properties": {
+          "returnValue": {
+            "type": "boolean",
+            "description": "성공 시 true를 반환하고, 실패 시 false를 반환합니다."
+          }
+        },
+        "required": [
+          "returnValue"
+        ]
+      }
+    },
+    {
+      "description": "데이터플로 그래프에 새 변수를 추가합니다.\n\n지원되는 타입 스트링:\n  프리미티브: 'Bool', 'Int32', 'Int64', 'Float', 'Double', 'Name', 'String'\n  구조체: 'F' 접두사가 있거나 없는 UScriptStruct 이름\n               예: 'Vector', 'FVector', 'Transform', 'FTransform', 'Rotator', 'LinearColor'\n  오브젝트: 'Object:<ClassName>' 형식으로, 클래스 이름에 'U 또는 'A' 접두사가 있거나 없음\n               예: 'Object:StaticMesh', 'Object:USkeletalMesh'",
+      "name": "DataflowAgent.DataflowAgentToolset.AddVariable",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "graph": {
+            "type": "object",
+            "title": "/Script/DataflowEngine.Dataflow",
+            "description": "수정할 데이터플로 에셋입니다.",
+            "properties": {
+              "refPath": {
+                "type": "string",
+                "description": "소프트 경로 스트링으로 저장된 레퍼런스입니다."
+              }
+            },
+            "required": [
+              "refPath"
+            ]
+          },
+          "name": {
+            "type": "string",
+            "description": "새 변수에 사용할 고유 이름입니다."
+          },
+          "type": {
+            "type": "string",
+            "description": "위에 설명된 타입 스트링입니다."
+          }
+        },
+        "required": [
+          "graph",
+          "name",
+          "type"
+        ]
+      },
+      "outputSchema": {
+        "type": "object",
+        "properties": {
+          "returnValue": {
+            "type": "boolean",
+            "description": "성공 시 true를 반환하고, 변수가 이미 있거나 타입을 리졸브할 수 없는 경우 false를 반환합니다."
+          }
+        },
+        "required": [
+          "returnValue"
+        ]
+      }
+    },
+    {
+      "description": "데이터플로 그래프에 지정된 타입의 노드를 추가합니다.",
+      "name": "DataflowAgent.DataflowAgentToolset.AddNode",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "graph": {
+            "type": "object",
+            "title": "/Script/DataflowEngine.Dataflow",
+            "description": "노드를 추가할 데이터플로 에셋입니다.",
+            "properties": {
+              "refPath": {
+                "type": "string",
+                "description": "소프트 경로 스트링으로 저장된 레퍼런스입니다."
+              }
+            },
+            "required": [
+              "refPath"
+            ]
+          },
+          "typeName": {
+            "type": "string",
+            "description": "노드 타입 이름입니다(예: 'FAddFloatsDataflowNode')."
+          },
+          "nodeName": {
+            "type": "string",
+            "description": "이 그래프 내에서 노드에 사용할 고유 이름입니다."
+          },
+          "jsonParams": {
+            "type": "string",
+            "description": "프로퍼티 오버라이드의 선택적 JSON 오브젝트입니다(예: {\"Value\": 3.14})."
+          },
+          "x": {
+            "type": "integer",
+            "description": "그래프 에디터 내의 X 위치입니다(디폴트 0, 일반적인 노드 너비 약 200)",
+            "default": 0
+          },
+          "y": {
+            "type": "integer",
+            "description": "그래프 에디터 내의 Y 위치입니다(디폴트 0, 일반적인 노드 높이 ~100)",
+            "default": 0
+          }
+        },
+        "required": [
+          "graph",
+          "typeName",
+          "nodeName",
+          "jsonParams"
+        ]
+      },
+      "outputSchema": {
+        "type": "object",
+        "properties": {
+          "returnValue": {
+            "type": "object",
+            "title": "/Script/DataflowEngine.DataflowEdNode",
+            "description": "새로 생성된 UDataflowEdNode를 반환하고, 실패 시 nullptr을 반환합니다.",
+            "properties": {
+              "refPath": {
+                "type": "string",
+                "description": "소프트 경로 스트링으로 저장된 레퍼런스입니다."
+              }
+            },
+            "required": [
+              "refPath"
+            ]
+          }
+        },
+        "required": [
+          "returnValue"
+        ]
+      }
+    },
+    {
+      "description": "지정된 노드 주변에 코멘트 박스를 추가합니다.",
+      "name": "DataflowAgent.DataflowAgentToolset.AddCommentBox",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "graph": {
+            "type": "object",
+            "title": "/Script/DataflowEngine.Dataflow",
+            "description": "코멘트를 추가할 데이터플로 에셋입니다.",
+            "properties": {
+              "refPath": {
+                "type": "string",
+                "description": "소프트 경로 스트링으로 저장된 레퍼런스입니다."
+              }
+            },
+            "required": [
+              "refPath"
+            ]
+          },
+          "nodes": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "title": "/Script/DataflowEngine.DataflowEdNode",
+              "properties": {
+                "refPath": {
+                  "type": "string",
+                  "description": "소프트 경로 스트링으로 저장된 레퍼런스입니다."
+                }
+              },
+              "required": [
+                "refPath"
+              ]
+            },
+            "description": "코멘트 박스로 둘러쌀 에디터 노드의 목록입니다."
+          },
+          "comment": {
+            "type": "string",
+            "description": "코멘트 박스에 표시할 텍스트입니다.",
+            "default": "/**\n\t * Adds a comment box around the given nodes.\n\t *\n\t * @param Graph   - The Dataflow asset to add the comment to\n\t * @param Nodes   - List of EdNodes to surround with the comment box\n\t * @param Comment - Text to display on the comment box\n\t * @param Color   - Background color of the comment box (defaults to White)\n\t * @return Node ID string of the created comment node, or empty string on failure\n\t */"
+          },
+          "color": {
+            "type": "object",
+            "title": "LinearColor",
+            "properties": {
+              "r": {
+                "type": "number",
+                "minimum": 0
+              },
+              "g": {
+                "type": "number",
+                "minimum": 0
+              },
+              "b": {
+                "type": "number",
+                "minimum": 0
+              },
+              "a": {
+                "type": "number",
+                "minimum": 0
+              }
+            },
+            "required": [
+              "r",
+              "g",
+              "b",
+              "a"
+            ],
+            "description": "코멘트 박스의 배경색입니다(디폴트는 흰색).",
+            "default": {
+              "r": 1,
+              "g": 1,
+              "b": 1,
+              "a": 1
+            }
+          }
+        },
+        "required": [
+          "graph",
+          "nodes"
+        ]
+      },
+      "outputSchema": {
+        "type": "object",
+        "properties": {
+          "returnValue": {
+            "type": "string",
+            "description": "생성된 코멘트 노드의 노드 ID 스트링을 반환하고, 실패 시 빈 스트링을 반환합니다."
+          }
+        },
+        "required": [
+          "returnValue"
+        ]
+      }
+    }
+  ]
+}

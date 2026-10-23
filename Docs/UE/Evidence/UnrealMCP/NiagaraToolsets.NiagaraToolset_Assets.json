@@ -1,0 +1,296 @@
+{
+  "name": "NiagaraToolsets.NiagaraToolset_Assets",
+  "version": "1.0",
+  "description": "나이아가라 스크립트 에셋을 검색하는 데 사용되는 나이아가라 툴세트입니다.\n\n제공:\n- GetAssetDiscoveryInfo: 프로젝트에 환경설정된 에셋 검색 그룹\n- FindNiagaraScripts: 사용 용도, 비저빌리티, 이름, 모듈 사용 비트마스크로 필터링된 에셋 레지스트리 검색\n- GetNiagaraScriptDigest: 단일 스크립트에 대한 디코딩된 에셋 레지스트리 태그\n\n모든 함수는 LoadObject 없이 에셋 레지스트리에서 데이터를 읽습니다. 검색된 모듈을 스택에 드롭하려면\nNiagaraToolset_System.AddModule과 쌍으로 연결하세요.\n\n참고: FAssetData의 JSON 시리얼라이제이션에는 TagsAndValues 맵이 포함되지 않으므로\n(UPROPERTY가 아님), FindNiagaraScripts의 결과 행에서 디코딩된 메타데이터를\n원하는 호출자는 GetNiagaraScriptDigest를 거치는 라운드트립을 수행해야 합니다.",
+  "tools": [
+    {
+      "description": "나이아가라 스크립트 에셋에 대한 디코딩된 에셋 레지스트리 태그 메타데이터를 반환합니다.\n\n에셋 레지스트리에서 오브젝트 경로로 에셋을 찾아 해당 태그를 읽습니다.\nLoadObject는 수행되지 않습니다. 스크립트가 FVersionedNiagaraScriptData 버전 관리를\n사용하는 경우, 반환되는 필드는 노출된(퍼블리싱된) 버전을 반영합니다.\n레지스트리는 노출되지 않은 버전의 메타데이터는 포함하지 않습니다.",
+      "name": "NiagaraToolsets.NiagaraToolset_Assets.GetNiagaraScriptDigest",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "objectPath": {
+            "type": "string",
+            "description": "스크립트의 전체 오브젝트 경로입니다(예: '/Niagara/Modules/Spawn/Initialize Particle.Initialize Particle')."
+          }
+        },
+        "required": [
+          "objectPath"
+        ]
+      },
+      "outputSchema": {
+        "type": "object",
+        "properties": {
+          "returnValue": {
+            "title": "NiagaraExt_ScriptDigest",
+            "description": "디코딩된 다이제스트를 반환합니다. 경로가 유효하지 않거나 UNiagaraScript가 아닌 경우, 오류가 발생하고 디폴트로 초기화된 다이제스트가 반환됩니다.",
+            "type": "object",
+            "properties": {
+              "objectPath": {
+                "type": "string",
+                "description": "전체 오브젝트 경로: /Path/To/Package.AssetName"
+              },
+              "packageName": {
+                "type": "string",
+                "description": "긴 패키지 이름: /Path/To/Package"
+              },
+              "assetName": {
+                "type": "string",
+                "description": "패키지가 없는 에셋 이름입니다."
+              },
+              "usage": {
+                "type": "string",
+                "title": "ENiagaraScriptUsage",
+                "enum": [
+                  "Function",
+                  "Module",
+                  "DynamicInput",
+                  "ParticleSpawnScript",
+                  "ParticleSpawnScriptInterpolated",
+                  "ParticleUpdateScript",
+                  "ParticleEventScript",
+                  "ParticleSimulationStageScript",
+                  "ParticleGPUComputeScript",
+                  "EmitterSpawnScript",
+                  "EmitterUpdateScript",
+                  "SystemSpawnScript",
+                  "SystemUpdateScript"
+                ],
+                "description": "스크립트 종류: Module, DynamicInput, Function 또는 스테이지 스크립트 중 하나"
+              },
+              "libraryVisibility": {
+                "type": "string",
+                "title": "ENiagaraScriptLibraryVisibility",
+                "enum": [
+                  "Invalid",
+                  "Unexposed",
+                  "Library",
+                  "Hidden"
+                ],
+                "description": "라이브러리 비저빌리티입니다. Unexposed, Library(= 에디터 UI에서는 'Exposed'로 표시됨) 또는 Hidden입니다."
+              },
+              "moduleUsageBitmask": {
+                "type": "integer",
+                "description": "모듈과 호환되는 스택 컨텍스트의 비트마스크입니다. 모듈이 아닌 스크립트의 경우 0입니다."
+              },
+              "category": {
+                "type": "string",
+                "description": "라이브러리 카테고리 텍스트입니다(설정되지 않은 경우 비어 있음)."
+              },
+              "description": {
+                "type": "string",
+                "description": "라이브러리 설명 텍스트입니다(설정되지 않은 경우 비어 있음)."
+              },
+              "keywords": {
+                "type": "string",
+                "description": "라이브러리 검색 키워드입니다(설정되지 않은 경우 비어 있음)."
+              },
+              "bDeprecated": {
+                "type": "boolean",
+                "description": "스크립트가 지원 중단됨으로 마킹된 경우 true입니다."
+              },
+              "bSuggested": {
+                "type": "boolean",
+                "description": "스크립트가 제안됨으로 마킹된 경우 true입니다."
+              }
+            },
+            "required": [
+              "objectPath",
+              "packageName",
+              "assetName",
+              "usage",
+              "libraryVisibility",
+              "moduleUsageBitmask",
+              "category",
+              "description",
+              "keywords",
+              "bDeprecated",
+              "bSuggested"
+            ]
+          }
+        },
+        "required": [
+          "returnValue"
+        ]
+      }
+    },
+    {
+      "description": "프로젝트에 환경설정된 에셋 검색 그룹을 반환합니다.\n각 그룹은 콘텐츠 디렉터리의 용도와 경로를 설명합니다.",
+      "name": "NiagaraToolsets.NiagaraToolset_Assets.GetAssetDiscoveryInfo",
+      "inputSchema": {
+        "type": "object"
+      },
+      "outputSchema": {
+        "type": "object",
+        "properties": {
+          "returnValue": {
+            "type": "array",
+            "items": {
+              "title": "NiagaraToolsetAssetDiscoveryGroup",
+              "type": "object",
+              "properties": {
+                "description": {
+                  "type": "string",
+                  "description": "이 경로에 어떤 타입의 에셋이 있는지, 그리고 언제 사용해야 하는지에 대한 설명입니다."
+                },
+                "paths": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  },
+                  "description": "이 그룹의 에셋을 포함하는 콘텐츠 디렉터리 경로입니다."
+                }
+              },
+              "required": [
+                "description",
+                "paths"
+              ]
+            },
+            "description": "환경설정된 에셋 검색 그룹을 반환하며, NiagaraToolsetsSettings에 환경설정된 그룹이 없는 경우 빈 배열을 반환합니다."
+          }
+        },
+        "required": [
+          "returnValue"
+        ]
+      }
+    },
+    {
+      "description": "지정된 필터와 일치하는 UNiagaraScript 에셋을 검색합니다.\n\n에셋 레지스트리 태그에서만 필터링할 수 있는 메타데이터를 읽습니다. - LoadObject는 필요하지 않습니다.\n\n태그는 버전이 지정된 스크립트의 노출된, 즉 퍼블리싱된 버전을 반영합니다.\n이 함수는 버전 필터가 필요하지 않으며, 에셋 레지스트리를 통해\n노출되지 않은 버전을 검색할 수 있는 방법은 없습니다.",
+      "name": "NiagaraToolsets.NiagaraToolset_Assets.FindNiagaraScripts",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "folderPath": {
+            "type": "string",
+            "description": "검색할 폴더입니다. 프로젝트 전체를 검색하려면 빈 스트링을 전달하세요."
+          },
+          "name": {
+            "type": "string",
+            "description": "비어 있지 않으면 이름에 이 서브스트링이 포함된 에셋만 반환합니다(대소문자 구분 없음)."
+          },
+          "usages": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "title": "ENiagaraScriptUsage",
+              "enum": [
+                "Function",
+                "Module",
+                "DynamicInput",
+                "ParticleSpawnScript",
+                "ParticleSpawnScriptInterpolated",
+                "ParticleUpdateScript",
+                "ParticleEventScript",
+                "ParticleSimulationStageScript",
+                "ParticleGPUComputeScript",
+                "EmitterSpawnScript",
+                "EmitterUpdateScript",
+                "SystemSpawnScript",
+                "SystemUpdateScript"
+              ]
+            },
+            "description": "비어 있지 않으면 사용 용도가 나열된 값 중 하나와 일치하는 에셋만 반환합니다. 빈 배열 = 모든 사용 용도가 허용됩니다."
+          },
+          "visibilities": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "title": "ENiagaraScriptLibraryVisibility",
+              "enum": [
+                "Invalid",
+                "Unexposed",
+                "Library",
+                "Hidden"
+              ]
+            },
+            "description": "비어 있지 않은 경우, LibraryVisibility가 나열된 값 중 하나와 일치하는 에셋만 반환합니다. 빈 배열의 디폴트는 {Library}(에디터의 'Exposed')입니다. - Unexposed 또는 Hidden 스크립트를 표시하려면 명시적인 오버라이드가 필요합니다."
+          },
+          "moduleUsageBitmask": {
+            "type": "integer",
+            "description": "0이 아닌 경우, ModuleUsageBitmask가 이 실행인자와 최소 하나의 비트를 공유(any-match)하는 모듈 스크립트로 결과를 제한합니다. 이 값이 0이 아니면 모듈이 아닌 스크립트는 제외됩니다. 비트마스크 제어를 비활성화하려면 0을 전달하세요."
+          },
+          "bRecursive": {
+            "type": "boolean",
+            "description": "서브폴더를 검색할지 여부입니다. FolderPath가 비어 있으면 무시됩니다(전체 프로젝트 스캔은 항상 철저하게 수행됨)."
+          },
+          "bIncludeDeprecated": {
+            "type": "boolean",
+            "description": "false(디폴트 사용법)인 경우, 노출된 버전에 bDeprecated=true가 설정된 에셋은 제외됩니다. 호출자가 명시적으로 지원이 중단된 에셋을 표시하려는 경우에만 true를 전달합니다(예: 이미 알려진 지원 중단된 모듈의 정규 대체 항목을 검색하는 경우)."
+          }
+        },
+        "required": [
+          "folderPath",
+          "name",
+          "usages",
+          "visibilities",
+          "moduleUsageBitmask",
+          "bRecursive",
+          "bIncludeDeprecated"
+        ]
+      },
+      "outputSchema": {
+        "type": "object",
+        "properties": {
+          "returnValue": {
+            "type": "array",
+            "items": {
+              "title": "AssetData",
+              "type": "object",
+              "properties": {
+                "objectPath": {
+                  "type": "string"
+                },
+                "packageName": {
+                  "type": "string",
+                  "description": "에셋이 들어있던 패키지 이름으로, /Game/Path/Package 식의 전체 긴 패키지 이름입니다."
+                },
+                "packagePath": {
+                  "type": "string",
+                  "description": "에셋이 들어있던 패키지 경로이며, 패키지를 벗겨낸 /Game/Path 식입니다."
+                },
+                "assetName": {
+                  "type": "string",
+                  "description": "패키지 없는 에셋 이름입니다."
+                },
+                "assetClass": {
+                  "type": "string"
+                },
+                "assetClassPath": {
+                  "title": "TopLevelAssetPath",
+                  "description": "에셋 클래스의 경로입니다(예: /Script/Engine.StaticMesh).",
+                  "type": "object",
+                  "properties": {
+                    "packageName": {
+                      "type": "string",
+                      "description": "에셋을 포함하는 패키지 이름입니다. 예: /Path/To/Package"
+                    },
+                    "assetName": {
+                      "type": "string",
+                      "description": "패키지 내의 에셋 이름입니다. 예: 'AssetName'"
+                    }
+                  },
+                  "required": [
+                    "packageName",
+                    "assetName"
+                  ]
+                }
+              },
+              "required": [
+                "objectPath",
+                "packageName",
+                "packagePath",
+                "assetName",
+                "assetClass",
+                "assetClassPath"
+              ]
+            },
+            "description": "일치하는 스크립트에 대한 AssetData 엔트리의 배열을 반환합니다. 모든 행에 대한 태그 메타데이터를 디코딩하려면 GetNiagaraScriptDigest를 사용하세요."
+          }
+        },
+        "required": [
+          "returnValue"
+        ]
+      }
+    }
+  ]
+}

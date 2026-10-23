@@ -1,0 +1,1188 @@
+{
+  "name": "state_tree_toolset.toolsets.state_tree.StateTreeTools",
+  "version": "1.0",
+  "description": "Inspect StateTree (ST) assets.",
+  "tools": [
+    {
+      "description": "Returns a human-readable description for a node.\n\n        Args:\n            state_tree: The StateTree asset.\n            node: The editor node to describe.\n\n        Returns:\n            Formatted description string.",
+      "name": "state_tree_toolset.toolsets.state_tree.StateTreeTools.get_node_description",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "state_tree": {
+            "type": "object",
+            "title": "/Script/StateTreeModule.StateTree",
+            "description": "UObject 또는 UClass에 대한 레퍼런스를 나타냅니다.",
+            "properties": {
+              "refPath": {
+                "type": "string",
+                "description": "소프트 경로 스트링으로 저장된 레퍼런스입니다."
+              }
+            },
+            "required": [
+              "refPath"
+            ]
+          },
+          "node": {
+            "title": "StateTreeEditorNode",
+            "type": "object",
+            "properties": {
+              "node": {
+                "type": "object",
+                "title": "FInstancedStruct",
+                "description": "Polymorphic struct. Provide _structType with the UScriptStruct path (e.g. /Script/Module.StructName) to create from scratch.",
+                "properties": {
+                  "_structType": {
+                    "type": "string",
+                    "description": "UScriptStruct path name for polymorphic type identification (e.g. /Script/Module.StructName)."
+                  }
+                }
+              },
+              "instance": {
+                "type": "object",
+                "title": "FInstancedStruct",
+                "description": "Polymorphic struct. Provide _structType with the UScriptStruct path (e.g. /Script/Module.StructName) to create from scratch.",
+                "properties": {
+                  "_structType": {
+                    "type": "string",
+                    "description": "UScriptStruct path name for polymorphic type identification (e.g. /Script/Module.StructName)."
+                  }
+                }
+              },
+              "instanceObject": {
+                "type": "object",
+                "title": "/Script/CoreUObject.Object",
+                "description": "UObject 또는 UClass에 대한 레퍼런스를 나타냅니다.",
+                "properties": {
+                  "refPath": {
+                    "type": "string",
+                    "description": "소프트 경로 스트링으로 저장된 레퍼런스입니다."
+                  }
+                },
+                "required": [
+                  "refPath"
+                ]
+              },
+              "executionRuntimeData": {
+                "type": "object",
+                "title": "FInstancedStruct",
+                "description": "Polymorphic struct. Provide _structType with the UScriptStruct path (e.g. /Script/Module.StructName) to create from scratch.",
+                "properties": {
+                  "_structType": {
+                    "type": "string",
+                    "description": "UScriptStruct path name for polymorphic type identification (e.g. /Script/Module.StructName)."
+                  }
+                }
+              },
+              "executionRuntimeDataObject": {
+                "type": "object",
+                "title": "/Script/CoreUObject.Object",
+                "description": "UObject 또는 UClass에 대한 레퍼런스를 나타냅니다.",
+                "properties": {
+                  "refPath": {
+                    "type": "string",
+                    "description": "소프트 경로 스트링으로 저장된 레퍼런스입니다."
+                  }
+                },
+                "required": [
+                  "refPath"
+                ]
+              },
+              "iD": {
+                "type": "string",
+                "description": "노드 인스턴스의 ID입니다.",
+                "pattern": "^[0-9A-Fa-f]{8}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{12}$"
+              },
+              "expressionIndent": {
+                "type": "integer"
+              },
+              "expressionOperand": {
+                "type": "string",
+                "title": "EStateTreeExpressionOperand",
+                "enum": [
+                  "Copy",
+                  "And",
+                  "Or",
+                  "Multiply"
+                ]
+              }
+            },
+            "required": [
+              "node",
+              "instance",
+              "instanceObject",
+              "executionRuntimeData",
+              "executionRuntimeDataObject",
+              "iD",
+              "expressionIndent",
+              "expressionOperand"
+            ]
+          }
+        },
+        "required": [
+          "state_tree",
+          "node"
+        ]
+      },
+      "outputSchema": {
+        "type": "object",
+        "properties": {
+          "returnValue": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "returnValue"
+        ]
+      }
+    },
+    {
+      "description": "Returns global evaluators.\n\n        Args:\n            state_tree: The StateTree asset.\n\n        Returns:\n            Evaluator editor nodes.",
+      "name": "state_tree_toolset.toolsets.state_tree.StateTreeTools.get_evaluators",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "state_tree": {
+            "type": "object",
+            "title": "/Script/StateTreeModule.StateTree",
+            "description": "UObject 또는 UClass에 대한 레퍼런스를 나타냅니다.",
+            "properties": {
+              "refPath": {
+                "type": "string",
+                "description": "소프트 경로 스트링으로 저장된 레퍼런스입니다."
+              }
+            },
+            "required": [
+              "refPath"
+            ]
+          }
+        },
+        "required": [
+          "state_tree"
+        ]
+      },
+      "outputSchema": {
+        "type": "object",
+        "properties": {
+          "returnValue": {
+            "type": "array",
+            "items": {
+              "title": "StateTreeEditorNode",
+              "type": "object",
+              "properties": {
+                "node": {
+                  "type": "object",
+                  "title": "FInstancedStruct",
+                  "description": "Polymorphic struct. Provide _structType with the UScriptStruct path (e.g. /Script/Module.StructName) to create from scratch.",
+                  "properties": {
+                    "_structType": {
+                      "type": "string",
+                      "description": "UScriptStruct path name for polymorphic type identification (e.g. /Script/Module.StructName)."
+                    }
+                  }
+                },
+                "instance": {
+                  "type": "object",
+                  "title": "FInstancedStruct",
+                  "description": "Polymorphic struct. Provide _structType with the UScriptStruct path (e.g. /Script/Module.StructName) to create from scratch.",
+                  "properties": {
+                    "_structType": {
+                      "type": "string",
+                      "description": "UScriptStruct path name for polymorphic type identification (e.g. /Script/Module.StructName)."
+                    }
+                  }
+                },
+                "instanceObject": {
+                  "type": "object",
+                  "title": "/Script/CoreUObject.Object",
+                  "description": "UObject 또는 UClass에 대한 레퍼런스를 나타냅니다.",
+                  "properties": {
+                    "refPath": {
+                      "type": "string",
+                      "description": "소프트 경로 스트링으로 저장된 레퍼런스입니다."
+                    }
+                  },
+                  "required": [
+                    "refPath"
+                  ]
+                },
+                "executionRuntimeData": {
+                  "type": "object",
+                  "title": "FInstancedStruct",
+                  "description": "Polymorphic struct. Provide _structType with the UScriptStruct path (e.g. /Script/Module.StructName) to create from scratch.",
+                  "properties": {
+                    "_structType": {
+                      "type": "string",
+                      "description": "UScriptStruct path name for polymorphic type identification (e.g. /Script/Module.StructName)."
+                    }
+                  }
+                },
+                "executionRuntimeDataObject": {
+                  "type": "object",
+                  "title": "/Script/CoreUObject.Object",
+                  "description": "UObject 또는 UClass에 대한 레퍼런스를 나타냅니다.",
+                  "properties": {
+                    "refPath": {
+                      "type": "string",
+                      "description": "소프트 경로 스트링으로 저장된 레퍼런스입니다."
+                    }
+                  },
+                  "required": [
+                    "refPath"
+                  ]
+                },
+                "iD": {
+                  "type": "string",
+                  "description": "노드 인스턴스의 ID입니다.",
+                  "pattern": "^[0-9A-Fa-f]{8}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{12}$"
+                },
+                "expressionIndent": {
+                  "type": "integer"
+                },
+                "expressionOperand": {
+                  "type": "string",
+                  "title": "EStateTreeExpressionOperand",
+                  "enum": [
+                    "Copy",
+                    "And",
+                    "Or",
+                    "Multiply"
+                  ]
+                }
+              },
+              "required": [
+                "node",
+                "instance",
+                "instanceObject",
+                "executionRuntimeData",
+                "executionRuntimeDataObject",
+                "iD",
+                "expressionIndent",
+                "expressionOperand"
+              ]
+            }
+          }
+        },
+        "required": [
+          "returnValue"
+        ]
+      }
+    },
+    {
+      "description": "Returns global tasks that run across all states.\n\n        Args:\n            state_tree: The StateTree asset.\n\n        Returns:\n            Global task editor nodes.",
+      "name": "state_tree_toolset.toolsets.state_tree.StateTreeTools.get_global_tasks",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "state_tree": {
+            "type": "object",
+            "title": "/Script/StateTreeModule.StateTree",
+            "description": "UObject 또는 UClass에 대한 레퍼런스를 나타냅니다.",
+            "properties": {
+              "refPath": {
+                "type": "string",
+                "description": "소프트 경로 스트링으로 저장된 레퍼런스입니다."
+              }
+            },
+            "required": [
+              "refPath"
+            ]
+          }
+        },
+        "required": [
+          "state_tree"
+        ]
+      },
+      "outputSchema": {
+        "type": "object",
+        "properties": {
+          "returnValue": {
+            "type": "array",
+            "items": {
+              "title": "StateTreeEditorNode",
+              "type": "object",
+              "properties": {
+                "node": {
+                  "type": "object",
+                  "title": "FInstancedStruct",
+                  "description": "Polymorphic struct. Provide _structType with the UScriptStruct path (e.g. /Script/Module.StructName) to create from scratch.",
+                  "properties": {
+                    "_structType": {
+                      "type": "string",
+                      "description": "UScriptStruct path name for polymorphic type identification (e.g. /Script/Module.StructName)."
+                    }
+                  }
+                },
+                "instance": {
+                  "type": "object",
+                  "title": "FInstancedStruct",
+                  "description": "Polymorphic struct. Provide _structType with the UScriptStruct path (e.g. /Script/Module.StructName) to create from scratch.",
+                  "properties": {
+                    "_structType": {
+                      "type": "string",
+                      "description": "UScriptStruct path name for polymorphic type identification (e.g. /Script/Module.StructName)."
+                    }
+                  }
+                },
+                "instanceObject": {
+                  "type": "object",
+                  "title": "/Script/CoreUObject.Object",
+                  "description": "UObject 또는 UClass에 대한 레퍼런스를 나타냅니다.",
+                  "properties": {
+                    "refPath": {
+                      "type": "string",
+                      "description": "소프트 경로 스트링으로 저장된 레퍼런스입니다."
+                    }
+                  },
+                  "required": [
+                    "refPath"
+                  ]
+                },
+                "executionRuntimeData": {
+                  "type": "object",
+                  "title": "FInstancedStruct",
+                  "description": "Polymorphic struct. Provide _structType with the UScriptStruct path (e.g. /Script/Module.StructName) to create from scratch.",
+                  "properties": {
+                    "_structType": {
+                      "type": "string",
+                      "description": "UScriptStruct path name for polymorphic type identification (e.g. /Script/Module.StructName)."
+                    }
+                  }
+                },
+                "executionRuntimeDataObject": {
+                  "type": "object",
+                  "title": "/Script/CoreUObject.Object",
+                  "description": "UObject 또는 UClass에 대한 레퍼런스를 나타냅니다.",
+                  "properties": {
+                    "refPath": {
+                      "type": "string",
+                      "description": "소프트 경로 스트링으로 저장된 레퍼런스입니다."
+                    }
+                  },
+                  "required": [
+                    "refPath"
+                  ]
+                },
+                "iD": {
+                  "type": "string",
+                  "description": "노드 인스턴스의 ID입니다.",
+                  "pattern": "^[0-9A-Fa-f]{8}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{12}$"
+                },
+                "expressionIndent": {
+                  "type": "integer"
+                },
+                "expressionOperand": {
+                  "type": "string",
+                  "title": "EStateTreeExpressionOperand",
+                  "enum": [
+                    "Copy",
+                    "And",
+                    "Or",
+                    "Multiply"
+                  ]
+                }
+              },
+              "required": [
+                "node",
+                "instance",
+                "instanceObject",
+                "executionRuntimeData",
+                "executionRuntimeDataObject",
+                "iD",
+                "expressionIndent",
+                "expressionOperand"
+              ]
+            }
+          }
+        },
+        "required": [
+          "returnValue"
+        ]
+      }
+    },
+    {
+      "description": "Returns transitions on a state.\n\n        Args:\n            state: The state to query.\n\n        Returns:\n            Transitions.",
+      "name": "state_tree_toolset.toolsets.state_tree.StateTreeTools.get_transitions",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "state": {
+            "type": "object",
+            "title": "/Script/StateTreeEditorModule.StateTreeState",
+            "description": "UObject 또는 UClass에 대한 레퍼런스를 나타냅니다.",
+            "properties": {
+              "refPath": {
+                "type": "string",
+                "description": "소프트 경로 스트링으로 저장된 레퍼런스입니다."
+              }
+            },
+            "required": [
+              "refPath"
+            ]
+          }
+        },
+        "required": [
+          "state"
+        ]
+      },
+      "outputSchema": {
+        "type": "object",
+        "properties": {
+          "returnValue": {
+            "type": "array",
+            "items": {
+              "title": "StateTreeTransition",
+              "type": "object",
+              "properties": {
+                "trigger": {
+                  "type": "string",
+                  "title": "EStateTreeTransitionTrigger",
+                  "enum": [
+                    "None",
+                    "OnStateCompleted",
+                    "OnStateSucceeded",
+                    "OnStateFailed",
+                    "OnTick",
+                    "OnEvent",
+                    "OnDelegate",
+                    "MAX"
+                  ],
+                  "description": "트랜지션을 트리거하려고 시도할 시점입니다."
+                },
+                "requiredEvent": {
+                  "title": "StateTreeEventDesc",
+                  "description": "트랜지션을 트리거하기 위해 상태 선택 동안 제공해야 하는 이벤트를 정의합니다.",
+                  "type": "object",
+                  "properties": {
+                    "tag": {
+                      "title": "GameplayTag",
+                      "description": "이벤트 태그입니다.",
+                      "type": "object",
+                      "properties": {
+                        "tagName": {
+                          "type": "string",
+                          "description": "태그의 이름입니다."
+                        }
+                      },
+                      "required": [
+                        "tagName"
+                      ]
+                    },
+                    "payloadStruct": {
+                      "type": "object",
+                      "title": "/Script/CoreUObject.ScriptStruct",
+                      "description": "이벤트 페이로드 구조체입니다.",
+                      "properties": {
+                        "refPath": {
+                          "type": "string",
+                          "description": "소프트 경로 스트링으로 저장된 레퍼런스입니다."
+                        }
+                      },
+                      "required": [
+                        "refPath"
+                      ]
+                    },
+                    "bConsumeEventOnSelect": {
+                      "type": "boolean",
+                      "description": "true로 설정한 경우, 상태 선택을 수행할 수 있으면 이벤트가 소비됩니다(이후 상태 선택은 이에 반응할 수 없음)."
+                    },
+                    "temporaryEvent": {
+                      "title": "StateTreeEvent",
+                      "description": "바인딩에서 소스 값으로 사용되는 임시 이벤트입니다.",
+                      "type": "object",
+                      "properties": {
+                        "tag": {
+                          "title": "GameplayTag",
+                          "description": "이벤트를 설명하는 태그입니다.",
+                          "type": "object",
+                          "properties": {
+                            "tagName": {
+                              "type": "string",
+                              "description": "태그의 이름입니다."
+                            }
+                          },
+                          "required": [
+                            "tagName"
+                          ]
+                        },
+                        "payload": {
+                          "type": "object",
+                          "title": "FInstancedStruct",
+                          "description": "이벤트의 선택적 페이로드입니다.",
+                          "properties": {
+                            "_structType": {
+                              "type": "string",
+                              "description": "UScriptStruct path name for polymorphic type identification (e.g. /Script/Module.StructName)."
+                            }
+                          }
+                        },
+                        "origin": {
+                          "type": "string",
+                          "description": "누구가 이벤트를 전송했는지 설명하는 선택적 정보입니다."
+                        }
+                      },
+                      "required": [
+                        "tag",
+                        "payload",
+                        "origin"
+                      ]
+                    }
+                  },
+                  "required": [
+                    "tag",
+                    "payloadStruct",
+                    "bConsumeEventOnSelect",
+                    "temporaryEvent"
+                  ]
+                },
+                "state": {
+                  "title": "StateTreeStateLink",
+                  "description": "트랜지션 타깃 상태입니다.",
+                  "type": "object",
+                  "properties": {
+                    "name": {
+                      "type": "string",
+                      "description": "오류 보고에 사용되는 링크 시 상태의 이름입니다."
+                    },
+                    "iD": {
+                      "type": "string",
+                      "description": "링크된 상태의 ID입니다.",
+                      "pattern": "^[0-9A-Fa-f]{8}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{12}$"
+                    },
+                    "linkType": {
+                      "type": "string",
+                      "title": "EStateTreeTransitionType",
+                      "enum": [
+                        "None",
+                        "Succeeded",
+                        "Failed",
+                        "GotoState",
+                        "Parent",
+                        "NextState",
+                        "NextSelectableState",
+                        "NextParent",
+                        "NextSelectableParent",
+                        "NotSet"
+                      ],
+                      "description": "트랜지션의 타입으로, 편집 시 다음 상태 등을 설명하는 데 사용됩니다(컴파일 시간에 계산됨)."
+                    },
+                    "stateHandle": {
+                      "title": "StateTreeStateHandle",
+                      "description": "링크된 상태의 핸들입니다.",
+                      "type": "object",
+                      "properties": {
+                        "index": {
+                          "type": "integer"
+                        }
+                      },
+                      "required": [
+                        "index"
+                      ]
+                    },
+                    "fallback": {
+                      "type": "string",
+                      "title": "EStateTreeSelectionFallback",
+                      "enum": [
+                        "None",
+                        "NextSelectableSibling"
+                      ],
+                      "description": "타깃 상태를 선택하지 못한 경우 트랜지션의 예비 항목입니다."
+                    }
+                  },
+                  "required": [
+                    "name",
+                    "iD",
+                    "linkType",
+                    "stateHandle",
+                    "fallback"
+                  ]
+                },
+                "iD": {
+                  "type": "string",
+                  "description": "Globally unique identifier in 8-4-4-4-12 hyphenated form, e.g. \"E05FCC13-4D37-9D7A-E238-83859F29AD74\".",
+                  "pattern": "^[0-9A-Fa-f]{8}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{12}$"
+                },
+                "delegateListener": {
+                  "title": "StateTreeTransitionDelegateListener",
+                  "description": "선택된 델리게이트 디스패처에 대한 리스너입니다.",
+                  "type": "object"
+                },
+                "priority": {
+                  "type": "string",
+                  "title": "EStateTreeTransitionPriority",
+                  "enum": [
+                    "None",
+                    "Low",
+                    "Normal",
+                    "Medium",
+                    "High",
+                    "Critical"
+                  ],
+                  "description": "여러 트랜지션이 동시에 발생하는 경우의 트랜지션 우선순위입니다.\n트랜지션을 처리하는 동안 트랜지션은 리프에서 루트로 방문합니다.\n우선순위가 가장 높고 상태 선택으로 이어지는 첫 번째 방문한 트랜지션이 활성화됩니다."
+                },
+                "bDelayTransition": {
+                  "type": "boolean",
+                  "description": "트랜지션의 트리거를 딜레이합니다."
+                },
+                "delayDuration": {
+                  "type": "number",
+                  "description": "트랜지션 딜레이 경과시간(초)입니다.",
+                  "minimum": 0,
+                  "maximum": 25
+                },
+                "delayRandomVariance": {
+                  "type": "number",
+                  "description": "트랜지션 딜레이 랜덤 편차(초)입니다.",
+                  "minimum": 0,
+                  "maximum": 25
+                },
+                "conditions": {
+                  "type": "array",
+                  "items": {
+                    "title": "StateTreeEditorNode",
+                    "type": "object",
+                    "properties": {
+                      "node": {
+                        "type": "object",
+                        "title": "FInstancedStruct",
+                        "description": "Polymorphic struct. Provide _structType with the UScriptStruct path (e.g. /Script/Module.StructName) to create from scratch.",
+                        "properties": {
+                          "_structType": {
+                            "type": "string",
+                            "description": "UScriptStruct path name for polymorphic type identification (e.g. /Script/Module.StructName)."
+                          }
+                        }
+                      },
+                      "instance": {
+                        "type": "object",
+                        "title": "FInstancedStruct",
+                        "description": "Polymorphic struct. Provide _structType with the UScriptStruct path (e.g. /Script/Module.StructName) to create from scratch.",
+                        "properties": {
+                          "_structType": {
+                            "type": "string",
+                            "description": "UScriptStruct path name for polymorphic type identification (e.g. /Script/Module.StructName)."
+                          }
+                        }
+                      },
+                      "instanceObject": {
+                        "type": "object",
+                        "title": "/Script/CoreUObject.Object",
+                        "description": "UObject 또는 UClass에 대한 레퍼런스를 나타냅니다.",
+                        "properties": {
+                          "refPath": {
+                            "type": "string",
+                            "description": "소프트 경로 스트링으로 저장된 레퍼런스입니다."
+                          }
+                        },
+                        "required": [
+                          "refPath"
+                        ]
+                      },
+                      "executionRuntimeData": {
+                        "type": "object",
+                        "title": "FInstancedStruct",
+                        "description": "Polymorphic struct. Provide _structType with the UScriptStruct path (e.g. /Script/Module.StructName) to create from scratch.",
+                        "properties": {
+                          "_structType": {
+                            "type": "string",
+                            "description": "UScriptStruct path name for polymorphic type identification (e.g. /Script/Module.StructName)."
+                          }
+                        }
+                      },
+                      "executionRuntimeDataObject": {
+                        "type": "object",
+                        "title": "/Script/CoreUObject.Object",
+                        "description": "UObject 또는 UClass에 대한 레퍼런스를 나타냅니다.",
+                        "properties": {
+                          "refPath": {
+                            "type": "string",
+                            "description": "소프트 경로 스트링으로 저장된 레퍼런스입니다."
+                          }
+                        },
+                        "required": [
+                          "refPath"
+                        ]
+                      },
+                      "iD": {
+                        "type": "string",
+                        "description": "노드 인스턴스의 ID입니다.",
+                        "pattern": "^[0-9A-Fa-f]{8}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{12}$"
+                      },
+                      "expressionIndent": {
+                        "type": "integer"
+                      },
+                      "expressionOperand": {
+                        "type": "string",
+                        "title": "EStateTreeExpressionOperand",
+                        "enum": [
+                          "Copy",
+                          "And",
+                          "Or",
+                          "Multiply"
+                        ]
+                      }
+                    },
+                    "required": [
+                      "node",
+                      "instance",
+                      "instanceObject",
+                      "executionRuntimeData",
+                      "executionRuntimeDataObject",
+                      "iD",
+                      "expressionIndent",
+                      "expressionOperand"
+                    ]
+                  },
+                  "description": "트랜지션 트리거를 허용하기 위해 true로 평가되어야 하는 조건의 표현식입니다."
+                },
+                "reactivateTargetState": {
+                  "type": "string",
+                  "title": "EStateTreeTransitionChangeTypeRules",
+                  "enum": [
+                    "ForceChanged",
+                    "ForceSustained",
+                    "Default"
+                  ],
+                  "description": "타깃 스테이트 및 그 다음의 모든 스테이트가 재활성화됩니다. 해당 인스턴스 데이터가 다시 인스턴스화되며, EnterState를 수신합니다.\n참고: 타깃 스테이트가 중첩된 스테이트(부모 또는 자신) 내에 있는 경우에만 활성화됩니다. 이 설정은 중첩된 스테이트의 비헤이비어만 변경하기 때문입니다."
+                },
+                "bTransitionEnabled": {
+                  "type": "boolean",
+                  "description": "트랜지션이 활성화되어 있는 경우, 즉 에셋에서 명시적으로 비활성화되어 있지 않은 경우 true입니다."
+                }
+              },
+              "required": [
+                "trigger",
+                "requiredEvent",
+                "state",
+                "iD",
+                "delegateListener",
+                "priority",
+                "bDelayTransition",
+                "delayDuration",
+                "delayRandomVariance",
+                "conditions",
+                "reactivateTargetState",
+                "bTransitionEnabled"
+              ]
+            }
+          }
+        },
+        "required": [
+          "returnValue"
+        ]
+      }
+    },
+    {
+      "description": "Returns enter conditions on a state.\n\n        Args:\n            state: The state to query.\n\n        Returns:\n            Condition editor nodes.",
+      "name": "state_tree_toolset.toolsets.state_tree.StateTreeTools.get_enter_conditions",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "state": {
+            "type": "object",
+            "title": "/Script/StateTreeEditorModule.StateTreeState",
+            "description": "UObject 또는 UClass에 대한 레퍼런스를 나타냅니다.",
+            "properties": {
+              "refPath": {
+                "type": "string",
+                "description": "소프트 경로 스트링으로 저장된 레퍼런스입니다."
+              }
+            },
+            "required": [
+              "refPath"
+            ]
+          }
+        },
+        "required": [
+          "state"
+        ]
+      },
+      "outputSchema": {
+        "type": "object",
+        "properties": {
+          "returnValue": {
+            "type": "array",
+            "items": {
+              "title": "StateTreeEditorNode",
+              "type": "object",
+              "properties": {
+                "node": {
+                  "type": "object",
+                  "title": "FInstancedStruct",
+                  "description": "Polymorphic struct. Provide _structType with the UScriptStruct path (e.g. /Script/Module.StructName) to create from scratch.",
+                  "properties": {
+                    "_structType": {
+                      "type": "string",
+                      "description": "UScriptStruct path name for polymorphic type identification (e.g. /Script/Module.StructName)."
+                    }
+                  }
+                },
+                "instance": {
+                  "type": "object",
+                  "title": "FInstancedStruct",
+                  "description": "Polymorphic struct. Provide _structType with the UScriptStruct path (e.g. /Script/Module.StructName) to create from scratch.",
+                  "properties": {
+                    "_structType": {
+                      "type": "string",
+                      "description": "UScriptStruct path name for polymorphic type identification (e.g. /Script/Module.StructName)."
+                    }
+                  }
+                },
+                "instanceObject": {
+                  "type": "object",
+                  "title": "/Script/CoreUObject.Object",
+                  "description": "UObject 또는 UClass에 대한 레퍼런스를 나타냅니다.",
+                  "properties": {
+                    "refPath": {
+                      "type": "string",
+                      "description": "소프트 경로 스트링으로 저장된 레퍼런스입니다."
+                    }
+                  },
+                  "required": [
+                    "refPath"
+                  ]
+                },
+                "executionRuntimeData": {
+                  "type": "object",
+                  "title": "FInstancedStruct",
+                  "description": "Polymorphic struct. Provide _structType with the UScriptStruct path (e.g. /Script/Module.StructName) to create from scratch.",
+                  "properties": {
+                    "_structType": {
+                      "type": "string",
+                      "description": "UScriptStruct path name for polymorphic type identification (e.g. /Script/Module.StructName)."
+                    }
+                  }
+                },
+                "executionRuntimeDataObject": {
+                  "type": "object",
+                  "title": "/Script/CoreUObject.Object",
+                  "description": "UObject 또는 UClass에 대한 레퍼런스를 나타냅니다.",
+                  "properties": {
+                    "refPath": {
+                      "type": "string",
+                      "description": "소프트 경로 스트링으로 저장된 레퍼런스입니다."
+                    }
+                  },
+                  "required": [
+                    "refPath"
+                  ]
+                },
+                "iD": {
+                  "type": "string",
+                  "description": "노드 인스턴스의 ID입니다.",
+                  "pattern": "^[0-9A-Fa-f]{8}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{12}$"
+                },
+                "expressionIndent": {
+                  "type": "integer"
+                },
+                "expressionOperand": {
+                  "type": "string",
+                  "title": "EStateTreeExpressionOperand",
+                  "enum": [
+                    "Copy",
+                    "And",
+                    "Or",
+                    "Multiply"
+                  ]
+                }
+              },
+              "required": [
+                "node",
+                "instance",
+                "instanceObject",
+                "executionRuntimeData",
+                "executionRuntimeDataObject",
+                "iD",
+                "expressionIndent",
+                "expressionOperand"
+              ]
+            }
+          }
+        },
+        "required": [
+          "returnValue"
+        ]
+      }
+    },
+    {
+      "description": "Returns tasks on a state.\n\n        Args:\n            state: The state to query.\n\n        Returns:\n            Task editor nodes.",
+      "name": "state_tree_toolset.toolsets.state_tree.StateTreeTools.get_tasks",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "state": {
+            "type": "object",
+            "title": "/Script/StateTreeEditorModule.StateTreeState",
+            "description": "UObject 또는 UClass에 대한 레퍼런스를 나타냅니다.",
+            "properties": {
+              "refPath": {
+                "type": "string",
+                "description": "소프트 경로 스트링으로 저장된 레퍼런스입니다."
+              }
+            },
+            "required": [
+              "refPath"
+            ]
+          }
+        },
+        "required": [
+          "state"
+        ]
+      },
+      "outputSchema": {
+        "type": "object",
+        "properties": {
+          "returnValue": {
+            "type": "array",
+            "items": {
+              "title": "StateTreeEditorNode",
+              "type": "object",
+              "properties": {
+                "node": {
+                  "type": "object",
+                  "title": "FInstancedStruct",
+                  "description": "Polymorphic struct. Provide _structType with the UScriptStruct path (e.g. /Script/Module.StructName) to create from scratch.",
+                  "properties": {
+                    "_structType": {
+                      "type": "string",
+                      "description": "UScriptStruct path name for polymorphic type identification (e.g. /Script/Module.StructName)."
+                    }
+                  }
+                },
+                "instance": {
+                  "type": "object",
+                  "title": "FInstancedStruct",
+                  "description": "Polymorphic struct. Provide _structType with the UScriptStruct path (e.g. /Script/Module.StructName) to create from scratch.",
+                  "properties": {
+                    "_structType": {
+                      "type": "string",
+                      "description": "UScriptStruct path name for polymorphic type identification (e.g. /Script/Module.StructName)."
+                    }
+                  }
+                },
+                "instanceObject": {
+                  "type": "object",
+                  "title": "/Script/CoreUObject.Object",
+                  "description": "UObject 또는 UClass에 대한 레퍼런스를 나타냅니다.",
+                  "properties": {
+                    "refPath": {
+                      "type": "string",
+                      "description": "소프트 경로 스트링으로 저장된 레퍼런스입니다."
+                    }
+                  },
+                  "required": [
+                    "refPath"
+                  ]
+                },
+                "executionRuntimeData": {
+                  "type": "object",
+                  "title": "FInstancedStruct",
+                  "description": "Polymorphic struct. Provide _structType with the UScriptStruct path (e.g. /Script/Module.StructName) to create from scratch.",
+                  "properties": {
+                    "_structType": {
+                      "type": "string",
+                      "description": "UScriptStruct path name for polymorphic type identification (e.g. /Script/Module.StructName)."
+                    }
+                  }
+                },
+                "executionRuntimeDataObject": {
+                  "type": "object",
+                  "title": "/Script/CoreUObject.Object",
+                  "description": "UObject 또는 UClass에 대한 레퍼런스를 나타냅니다.",
+                  "properties": {
+                    "refPath": {
+                      "type": "string",
+                      "description": "소프트 경로 스트링으로 저장된 레퍼런스입니다."
+                    }
+                  },
+                  "required": [
+                    "refPath"
+                  ]
+                },
+                "iD": {
+                  "type": "string",
+                  "description": "노드 인스턴스의 ID입니다.",
+                  "pattern": "^[0-9A-Fa-f]{8}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{12}$"
+                },
+                "expressionIndent": {
+                  "type": "integer"
+                },
+                "expressionOperand": {
+                  "type": "string",
+                  "title": "EStateTreeExpressionOperand",
+                  "enum": [
+                    "Copy",
+                    "And",
+                    "Or",
+                    "Multiply"
+                  ]
+                }
+              },
+              "required": [
+                "node",
+                "instance",
+                "instanceObject",
+                "executionRuntimeData",
+                "executionRuntimeDataObject",
+                "iD",
+                "expressionIndent",
+                "expressionOperand"
+              ]
+            }
+          }
+        },
+        "required": [
+          "returnValue"
+        ]
+      }
+    },
+    {
+      "description": "Returns child states of a state.\n\n        Args:\n            state: The state to query.\n\n        Returns:\n            Child states.",
+      "name": "state_tree_toolset.toolsets.state_tree.StateTreeTools.get_children",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "state": {
+            "type": "object",
+            "title": "/Script/StateTreeEditorModule.StateTreeState",
+            "description": "UObject 또는 UClass에 대한 레퍼런스를 나타냅니다.",
+            "properties": {
+              "refPath": {
+                "type": "string",
+                "description": "소프트 경로 스트링으로 저장된 레퍼런스입니다."
+              }
+            },
+            "required": [
+              "refPath"
+            ]
+          }
+        },
+        "required": [
+          "state"
+        ]
+      },
+      "outputSchema": {
+        "type": "object",
+        "properties": {
+          "returnValue": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "title": "/Script/StateTreeEditorModule.StateTreeState",
+              "properties": {
+                "refPath": {
+                  "type": "string",
+                  "description": "소프트 경로 스트링으로 저장된 레퍼런스입니다."
+                }
+              },
+              "required": [
+                "refPath"
+              ]
+            }
+          }
+        },
+        "required": [
+          "returnValue"
+        ]
+      }
+    },
+    {
+      "description": "Returns top-level states of a StateTree.\n\n        Args:\n            state_tree: The StateTree asset.\n\n        Returns:\n            Root-level states.",
+      "name": "state_tree_toolset.toolsets.state_tree.StateTreeTools.get_root_states",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "state_tree": {
+            "type": "object",
+            "title": "/Script/StateTreeModule.StateTree",
+            "description": "UObject 또는 UClass에 대한 레퍼런스를 나타냅니다.",
+            "properties": {
+              "refPath": {
+                "type": "string",
+                "description": "소프트 경로 스트링으로 저장된 레퍼런스입니다."
+              }
+            },
+            "required": [
+              "refPath"
+            ]
+          }
+        },
+        "required": [
+          "state_tree"
+        ]
+      },
+      "outputSchema": {
+        "type": "object",
+        "properties": {
+          "returnValue": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "title": "/Script/StateTreeEditorModule.StateTreeState",
+              "properties": {
+                "refPath": {
+                  "type": "string",
+                  "description": "소프트 경로 스트링으로 저장된 레퍼런스입니다."
+                }
+              },
+              "required": [
+                "refPath"
+              ]
+            }
+          }
+        },
+        "required": [
+          "returnValue"
+        ]
+      }
+    },
+    {
+      "description": "Returns the editor data for a StateTree asset.\n\n        Args:\n            state_tree: The StateTree asset.\n\n        Returns:\n            The editor data object.",
+      "name": "state_tree_toolset.toolsets.state_tree.StateTreeTools.get_editor_data",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "state_tree": {
+            "type": "object",
+            "title": "/Script/StateTreeModule.StateTree",
+            "description": "UObject 또는 UClass에 대한 레퍼런스를 나타냅니다.",
+            "properties": {
+              "refPath": {
+                "type": "string",
+                "description": "소프트 경로 스트링으로 저장된 레퍼런스입니다."
+              }
+            },
+            "required": [
+              "refPath"
+            ]
+          }
+        },
+        "required": [
+          "state_tree"
+        ]
+      },
+      "outputSchema": {
+        "type": "object",
+        "properties": {
+          "returnValue": {
+            "type": "object",
+            "title": "/Script/StateTreeEditorModule.StateTreeEditorData",
+            "description": "UObject 또는 UClass에 대한 레퍼런스를 나타냅니다.",
+            "properties": {
+              "refPath": {
+                "type": "string",
+                "description": "소프트 경로 스트링으로 저장된 레퍼런스입니다."
+              }
+            },
+            "required": [
+              "refPath"
+            ]
+          }
+        },
+        "required": [
+          "returnValue"
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,345 @@
+{
+  "name": "GASToolsets.GameplayCueToolset",
+  "version": "1.0",
+  "description": "게임플레이 큐와 해당 노티파이 에셋을 검사, 실행 및 관리하는 데 사용되는 툴을 제공합니다.",
+  "tools": [
+    {
+      "description": "프로젝트에서 게임플레이 큐 태그를 제거합니다.\n이 함수는 사용자의 명시적인 지시나 허가를 받은 후에만 호출해야 합니다.",
+      "name": "GASToolsets.GameplayCueToolset.RemoveCueTag",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "cueTag": {
+            "type": "string",
+            "description": "제거할 완전히 정규화된 태그입니다(예: 'GameplayCue.Character.Death')."
+          }
+        },
+        "required": [
+          "cueTag"
+        ]
+      },
+      "outputSchema": {
+        "type": "object",
+        "properties": {
+          "returnValue": {
+            "type": "boolean",
+            "description": "태그가 성공적으로 제거된 경우, true를 반환합니다."
+          }
+        },
+        "required": [
+          "returnValue"
+        ]
+      }
+    },
+    {
+      "description": "프로젝트에 등록된 게임플레이 큐 태그를 반환합니다.",
+      "name": "GASToolsets.GameplayCueToolset.ListCues",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "parentTag": {
+            "type": "string",
+            "description": "비어 있지 않은 경우, 이 태그의 자손인 큐만 반환됩니다. 예를 들어 'GameplayCue.Character'를 전달하면 해당 네임스페이스 아래의 모든 큐를 반환합니다. 'GameplayCue' 루트 아래의 모든 태그를 반환하려면 빈 스트링을 전달하세요."
+          }
+        },
+        "required": [
+          "parentTag"
+        ]
+      },
+      "outputSchema": {
+        "type": "object",
+        "properties": {
+          "returnValue": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "정렬된 완전히 정규화된 게임플레이 큐 태그 이름의 목록을 반환합니다."
+          }
+        },
+        "required": [
+          "returnValue"
+        ]
+      }
+    },
+    {
+      "description": "노티파이 에셋을 포함하는 특정 게임플레이 큐에 대한 정보를 반환합니다.",
+      "name": "GASToolsets.GameplayCueToolset.GetCueInfo",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "cueTag": {
+            "type": "string",
+            "description": "완전히 정규화된 게임플레이 큐 태그입니다(예: 'GameplayCue.Character.Death')."
+          }
+        },
+        "required": [
+          "cueTag"
+        ]
+      },
+      "outputSchema": {
+        "type": "object",
+        "properties": {
+          "returnValue": {
+            "title": "GameplayCueInfo",
+            "description": "큐의 노티파이 에셋 경로와 타입('Static', 'Actor', 'None')을 반환합니다. 태그가 없는 경우 스크립트 오류가 발생합니다.",
+            "type": "object",
+            "properties": {
+              "tag": {
+                "type": "string",
+                "description": "완전히 정규화된 게임플레이 큐 태그입니다(예: 'GameplayCue.Character.Death')."
+              },
+              "notifyAssetPath": {
+                "type": "string",
+                "description": "관련된 GameplayCueNotify 에셋의 오브젝트 경로입니다.\n에셋 레지스트리에서 이 태그에 대한 노티파이를 찾을 수 없으면 비어 있습니다."
+              },
+              "notifyType": {
+                "type": "string",
+                "description": "노티파이 베이스 클래스: 노티파이를 찾을 수 없는 경우 'Static', 'Actor', 또는 'None'입니다."
+              }
+            },
+            "required": [
+              "tag",
+              "notifyAssetPath",
+              "notifyType"
+            ]
+          }
+        },
+        "required": [
+          "returnValue"
+        ]
+      }
+    },
+    {
+      "description": "프로젝트에 해당하는 GameplayCueNotify 에셋이 없는 게임플레이 큐 태그를 반환합니다.\n노티파이가 없는 태그는 런타임에서 트리거되어도 가시적인 효과를 생성하지 않습니다.",
+      "name": "GASToolsets.GameplayCueToolset.FindCueTagsWithoutNotifies",
+      "inputSchema": {
+        "type": "object"
+      },
+      "outputSchema": {
+        "type": "object",
+        "properties": {
+          "returnValue": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "관련된 노티파이 에셋이 없는 정렬된 게임플레이 큐 태그 이름의 목록입니다."
+          }
+        },
+        "required": [
+          "returnValue"
+        ]
+      }
+    },
+    {
+      "description": "에셋 레지스트리를 통해 프로젝트에서 발견된 모든 GameplayCueNotify 에셋을 반환합니다.",
+      "name": "GASToolsets.GameplayCueToolset.FindCueNotifyAssets",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "parentTag": {
+            "type": "string",
+            "description": "비어 있지 않은 경우, 큐 태그가 이 태그의 하위인 노티파이만 반환됩니다. 프로젝트의 모든 노티파이 에셋을 반환하려면 빈 스트링을 전달합니다."
+          }
+        },
+        "required": [
+          "parentTag"
+        ]
+      },
+      "outputSchema": {
+        "type": "object",
+        "properties": {
+          "returnValue": {
+            "type": "array",
+            "items": {
+              "title": "GameplayCueNotifyInfo",
+              "type": "object",
+              "properties": {
+                "cueTag": {
+                  "type": "string",
+                  "description": "이 노티파이가 응답하는 게임플레이 큐 태그입니다."
+                },
+                "assetPath": {
+                  "type": "string",
+                  "description": "에셋의 전체 오브젝트 경로입니다(예: '/Game/Effects/GCN_Death.GCN_Death')."
+                },
+                "assetName": {
+                  "type": "string",
+                  "description": "패키지 경로를 제외한 에셋 이름입니다(예: 'GCN_Death')."
+                },
+                "notifyType": {
+                  "type": "string",
+                  "description": "UGameplayCueNotify_Static 서브클래스의 경우 'Static', AGameplayCueNotify_Actor 서브클래스의 경우 'Actor'입니다."
+                }
+              },
+              "required": [
+                "cueTag",
+                "assetPath",
+                "assetName",
+                "notifyType"
+              ]
+            },
+            "description": "큐 태그순으로 정렬된 노티파이 디스크립터의 목록을 반환합니다."
+          }
+        },
+        "required": [
+          "returnValue"
+        ]
+      }
+    },
+    {
+      "description": "에디터에서 현재 선택된 액터에 리플리케이트되지 않는 게임플레이 큐를 실행합니다.\n네트워크 리플리케이션 없이 큐 이펙트를 프리뷰하는 데 유용합니다.\n시각적인 결과를 확인하려면 PIE 세션 또는 환경설정된 GameplayCueManager가 필요합니다.",
+      "name": "GASToolsets.GameplayCueToolset.ExecuteCueOnSelectedActor",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "cueTag": {
+            "type": "string",
+            "description": "실행할 큐의 완전히 정규화된 태그입니다(예: 'GameplayCue.Character.Death')."
+          },
+          "normalizedMagnitude": {
+            "type": "number",
+            "description": "큐에 전달되는 정규화된 크기 값(0.0~1.0)입니다."
+          },
+          "location": {
+            "title": "Vector",
+            "description": "큐에 전달되는 월드 스페이스 위치 파라미터입니다.",
+            "type": "object",
+            "properties": {
+              "x": {
+                "type": "number"
+              },
+              "y": {
+                "type": "number"
+              },
+              "z": {
+                "type": "number"
+              }
+            },
+            "required": [
+              "x",
+              "y",
+              "z"
+            ]
+          },
+          "normal": {
+            "title": "Vector",
+            "description": "큐에 전달되는 월드 스페이스 방향 파라미터입니다.",
+            "type": "object",
+            "properties": {
+              "x": {
+                "type": "number"
+              },
+              "y": {
+                "type": "number"
+              },
+              "z": {
+                "type": "number"
+              }
+            },
+            "required": [
+              "x",
+              "y",
+              "z"
+            ]
+          }
+        },
+        "required": [
+          "cueTag",
+          "normalizedMagnitude",
+          "location",
+          "normal"
+        ]
+      },
+      "outputSchema": {
+        "type": "object",
+        "properties": {
+          "returnValue": {
+            "type": "boolean",
+            "description": "큐가 디스패치된 경우, true를 반환합니다. 액터가 선택되지 않았거나 태그가 없는 경우 스크립트 오류가 발생합니다."
+          }
+        },
+        "required": [
+          "returnValue"
+        ]
+      }
+    },
+    {
+      "description": "콘텐츠 브라우저의 지정된 위치에 새로운 GameplayCueNotify 블루프린트 에셋을 생성합니다.\n이 함수는 사용자의 명시적인 지시나 허가를 받은 후에만 호출해야 합니다.",
+      "name": "GASToolsets.GameplayCueToolset.CreateCueNotifyAsset",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "cueTag": {
+            "type": "string",
+            "description": "노티파이가 응답해야 할 게임플레이 큐 태그입니다. 태그가 이미 존재해야 합니다. 필요한 경우 AddCueTag를 사용하여 먼저 생성하세요."
+          },
+          "packagePath": {
+            "type": "string",
+            "description": "에셋이 저장될 콘텐츠 브라우저 폴더입니다. 예: '/Game/Effects/Cues'."
+          },
+          "assetName": {
+            "type": "string",
+            "description": "새 에셋의 파일 이름입니다(예: 'GCN_CharacterDeath')."
+          },
+          "bIsActor": {
+            "type": "boolean",
+            "description": "true인 경우, GameplayCueNotify_Actor(월드에 스폰되는 액터)를 생성합니다. false인 경우, GameplayCueNotify_Static(스폰되는 액터가 없는 즉각적인 이펙트)을 생성합니다."
+          }
+        },
+        "required": [
+          "cueTag",
+          "packagePath",
+          "assetName",
+          "bIsActor"
+        ]
+      },
+      "outputSchema": {
+        "type": "object",
+        "properties": {
+          "returnValue": {
+            "type": "string",
+            "description": "생성된 에셋의 오브젝트 경로를 반환하고, 실패 시 빈 스트링을 반환합니다."
+          }
+        },
+        "required": [
+          "returnValue"
+        ]
+      }
+    },
+    {
+      "description": "프로젝트에 새 게임플레이 큐 태그를 추가합니다.\n이 함수는 사용자의 명시적인 지시나 허가를 받은 후에만 호출해야 합니다.",
+      "name": "GASToolsets.GameplayCueToolset.AddCueTag",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "cueTag": {
+            "type": "string",
+            "description": "추가할 완전히 정규화된 태그입니다. 'GameplayCue.'로 시작해야 합니다. (예: 'GameplayCue.Character.Death')."
+          },
+          "comment": {
+            "type": "string",
+            "description": "큐의 용도를 설명하는 선택적 개발자 코멘트입니다.",
+            "default": "/**\n\t * Adds a new gameplay cue tag to the project.\n\t * This should ONLY be called after getting explicit direction or permission from the user.\n\t * @param CueTag The fully-qualified tag to add. Must begin with \"GameplayCue.\"\n\t *   (e.g. \"GameplayCue.Character.Death\").\n\t * @param Comment An optional developer comment describing the cue's purpose.\n\t * @return True if the tag was added successfully.\n\t */"
+          }
+        },
+        "required": [
+          "cueTag"
+        ]
+      },
+      "outputSchema": {
+        "type": "object",
+        "properties": {
+          "returnValue": {
+            "type": "boolean",
+            "description": "태그가 성공적으로 추가된 경우, true를 반환합니다."
+          }
+        },
+        "required": [
+          "returnValue"
+        ]
+      }
+    }
+  ]
+}

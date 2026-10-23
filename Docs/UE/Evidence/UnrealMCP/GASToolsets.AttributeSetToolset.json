@@ -1,0 +1,123 @@
+{
+  "name": "GASToolsets.AttributeSetToolset",
+  "version": "1.0",
+  "description": "AttributeSet 클래스와 해당 게임플레이 어트리뷰트를 검색하는 데 사용되는 툴을 제공합니다.",
+  "tools": [
+    {
+      "description": "특정 AttributeSet 클래스에 정의된 게임플레이 어트리뷰트를 반환합니다.",
+      "name": "GASToolsets.AttributeSetToolset.ListAttributes",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "className": {
+            "type": "string",
+            "description": "찾으려는 UClass 이름입니다(예: 'UMyHealthSet'). 클래스를 찾을 수 없거나 AttributeSet의 서브클래스가 아닌 경우, 스크립트 오류가 발생합니다."
+          }
+        },
+        "required": [
+          "className"
+        ]
+      },
+      "outputSchema": {
+        "type": "object",
+        "properties": {
+          "returnValue": {
+            "type": "array",
+            "items": {
+              "title": "GameplayAttributeInfo",
+              "type": "object",
+              "properties": {
+                "attributeName": {
+                  "type": "string",
+                  "description": "짧은 어트리뷰트 이름입니다(예: 'Health')."
+                },
+                "fullName": {
+                  "type": "string",
+                  "description": "세트 클래스를 포함하는 완전히 정규화된 어트리뷰트 이름입니다(예: 'UMyHealthSet.Health')."
+                },
+                "setClassName": {
+                  "type": "string",
+                  "description": "이 어트리뷰트를 소유하는 AttributeSet 클래스의 이름입니다(예: 'UMyHealthSet')."
+                }
+              },
+              "required": [
+                "attributeName",
+                "fullName",
+                "setClassName"
+              ]
+            },
+            "description": "클래스에 정의된 어트리뷰트 디스크립터의 목록입니다."
+          }
+        },
+        "required": [
+          "returnValue"
+        ]
+      }
+    },
+    {
+      "description": "프로젝트에서 검색된 모든 어트리뷰트 세트 서브클래스와 해당 어트리뷰트를 반환합니다.\n네이티브 C++ 서브클래스와 에셋 레지스트리를 통해 검색된 블루프린트 서브클래스를 모두 포함합니다.",
+      "name": "GASToolsets.AttributeSetToolset.FindAttributeSetClasses",
+      "inputSchema": {
+        "type": "object"
+      },
+      "outputSchema": {
+        "type": "object",
+        "properties": {
+          "returnValue": {
+            "type": "array",
+            "items": {
+              "title": "AttributeSetClassInfo",
+              "type": "object",
+              "properties": {
+                "className": {
+                  "type": "string",
+                  "description": "어트리뷰트 세트의 UClass 이름입니다(예: 'UMyHealthSet')."
+                },
+                "assetPath": {
+                  "type": "string",
+                  "description": "블루프린트 에셋에 대한 오브젝트 경로로, 네이티브 C++ 클래스의 경우 비워 둡니다."
+                },
+                "attributes": {
+                  "type": "array",
+                  "items": {
+                    "title": "GameplayAttributeInfo",
+                    "type": "object",
+                    "properties": {
+                      "attributeName": {
+                        "type": "string",
+                        "description": "짧은 어트리뷰트 이름입니다(예: 'Health')."
+                      },
+                      "fullName": {
+                        "type": "string",
+                        "description": "세트 클래스를 포함하는 완전히 정규화된 어트리뷰트 이름입니다(예: 'UMyHealthSet.Health')."
+                      },
+                      "setClassName": {
+                        "type": "string",
+                        "description": "이 어트리뷰트를 소유하는 AttributeSet 클래스의 이름입니다(예: 'UMyHealthSet')."
+                      }
+                    },
+                    "required": [
+                      "attributeName",
+                      "fullName",
+                      "setClassName"
+                    ]
+                  },
+                  "description": "이 세트에 정의된 게임플레이 어트리뷰트입니다."
+                }
+              },
+              "required": [
+                "className",
+                "assetPath",
+                "attributes"
+              ]
+            },
+            "description": "클래스 이름순으로 정렬된 어트리뷰트 세트 디스크립터의 목록입니다."
+          }
+        },
+        "required": [
+          "returnValue"
+        ]
+      }
+    }
+  ]
+}

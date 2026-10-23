@@ -1,0 +1,556 @@
+{
+  "name": "editor_toolset.toolsets.primitive.PrimitiveTools",
+  "version": "1.0",
+  "description": "Provides tools for adding primitive geometry components to actors.",
+  "tools": [
+    {
+      "description": "Adds a cone-shaped StaticMeshComponent to an actor.\n\n        Args:\n            actor: The actor to add the component to.\n            name: The name of the new component.\n            radius: The radius of the cone base.\n            height: The height of the cone.\n            local_transform: The transform of the component relative to the actor.\n\n        Returns:\n            The new StaticMeshComponent.",
+      "name": "editor_toolset.toolsets.primitive.PrimitiveTools.add_cone",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "actor": {
+            "type": "object",
+            "title": "/Script/Engine.Actor",
+            "description": "UObject 또는 UClass에 대한 레퍼런스를 나타냅니다.",
+            "properties": {
+              "refPath": {
+                "type": "string",
+                "description": "소프트 경로 스트링으로 저장된 레퍼런스입니다."
+              }
+            },
+            "required": [
+              "refPath"
+            ]
+          },
+          "name": {
+            "type": "string"
+          },
+          "radius": {
+            "type": "number",
+            "default": 50
+          },
+          "height": {
+            "type": "number",
+            "default": 100
+          },
+          "local_transform": {
+            "default": null,
+            "type": "object",
+            "title": "ToolsetTransform",
+            "description": "선택적인 위치, 회전 및 스케일을 포함하는 3D 트랜스폼을 나타냅니다.\n설정되지 않은 필드는 오브젝트를 생성하는 경우 '항등'을 의미하고, 기존 오브젝트를 수정하는 경우 '변경하지 않음'을 의미합니다.",
+            "properties": {
+              "location": {
+                "description": "월드 스페이스 위치입니다.",
+                "title": "Vector",
+                "type": "object",
+                "properties": {
+                  "x": {
+                    "type": "number"
+                  },
+                  "y": {
+                    "type": "number"
+                  },
+                  "z": {
+                    "type": "number"
+                  }
+                },
+                "required": [
+                  "x",
+                  "y",
+                  "z"
+                ]
+              },
+              "rotation": {
+                "description": "월드 스페이스 회전입니다.",
+                "title": "Rotator",
+                "type": "object",
+                "properties": {
+                  "pitch": {
+                    "type": "number",
+                    "description": "Y 축을 중심으로 하는 피치입니다 (각도 단위)."
+                  },
+                  "yaw": {
+                    "type": "number",
+                    "description": "Z 축을 중심으로 하는 요입니다 (각도 단위)."
+                  },
+                  "roll": {
+                    "type": "number",
+                    "description": "X 축을 중심으로 하는 롤입니다 (각도 단위)."
+                  }
+                },
+                "required": [
+                  "pitch",
+                  "yaw",
+                  "roll"
+                ]
+              },
+              "scale": {
+                "description": "스케일입니다.",
+                "title": "Vector",
+                "type": "object",
+                "properties": {
+                  "x": {
+                    "type": "number"
+                  },
+                  "y": {
+                    "type": "number"
+                  },
+                  "z": {
+                    "type": "number"
+                  }
+                },
+                "required": [
+                  "x",
+                  "y",
+                  "z"
+                ]
+              }
+            }
+          }
+        },
+        "required": [
+          "actor",
+          "name"
+        ]
+      },
+      "outputSchema": {
+        "type": "object",
+        "properties": {
+          "returnValue": {
+            "type": "object",
+            "title": "/Script/Engine.StaticMeshComponent",
+            "description": "UObject 또는 UClass에 대한 레퍼런스를 나타냅니다.",
+            "properties": {
+              "refPath": {
+                "type": "string",
+                "description": "소프트 경로 스트링으로 저장된 레퍼런스입니다."
+              }
+            },
+            "required": [
+              "refPath"
+            ]
+          }
+        },
+        "required": [
+          "returnValue"
+        ]
+      }
+    },
+    {
+      "description": "Adds a cylinder-shaped StaticMeshComponent to an actor.\n\n        Args:\n            actor: The actor to add the component to.\n            name: The name of the new component.\n            radius: The radius of the cylinder.\n            height: The height of the cylinder.\n            local_transform: The transform of the component relative to the actor.\n\n        Returns:\n            The new StaticMeshComponent.",
+      "name": "editor_toolset.toolsets.primitive.PrimitiveTools.add_cylinder",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "actor": {
+            "type": "object",
+            "title": "/Script/Engine.Actor",
+            "description": "UObject 또는 UClass에 대한 레퍼런스를 나타냅니다.",
+            "properties": {
+              "refPath": {
+                "type": "string",
+                "description": "소프트 경로 스트링으로 저장된 레퍼런스입니다."
+              }
+            },
+            "required": [
+              "refPath"
+            ]
+          },
+          "name": {
+            "type": "string"
+          },
+          "radius": {
+            "type": "number",
+            "default": 50
+          },
+          "height": {
+            "type": "number",
+            "default": 100
+          },
+          "local_transform": {
+            "default": null,
+            "type": "object",
+            "title": "ToolsetTransform",
+            "description": "선택적인 위치, 회전 및 스케일을 포함하는 3D 트랜스폼을 나타냅니다.\n설정되지 않은 필드는 오브젝트를 생성하는 경우 '항등'을 의미하고, 기존 오브젝트를 수정하는 경우 '변경하지 않음'을 의미합니다.",
+            "properties": {
+              "location": {
+                "description": "월드 스페이스 위치입니다.",
+                "title": "Vector",
+                "type": "object",
+                "properties": {
+                  "x": {
+                    "type": "number"
+                  },
+                  "y": {
+                    "type": "number"
+                  },
+                  "z": {
+                    "type": "number"
+                  }
+                },
+                "required": [
+                  "x",
+                  "y",
+                  "z"
+                ]
+              },
+              "rotation": {
+                "description": "월드 스페이스 회전입니다.",
+                "title": "Rotator",
+                "type": "object",
+                "properties": {
+                  "pitch": {
+                    "type": "number",
+                    "description": "Y 축을 중심으로 하는 피치입니다 (각도 단위)."
+                  },
+                  "yaw": {
+                    "type": "number",
+                    "description": "Z 축을 중심으로 하는 요입니다 (각도 단위)."
+                  },
+                  "roll": {
+                    "type": "number",
+                    "description": "X 축을 중심으로 하는 롤입니다 (각도 단위)."
+                  }
+                },
+                "required": [
+                  "pitch",
+                  "yaw",
+                  "roll"
+                ]
+              },
+              "scale": {
+                "description": "스케일입니다.",
+                "title": "Vector",
+                "type": "object",
+                "properties": {
+                  "x": {
+                    "type": "number"
+                  },
+                  "y": {
+                    "type": "number"
+                  },
+                  "z": {
+                    "type": "number"
+                  }
+                },
+                "required": [
+                  "x",
+                  "y",
+                  "z"
+                ]
+              }
+            }
+          }
+        },
+        "required": [
+          "actor",
+          "name"
+        ]
+      },
+      "outputSchema": {
+        "type": "object",
+        "properties": {
+          "returnValue": {
+            "type": "object",
+            "title": "/Script/Engine.StaticMeshComponent",
+            "description": "UObject 또는 UClass에 대한 레퍼런스를 나타냅니다.",
+            "properties": {
+              "refPath": {
+                "type": "string",
+                "description": "소프트 경로 스트링으로 저장된 레퍼런스입니다."
+              }
+            },
+            "required": [
+              "refPath"
+            ]
+          }
+        },
+        "required": [
+          "returnValue"
+        ]
+      }
+    },
+    {
+      "description": "Adds a sphere-shaped StaticMeshComponent to an actor.\n\n        Args:\n            actor: The actor to add the component to.\n            name: The name of the new component.\n            radius: The radius of the sphere.\n            local_transform: The transform of the component relative to the actor.\n\n        Returns:\n            The new StaticMeshComponent.",
+      "name": "editor_toolset.toolsets.primitive.PrimitiveTools.add_sphere",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "actor": {
+            "type": "object",
+            "title": "/Script/Engine.Actor",
+            "description": "UObject 또는 UClass에 대한 레퍼런스를 나타냅니다.",
+            "properties": {
+              "refPath": {
+                "type": "string",
+                "description": "소프트 경로 스트링으로 저장된 레퍼런스입니다."
+              }
+            },
+            "required": [
+              "refPath"
+            ]
+          },
+          "name": {
+            "type": "string"
+          },
+          "radius": {
+            "type": "number",
+            "default": 50
+          },
+          "local_transform": {
+            "default": null,
+            "type": "object",
+            "title": "ToolsetTransform",
+            "description": "선택적인 위치, 회전 및 스케일을 포함하는 3D 트랜스폼을 나타냅니다.\n설정되지 않은 필드는 오브젝트를 생성하는 경우 '항등'을 의미하고, 기존 오브젝트를 수정하는 경우 '변경하지 않음'을 의미합니다.",
+            "properties": {
+              "location": {
+                "description": "월드 스페이스 위치입니다.",
+                "title": "Vector",
+                "type": "object",
+                "properties": {
+                  "x": {
+                    "type": "number"
+                  },
+                  "y": {
+                    "type": "number"
+                  },
+                  "z": {
+                    "type": "number"
+                  }
+                },
+                "required": [
+                  "x",
+                  "y",
+                  "z"
+                ]
+              },
+              "rotation": {
+                "description": "월드 스페이스 회전입니다.",
+                "title": "Rotator",
+                "type": "object",
+                "properties": {
+                  "pitch": {
+                    "type": "number",
+                    "description": "Y 축을 중심으로 하는 피치입니다 (각도 단위)."
+                  },
+                  "yaw": {
+                    "type": "number",
+                    "description": "Z 축을 중심으로 하는 요입니다 (각도 단위)."
+                  },
+                  "roll": {
+                    "type": "number",
+                    "description": "X 축을 중심으로 하는 롤입니다 (각도 단위)."
+                  }
+                },
+                "required": [
+                  "pitch",
+                  "yaw",
+                  "roll"
+                ]
+              },
+              "scale": {
+                "description": "스케일입니다.",
+                "title": "Vector",
+                "type": "object",
+                "properties": {
+                  "x": {
+                    "type": "number"
+                  },
+                  "y": {
+                    "type": "number"
+                  },
+                  "z": {
+                    "type": "number"
+                  }
+                },
+                "required": [
+                  "x",
+                  "y",
+                  "z"
+                ]
+              }
+            }
+          }
+        },
+        "required": [
+          "actor",
+          "name"
+        ]
+      },
+      "outputSchema": {
+        "type": "object",
+        "properties": {
+          "returnValue": {
+            "type": "object",
+            "title": "/Script/Engine.StaticMeshComponent",
+            "description": "UObject 또는 UClass에 대한 레퍼런스를 나타냅니다.",
+            "properties": {
+              "refPath": {
+                "type": "string",
+                "description": "소프트 경로 스트링으로 저장된 레퍼런스입니다."
+              }
+            },
+            "required": [
+              "refPath"
+            ]
+          }
+        },
+        "required": [
+          "returnValue"
+        ]
+      }
+    },
+    {
+      "description": "Adds a cube-shaped StaticMeshComponent to an actor.\n\n        Args:\n            actor: The actor to add the component to.\n            name: The name of the new component.\n            dimensions: The x, y, and z size of the cube.\n            local_transform: The transform of the component relative to the actor.\n\n        Returns:\n            The new StaticMeshComponent.",
+      "name": "editor_toolset.toolsets.primitive.PrimitiveTools.add_cube",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "actor": {
+            "type": "object",
+            "title": "/Script/Engine.Actor",
+            "description": "UObject 또는 UClass에 대한 레퍼런스를 나타냅니다.",
+            "properties": {
+              "refPath": {
+                "type": "string",
+                "description": "소프트 경로 스트링으로 저장된 레퍼런스입니다."
+              }
+            },
+            "required": [
+              "refPath"
+            ]
+          },
+          "name": {
+            "type": "string"
+          },
+          "dimensions": {
+            "title": "Vector",
+            "default": {
+              "x": 100,
+              "y": 100,
+              "z": 100
+            },
+            "type": "object",
+            "properties": {
+              "x": {
+                "type": "number"
+              },
+              "y": {
+                "type": "number"
+              },
+              "z": {
+                "type": "number"
+              }
+            },
+            "required": [
+              "x",
+              "y",
+              "z"
+            ]
+          },
+          "local_transform": {
+            "default": null,
+            "type": "object",
+            "title": "ToolsetTransform",
+            "description": "선택적인 위치, 회전 및 스케일을 포함하는 3D 트랜스폼을 나타냅니다.\n설정되지 않은 필드는 오브젝트를 생성하는 경우 '항등'을 의미하고, 기존 오브젝트를 수정하는 경우 '변경하지 않음'을 의미합니다.",
+            "properties": {
+              "location": {
+                "description": "월드 스페이스 위치입니다.",
+                "title": "Vector",
+                "type": "object",
+                "properties": {
+                  "x": {
+                    "type": "number"
+                  },
+                  "y": {
+                    "type": "number"
+                  },
+                  "z": {
+                    "type": "number"
+                  }
+                },
+                "required": [
+                  "x",
+                  "y",
+                  "z"
+                ]
+              },
+              "rotation": {
+                "description": "월드 스페이스 회전입니다.",
+                "title": "Rotator",
+                "type": "object",
+                "properties": {
+                  "pitch": {
+                    "type": "number",
+                    "description": "Y 축을 중심으로 하는 피치입니다 (각도 단위)."
+                  },
+                  "yaw": {
+                    "type": "number",
+                    "description": "Z 축을 중심으로 하는 요입니다 (각도 단위)."
+                  },
+                  "roll": {
+                    "type": "number",
+                    "description": "X 축을 중심으로 하는 롤입니다 (각도 단위)."
+                  }
+                },
+                "required": [
+                  "pitch",
+                  "yaw",
+                  "roll"
+                ]
+              },
+              "scale": {
+                "description": "스케일입니다.",
+                "title": "Vector",
+                "type": "object",
+                "properties": {
+                  "x": {
+                    "type": "number"
+                  },
+                  "y": {
+                    "type": "number"
+                  },
+                  "z": {
+                    "type": "number"
+                  }
+                },
+                "required": [
+                  "x",
+                  "y",
+                  "z"
+                ]
+              }
+            }
+          }
+        },
+        "required": [
+          "actor",
+          "name"
+        ]
+      },
+      "outputSchema": {
+        "type": "object",
+        "properties": {
+          "returnValue": {
+            "type": "object",
+            "title": "/Script/Engine.StaticMeshComponent",
+            "description": "UObject 또는 UClass에 대한 레퍼런스를 나타냅니다.",
+            "properties": {
+              "refPath": {
+                "type": "string",
+                "description": "소프트 경로 스트링으로 저장된 레퍼런스입니다."
+              }
+            },
+            "required": [
+              "refPath"
+            ]
+          }
+        },
+        "required": [
+          "returnValue"
+        ]
+      }
+    }
+  ]
+}

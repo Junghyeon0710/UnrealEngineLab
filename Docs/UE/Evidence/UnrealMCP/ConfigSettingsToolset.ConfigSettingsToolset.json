@@ -1,0 +1,299 @@
+{
+  "name": "ConfigSettingsToolset.ConfigSettingsToolset",
+  "version": "1.0",
+  "description": "환경설정 세팅 섹션을 나열, 검사 및 편집하는 데 사용되는 툴입니다.",
+  "tools": [
+    {
+      "description": "JSON 오브젝트에서 세팅 섹션의 하나 이상의 프로퍼티를 설정하고 저장합니다.\nPropertiesJson은 GetSectionPropertyValues에 의해 반환되는 것과 동일한 포맷의,\n프로퍼티 이름을 새 값에 매핑하는 JSON 오브젝트여야 합니다.\n섹션이 없거나, 편집할 수 없거나, 세팅 오브젝트가 없거나, 디폴트 환경설정 파일에 쓸 수 없거나,\n임의의 프로퍼티를 설정할 수 없는 경우 오류를 발생시킵니다.",
+      "name": "ConfigSettingsToolset.ConfigSettingsToolset.SetSectionProperties",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "containerName": {
+            "type": "string",
+            "description": "컨테이너의 이름입니다(예: 'Project')."
+          },
+          "categoryName": {
+            "type": "string",
+            "description": "카테고리의 이름입니다(예: 'Engine')."
+          },
+          "sectionName": {
+            "type": "string",
+            "description": "섹션의 이름입니다(예: 'General')."
+          },
+          "propertiesJson": {
+            "type": "string",
+            "description": "프로퍼티 이름과 새 값의 쌍이 포함된 JSON 오브젝트입니다."
+          }
+        },
+        "required": [
+          "containerName",
+          "categoryName",
+          "sectionName",
+          "propertiesJson"
+        ]
+      },
+      "outputSchema": {
+        "type": "object",
+        "properties": {
+          "returnValue": {
+            "type": "boolean",
+            "description": "모든 프로퍼티가 성공적으로 설정된 경우, true를 반환합니다."
+          }
+        },
+        "required": [
+          "returnValue"
+        ]
+      }
+    },
+    {
+      "description": "섹션의 세팅을 저장합니다.\n섹션이 존재하지 않거나 저장이 지원되지 않는 경우 오류를 발생시킵니다.",
+      "name": "ConfigSettingsToolset.ConfigSettingsToolset.SaveSection",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "containerName": {
+            "type": "string",
+            "description": "컨테이너의 이름입니다(예: 'Project')."
+          },
+          "categoryName": {
+            "type": "string",
+            "description": "카테고리의 이름입니다(예: 'Engine')."
+          },
+          "sectionName": {
+            "type": "string",
+            "description": "섹션의 이름입니다(예: 'General')."
+          }
+        },
+        "required": [
+          "containerName",
+          "categoryName",
+          "sectionName"
+        ]
+      },
+      "outputSchema": {
+        "type": "object",
+        "properties": {
+          "returnValue": {
+            "type": "boolean",
+            "description": "성공 시 true를 반환합니다."
+          }
+        },
+        "required": [
+          "returnValue"
+        ]
+      }
+    },
+    {
+      "description": "섹션의 세팅을 디폴트 값으로 리셋합니다.\n섹션이 존재하지 않거나 리셋이 지원되지 않는 경우 오류를 발생시킵니다.",
+      "name": "ConfigSettingsToolset.ConfigSettingsToolset.ResetSectionToDefaults",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "containerName": {
+            "type": "string",
+            "description": "컨테이너의 이름입니다(예: 'Project')."
+          },
+          "categoryName": {
+            "type": "string",
+            "description": "카테고리의 이름입니다(예: 'Engine')."
+          },
+          "sectionName": {
+            "type": "string",
+            "description": "섹션의 이름입니다(예: 'General')."
+          }
+        },
+        "required": [
+          "containerName",
+          "categoryName",
+          "sectionName"
+        ]
+      },
+      "outputSchema": {
+        "type": "object",
+        "properties": {
+          "returnValue": {
+            "type": "boolean",
+            "description": "성공 시 true를 반환합니다."
+          }
+        },
+        "required": [
+          "returnValue"
+        ]
+      }
+    },
+    {
+      "description": "세팅 카테고리 내의 모든 섹션 이름을 알파벳 순으로 나열합니다.\n컨테이너 또는 카테고리가 없는 경우 오류를 발생시킵니다.",
+      "name": "ConfigSettingsToolset.ConfigSettingsToolset.ListSections",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "containerName": {
+            "type": "string",
+            "description": "컨테이너의 이름입니다(예: 'Project')."
+          },
+          "categoryName": {
+            "type": "string",
+            "description": "카테고리의 이름입니다(예: 'Engine')."
+          }
+        },
+        "required": [
+          "containerName",
+          "categoryName"
+        ]
+      },
+      "outputSchema": {
+        "type": "object",
+        "properties": {
+          "returnValue": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "정렬된 섹션 이름 배열을 반환합니다."
+          }
+        },
+        "required": [
+          "returnValue"
+        ]
+      }
+    },
+    {
+      "description": "알려진 모든 세팅 컨테이너의 이름을 알파벳 순으로 나열합니다.\n일반적인 컨테이너로는 'Editor' 및 'Project'가 있습니다.",
+      "name": "ConfigSettingsToolset.ConfigSettingsToolset.ListContainers",
+      "inputSchema": {
+        "type": "object"
+      },
+      "outputSchema": {
+        "type": "object",
+        "properties": {
+          "returnValue": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "정렬된 컨테이너 이름 배열을 반환합니다."
+          }
+        },
+        "required": [
+          "returnValue"
+        ]
+      }
+    },
+    {
+      "description": "세팅 컨테이너 내의 모든 카테고리 이름을 알파벳 순으로 정렬하여 나열합니다.\n컨테이너가 없는 경우 오류를 발생시킵니다.",
+      "name": "ConfigSettingsToolset.ConfigSettingsToolset.ListCategories",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "containerName": {
+            "type": "string",
+            "description": "컨테이너의 이름입니다(예: 'Project')."
+          }
+        },
+        "required": [
+          "containerName"
+        ]
+      },
+      "outputSchema": {
+        "type": "object",
+        "properties": {
+          "returnValue": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "정렬된 카테고리 이름 배열을 반환합니다."
+          }
+        },
+        "required": [
+          "returnValue"
+        ]
+      }
+    },
+    {
+      "description": "세팅 섹션의 사용자 표시용 프로퍼티를 설명하는 JSON 스키마를 반환합니다.\n이 스키마는 각 프로퍼티 이름을 해당 타입, 설명 및 컨스트레인트에 매핑합니다.\n섹션이 없거나 지원 세팅 오브젝트가 없는 경우 오류를 발생시킵니다\n(예: 대신 커스텀 위젯을 사용하는 경우).",
+      "name": "ConfigSettingsToolset.ConfigSettingsToolset.GetSectionSchema",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "containerName": {
+            "type": "string",
+            "description": "컨테이너의 이름입니다(예: 'Project')."
+          },
+          "categoryName": {
+            "type": "string",
+            "description": "카테고리의 이름입니다(예: 'Engine')."
+          },
+          "sectionName": {
+            "type": "string",
+            "description": "섹션의 이름입니다(예: 'General')."
+          }
+        },
+        "required": [
+          "containerName",
+          "categoryName",
+          "sectionName"
+        ]
+      },
+      "outputSchema": {
+        "type": "object",
+        "properties": {
+          "returnValue": {
+            "type": "string",
+            "description": "섹션의 프로퍼티를 설명하는 JSON 스키마 스트링을 반환하고, 실패 시 빈 스트링을 반환합니다."
+          }
+        },
+        "required": [
+          "returnValue"
+        ]
+      }
+    },
+    {
+      "description": "지정된 프로퍼티의 현재 값을 JSON 오브젝트로 반환합니다.\n섹션이 없거나, 세팅 오브젝트가 없거나, 요청된 프로퍼티를 읽을 수 없는 경우\n오류를 발생시킵니다.",
+      "name": "ConfigSettingsToolset.ConfigSettingsToolset.GetSectionPropertyValues",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "containerName": {
+            "type": "string",
+            "description": "컨테이너의 이름입니다(예: 'Project')."
+          },
+          "categoryName": {
+            "type": "string",
+            "description": "카테고리의 이름입니다(예: 'Engine')."
+          },
+          "sectionName": {
+            "type": "string",
+            "description": "섹션의 이름입니다(예: 'General')."
+          },
+          "propertyNames": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "읽을 프로퍼티의 이름입니다."
+          }
+        },
+        "required": [
+          "containerName",
+          "categoryName",
+          "sectionName",
+          "propertyNames"
+        ]
+      },
+      "outputSchema": {
+        "type": "object",
+        "properties": {
+          "returnValue": {
+            "type": "string",
+            "description": "프로퍼티 이름과 현재 값을 매핑하는 JSON 오브젝트를 반환하고, 실패 시 빈 스트링을 반환합니다."
+          }
+        },
+        "required": [
+          "returnValue"
+        ]
+      }
+    }
+  ]
+}

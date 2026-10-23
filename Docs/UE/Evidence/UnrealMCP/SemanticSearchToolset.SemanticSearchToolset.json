@@ -1,0 +1,221 @@
+{
+  "name": "SemanticSearchToolset.SemanticSearchToolset",
+  "version": "1.0",
+  "description": "SemanticSearch 플러그인의 하이브리드 벡터 + BM25 에셋 검색 기능을 AI 툴세트 레지스트리에\n노출하는 툴세트입니다.",
+  "tools": [
+    {
+      "description": "SemanticSearch 플러그인에 의해 인덱싱된 콘텐츠 브라우저 에셋에 대해 시맨틱 검색을 실행합니다.",
+      "name": "SemanticSearchToolset.SemanticSearchToolset.Search",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "query": {
+            "type": "string",
+            "description": "자연어 쿼리입니다. 비어 있지 않아야 합니다."
+          },
+          "classFilter": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "title": "Class@/Script/CoreUObject.Object",
+              "properties": {
+                "refPath": {
+                  "type": "string",
+                  "description": "소프트 경로 스트링으로 저장된 레퍼런스입니다."
+                }
+              },
+              "required": [
+                "refPath"
+              ]
+            },
+            "description": "비어 있지 않은 경우, 필터링할 클래스의 배열입니다(클래스의 전체 레퍼런스 경로 제공). 베이스 클래스를 전달하면 해당 베이스 클래스의 모든 서브클래스가 포함됩니다. 시맨틱 검색 인덱스는 현재 Blueprint, StaticMesh, SkeletalMesh, Texture, Material, MaterialInstance 같은 베이스 클래스를 커버합니다. 인덱싱된 모든 클래스를 고려하려면 빈 배열을 전달하세요."
+          },
+          "pathRegexes": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "비어 있지 않은 경우, 소프트 오브젝트 경로가 이러한 정규식 중 최소한 하나와 일치하는 에셋만 고려됩니다(예: '^/Game/Blueprints/.*'). 인덱싱된 모든 경로를 고려하려면 빈 배열을 전달하세요."
+          },
+          "k": {
+            "type": "integer",
+            "description": "반환할 결과의 최대 수입니다. 1 이상이어야 하며, 디폴트는 10입니다.",
+            "default": 10
+          }
+        },
+        "required": [
+          "query",
+          "classFilter",
+          "pathRegexes"
+        ]
+      },
+      "outputSchema": {
+        "type": "object",
+        "properties": {
+          "returnValue": {
+            "type": "array",
+            "items": {
+              "title": "SemanticSearchResult",
+              "type": "object",
+              "properties": {
+                "path": {
+                  "type": "object",
+                  "title": "/Script/CoreUObject.Object",
+                  "description": "전체 에셋 경로입니다. 예: '/Game/Blueprints/BP_Foo.BP_Foo'",
+                  "properties": {
+                    "refPath": {
+                      "type": "string",
+                      "description": "소프트 경로 스트링으로 저장된 레퍼런스입니다."
+                    }
+                  },
+                  "required": [
+                    "refPath"
+                  ]
+                },
+                "class": {
+                  "type": "object",
+                  "title": "Class@/Script/CoreUObject.Object",
+                  "description": "에셋의 클래스입니다.",
+                  "properties": {
+                    "refPath": {
+                      "type": "string",
+                      "description": "소프트 경로 스트링으로 저장된 레퍼런스입니다."
+                    }
+                  },
+                  "required": [
+                    "refPath"
+                  ]
+                },
+                "caption": {
+                  "type": "string",
+                  "description": "SemanticSearch 플러그인에 의해 인덱스 생성 시점에 생성된 캡션입니다."
+                }
+              },
+              "required": [
+                "path",
+                "class",
+                "caption"
+              ]
+            },
+            "description": "연관성 순서로 정렬(점수가 가장 높은 항목이 첫 번째)된 FSemanticSearchResult의 배열입니다."
+          }
+        },
+        "required": [
+          "returnValue"
+        ]
+      }
+    },
+    {
+      "description": "지정된 에셋의 임베딩과 의미론적으로 유사한 임베딩을 가진 에셋을 찾습니다.\n벡터 전용(BM25 제외)입니다. 소스 에셋은 SemanticSearch 플러그인에 의해 이미 인덱싱되어 있어야\n합니다.",
+      "name": "SemanticSearchToolset.SemanticSearchToolset.FindSimilar",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "assetPath": {
+            "type": "object",
+            "title": "/Script/CoreUObject.Object",
+            "description": "레퍼런스 에셋의 SoftObjectPath입니다.",
+            "properties": {
+              "refPath": {
+                "type": "string",
+                "description": "소프트 경로 스트링으로 저장된 레퍼런스입니다."
+              }
+            },
+            "required": [
+              "refPath"
+            ]
+          },
+          "classFilter": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "title": "Class@/Script/CoreUObject.Object",
+              "properties": {
+                "refPath": {
+                  "type": "string",
+                  "description": "소프트 경로 스트링으로 저장된 레퍼런스입니다."
+                }
+              },
+              "required": [
+                "refPath"
+              ]
+            },
+            "description": "Search::ClassFilter와 동일한 시맨틱스입니다. 현재 인덱싱된 베이스 클래스의 목록은 Search를 참고하세요. 클래스 필터를 적용하지 않으려면 빈 배열을 전달하세요."
+          },
+          "pathRegexes": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Search::PathRegexes와 동일한 시맨틱스입니다. 경로 필터를 적용하지 않으려면 빈 배열을 전달하세요."
+          },
+          "k": {
+            "type": "integer",
+            "description": "반환할 결과의 최대 수입니다. 1 이상이어야 하며, 디폴트는 10입니다.",
+            "default": 10
+          }
+        },
+        "required": [
+          "assetPath",
+          "classFilter",
+          "pathRegexes"
+        ]
+      },
+      "outputSchema": {
+        "type": "object",
+        "properties": {
+          "returnValue": {
+            "type": "array",
+            "items": {
+              "title": "SemanticSearchResult",
+              "type": "object",
+              "properties": {
+                "path": {
+                  "type": "object",
+                  "title": "/Script/CoreUObject.Object",
+                  "description": "전체 에셋 경로입니다. 예: '/Game/Blueprints/BP_Foo.BP_Foo'",
+                  "properties": {
+                    "refPath": {
+                      "type": "string",
+                      "description": "소프트 경로 스트링으로 저장된 레퍼런스입니다."
+                    }
+                  },
+                  "required": [
+                    "refPath"
+                  ]
+                },
+                "class": {
+                  "type": "object",
+                  "title": "Class@/Script/CoreUObject.Object",
+                  "description": "에셋의 클래스입니다.",
+                  "properties": {
+                    "refPath": {
+                      "type": "string",
+                      "description": "소프트 경로 스트링으로 저장된 레퍼런스입니다."
+                    }
+                  },
+                  "required": [
+                    "refPath"
+                  ]
+                },
+                "caption": {
+                  "type": "string",
+                  "description": "SemanticSearch 플러그인에 의해 인덱스 생성 시점에 생성된 캡션입니다."
+                }
+              },
+              "required": [
+                "path",
+                "class",
+                "caption"
+              ]
+            },
+            "description": "연관성 순서로 정렬(점수가 가장 높은 항목이 첫 번째)된 FSemanticSearchResult의 배열입니다."
+          }
+        },
+        "required": [
+          "returnValue"
+        ]
+      }
+    }
+  ]
+}

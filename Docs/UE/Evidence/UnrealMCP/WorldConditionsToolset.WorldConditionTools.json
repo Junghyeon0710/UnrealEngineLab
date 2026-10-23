@@ -1,0 +1,142 @@
+{
+  "name": "WorldConditionsToolset.WorldConditionTools",
+  "version": "1.0",
+  "description": "월드 조건(FWorldConditionQueryDefinition, FWorldConditionBase) 구조체를 검사합니다.",
+  "tools": [
+    {
+      "description": "월드 조건 쿼리에 대한 사람이 읽을 수 있는 설명을 반환합니다.",
+      "name": "WorldConditionsToolset.WorldConditionTools.GetQueryDescription",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "queryDefinition": {
+            "type": "object",
+            "title": "WorldConditionQueryDefinition",
+            "description": "설명할 쿼리 정의입니다.",
+            "properties": {
+              "sharedDefinition": {
+                "title": "SharedStruct",
+                "description": "월드 조건을 초기화하고 실행하는 데 사용되는 정의입니다.\n편집하는 동안 Initialize()를 통해 편집 가능한 조건에서 생성됩니다.",
+                "type": "object"
+              },
+              "schemaClass": {
+                "type": "object",
+                "title": "Class@/Script/WorldConditions.WorldConditionSchema",
+                "description": "정의의 스키마로, SharedDefinition에도 저장됩니다.",
+                "properties": {
+                  "refPath": {
+                    "type": "string",
+                    "description": "소프트 경로 스트링으로 저장된 레퍼런스입니다."
+                  }
+                },
+                "required": [
+                  "refPath"
+                ]
+              },
+              "editableConditions": {
+                "type": "array",
+                "items": {
+                  "title": "WorldConditionEditable",
+                  "type": "object",
+                  "properties": {
+                    "expressionDepth": {
+                      "type": "integer",
+                      "description": "표현식의 괄호를 제어하는 표현식 깊이입니다."
+                    },
+                    "operator": {
+                      "type": "string",
+                      "title": "EWorldConditionOperator",
+                      "enum": [
+                        "And",
+                        "Or",
+                        "Copy"
+                      ],
+                      "description": "조건의 결과가 다른 조건과 조합되는 방식을 설명하는 연산자입니다."
+                    },
+                    "bInvert": {
+                      "type": "boolean",
+                      "description": "IsTrue로 계산된 표현식의 값을 반전시킬지 여부를 제어합니다."
+                    },
+                    "condition": {
+                      "type": "object",
+                      "title": "FInstancedStruct",
+                      "description": "월드 조건의 인스턴스입니다.",
+                      "properties": {
+                        "_structType": {
+                          "type": "string",
+                          "description": "UScriptStruct path name for polymorphic type identification (e.g. /Script/Module.StructName)."
+                        }
+                      }
+                    }
+                  },
+                  "required": [
+                    "expressionDepth",
+                    "operator",
+                    "bInvert",
+                    "condition"
+                  ]
+                },
+                "description": "편집 동안 사용되는 조건으로, Initialize()를 통해 조건으로 변환됩니다.이는 쿠킹된 빌드에서 지워지지만 핫픽스에서 계속 사용될 수 있습니다."
+              }
+            },
+            "required": [
+              "sharedDefinition",
+              "schemaClass",
+              "editableConditions"
+            ]
+          }
+        },
+        "required": [
+          "queryDefinition"
+        ]
+      },
+      "outputSchema": {
+        "type": "object",
+        "properties": {
+          "returnValue": {
+            "type": "string",
+            "description": "쿼리의 모든 조건에 대한 텍스트 설명을 반환합니다."
+          }
+        },
+        "required": [
+          "returnValue"
+        ]
+      }
+    },
+    {
+      "description": "단일 월드 조건에 대한 사람이 읽을 수 있는 설명을 반환합니다.\n조건은 FWorldConditionBase 파생 구조체를 포함하는 FInstancedStruct로 전달되어야 합니다.",
+      "name": "WorldConditionsToolset.WorldConditionTools.GetConditionDescription",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "condition": {
+            "type": "object",
+            "title": "FInstancedStruct",
+            "description": "월드 조건을 보유하는 인스턴스드 구조체입니다.",
+            "properties": {
+              "_structType": {
+                "type": "string",
+                "description": "UScriptStruct path name for polymorphic type identification (e.g. /Script/Module.StructName)."
+              }
+            }
+          }
+        },
+        "required": [
+          "condition"
+        ]
+      },
+      "outputSchema": {
+        "type": "object",
+        "properties": {
+          "returnValue": {
+            "type": "string",
+            "description": "조건에 대한 텍스트 설명을 반환합니다. 유효하지 않은 경우, 비어 있습니다."
+          }
+        },
+        "required": [
+          "returnValue"
+        ]
+      }
+    }
+  ]
+}

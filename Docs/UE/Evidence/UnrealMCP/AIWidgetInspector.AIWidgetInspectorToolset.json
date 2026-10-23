@@ -1,0 +1,153 @@
+{
+  "name": "AIWidgetInspector.AIWidgetInspectorToolset",
+  "version": "1.0",
+  "description": "Lets an AI assistant read and change the widget the user has selected in the editor.\n\nUnreal's ModelContextProtocol plugin exposes these functions as MCP tools, so an AI CLI calls\nthem directly instead of returning JSON for the plugin to interpret. It sees each result and can\ncorrect itself. No server of our own: the engine already ships one.\n\nThese functions are the whitelist. Arguments go through the same parser and validator as the\nresponse-JSON path, so neither route can drift into accepting what the other rejects.\n\nThe comment above each function is what the model reads when choosing a tool. English on\npurpose — it is the one language every assistant handles well, whatever the user is typing.",
+  "tools": [
+    {
+      "description": "Saves the Widget Blueprint changed by ApplyWidgetChangeToAsset to disk.\n\nAfter this the change survives closing the editor, and Ctrl+Z no longer takes the file back.\nOnly call it when the user has asked to save. Reports back if there was nothing to save.",
+      "name": "AIWidgetInspector.AIWidgetInspectorToolset.SaveWidgetAsset",
+      "inputSchema": {
+        "type": "object"
+      },
+      "outputSchema": {
+        "type": "object",
+        "properties": {
+          "returnValue": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "returnValue"
+        ]
+      }
+    },
+    {
+      "description": "Restores every value changed by PreviewWidgetChange to what it was. Asset changes are not affected.",
+      "name": "AIWidgetInspector.AIWidgetInspectorToolset.RevertPreview",
+      "inputSchema": {
+        "type": "object"
+      },
+      "outputSchema": {
+        "type": "object",
+        "properties": {
+          "returnValue": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "returnValue"
+        ]
+      }
+    },
+    {
+      "description": "Applies a change to the live widget on screen. The asset file is untouched.\n\nCheap to undo: RevertPreview restores the original value. Always use this first for anything\nthe user needs to look at, such as a colour or an opacity.",
+      "name": "AIWidgetInspector.AIWidgetInspectorToolset.PreviewWidgetChange",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "operation": {
+            "type": "string",
+            "description": "One of SetVisibility, SetEnabled, SetText, SetRenderOpacity, SetRenderTranslation, SetColorAndOpacity. Anything else is rejected."
+          },
+          "targetWidget": {
+            "type": "string",
+            "description": "Name of the widget to change. Must be a name returned by ListWidgetTree."
+          },
+          "valueJson": {
+            "type": "string",
+            "description": "A JSON value whose type the operation decides. SetVisibility takes a quoted string, one of \"Visible\", \"Collapsed\", \"Hidden\", \"HitTestInvisible\", \"SelfHitTestInvisible\". SetEnabled takes true or false. SetText takes a quoted string. SetRenderOpacity takes a number from 0 to 1. SetRenderTranslation takes {\"x\":30,\"y\":0}. SetColorAndOpacity takes \"#RRGGBB\" or \"#RRGGBBAA\", read as sRGB."
+          }
+        },
+        "required": [
+          "operation",
+          "targetWidget",
+          "valueJson"
+        ]
+      },
+      "outputSchema": {
+        "type": "object",
+        "properties": {
+          "returnValue": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "returnValue"
+        ]
+      }
+    },
+    {
+      "description": "Lists every widget inside the UserWidget that owns the current selection.\n\nGives name, class, and current visibility. The only names accepted by TargetWidget are the\nones in this list, so call this before changing anything other than the selected widget.",
+      "name": "AIWidgetInspector.AIWidgetInspectorToolset.ListWidgetTree",
+      "inputSchema": {
+        "type": "object"
+      },
+      "outputSchema": {
+        "type": "object",
+        "properties": {
+          "returnValue": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "returnValue"
+        ]
+      }
+    },
+    {
+      "description": "Describes the UMG or Slate widget currently selected in the editor.\n\nReturns its type, current state (visibility, enabled, size, geometry), slot, parent, owning\nWidget Blueprint, and the C++ location that created it along with the surrounding lines.\nCall this before deciding what to change.\nIf nothing is selected it says so; ask the user to click a widget with Inspect Mode.",
+      "name": "AIWidgetInspector.AIWidgetInspectorToolset.GetSelectedWidget",
+      "inputSchema": {
+        "type": "object"
+      },
+      "outputSchema": {
+        "type": "object",
+        "properties": {
+          "returnValue": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "returnValue"
+        ]
+      }
+    },
+    {
+      "description": "Writes a change into the Widget Blueprint asset. Undoing it takes Ctrl+Z in the editor.\n\nDoes not save, so the user still has to save for it to reach the file. Unlike a preview this\nedits the asset, so only call it when the user has clearly asked for that. To show how\nsomething would look, use PreviewWidgetChange.",
+      "name": "AIWidgetInspector.AIWidgetInspectorToolset.ApplyWidgetChangeToAsset",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "operation": {
+            "type": "string",
+            "description": "Same as PreviewWidgetChange."
+          },
+          "targetWidget": {
+            "type": "string",
+            "description": "Same as PreviewWidgetChange."
+          },
+          "valueJson": {
+            "type": "string",
+            "description": "Same as PreviewWidgetChange."
+          }
+        },
+        "required": [
+          "operation",
+          "targetWidget",
+          "valueJson"
+        ]
+      },
+      "outputSchema": {
+        "type": "object",
+        "properties": {
+          "returnValue": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "returnValue"
+        ]
+      }
+    }
+  ]
+}
