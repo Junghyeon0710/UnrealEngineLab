@@ -8,6 +8,7 @@
 
 - [Unreal MCP 연결하기 — 구조와 작업별 툴셋 사용법](UnrealMCP.md)
 - [Unreal MCP 툴셋 전체 목록](UnrealMCPToolsets.md)
+- [Claude Code용 Unreal Engine Skills 플러그인 — 스킬 목록, 사용법, 효과, 비용](UnrealEngineSkills.md)
 
 ## Gameplay
 

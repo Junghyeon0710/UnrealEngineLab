@@ -1,0 +1,55 @@
+{
+ "level": "/Engine/Maps/Templates/Template_Default",
+ "actors": [
+  "WorldSettings_1",
+  "Brush_1",
+  "DirectionalLight_0",
+  "SkyAtmosphere_0",
+  "SkyLight_0",
+  "ExponentialHeightFog_0",
+  "VolumetricCloud_0",
+  "PlayerStart_0",
+  "StaticMeshActor_0",
+  "Floor_0",
+  "BuoyancyManager_0",
+  "DefaultPhysicsVolume_0",
+  "GameplayDebuggerPlayerManager_0",
+  "ChaosDebugDrawActor",
+  "SmartObjectSubsystemRenderingActor_0",
+  "AbstractNavData-Default"
+ ],
+ "get_parent": {
+  "refPath": "/Script/Mover.SmoothWalkingMode"
+ },
+ "list_variables": [
+  "InitialBoost",
+  "InitialBoostTime",
+  "InitialBoostSpeed",
+  "InitialBoostAcceleration",
+  "AfterBoostAcceleration",
+  "SteepSlopeAngle",
+  "ShallowSlopeAngle",
+  "SteepSlopeSpeed",
+  "ShallowSlopeSpeed",
+  "FlatGroundSpeed",
+  "SteepSlopeDeceleration",
+  "FlatGroundDeceleration"
+ ],
+ "list_functions": [
+  {
+   "name": "GenerateWalkMove",
+   "description": "",
+   "bIsImplemented": true
+  },
+  {
+   "name": "SimulationTick",
+   "description": "Simulation Tick",
+   "bIsImplemented": false
+  },
+  {
+   "name": "GenerateMove",
+   "description": "Generate Move",
+   "bIsImplemented": false
+  }
+ ]
+}

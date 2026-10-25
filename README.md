@@ -23,6 +23,7 @@ Unreal Engine 최적화, 성능 분석, 공식 문서 정리, 신기능 및 궁�
 엔진 기능을 직접 만들어 보면서 확인한 내용을 정리합니다
 
 - [Unreal MCP 연결하기 — 구조와 작업별 툴셋 사용법](Docs/UE/UnrealMCP.md)
+- [Claude Code용 Unreal Engine Skills 플러그인 — 스킬 목록, 사용법, 효과, 비용](Docs/UE/UnrealEngineSkills.md)
 
 - [StateTree로 터렛 만들기](Docs/UE/StateTree.md)
 - [Animation Budget Allocator로 애니메이션 비용 묶기](Docs/UE/AnimationBudget.md)

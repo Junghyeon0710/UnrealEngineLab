@@ -1,0 +1,99 @@
+{
+ "model": "sonnet",
+ "tools": [
+  "Skill",
+  "ToolSearch",
+  "Read",
+  "Grep",
+  "Glob"
+ ],
+ "tasks": {
+  "T0": "OK라고만 답해. 도구는 쓰지 마.",
+  "T1": "지금 열려 있는 언리얼 에디터에서 현재 레벨 경로와 레벨에 있는 액터 개수를 알려줘. 액터 이름도 나열해 줘. 아무것도 수정하거나 저장하지 마.",
+  "T2": "/Game/Blueprints/MovementModes/BP_MovementMode_Slide 블루프린트의 부모 클래스, 변수 목록, 구현된 함수를 에디터에서 확인해서 알려줘. 아무것도 수정하거나 저장하지 마.",
+  "T3": "에디터에서 블루프린트를 새로 만들 계획이야. 만들기 전에 이 에디터(엔진)가 제공하는 블루프린트 작업 지침이 있으면 찾아서 핵심만 요약해 줘. 실제로 만들거나 수정하지는 마.",
+  "T3b": "unreal-mcp 스킬을 참고해서 진행해 줘. 에디터에서 블루프린트를 새로 만들 계획이야. 만들기 전에 이 에디터(엔진)가 제공하는 블루프린트 작업 지침이 있으면 찾아서 핵심만 요약해 줘. 실제로 만들거나 수정하지는 마."
+ },
+ "runs": [
+  {
+   "task": "T0",
+   "plugin": false,
+   "rep": 1
+  },
+  {
+   "task": "T0",
+   "plugin": true,
+   "rep": 1
+  },
+  {
+   "task": "T1",
+   "plugin": false,
+   "rep": 1
+  },
+  {
+   "task": "T1",
+   "plugin": true,
+   "rep": 1
+  },
+  {
+   "task": "T2",
+   "plugin": true,
+   "rep": 1
+  },
+  {
+   "task": "T2",
+   "plugin": false,
+   "rep": 1
+  },
+  {
+   "task": "T3",
+   "plugin": false,
+   "rep": 1
+  },
+  {
+   "task": "T3",
+   "plugin": true,
+   "rep": 1
+  },
+  {
+   "task": "T1",
+   "plugin": true,
+   "rep": 2
+  },
+  {
+   "task": "T1",
+   "plugin": false,
+   "rep": 2
+  },
+  {
+   "task": "T2",
+   "plugin": false,
+   "rep": 2
+  },
+  {
+   "task": "T2",
+   "plugin": true,
+   "rep": 2
+  },
+  {
+   "task": "T3",
+   "plugin": true,
+   "rep": 2
+  },
+  {
+   "task": "T3",
+   "plugin": false,
+   "rep": 2
+  },
+  {
+   "task": "T3b",
+   "plugin": true,
+   "rep": 1
+  },
+  {
+   "task": "T3b",
+   "plugin": true,
+   "rep": 2
+  }
+ ]
+}
